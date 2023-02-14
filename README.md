@@ -28,5 +28,5 @@ For additional fields, see the [OBIS manual](https://manual.obis.org/data_standa
 ## How to
 ### Add a data source
 
-- Create a folder in [datasets](datasets) with a descriptive name (all lowercase with underscores). Upload any data files or documents into that folder.
+- Create a folder in [datasets](datasets) with a descriptive name (all lowercase with underscores). Upload any data files or documents into that folder. These can be reports, research papers, spreadsheets, CSV files, etc.
 - Create an issue in [Issues](https://github.com/iobis/mwhs-data-mobilization/issues) with a description of the dataset and a link to the folder created above. Describe any issues with data quality or missing data elements, and add any other information that may be relevant for data processing.
