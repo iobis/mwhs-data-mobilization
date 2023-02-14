@@ -21,6 +21,8 @@ All output will use the biodiversity data standards as [outlined in the OBIS man
 | Scientific name identifier | Identifier for the scientific name, preferably a full [WoRMS](https://www.marinespecies.org/) LSID | http://rs.tdwg.org/dwc/terms/scientificNameID              |
 | References                 | Bibliographic references associated with the occurrence (pipe separated).                                           | http://rs.tdwg.org/dwc/terms/associatedReferences          |
 
+If a precise coordinates are not available, a spatial polygon can be provided in the [footprintWKT](http://rs.tdwg.org/dwc/terms/footprintWKT) field formatted as [WKT](https://wktmap.com/).
+
 For additional fields, see the [OBIS manual](https://manual.obis.org/data_standards.html) or the [Darwin Core Quick Reference Guide](https://dwc.tdwg.org/terms/).
 
 ## How to
