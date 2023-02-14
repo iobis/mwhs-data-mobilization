@@ -3,9 +3,9 @@
 This repository centralizes biodiversity data mobilization for marine World Heritage sites. This repository is organized as follows:
 
 - [Issues](issues): status tracking and discussion of data sources to be processed as well as any other issues.
-- Folder [datasets](tree/master/datasets): raw data files and documents organized by dataset.
-- Folder [output](tree/master/output): combined Darwin Core Archive output for all datasets.
-- Folder [notebooks](tree/master/notebooks): notebooks for bundling individual datasets into a Darwin Core Archive for publishing.
+- Folder [datasets](datasets): raw data files and documents organized by dataset.
+- Folder [output](output): combined Darwin Core Archive output for all datasets.
+- Folder [notebooks](notebooks): notebooks for bundling individual datasets into a Darwin Core Archive for publishing.
 
 ## Data standards and required fields
 
@@ -21,8 +21,10 @@ All output will use the biodiversity data standards as [outlined in the OBIS man
 | Scientific name identifier | Identifier for the scientific name, preferably a full [WoRMS](https://www.marinespecies.org/) LSID | http://rs.tdwg.org/dwc/terms/scientificNameID              |
 | References                 | Bibliographic references associated with the occurrence (pipe separated).                                           | http://rs.tdwg.org/dwc/terms/associatedReferences          |
 
+For additional fields, see the [OBIS manual](https://manual.obis.org/data_standards.html) or the [Darwin Core Quick Reference Guide](https://dwc.tdwg.org/terms/).
+
 ## How to
 ### Add a data source
 
 - Create a folder in [datasets](tree/master/datasets) with a descriptive name (all lowercase with underscores). Upload any data files or documents into that folder.
-- Create an issue in (Issues)[issues] with a description of the dataset and a link to the folder created above. Describe any issues with data quality or missing data elements.
+- Create an issue in (Issues)[issues] with a description of the dataset and a link to the folder created above. Describe any issues with data quality or missing data elements, and add any other information that may be relevant for data processing.
