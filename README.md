@@ -14,14 +14,17 @@ All output will use the biodiversity data standards as [outlined in the OBIS man
 | Field                      | Description                                                                                        | Darwin Core                                                |
 |----------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------|
 | Date                       | Date of the occurrence.                                                                            | http://rs.tdwg.org/dwc/terms/eventDate                     |
+| Location                   | Detail textual description of the location.                                                        | http://rs.tdwg.org/dwc/terms/locality              |
 | Longitude                  | Longitude in decimal degrees, point location or centroid for a larger area.                        | http://rs.tdwg.org/dwc/terms/decimalLongitude              |
 | Latitude                   | Latitude in decimal degrees, point location or centroid for a larger area.                         | http://rs.tdwg.org/dwc/terms/decimalLatitude               |
 | Coordinate uncertainty     | Coordinate uncertainty expressed in meters from the centroid (see fields above).                   | http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters |
 | Scientific name            | Scientific name as found in the source.                                                            | http://rs.tdwg.org/dwc/terms/scientificName                |
 | Scientific name identifier | Identifier for the scientific name, preferably a full [WoRMS](https://www.marinespecies.org/) LSID | http://rs.tdwg.org/dwc/terms/scientificNameID              |
-| References                 | Bibliographic references associated with the occurrence (pipe separated).                                           | http://rs.tdwg.org/dwc/terms/associatedReferences          |
+| References                 | Bibliographic references associated with the occurrence (pipe separated).                          | http://rs.tdwg.org/dwc/terms/associatedReferences          |
 
-If a precise coordinates are not available, a spatial polygon can be provided in the [footprintWKT](http://rs.tdwg.org/dwc/terms/footprintWKT) field formatted as [WKT](https://wktmap.com/). For additional fields, see the [OBIS manual](https://manual.obis.org/data_standards.html) or the [Darwin Core Quick Reference Guide](https://dwc.tdwg.org/terms/).
+If a precise coordinates are not available, a spatial polygon can be provided in the [footprintWKT](http://rs.tdwg.org/dwc/terms/footprintWKT) field formatted as [WKT](https://wktmap.com/). Alternatively, a location identifier can be provided in the [locationID](http://rs.tdwg.org/dwc/terms/locationID) field, for which we recommend using identifiers from [Marine Regions](https://marineregions.org/), for example `http://marineregions.org/mrgid/26874`.
+
+For additional fields, see the [OBIS manual](https://manual.obis.org/data_standards.html) or the [Darwin Core Quick Reference Guide](https://dwc.tdwg.org/terms/).
 
 ## How to
 ### Add a data source
