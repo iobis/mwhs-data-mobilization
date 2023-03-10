@@ -14,7 +14,7 @@ All output will use the biodiversity data standards as [outlined in the OBIS man
 | Field                      | Description                                                                                        | Darwin Core                                                |
 |----------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------|
 | Date                       | Date of the occurrence.                                                                            | http://rs.tdwg.org/dwc/terms/eventDate                     |
-| Location                   | Detail textual description of the location.                                                        | http://rs.tdwg.org/dwc/terms/locality              |
+| Location                   | Detailed textual description of the location.                                                        | http://rs.tdwg.org/dwc/terms/locality              |
 | Longitude                  | Longitude in decimal degrees, point location or centroid for a larger area.                        | http://rs.tdwg.org/dwc/terms/decimalLongitude              |
 | Latitude                   | Latitude in decimal degrees, point location or centroid for a larger area.                         | http://rs.tdwg.org/dwc/terms/decimalLatitude               |
 | Coordinate uncertainty     | Coordinate uncertainty expressed in meters from the centroid (see fields above).                   | http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters |
