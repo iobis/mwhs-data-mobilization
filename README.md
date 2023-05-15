@@ -9,7 +9,9 @@ This repository centralizes biodiversity data mobilization efforts for marine Wo
 
 ## Data standards and required fields
 
-All output will use the biodiversity data standards as [outlined in the OBIS manual](https://manual.obis.org/data_standards.html). The following data fields are highly recommended for all datasets:
+### Occurrence datasets
+
+All output will use the biodiversity data standards as [outlined in the OBIS manual](https://manual.obis.org/data_standards.html). The following data fields are highly recommended for all occurrence datasets:
 
 | Field                      | Description                                                                                        | Darwin Core                                                |
 |----------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------|
@@ -25,6 +27,10 @@ All output will use the biodiversity data standards as [outlined in the OBIS man
 If a precise coordinates are not available, a spatial polygon can be provided in the [footprintWKT](http://rs.tdwg.org/dwc/terms/footprintWKT) field formatted as [WKT](https://wktmap.com/). Alternatively, a location identifier can be provided in the [locationID](http://rs.tdwg.org/dwc/terms/locationID) field, for which we recommend using identifiers from [Marine Regions](https://marineregions.org/), for example `http://marineregions.org/mrgid/26874`.
 
 For additional fields, see the [OBIS manual](https://manual.obis.org/data_standards.html) or the [Darwin Core Quick Reference Guide](https://dwc.tdwg.org/terms/).
+
+### Checklist datasets
+
+Guidelines for checklist datasets are still to be developed but will be based on [A checklist recipe: making species data open and FAIR](https://academic.oup.com/database/article/doi/10.1093/database/baaa084/5979745).
 
 ## How to
 ### Add a data source
