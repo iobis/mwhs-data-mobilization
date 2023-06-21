@@ -3,8 +3,8 @@
 This repository centralizes biodiversity data mobilization efforts for marine World Heritage sites. This repository is organized as follows:
 
 - [Issues](https://github.com/iobis/mwhs-data-mobilization/issues): status tracking and discussion of data sources to be processed as well as any other issues.
-- Folder [datasets](datasets): raw data files and documents organized by dataset.
-- Folder [output](output): combined Darwin Core Archive output for all datasets.
+- Folder [datasets](datasets): raw data files and documents organized by site and dataset.
+- Folder [output](output): combined Darwin Core Archive output for all sites and datasets.
 - Folder [notebooks](notebooks): notebooks for bundling individual datasets into a Darwin Core Archive for publishing.
 
 ## Data standards and required fields
