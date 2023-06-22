@@ -35,5 +35,6 @@ Guidelines for checklist datasets are still to be developed but will be based on
 ## How to
 ### Add a data source
 
-- Create a folder in [datasets](datasets) with a descriptive name (all lowercase with underscores). Upload any data files or documents into that folder. These can be reports, research papers, spreadsheets, CSV files, etc.
+- Create a folder in [datasets](datasets) under the correct site with a descriptive name (all lowercase with underscores). Upload any data files or documents into that folder. These can be reports, research papers, spreadsheets, CSV files, etc.
 - Create an issue in [Issues](https://github.com/iobis/mwhs-data-mobilization/issues) with a description of the dataset and a link to the folder created above. Describe any issues with data quality or missing data elements, and add any other information that may be relevant for data processing.
+- Create a row in [references](https://github.com/iobis/mwhs-data-mobilization/blob/master/datasets/References.csv) with the citation, reference, title, link, type of data and information on reference and data availablitity.
