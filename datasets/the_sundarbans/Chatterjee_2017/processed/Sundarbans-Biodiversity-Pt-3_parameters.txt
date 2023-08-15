@@ -1,0 +1,21 @@
+Script Execution Summary
+Date and Time: 2023-08-15 13:42:36
+------------------------------
+Command Entered:
+pdf_to_table.py -i ../mwhs-data-mobilization/datasets/the_sundarbans/Chatterjee_2017/raw/Sundarbans-Biodiversity-Pt-3.pdf -ocr -# 8 -a 98.593,63.62,762.325,535.376 -p 8 -a 82.222,63.62,762.325,535.376 -p 9 -a 81.478,63.62,762.325,535.376 -p 10 -a 77.758,63.62,762.325,535.376 -p 11 -a 82.222,63.62,762.325,535.376 -p 12 -a 71.805,63.62,770.51,535.376 -p 13 -a 77.758,63.62,763.069,535.376 -p 14 -a 72.549,63.62,769.022,535.376 -p 15 -a 79.99,63.62,762.325,535.376 -p 16 -a 79.246,63.62,762.325,535.376 -p 17 -s -c -o ../mwhs-data-mobilization/datasets/the_sundarbans/Chatterjee_2017/processed/
+
+Script Arguments:
+pdf: ../mwhs-data-mobilization/datasets/the_sundarbans/Chatterjee_2017/raw/Sundarbans-Biodiversity-Pt-3.pdf
+output: ../mwhs-data-mobilization/datasets/the_sundarbans/Chatterjee_2017/processed
+area: [[98.593, 63.62, 762.325, 535.376], [82.222, 63.62, 762.325, 535.376], [81.478, 63.62, 762.325, 535.376], [77.758, 63.62, 762.325, 535.376], [82.222, 63.62, 762.325, 535.376], [71.805, 63.62, 770.51, 535.376], [77.758, 63.62, 763.069, 535.376], [72.549, 63.62, 769.022, 535.376], [79.99, 63.62, 762.325, 535.376], [79.246, 63.62, 762.325, 535.376]]
+pages: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17']
+concatenate: True
+OCR: True
+cores: 8
+stream: True
+lattice: False
+
+Outputs:
+../mwhs-data-mobilization/datasets/the_sundarbans/Chatterjee_2017/processed/Sundarbans-Biodiversity-Pt-3_ocr.pdf
+../mwhs-data-mobilization/datasets/the_sundarbans/Chatterjee_2017/processed/Sundarbans-Biodiversity-Pt-3_tables_parsed_concatenated.csv
+../mwhs-data-mobilization/datasets/the_sundarbans/Chatterjee_2017/processed/Sundarbans-Biodiversity-Pt-3_parameters.txt
