@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archive xmlns="http://rs.tdwg.org/dwc/text/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xsi:schemaLocation="http://rs.tdwg.org/dwc/text/ http://rs.tdwg.org/dwc/text/tdwg_dwc_text.xsd">
+    <core rowType="http://rs.tdwg.org/dwc/terms/Occurrence" ignoreHeaderLines="1">
+	<files>
+	    <location>occurrence.csv</location>
+    	</files>
+    	<field index="0" term="http://rs.tdwg.org/dwc/terms/occurrenceID" />
+    	<field index="1" term="http://rs.tdwg.org/dwc/terms/scientificName" />
+    	<field index="2" term="http://rs.tdwg.org/dwc/terms/scientificNameID" />
+        <field term="http://rs.tdwg.org/dwc/terms/eventDate" default="###"/>
+        <field term="http://rs.tdwg.org/dwc/terms/country" default="###"/>
+        <field term="http://rs.tdwg.org/dwc/terms/locality" default="###"/>
+        <field term="http://rs.tdwg.org/dwc/terms/decimalLatitude" default="###"/>
+        <field term="http://rs.tdwg.org/dwc/terms/decimalLongitude" default="###"/>
+        <field term="http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters" default="###"/>
+        <field term="http://rs.tdwg.org/dwc/terms/footprintWKT" default="###"/>
+        <field term="http://rs.tdwg.org/dwc/terms/geodeticDatum" default="###"/>
+        <field term="http://rs.tdwg.org/dwc/terms/occurrenceStatus" default="###"/>
+        <field term="http://rs.tdwg.org/dwc/terms/basisOfRecord" default="###"/>
+    </core>
+</archive>

@@ -1,3 +1,0 @@
-[submodule "scripts/pdf_to_tables"]
-	path = scripts/pdf_to_tables
-	url = https://github.com/sunray1/pdf_to_table
