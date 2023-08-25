@@ -1,0 +1,20 @@
+Script Execution Summary
+Date and Time: 2023-08-24 21:10:19
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/the_sundarbans/Gupta_et_al_2016/raw/ojsadmin,+188826viii169144-9154.pdf -s -c -a 109.754,325.542,754.884,463.199 -p 7 -a 111.986,88.175,748.932,219.136 -p 7 -a 88.175,85.199,689.404,219.136 -p 8 -o ../../../datasets/the_sundarbans/Gupta_et_al_2016/processed
+
+Script Arguments:
+pdf: ../../../datasets/the_sundarbans/Gupta_et_al_2016/raw/ojsadmin,+188826viii169144-9154.pdf
+output: ../../../datasets/the_sundarbans/Gupta_et_al_2016/processed
+area: [[109.754, 325.542, 754.884, 463.199], [111.986, 88.175, 748.932, 219.136], [88.175, 85.199, 689.404, 219.136]]
+pages: ['7', '7', '8']
+concatenate: True
+OCR: False
+cores: 4
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/the_sundarbans/Gupta_et_al_2016/processed/ojsadmin,+188826viii169144-9154_tables_parsed_concatenated.csv
+../../../datasets/the_sundarbans/Gupta_et_al_2016/processed/ojsadmin,+188826viii169144-9154_parameters.txt
