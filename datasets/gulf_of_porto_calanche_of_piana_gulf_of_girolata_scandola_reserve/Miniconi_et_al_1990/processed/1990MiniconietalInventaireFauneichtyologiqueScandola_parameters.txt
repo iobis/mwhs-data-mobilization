@@ -1,0 +1,21 @@
+Script Execution Summary
+Date and Time: 2023-08-25 13:18:32
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/raw/1990MiniconietalInventaireFauneichtyologiqueScandola.pdf -s -c -ocr -# 8 -a 189.095,47.912,649.499,235.589 -p 9 -a 73.994,55.85,631.355,257.135 -p 10 -a 68.324,58.685,620.582,253.733 -p 11 -a 94.406,56.417,535.532,246.362 -p 12 -o ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/processed
+
+Script Arguments:
+pdf: ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/raw/1990MiniconietalInventaireFauneichtyologiqueScandola.pdf
+output: ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/processed
+area: [[189.095, 47.912, 649.499, 235.589], [73.994, 55.85, 631.355, 257.135], [68.324, 58.685, 620.582, 253.733], [94.406, 56.417, 535.532, 246.362]]
+pages: ['9', '10', '11', '12']
+concatenate: True
+OCR: True
+cores: 8
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/processed/1990MiniconietalInventaireFauneichtyologiqueScandola_ocr.pdf
+../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/processed/1990MiniconietalInventaireFauneichtyologiqueScandola_tables_parsed_concatenated.csv
+../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/processed/1990MiniconietalInventaireFauneichtyologiqueScandola_parameters.txt
