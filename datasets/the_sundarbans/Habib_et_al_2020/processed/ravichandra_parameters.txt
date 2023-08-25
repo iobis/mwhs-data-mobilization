@@ -1,0 +1,20 @@
+Script Execution Summary
+Date and Time: 2023-08-24 18:58:28
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/the_sundarbans/Habib_et_al_2020/raw/ravichandra.pdf -s -c -a 123.148,268.99,737.77,378.372 -p 7 -a 88.919,269.734,741.491,378.372 -p 8 -a 88.919,270.479,728.097,379.116 -p 9 -a 88.175,270.479,742.235,378.372 -p 10 -a 88.175,269.734,740.002,378.372 -p 11 -a 88.919,271.223,752.652,377.628 -p 12 -a 88.175,271.223,745.211,377.628 -p 13 -a 88.175,270.479,730.329,379.116 -p 14 -a 87.431,269.734,588.951,376.884 -p 15 -o ../../../datasets/the_sundarbans/Habib_et_al_2020/processed
+
+Script Arguments:
+pdf: ../../../datasets/the_sundarbans/Habib_et_al_2020/raw/ravichandra.pdf
+output: ../../../datasets/the_sundarbans/Habib_et_al_2020/processed
+area: [[123.148, 268.99, 737.77, 378.372], [88.919, 269.734, 741.491, 378.372], [88.919, 270.479, 728.097, 379.116], [88.175, 270.479, 742.235, 378.372], [88.175, 269.734, 740.002, 378.372], [88.919, 271.223, 752.652, 377.628], [88.175, 271.223, 745.211, 377.628], [88.175, 270.479, 730.329, 379.116], [87.431, 269.734, 588.951, 376.884]]
+pages: ['7', '8', '9', '10', '11', '12', '13', '14', '15']
+concatenate: True
+OCR: False
+cores: 4
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/the_sundarbans/Habib_et_al_2020/processed/ravichandra_tables_parsed_concatenated.csv
+../../../datasets/the_sundarbans/Habib_et_al_2020/processed/ravichandra_parameters.txt

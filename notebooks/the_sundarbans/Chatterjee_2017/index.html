@@ -1625,7 +1625,7 @@ messages.</p>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">library</span>(worrms)                         <span class="co"># To get WoRMS IDs</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">library</span>(digest)                         <span class="co"># To generate hashes</span></span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(obistools))    <span class="co"># To generate centroid lat/long and uncertainty</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(sf))           <span class="co">#</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(sf))           <span class="co"># To generate wkt polygon</span></span>
 <span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(EML))          <span class="co"># To create eml.xml file</span></span>
 <span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="fu">library</span>(xml2)                           <span class="co"># To create the meta.xml file</span></span>
 <span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(zip))          <span class="co"># To zip DwC file</span></span></code></pre></div>
@@ -1681,7 +1681,7 @@ and parse out the table to a CSV.</p>
 <span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a><span class="fu">system</span>(command, <span class="at">intern=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                                                                                                                                
 ##  [2] &quot;Script Execution Summary&quot;                                                                                                        
-##  [3] &quot;Date and Time: 2023-08-24 03:49:59&quot;                                                                                              
+##  [3] &quot;Date and Time: 2023-08-24 19:16:11&quot;                                                                                              
 ##  [4] &quot;------------------------------&quot;                                                                                                  
 ##  [5] &quot;&quot;                                                                                                                                
 ##  [6] &quot;PDF input: ../../../datasets/the_sundarbans/Chatterjee_2017/raw/Sundarbans-Biodiversity-Pt-3.pdf&quot;                                
@@ -2117,11 +2117,11 @@ in a DarwinCore-Archive.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>emld<span class="sc">::</span><span class="fu">eml_version</span>(<span class="st">&quot;eml-2.1.1&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;eml-2.1.1&quot;</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co">#Title</span></span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="st">&quot;State Of The Art Report On Biodiversity In Indian Sundarbans&quot;</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="st">&quot;State Of The Art Report On Biodiversity In Indian Sundarbans: Fishes Checklist&quot;</span></span>
 <span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
 <span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co">#Abstract</span></span>
 <span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>abstract <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">abstract</span>(</span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;The dynamics of the fish communities of the Sundarbans are poorly understood (Rainboth, 1990). Although there are many published works on the fish fauna of different states of India including that of West Bengal, there is no comprehensive account of the fishes recorded from the Sundarbans. However, the works of Talwar et al. (1992); Mukherjee (1995); Das and Nandi (1999); and Gopal and Chauhan (2006) report the fish diversity of the Sundarbans. Compilations of the species listed in these works reveal that 364 species distributed under 215 genera are available in the Sundarbans as against 4,494 genera world over.&quot;</span></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;The dynamics of the fish communities of the Sundarbans are poorly understood. Although there are many published works on the fish fauna of different states of India including that of West Bengal, there is no comprehensive account of the fishes recorded from the Sundarbans. However, the works of Talwar et al. (1992); Mukherjee (1995); Das and Nandi (1999); and Gopal and Chauhan (2006) report the fish diversity of the Sundarbans. Compilations of the species listed in these works reveal that 364 species distributed under 215 genera are available in the Sundarbans as against 4,494 genera world over.&quot;</span></span>
 <span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>)</span></code></pre></div>
 <div id="people" class="section level3">
 <h3>People</h3>
@@ -2182,7 +2182,7 @@ timestamp of the EML.</p>
 <span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>    <span class="at">gbif =</span> <span class="fu">list</span>(</span>
 <span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>      <span class="at">dateStamp =</span> <span class="fu">paste0</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%Y-%m-%dT%H:%M:%OS3&quot;</span>), <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">1</span>, <span class="dv">3</span>), <span class="st">&quot;:&quot;</span>, <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">4</span>, <span class="dv">5</span>)))),</span>
 <span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>      <span class="at">hierarchyLevel =</span> <span class="st">&quot;dataset&quot;</span>,</span>
-<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;Dataset citation here&quot;</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;Earl C, Provost P (2023) State Of The Art Report On Biodiversity In Indian Sundarbans: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI&quot;</span>,</span>
 <span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>      <span class="at">bibliography =</span> <span class="fu">list</span>(</span>
 <span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>        <span class="at">citation =</span> <span class="st">&quot;Chatterjee, T (2017) State of art report on biodiversity in Indian Sundarbans. Section 2.14. Coastal Fishes. World Wide Fund for Nature-India, New Delhi. http://support.wwfindia.org/other/State_of_Art_Report.pdf&quot;</span>)</span>
 <span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>    )</span>
@@ -2236,7 +2236,7 @@ coverage.</p>
 complete.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>methods <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">methods</span>(</span>
 <span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>  <span class="at">methodStep =</span> eml<span class="sc">$</span><span class="fu">methodStep</span>(</span>
-<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>    <span class="at">description =</span> <span class="st">&quot;See Github Notebook - URL -for dataset construction&quot;</span></span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>    <span class="at">description =</span> <span class="st">&quot;See Github R Project and Notebook - https://github.com/iobis/mwhs-data-mobilization/tree/master/notebooks/the_sundarbans/Chatterjee_2017 - for dataset construction&quot;</span></span>
 <span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a>  )</span>
 <span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>)</span>
 <span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a></span>
@@ -2259,7 +2259,7 @@ complete.</p>
 <span id="cb31-23"><a href="#cb31-23" tabindex="-1"></a></span>
 <span id="cb31-24"><a href="#cb31-24" tabindex="-1"></a><span class="co">#Universal CC</span></span>
 <span id="cb31-25"><a href="#cb31-25" tabindex="-1"></a>intellectualRights <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">intellectualRights</span>(</span>
-<span id="cb31-26"><a href="#cb31-26" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;These data are released under Creative Commons Zero (CC-0) - https://creativecommons.org/publicdomain/zero/1.0/. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.&quot;</span></span>
+<span id="cb31-26"><a href="#cb31-26" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;These data are released under &lt;ulink url=</span><span class="sc">\&quot;</span><span class="st">https://creativecommons.org/publicdomain/zero/1.0/</span><span class="sc">\&quot;</span><span class="st">&gt;&lt;citetitle&gt;Creative Commons Zero (CC-0)&lt;/citetitle&gt;&lt;/ulink&gt;. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.&quot;</span></span>
 <span id="cb31-27"><a href="#cb31-27" tabindex="-1"></a>)</span>
 <span id="cb31-28"><a href="#cb31-28" tabindex="-1"></a></span>
 <span id="cb31-29"><a href="#cb31-29" tabindex="-1"></a>purpose <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">purpose</span>(</span>
@@ -2375,12 +2375,16 @@ nodes to alphabetical order.</p>
 <h3>Zip files to DwC-A</h3>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>output_zip <span class="ot">&lt;-</span> <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;DwC-A.zip&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
 <span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>file_paths <span class="ot">&lt;-</span> <span class="fu">list.files</span>(dwc_output_dir, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a><span class="fu">zip</span>(<span class="at">zipfile =</span> output_zip, <span class="at">files =</span> file_paths, <span class="at">mode =</span> <span class="st">&quot;cherry-pick&quot;</span>)</span>
-<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a></span>
-<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(output_zip)) {</span>
-<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a>  <span class="fu">unlink</span>(file_paths)</span>
-<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(output_zip)) {</span>
+<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a>  <span class="fu">unlink</span>(output_zip)</span>
+<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a>}</span>
+<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a>file_paths <span class="ot">&lt;-</span> <span class="fu">list.files</span>(dwc_output_dir, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a><span class="fu">zip</span>(<span class="at">zipfile =</span> output_zip, <span class="at">files =</span> file_paths, <span class="at">mode =</span> <span class="st">&quot;cherry-pick&quot;</span>)</span>
+<span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(output_zip)) {</span>
+<span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a>  <span class="fu">unlink</span>(file_paths)</span>
+<span id="cb37-12"><a href="#cb37-12" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </div>
 </div>

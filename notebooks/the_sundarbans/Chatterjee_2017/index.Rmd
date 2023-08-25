@@ -28,7 +28,7 @@ suppressMessages(library(taxize))       # To get WoRMS IDs
 library(worrms)                         # To get WoRMS IDs
 library(digest)                         # To generate hashes
 suppressMessages(library(obistools))    # To generate centroid lat/long and uncertainty
-suppressMessages(library(sf))           #
+suppressMessages(library(sf))           # To generate wkt polygon
 suppressMessages(library(EML))          # To create eml.xml file
 library(xml2)                           # To create the meta.xml file
 suppressMessages(library(zip))          # To zip DwC file
@@ -365,11 +365,11 @@ This is a file which contains the dataset's metadata and is required in a Darwin
 emld::eml_version("eml-2.1.1")
 
 #Title
-title <- "State Of The Art Report On Biodiversity In Indian Sundarbans"
+title <- "State Of The Art Report On Biodiversity In Indian Sundarbans: Fishes Checklist"
 
 #Abstract
 abstract <- eml$abstract(
-  para = "The dynamics of the fish communities of the Sundarbans are poorly understood (Rainboth, 1990). Although there are many published works on the fish fauna of different states of India including that of West Bengal, there is no comprehensive account of the fishes recorded from the Sundarbans. However, the works of Talwar et al. (1992); Mukherjee (1995); Das and Nandi (1999); and Gopal and Chauhan (2006) report the fish diversity of the Sundarbans. Compilations of the species listed in these works reveal that 364 species distributed under 215 genera are available in the Sundarbans as against 4,494 genera world over."
+  para = "The dynamics of the fish communities of the Sundarbans are poorly understood. Although there are many published works on the fish fauna of different states of India including that of West Bengal, there is no comprehensive account of the fishes recorded from the Sundarbans. However, the works of Talwar et al. (1992); Mukherjee (1995); Das and Nandi (1999); and Gopal and Chauhan (2006) report the fish diversity of the Sundarbans. Compilations of the species listed in these works reveal that 364 species distributed under 215 genera are available in the Sundarbans as against 4,494 genera world over."
 )
 ```
 
@@ -437,7 +437,7 @@ additionalMetadata <- eml$additionalMetadata(
     gbif = list(
       dateStamp = paste0(format(Sys.time(), "%Y-%m-%dT%H:%M:%OS3"), paste0(substr(format(Sys.time(), "%z"), 1, 3), ":", paste0(substr(format(Sys.time(), "%z"), 4, 5)))),
       hierarchyLevel = "dataset",
-      citation = "Dataset citation here",
+      citation = "Earl C, Provost P (2023) State Of The Art Report On Biodiversity In Indian Sundarbans: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI",
       bibliography = list(
         citation = "Chatterjee, T (2017) State of art report on biodiversity in Indian Sundarbans. Section 2.14. Coastal Fishes. World Wide Fund for Nature-India, New Delhi. http://support.wwfindia.org/other/State_of_Art_Report.pdf")
     )
@@ -500,7 +500,7 @@ These fields are not required, though they make the metadata more complete.
 
 methods <- eml$methods(
   methodStep = eml$methodStep(
-    description = "See Github Notebook - URL -for dataset construction"
+    description = "See Github R Project and Notebook - https://github.com/iobis/mwhs-data-mobilization/tree/master/notebooks/the_sundarbans/Chatterjee_2017 - for dataset construction"
   )
 )
 
@@ -523,7 +523,7 @@ maintenance <- eml$maintenance(
 
 #Universal CC
 intellectualRights <- eml$intellectualRights(
-  para = "These data are released under Creative Commons Zero (CC-0) - https://creativecommons.org/publicdomain/zero/1.0/. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction."
+  para = "These data are released under <ulink url=\"https://creativecommons.org/publicdomain/zero/1.0/\"><citetitle>Creative Commons Zero (CC-0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction."
 )
 
 purpose <- eml$purpose(
@@ -648,6 +648,10 @@ write_xml(eml_content, paste(dwc_output_dir, "/eml.xml", sep = ""))
 
 ```{r Zip Files}
 output_zip <- paste(dwc_output_dir, "DwC-A.zip", sep="/")
+
+if (file.exists(output_zip)) {
+  unlink(output_zip)
+}
 
 file_paths <- list.files(dwc_output_dir, full.names = TRUE)
 zip(zipfile = output_zip, files = file_paths, mode = "cherry-pick")
