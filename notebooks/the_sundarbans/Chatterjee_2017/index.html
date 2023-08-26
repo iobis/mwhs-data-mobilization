@@ -7,7 +7,7 @@
 
         <meta name="author" content="Chandra Earl" />
     
-        <meta name="date" content="2023-08-24" />
+        <meta name="date" content="2023-08-25" />
     
     <title>Bundling Chatterjee et al. 2017 to a DwC Archive</title>
 
@@ -1582,7 +1582,7 @@ Archive</li>
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Chandra
 Earl</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-08-24</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-08-25</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -1681,7 +1681,7 @@ and parse out the table to a CSV.</p>
 <span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a><span class="fu">system</span>(command, <span class="at">intern=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                                                                                                                                
 ##  [2] &quot;Script Execution Summary&quot;                                                                                                        
-##  [3] &quot;Date and Time: 2023-08-24 19:16:11&quot;                                                                                              
+##  [3] &quot;Date and Time: 2023-08-25 13:26:57&quot;                                                                                              
 ##  [4] &quot;------------------------------&quot;                                                                                                  
 ##  [5] &quot;&quot;                                                                                                                                
 ##  [6] &quot;PDF input: ../../../datasets/the_sundarbans/Chatterjee_2017/raw/Sundarbans-Biodiversity-Pt-3.pdf&quot;                                
@@ -2341,7 +2341,7 @@ file “meta_occurrence_checklist_template.xml”</p>
 <h2>Save outputs</h2>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>dwc_output_dir <span class="ot">&lt;-</span> <span class="fu">paste</span>(path_to_project_root, <span class="st">&quot;output&quot;</span>, site_dir_name, dataset_dir_name, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="fu">write.csv</span>(occurrence, <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/occurrence.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">na =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="fu">write.csv</span>(occurrence, <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/occurrence.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">na =</span> <span class="st">&quot;&quot;</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
 <span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="fu">write_xml</span>(meta, <span class="at">file =</span> <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/meta.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
 <span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a><span class="fu">write_eml</span>(my_eml, <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/eml.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
 <div id="edit-eml" class="section level3">

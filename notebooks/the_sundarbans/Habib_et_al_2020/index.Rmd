@@ -47,7 +47,7 @@ original_pdf <- "ravichandra.pdf"
 
 # Parsing PDF table to CSV
 
-The data for this reference is formatted as an image-based table inside a PDF across multiple sheets. First, we use [pdf_to_table](https://github.com/sunray1/pdf_to_table) to OCR and parse out the table to a CSV.
+The data for this reference is formatted as a text-based table inside a PDF across multiple sheets. First, we use [pdf_to_table](https://github.com/sunray1/pdf_to_table) to parse out the table to a CSV.
 
 ```{r PDF Parse}
 #conda environment
@@ -608,7 +608,7 @@ for (field in fields) {
 
 dwc_output_dir <- paste(path_to_project_root, "output", site_dir_name, dataset_dir_name, sep="/")
 
-write.csv(occurrence, paste(dwc_output_dir, "/occurrence.csv", sep = ""), na = "")
+write.csv(occurrence, paste(dwc_output_dir, "/occurrence.csv", sep = ""), na = "", row.names = FALSE)
 write_xml(meta, file = paste(dwc_output_dir, "/meta.xml", sep = ""))
 write_eml(my_eml, paste(dwc_output_dir, "/eml.xml", sep = ""))
 
