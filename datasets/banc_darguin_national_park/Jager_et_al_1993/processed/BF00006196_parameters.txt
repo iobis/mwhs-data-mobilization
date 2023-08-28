@@ -1,0 +1,20 @@
+Script Execution Summary
+Date and Time: 2023-08-26 00:57:50
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/banc_darguin_national_park/Jager_et_al_1993/raw/BF00006196.pdf -s -a 119.813,150.863,555.863,266.288 -p 6 -o ../../../datasets/banc_darguin_national_park/Jager_et_al_1993/processed
+
+Script Arguments:
+pdf: ../../../datasets/banc_darguin_national_park/Jager_et_al_1993/raw/BF00006196.pdf
+output: ../../../datasets/banc_darguin_national_park/Jager_et_al_1993/processed
+area: [[119.813, 150.863, 555.863, 266.288]]
+pages: ['6']
+concatenate: False
+OCR: False
+cores: 4
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/banc_darguin_national_park/Jager_et_al_1993/processed/BF00006196_tables_parsed_1.csv
+../../../datasets/banc_darguin_national_park/Jager_et_al_1993/processed/BF00006196_parameters.txt
