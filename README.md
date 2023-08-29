@@ -1,6 +1,8 @@
 # mwhs-data-mobilization
 
-This repository centralizes biodiversity data mobilization efforts for marine World Heritage sites. This repository is organized as follows:
+This repository centralizes biodiversity data mobilization efforts for marine World Heritage sites. See https://iobis.github.io/mwhs-data-mobilization/ for current mobilization status.
+
+This repository is organized as follows:
 
 ```
 ├── README.md                 : Description of this repository (this file)
