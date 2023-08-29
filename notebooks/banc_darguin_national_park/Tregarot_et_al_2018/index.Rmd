@@ -474,7 +474,7 @@ These fields are not required, though they make the metadata more complete.
 
 methods <- eml$methods(
   methodStep = eml$methodStep(
-    description = "See Github R Project and Notebook - https://github.com/iobis/mwhs-data-mobilization/tree/master/notebooks/the_sundarbans/Chatterjee_2017 - for dataset construction"
+    description = "See Github R Project and Notebook - https://github.com/iobis/mwhs-data-mobilization/tree/master/notebooks/banc_darguin_national_park/Tregarot_et_al_2018 - for dataset construction"
   )
 )
 
