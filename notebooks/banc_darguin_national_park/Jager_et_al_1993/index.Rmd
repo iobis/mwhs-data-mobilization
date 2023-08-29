@@ -402,7 +402,7 @@ Here we describe the dataset's geographic, taxonomic and temporal coverage.
 #Coverage
 coverage <- eml$coverage(
   geographicCoverage = eml$geographicCoverage(
-    geographicDescription = "Indian Sundarbans",
+    geographicDescription = "Banc d'Arguin",
     boundingCoordinates = eml$boundingCoordinates(
       westBoundingCoordinate = st_bbox(ind_shape)$xmax,
       eastBoundingCoordinate = st_bbox(ind_shape)$xmin,

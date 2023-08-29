@@ -7,7 +7,7 @@
 
         <meta name="author" content="Chandra Earl" />
     
-        <meta name="date" content="2023-08-26" />
+        <meta name="date" content="2023-08-28" />
     
     <title>Bundling Jager et al. 1993 to a DwC Archive</title>
 
@@ -1582,7 +1582,7 @@ Archive</li>
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Chandra
 Earl</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-08-26</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-08-28</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -1667,7 +1667,7 @@ out the table to a CSV.</p>
 <pre><code>##  [1] &quot;Namespace(pdf=&#39;../../../datasets/banc_darguin_national_park/Jager_et_al_1993/raw/BF00006196.pdf&#39;, output=&#39;../../../datasets/banc_darguin_national_park/Jager_et_al_1993/processed&#39;, area=[[119.813, 150.863, 555.863, 266.288]], pages=[&#39;6&#39;], concatenate=False, OCR=False, cores=&#39;4&#39;, stream=True, lattice=False)&quot;
 ##  [2] &quot;&quot;                                                                                                                                                                                                                                                                                                                  
 ##  [3] &quot;Script Execution Summary&quot;                                                                                                                                                                                                                                                                                          
-##  [4] &quot;Date and Time: 2023-08-26 00:57:48&quot;                                                                                                                                                                                                                                                                                
+##  [4] &quot;Date and Time: 2023-08-28 15:10:19&quot;                                                                                                                                                                                                                                                                                
 ##  [5] &quot;------------------------------&quot;                                                                                                                                                                                                                                                                                    
 ##  [6] &quot;&quot;                                                                                                                                                                                                                                                                                                                  
 ##  [7] &quot;PDF input: ../../../datasets/banc_darguin_national_park/Jager_et_al_1993/raw/BF00006196.pdf&quot;                                                                                                                                                                                                                       
@@ -2092,7 +2092,7 @@ coverage.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co">#Coverage</span></span>
 <span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>coverage <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">coverage</span>(</span>
 <span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a>  <span class="at">geographicCoverage =</span> eml<span class="sc">$</span><span class="fu">geographicCoverage</span>(</span>
-<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a>    <span class="at">geographicDescription =</span> <span class="st">&quot;Indian Sundarbans&quot;</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a>    <span class="at">geographicDescription =</span> <span class="st">&quot;Banc d&#39;Arguin&quot;</span>,</span>
 <span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a>    <span class="at">boundingCoordinates =</span> eml<span class="sc">$</span><span class="fu">boundingCoordinates</span>(</span>
 <span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>      <span class="at">westBoundingCoordinate =</span> <span class="fu">st_bbox</span>(ind_shape)<span class="sc">$</span>xmax,</span>
 <span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a>      <span class="at">eastBoundingCoordinate =</span> <span class="fu">st_bbox</span>(ind_shape)<span class="sc">$</span>xmin,</span>
