@@ -237,11 +237,11 @@ Create a dataframe with unique taxa only (though this should already be unique).
 
 ```{r}
 #rename and restructure WoRMSIDs to OBIS requirements
-occurrence <- combined_dataframe %>% 
-  distinct(CanonicalFull, WormsIDs)%>%
+occurrence <- combined_dataframe %>%
+  distinct(CanonicalFull, WormsIDs) %>%
   rename(scientificName = CanonicalFull) %>%
   rename(scientificNameID = WormsIDs) %>%
-  mutate(scientificNameID = paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""))
+  mutate(scientificNameID = ifelse(!is.na(scientificNameID), paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""), NA))
 
 ```
 
@@ -259,10 +259,10 @@ occurrence %<>% mutate(occurrenceID = paste("indian-sundarbans-chatterjee-2017",
 
 ### eventDate
 
-This is when the original resource was published
+This is NULL since this is technically a checklist and we do not know the collection date.
 
 ```{r eventDate}
-eventDate <- "2017"
+eventDate <- NA
 occurrence %<>% mutate(eventDate)
 ```
 
@@ -396,11 +396,11 @@ creator <- eml$creator(
 
 contact <- eml$creator(
   individualName = eml$individualName(
-    givenName = "Pieter", 
-    surName = "Provost"),
-  electronicMailAddress = "p.provoost@unesco.org",
-  organizationName = "UNESCO",
-  positionName = "OBIS Data Manager"
+    givenName = "OBIS", 
+    surName = "Secretariat"),
+  electronicMailAddress = "helpdesk@obis.org",
+  organizationName = "OBIS",
+  positionName = "Secretariat"
 )
 
 metadataProvider <- eml$metadataProvider(
@@ -437,7 +437,7 @@ additionalMetadata <- eml$additionalMetadata(
     gbif = list(
       dateStamp = paste0(format(Sys.time(), "%Y-%m-%dT%H:%M:%OS3"), paste0(substr(format(Sys.time(), "%z"), 1, 3), ":", paste0(substr(format(Sys.time(), "%z"), 4, 5)))),
       hierarchyLevel = "dataset",
-      citation = "Earl C, Provost P (2023) State Of The Art Report On Biodiversity In Indian Sundarbans: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI",
+      citation = "Earl C., OBIS Secretariat. (2023) State Of The Art Report On Biodiversity In Indian Sundarbans: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI",
       bibliography = list(
         citation = "Chatterjee, T (2017) State of art report on biodiversity in Indian Sundarbans. Section 2.14. Coastal Fishes. World Wide Fund for Nature-India, New Delhi. http://support.wwfindia.org/other/State_of_Art_Report.pdf")
     )

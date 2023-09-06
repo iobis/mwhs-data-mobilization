@@ -106,7 +106,7 @@ input_data %<>%
   clean_names() %>%                         # Have sensible (lowercase) column names
   select(-c(unnamed_1, unnamed_2, unnamed_3))
 
-# Remove lines with colons, lines with only one word and lines that start with "("
+# Remove lines with only one word
 cleaned_data <- input_data %>%
   filter(str_count(famille_espece, "\\S+") > 1)
 
@@ -192,9 +192,6 @@ combined_dataframe[86,2:3] = c("Symphodus rostratus", 273574)
 combined_dataframe[87,2:3] = c("Symphodus tinca", 273575)
 combined_dataframe[124,2:3] = c("Trigla lyra", 127266)
 
-
-combined_dataframe <- combined_dataframe[-c(104),]
-
 ```
 
 # Darwin Core mapping
@@ -209,11 +206,11 @@ Create a dataframe with unique taxa only (though this should already be unique).
 
 ```{r}
 #rename and restructure WoRMSIDs to OBIS requirements
-occurrence <- combined_dataframe %>% 
-  distinct(CanonicalFull, WormsIDs)%>%
+occurrence <- combined_dataframe %>%
+  distinct(CanonicalFull, WormsIDs) %>%
   rename(scientificName = CanonicalFull) %>%
   rename(scientificNameID = WormsIDs) %>%
-  mutate(scientificNameID = paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""))
+  mutate(scientificNameID = ifelse(!is.na(scientificNameID), paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""), NA))
 
 ```
 
@@ -231,10 +228,10 @@ occurrence %<>% mutate(occurrenceID = paste("scandola-miniconi-1990", "occurrenc
 
 ### eventDate
 
-This is when the original resource was published
+This is NULL since this is technically a checklist and we do not know the collection date
 
 ```{r eventDate}
-eventDate <- "1990-01"
+eventDate <- NA
 occurrence %<>% mutate(eventDate)
 ```
 
@@ -378,11 +375,11 @@ creator <- list(eml$creator(
 
 contact <- eml$creator(
   individualName = eml$individualName(
-    givenName = "Pieter", 
-    surName = "Provost"),
-  electronicMailAddress = "p.provoost@unesco.org",
-  organizationName = "UNESCO",
-  positionName = "OBIS Data Manager"
+    givenName = "OBIS", 
+    surName = "Secretariat"),
+  electronicMailAddress = "helpdesk@obis.org",
+  organizationName = "OBIS",
+  positionName = "Secretariat"
 )
 
 metadataProvider <- eml$metadataProvider(
@@ -419,7 +416,7 @@ additionalMetadata <- eml$additionalMetadata(
     gbif = list(
       dateStamp = paste0(format(Sys.time(), "%Y-%m-%dT%H:%M:%OS3"), paste0(substr(format(Sys.time(), "%z"), 1, 3), ":", paste0(substr(format(Sys.time(), "%z"), 4, 5)))),
       hierarchyLevel = "dataset",
-      citation = "Earl C, Provost P (2023) Inventaire de la faune ichtyologique de la réserve naturelle de Scandola (Corse, Méditerranée nord-occidentale): Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI",
+      citation = "Earl C., OBIS Secretariat. (2023) Inventaire de la faune ichtyologique de la réserve naturelle de Scandola (Corse, Méditerranée nord-occidentale): Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI",
       bibliography = list(
         citation = "Miniconi, Roger & Francour, Patrice & C.H, Bianconi. (1990). Inventaire de la faune ichtyologique de la réserve naturelle de Scandola (Corse, Méditerranée nord-occidentale). Cybium: international journal of ichthyology. 14. 77-89.")
     )

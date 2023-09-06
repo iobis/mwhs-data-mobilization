@@ -222,11 +222,15 @@ Sometimes there are misspellings in the original text or incorrect OCR that can 
 
 combined_dataframe[170,2:3] = c("Apogonichthyoides pseudotaeniatus", 475091)
 combined_dataframe[177,2:3] = c("Jaydia queketti", 209280)
+combined_dataframe[328, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Chaetodon", "Chaetodon collare × Chaetodon lunula", 125954)
+combined_dataframe[342, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pomacanthus", "Pomacanthus asfur × Pomacanthus maculosus", 159286)
+combined_dataframe[343, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pomacanthus", "Pomacanthus semicirculatus × Pomacanthus maculosus", 159286)
+combined_dataframe[357, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Dascyllus", "Dascyllus carneus × Dascyllus marginatus", 205736)
 
 #combination not in WoRMs
 combined_dataframe[375,2:3] = c("Plectroglyphidodon leucozonus cingulum", NA)
 
-combined_dataframe <- combined_dataframe[-c(26, 237, 328, 342, 343, 357),]
+combined_dataframe <- combined_dataframe[-c(26, 237),]
 
 ```
 
@@ -242,11 +246,11 @@ Create a dataframe with unique taxa only (though this should already be unique).
 
 ```{r}
 #rename and restructure WoRMSIDs to OBIS requirements
-occurrence <- combined_dataframe %>% 
-  distinct(CanonicalFull, WormsIDs)%>%
+occurrence <- combined_dataframe %>%
+  distinct(CanonicalFull, WormsIDs) %>%
   rename(scientificName = CanonicalFull) %>%
   rename(scientificNameID = WormsIDs) %>%
-  mutate(scientificNameID = paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""))
+  mutate(scientificNameID = ifelse(!is.na(scientificNameID), paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""), NA))
 
 ```
 
@@ -264,10 +268,10 @@ occurrence %<>% mutate(occurrenceID = paste("socotra-zajonz-2019", "occurrence",
 
 ### eventDate
 
-This is when the original resource was published
+This is NULL since this is technically a checklist and we do not know the collection date.
 
 ```{r eventDate}
-eventDate <- "2019-07-12"
+eventDate <- NA
 occurrence %<>% mutate(eventDate)
 ```
 
@@ -432,11 +436,11 @@ creator <- list(eml$creator(
 
 contact <- eml$creator(
   individualName = eml$individualName(
-    givenName = "Pieter", 
-    surName = "Provost"),
-  electronicMailAddress = "p.provoost@unesco.org",
-  organizationName = "UNESCO",
-  positionName = "OBIS Data Manager"
+    givenName = "OBIS", 
+    surName = "Secretariat"),
+  electronicMailAddress = "helpdesk@obis.org",
+  organizationName = "OBIS",
+  positionName = "Secretariat"
 )
 
 metadataProvider <- eml$metadataProvider(
@@ -473,7 +477,7 @@ additionalMetadata <- eml$additionalMetadata(
     gbif = list(
       dateStamp = paste0(format(Sys.time(), "%Y-%m-%dT%H:%M:%OS3"), paste0(substr(format(Sys.time(), "%z"), 1, 3), ":", paste0(substr(format(Sys.time(), "%z"), 4, 5)))),
       hierarchyLevel = "dataset",
-      citation = "Earl C, Provost P (2023) Coastal fish diversity of the Socotra Archipelago, Yemen: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI",
+      citation = "Earl C., OBIS Secretariat. (2023) Coastal fish diversity of the Socotra Archipelago, Yemen: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI",
       bibliography = list(
         citation = "Zajonz U, Lavergne E, Bogorodsky S, Saeed F, Aideed M, Krupp F. (2019). Coastal fish diversity of the Socotra Archipelago, Yemen. Zootaxa. 4636. 001-108. 10.11646/zootaxa.4636.1.1. ")
     )

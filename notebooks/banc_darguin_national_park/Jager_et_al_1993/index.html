@@ -7,7 +7,7 @@
 
         <meta name="author" content="Chandra Earl" />
     
-        <meta name="date" content="2023-08-28" />
+        <meta name="date" content="2023-09-06" />
     
     <title>Bundling Jager et al. 1993 to a DwC Archive</title>
 
@@ -1582,7 +1582,7 @@ Archive</li>
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Chandra
 Earl</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-08-28</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-06</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -1664,33 +1664,33 @@ out the table to a CSV.</p>
 <span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>page_args_combined <span class="ot">&lt;-</span> <span class="fu">paste</span>(page_args, <span class="at">collapse =</span> <span class="st">&quot; &quot;</span>)</span>
 <span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>command <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;conda run -n&quot;</span>, condaenv, <span class="st">&quot;python&quot;</span>, script, <span class="st">&quot;-i&quot;</span>, input_pdf, run_parameters, page_args_combined, <span class="st">&quot;-o&quot;</span>, output_dir)</span>
 <span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="fu">system</span>(command, <span class="at">intern=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;Namespace(pdf=&#39;../../../datasets/banc_darguin_national_park/Jager_et_al_1993/raw/BF00006196.pdf&#39;, output=&#39;../../../datasets/banc_darguin_national_park/Jager_et_al_1993/processed&#39;, area=[[119.813, 150.863, 555.863, 266.288]], pages=[&#39;6&#39;], concatenate=False, OCR=False, cores=&#39;4&#39;, stream=True, lattice=False)&quot;
-##  [2] &quot;&quot;                                                                                                                                                                                                                                                                                                                  
-##  [3] &quot;Script Execution Summary&quot;                                                                                                                                                                                                                                                                                          
-##  [4] &quot;Date and Time: 2023-08-28 15:10:19&quot;                                                                                                                                                                                                                                                                                
-##  [5] &quot;------------------------------&quot;                                                                                                                                                                                                                                                                                    
-##  [6] &quot;&quot;                                                                                                                                                                                                                                                                                                                  
-##  [7] &quot;PDF input: ../../../datasets/banc_darguin_national_park/Jager_et_al_1993/raw/BF00006196.pdf&quot;                                                                                                                                                                                                                       
-##  [8] &quot;Perform Table Parsing: TRUE&quot;                                                                                                                                                                                                                                                                                       
-##  [9] &quot;Selected Areas:&quot;                                                                                                                                                                                                                                                                                                   
-## [10] &quot;  Area 1: [119.813, 150.863, 555.863, 266.288]&quot;                                                                                                                                                                                                                                                                    
-## [11] &quot;Pages: 6&quot;                                                                                                                                                                                                                                                                                                          
-## [12] &quot;Concatenate: False&quot;                                                                                                                                                                                                                                                                                                
-## [13] &quot;Stream Extraction: True&quot;                                                                                                                                                                                                                                                                                           
-## [14] &quot;Lattice Extraction: False&quot;                                                                                                                                                                                                                                                                                         
-## [15] &quot;&quot;                                                                                                                                                                                                                                                                                                                  
-## [16] &quot;Parsing Tables&quot;                                                                                                                                                                                                                                                                                                    
-## [17] &quot;------------------------------&quot;                                                                                                                                                                                                                                                                                    
-## [18] &quot;&quot;                                                                                                                                                                                                                                                                                                                  
-## [19] &quot;&quot;                                                                                                                                                                                                                                                                                                                  
-## [20] &quot;Saving to CSV&quot;                                                                                                                                                                                                                                                                                                     
-## [21] &quot;CSV file(s):&quot;                                                                                                                                                                                                                                                                                                      
-## [22] &quot;\t../../../datasets/banc_darguin_national_park/Jager_et_al_1993/processed/BF00006196_tables_parsed_1.csv&quot;                                                                                                                                                                                                          
-## [23] &quot;------------------------------&quot;                                                                                                                                                                                                                                                                                    
-## [24] &quot;&quot;                                                                                                                                                                                                                                                                                                                  
-## [25] &quot;&quot;                                                                                                                                                                                                                                                                                                                  
-## [26] &quot;Run Details: ../../../datasets/banc_darguin_national_park/Jager_et_al_1993/processed/BF00006196_parameters.txt&quot;                                                                                                                                                                                                    
-## [27] &quot;Finished&quot;                                                                                                                                                                                                                                                                                                          
+<pre><code>##  [1] &quot;&quot;                                                                                                              
+##  [2] &quot;Script Execution Summary&quot;                                                                                      
+##  [3] &quot;Date and Time: 2023-09-06 11:49:31&quot;                                                                            
+##  [4] &quot;------------------------------&quot;                                                                                
+##  [5] &quot;&quot;                                                                                                              
+##  [6] &quot;PDF input: ../../../datasets/banc_darguin_national_park/Jager_et_al_1993/raw/BF00006196.pdf&quot;                   
+##  [7] &quot;Perform Table Parsing: TRUE&quot;                                                                                   
+##  [8] &quot;Selected Areas:&quot;                                                                                               
+##  [9] &quot;  Area 1: [119.813, 150.863, 555.863, 266.288]&quot;                                                                
+## [10] &quot;Pages: 6&quot;                                                                                                      
+## [11] &quot;Concatenate: False&quot;                                                                                            
+## [12] &quot;Concatenate across headers: False&quot;                                                                             
+## [13] &quot;Stream Extraction: True&quot;                                                                                       
+## [14] &quot;Lattice Extraction: False&quot;                                                                                     
+## [15] &quot;&quot;                                                                                                              
+## [16] &quot;Parsing Tables&quot;                                                                                                
+## [17] &quot;------------------------------&quot;                                                                                
+## [18] &quot;&quot;                                                                                                              
+## [19] &quot;&quot;                                                                                                              
+## [20] &quot;Saving to CSV&quot;                                                                                                 
+## [21] &quot;CSV file(s):&quot;                                                                                                  
+## [22] &quot;\t../../../datasets/banc_darguin_national_park/Jager_et_al_1993/processed/BF00006196_tables_parsed_1.csv&quot;      
+## [23] &quot;------------------------------&quot;                                                                                
+## [24] &quot;&quot;                                                                                                              
+## [25] &quot;&quot;                                                                                                              
+## [26] &quot;Run Details: ../../../datasets/banc_darguin_national_park/Jager_et_al_1993/processed/BF00006196_parameters.txt&quot;
+## [27] &quot;Finished&quot;                                                                                                      
 ## [28] &quot;&quot;</code></pre>
 </div>
 <div id="read-source-data" class="section level1">
@@ -1887,11 +1887,11 @@ decimalLatitude, occurrenceStatus, basisOfRecord.</p>
 <p>Create a dataframe with unique taxa only (though this should already
 be unique). This will be our primary DarwinCore data frame.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#rename and restructure WoRMSIDs to OBIS requirements</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>occurrence <span class="ot">&lt;-</span> combined_dataframe <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, WormsIDs)<span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>occurrence <span class="ot">&lt;-</span> combined_dataframe <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, WormsIDs) <span class="sc">%&gt;%</span></span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificName =</span> CanonicalFull) <span class="sc">%&gt;%</span></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificNameID =</span> WormsIDs) <span class="sc">%&gt;%</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scientificNameID =</span> <span class="fu">paste</span>(<span class="st">&quot;urn:lsid:marinespecies.org:taxname:&quot;</span>, scientificNameID, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scientificNameID =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(scientificNameID), <span class="fu">paste</span>(<span class="st">&quot;urn:lsid:marinespecies.org:taxname:&quot;</span>, scientificNameID, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="cn">NA</span>))</span></code></pre></div>
 </div>
 <div id="occurrenceid" class="section level3">
 <h3>occurrenceID</h3>
@@ -1907,8 +1907,9 @@ name.</p>
 </div>
 <div id="eventdate" class="section level3">
 <h3>eventDate</h3>
-<p>This is when the original resource was published</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="st">&quot;1988-07&quot;</span></span>
+<p>This is NULL since this is technically a checklist and we do not know
+the collection date.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(eventDate)</span></code></pre></div>
 </div>
 <div id="decimallongitudedecimallatitude" class="section level3">
@@ -2004,7 +2005,20 @@ missing.</p>
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.</code></pre>
-<pre><code>## # A tibble: 0 × 0</code></pre>
+<pre><code>## # A tibble: 35 × 4
+##    level field       row message                                 
+##    &lt;chr&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                                   
+##  1 error eventDate     1 Empty value for required field eventDate
+##  2 error eventDate     2 Empty value for required field eventDate
+##  3 error eventDate     3 Empty value for required field eventDate
+##  4 error eventDate     4 Empty value for required field eventDate
+##  5 error eventDate     5 Empty value for required field eventDate
+##  6 error eventDate     6 Empty value for required field eventDate
+##  7 error eventDate     7 Empty value for required field eventDate
+##  8 error eventDate     8 Empty value for required field eventDate
+##  9 error eventDate     9 Empty value for required field eventDate
+## 10 error eventDate    10 Empty value for required field eventDate
+## # ℹ 25 more rows</code></pre>
 </div>
 <div id="create-the-eml-file" class="section level2">
 <h2>Create the EML file</h2>
@@ -2039,11 +2053,11 @@ is the person who mobilized the data from the original resource.</p>
 <span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a></span>
 <span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a>contact <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">creator</span>(</span>
 <span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a>  <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;Pieter&quot;</span>, </span>
-<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Provost&quot;</span>),</span>
-<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;p.provoost@unesco.org&quot;</span>,</span>
-<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;UNESCO&quot;</span>,</span>
-<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;OBIS Data Manager&quot;</span></span>
+<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;OBIS&quot;</span>, </span>
+<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Secretariat&quot;</span>),</span>
+<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;helpdesk@obis.org&quot;</span>,</span>
+<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;OBIS&quot;</span>,</span>
+<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;Secretariat&quot;</span></span>
 <span id="cb28-15"><a href="#cb28-15" tabindex="-1"></a>)</span>
 <span id="cb28-16"><a href="#cb28-16" tabindex="-1"></a></span>
 <span id="cb28-17"><a href="#cb28-17" tabindex="-1"></a>metadataProvider <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">metadataProvider</span>(</span>
@@ -2078,7 +2092,7 @@ timestamp of the EML.</p>
 <span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>    <span class="at">gbif =</span> <span class="fu">list</span>(</span>
 <span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>      <span class="at">dateStamp =</span> <span class="fu">paste0</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%Y-%m-%dT%H:%M:%OS3&quot;</span>), <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">1</span>, <span class="dv">3</span>), <span class="st">&quot;:&quot;</span>, <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">4</span>, <span class="dv">5</span>)))),</span>
 <span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>      <span class="at">hierarchyLevel =</span> <span class="st">&quot;dataset&quot;</span>,</span>
-<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;Earl C, Provost P (2023)The distribution and abundance of young fish in the Banc d&#39;Arguin, Mauritania: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI&quot;</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;Earl C., OBIS Secretariat. (2023) The distribution and abundance of young fish in the Banc d&#39;Arguin, Mauritania: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI&quot;</span>,</span>
 <span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>      <span class="at">bibliography =</span> <span class="fu">list</span>(</span>
 <span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>        <span class="at">citation =</span> <span class="st">&quot;Jager, Z. The distribution and abundance of young fish in the Banc d&#39;Arguin, Mauritania. Hydrobiologia 258, 185–196 (1993). https://doi.org/10.1007/BF00006196&quot;</span>)</span>
 <span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>    )</span>

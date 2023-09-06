@@ -7,7 +7,7 @@
 
         <meta name="author" content="Chandra Earl" />
     
-        <meta name="date" content="2023-08-25" />
+        <meta name="date" content="2023-09-06" />
     
     <title>Bundling Miniconi et al. 1990 to a DwC Archive</title>
 
@@ -1582,7 +1582,7 @@ Archive</li>
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Chandra
 Earl</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-08-25</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-06</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -1672,7 +1672,7 @@ and parse out the table to a CSV.</p>
 <span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="fu">system</span>(command, <span class="at">intern=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                                                                                                                                                                                                               
 ##  [2] &quot;Script Execution Summary&quot;                                                                                                                                                                                       
-##  [3] &quot;Date and Time: 2023-08-25 13:53:07&quot;                                                                                                                                                                             
+##  [3] &quot;Date and Time: 2023-09-06 11:55:11&quot;                                                                                                                                                                             
 ##  [4] &quot;------------------------------&quot;                                                                                                                                                                                 
 ##  [5] &quot;&quot;                                                                                                                                                                                                               
 ##  [6] &quot;PDF input: ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/raw/1990MiniconietalInventaireFauneichtyologiqueScandola.pdf&quot;                                
@@ -1686,25 +1686,26 @@ and parse out the table to a CSV.</p>
 ## [14] &quot;  Area 4: [94.406, 56.417, 535.532, 246.362]&quot;                                                                                                                                                                   
 ## [15] &quot;Pages: 9, 10, 11, 12&quot;                                                                                                                                                                                           
 ## [16] &quot;Concatenate: True&quot;                                                                                                                                                                                              
-## [17] &quot;Stream Extraction: True&quot;                                                                                                                                                                                        
-## [18] &quot;Lattice Extraction: False&quot;                                                                                                                                                                                      
-## [19] &quot;&quot;                                                                                                                                                                                                               
-## [20] &quot;OCRing PDF&quot;                                                                                                                                                                                                     
-## [21] &quot;------------------------------&quot;                                                                                                                                                                                 
-## [22] &quot;&quot;                                                                                                                                                                                                               
+## [17] &quot;Concatenate across headers: False&quot;                                                                                                                                                                              
+## [18] &quot;Stream Extraction: True&quot;                                                                                                                                                                                        
+## [19] &quot;Lattice Extraction: False&quot;                                                                                                                                                                                      
+## [20] &quot;&quot;                                                                                                                                                                                                               
+## [21] &quot;OCRing PDF&quot;                                                                                                                                                                                                     
+## [22] &quot;------------------------------&quot;                                                                                                                                                                                 
 ## [23] &quot;&quot;                                                                                                                                                                                                               
-## [24] &quot;Parsing Tables&quot;                                                                                                                                                                                                 
-## [25] &quot;------------------------------&quot;                                                                                                                                                                                 
-## [26] &quot;&quot;                                                                                                                                                                                                               
+## [24] &quot;&quot;                                                                                                                                                                                                               
+## [25] &quot;Parsing Tables&quot;                                                                                                                                                                                                 
+## [26] &quot;------------------------------&quot;                                                                                                                                                                                 
 ## [27] &quot;&quot;                                                                                                                                                                                                               
-## [28] &quot;Saving to CSV&quot;                                                                                                                                                                                                  
-## [29] &quot;CSV file: ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/processed/1990MiniconietalInventaireFauneichtyologiqueScandola_tables_parsed_concatenated.csv&quot;
-## [30] &quot;------------------------------&quot;                                                                                                                                                                                 
-## [31] &quot;&quot;                                                                                                                                                                                                               
+## [28] &quot;&quot;                                                                                                                                                                                                               
+## [29] &quot;Saving to CSV&quot;                                                                                                                                                                                                  
+## [30] &quot;CSV file: ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/processed/1990MiniconietalInventaireFauneichtyologiqueScandola_tables_parsed_concatenated.csv&quot;
+## [31] &quot;------------------------------&quot;                                                                                                                                                                                 
 ## [32] &quot;&quot;                                                                                                                                                                                                               
-## [33] &quot;Run Details: ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/processed/1990MiniconietalInventaireFauneichtyologiqueScandola_parameters.txt&quot;             
-## [34] &quot;Finished&quot;                                                                                                                                                                                                       
-## [35] &quot;&quot;</code></pre>
+## [33] &quot;&quot;                                                                                                                                                                                                               
+## [34] &quot;Run Details: ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Miniconi_et_al_1990/processed/1990MiniconietalInventaireFauneichtyologiqueScandola_parameters.txt&quot;             
+## [35] &quot;Finished&quot;                                                                                                                                                                                                       
+## [36] &quot;&quot;</code></pre>
 </div>
 <div id="read-source-data" class="section level1">
 <h1>Read source data</h1>
@@ -1781,7 +1782,7 @@ common and only take the list of species, since this is a checklist.</p>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span>                         <span class="co"># Have sensible (lowercase) column names</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(unnamed_1, unnamed_2, unnamed_3))</span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># Remove lines with colons, lines with only one word and lines that start with &quot;(&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># Remove lines with only one word</span></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> input_data <span class="sc">%&gt;%</span></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_count</span>(famille_espece, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">S+&quot;</span>) <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
 <span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
@@ -1936,10 +1937,7 @@ steps</p>
 <span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>combined_dataframe[<span class="dv">85</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Symphodus roissali&quot;</span>, <span class="dv">273573</span>)</span>
 <span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>combined_dataframe[<span class="dv">86</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Symphodus rostratus&quot;</span>, <span class="dv">273574</span>)</span>
 <span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>combined_dataframe[<span class="dv">87</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Symphodus tinca&quot;</span>, <span class="dv">273575</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>combined_dataframe[<span class="dv">124</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Trigla lyra&quot;</span>, <span class="dv">127266</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>combined_dataframe <span class="ot">&lt;-</span> combined_dataframe[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">104</span>),]</span></code></pre></div>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>combined_dataframe[<span class="dv">124</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Trigla lyra&quot;</span>, <span class="dv">127266</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="darwin-core-mapping" class="section level1">
@@ -1954,11 +1952,11 @@ decimalLatitude, occurrenceStatus, basisOfRecord.</p>
 <p>Create a dataframe with unique taxa only (though this should already
 be unique). This will be our primary DarwinCore data frame.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#rename and restructure WoRMSIDs to OBIS requirements</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>occurrence <span class="ot">&lt;-</span> combined_dataframe <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, WormsIDs)<span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>occurrence <span class="ot">&lt;-</span> combined_dataframe <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, WormsIDs) <span class="sc">%&gt;%</span></span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificName =</span> CanonicalFull) <span class="sc">%&gt;%</span></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificNameID =</span> WormsIDs) <span class="sc">%&gt;%</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scientificNameID =</span> <span class="fu">paste</span>(<span class="st">&quot;urn:lsid:marinespecies.org:taxname:&quot;</span>, scientificNameID, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scientificNameID =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(scientificNameID), <span class="fu">paste</span>(<span class="st">&quot;urn:lsid:marinespecies.org:taxname:&quot;</span>, scientificNameID, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="cn">NA</span>))</span></code></pre></div>
 </div>
 <div id="occurrenceid" class="section level3">
 <h3>occurrenceID</h3>
@@ -1974,8 +1972,9 @@ name.</p>
 </div>
 <div id="eventdate" class="section level3">
 <h3>eventDate</h3>
-<p>This is when the original resource was published</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="st">&quot;1990-01&quot;</span></span>
+<p>This is NULL since this is technically a checklist and we do not know
+the collection date</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(eventDate)</span></code></pre></div>
 </div>
 <div id="decimallongitudedecimallatitude" class="section level3">
@@ -2070,7 +2069,20 @@ missing.</p>
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.</code></pre>
-<pre><code>## # A tibble: 0 × 0</code></pre>
+<pre><code>## # A tibble: 125 × 4
+##    level field       row message                                 
+##    &lt;chr&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                                   
+##  1 error eventDate     1 Empty value for required field eventDate
+##  2 error eventDate     2 Empty value for required field eventDate
+##  3 error eventDate     3 Empty value for required field eventDate
+##  4 error eventDate     4 Empty value for required field eventDate
+##  5 error eventDate     5 Empty value for required field eventDate
+##  6 error eventDate     6 Empty value for required field eventDate
+##  7 error eventDate     7 Empty value for required field eventDate
+##  8 error eventDate     8 Empty value for required field eventDate
+##  9 error eventDate     9 Empty value for required field eventDate
+## 10 error eventDate    10 Empty value for required field eventDate
+## # ℹ 115 more rows</code></pre>
 </div>
 <div id="create-the-eml-file" class="section level2">
 <h2>Create the EML file</h2>
@@ -2116,11 +2128,11 @@ is the person who mobilized the data from the original resource.</p>
 <span id="cb28-18"><a href="#cb28-18" tabindex="-1"></a></span>
 <span id="cb28-19"><a href="#cb28-19" tabindex="-1"></a>contact <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">creator</span>(</span>
 <span id="cb28-20"><a href="#cb28-20" tabindex="-1"></a>  <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-21"><a href="#cb28-21" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;Pieter&quot;</span>, </span>
-<span id="cb28-22"><a href="#cb28-22" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Provost&quot;</span>),</span>
-<span id="cb28-23"><a href="#cb28-23" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;p.provoost@unesco.org&quot;</span>,</span>
-<span id="cb28-24"><a href="#cb28-24" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;UNESCO&quot;</span>,</span>
-<span id="cb28-25"><a href="#cb28-25" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;OBIS Data Manager&quot;</span></span>
+<span id="cb28-21"><a href="#cb28-21" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;OBIS&quot;</span>, </span>
+<span id="cb28-22"><a href="#cb28-22" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Secretariat&quot;</span>),</span>
+<span id="cb28-23"><a href="#cb28-23" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;helpdesk@obis.org&quot;</span>,</span>
+<span id="cb28-24"><a href="#cb28-24" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;OBIS&quot;</span>,</span>
+<span id="cb28-25"><a href="#cb28-25" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;Secretariat&quot;</span></span>
 <span id="cb28-26"><a href="#cb28-26" tabindex="-1"></a>)</span>
 <span id="cb28-27"><a href="#cb28-27" tabindex="-1"></a></span>
 <span id="cb28-28"><a href="#cb28-28" tabindex="-1"></a>metadataProvider <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">metadataProvider</span>(</span>
@@ -2155,7 +2167,7 @@ timestamp of the EML.</p>
 <span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>    <span class="at">gbif =</span> <span class="fu">list</span>(</span>
 <span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>      <span class="at">dateStamp =</span> <span class="fu">paste0</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%Y-%m-%dT%H:%M:%OS3&quot;</span>), <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">1</span>, <span class="dv">3</span>), <span class="st">&quot;:&quot;</span>, <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">4</span>, <span class="dv">5</span>)))),</span>
 <span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>      <span class="at">hierarchyLevel =</span> <span class="st">&quot;dataset&quot;</span>,</span>
-<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;Earl C, Provost P (2023) Inventaire de la faune ichtyologique de la réserve naturelle de Scandola (Corse, Méditerranée nord-occidentale): Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI&quot;</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;Earl C., OBIS Secretariat. (2023) Inventaire de la faune ichtyologique de la réserve naturelle de Scandola (Corse, Méditerranée nord-occidentale): Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI&quot;</span>,</span>
 <span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>      <span class="at">bibliography =</span> <span class="fu">list</span>(</span>
 <span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>        <span class="at">citation =</span> <span class="st">&quot;Miniconi, Roger &amp; Francour, Patrice &amp; C.H, Bianconi. (1990). Inventaire de la faune ichtyologique de la réserve naturelle de Scandola (Corse, Méditerranée nord-occidentale). Cybium: international journal of ichthyology. 14. 77-89.&quot;</span>)</span>
 <span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>    )</span>

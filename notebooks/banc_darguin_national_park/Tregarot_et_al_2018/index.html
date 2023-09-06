@@ -7,7 +7,7 @@
 
         <meta name="author" content="Chandra Earl" />
     
-        <meta name="date" content="2023-08-28" />
+        <meta name="date" content="2023-09-06" />
     
     <title>Bundling Tregarot et al 2018 to a DwC Archive</title>
 
@@ -1582,7 +1582,7 @@ Archive</li>
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Chandra
 Earl</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-08-28</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-06</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -1673,7 +1673,7 @@ and parse out the table to a CSV.</p>
 <span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="fu">system</span>(command, <span class="at">intern=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                                                                                                                    
 ##  [2] &quot;Script Execution Summary&quot;                                                                                            
-##  [3] &quot;Date and Time: 2023-08-28 16:29:06&quot;                                                                                  
+##  [3] &quot;Date and Time: 2023-09-06 11:46:30&quot;                                                                                  
 ##  [4] &quot;------------------------------&quot;                                                                                      
 ##  [5] &quot;&quot;                                                                                                                    
 ##  [6] &quot;PDF input: ../../../datasets/banc_darguin_national_park/Tregarot_et_al_2018/raw/010075369-330.pdf&quot;                   
@@ -1684,26 +1684,27 @@ and parse out the table to a CSV.</p>
 ## [11] &quot;  Area 1: [183.402, 74.03, 748.861, 220.603]&quot;                                                                        
 ## [12] &quot;Pages: 1&quot;                                                                                                            
 ## [13] &quot;Concatenate: False&quot;                                                                                                  
-## [14] &quot;Stream Extraction: True&quot;                                                                                             
-## [15] &quot;Lattice Extraction: False&quot;                                                                                           
-## [16] &quot;&quot;                                                                                                                    
-## [17] &quot;OCRing PDF&quot;                                                                                                          
-## [18] &quot;------------------------------&quot;                                                                                      
-## [19] &quot;&quot;                                                                                                                    
+## [14] &quot;Concatenate across headers: False&quot;                                                                                   
+## [15] &quot;Stream Extraction: True&quot;                                                                                             
+## [16] &quot;Lattice Extraction: False&quot;                                                                                           
+## [17] &quot;&quot;                                                                                                                    
+## [18] &quot;OCRing PDF&quot;                                                                                                          
+## [19] &quot;------------------------------&quot;                                                                                      
 ## [20] &quot;&quot;                                                                                                                    
-## [21] &quot;Parsing Tables&quot;                                                                                                      
-## [22] &quot;------------------------------&quot;                                                                                      
-## [23] &quot;&quot;                                                                                                                    
+## [21] &quot;&quot;                                                                                                                    
+## [22] &quot;Parsing Tables&quot;                                                                                                      
+## [23] &quot;------------------------------&quot;                                                                                      
 ## [24] &quot;&quot;                                                                                                                    
-## [25] &quot;Saving to CSV&quot;                                                                                                       
-## [26] &quot;CSV file(s):&quot;                                                                                                        
-## [27] &quot;\t../../../datasets/banc_darguin_national_park/Tregarot_et_al_2018/processed/010075369-330_tables_parsed_1.csv&quot;      
-## [28] &quot;------------------------------&quot;                                                                                      
-## [29] &quot;&quot;                                                                                                                    
+## [25] &quot;&quot;                                                                                                                    
+## [26] &quot;Saving to CSV&quot;                                                                                                       
+## [27] &quot;CSV file(s):&quot;                                                                                                        
+## [28] &quot;\t../../../datasets/banc_darguin_national_park/Tregarot_et_al_2018/processed/010075369-330_tables_parsed_1.csv&quot;      
+## [29] &quot;------------------------------&quot;                                                                                      
 ## [30] &quot;&quot;                                                                                                                    
-## [31] &quot;Run Details: ../../../datasets/banc_darguin_national_park/Tregarot_et_al_2018/processed/010075369-330_parameters.txt&quot;
-## [32] &quot;Finished&quot;                                                                                                            
-## [33] &quot;&quot;</code></pre>
+## [31] &quot;&quot;                                                                                                                    
+## [32] &quot;Run Details: ../../../datasets/banc_darguin_national_park/Tregarot_et_al_2018/processed/010075369-330_parameters.txt&quot;
+## [33] &quot;Finished&quot;                                                                                                            
+## [34] &quot;&quot;</code></pre>
 </div>
 <div id="read-source-data" class="section level1">
 <h1>Read source data</h1>
@@ -1898,11 +1899,11 @@ decimalLatitude, occurrenceStatus, basisOfRecord.</p>
 <p>Create a dataframe with unique taxa only (though this should already
 be unique). This will be our primary DarwinCore data frame.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#rename and restructure WoRMSIDs to OBIS requirements</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>occurrence <span class="ot">&lt;-</span> combined_dataframe <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, WormsIDs)<span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>occurrence <span class="ot">&lt;-</span> combined_dataframe <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, WormsIDs) <span class="sc">%&gt;%</span></span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificName =</span> CanonicalFull) <span class="sc">%&gt;%</span></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificNameID =</span> WormsIDs) <span class="sc">%&gt;%</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scientificNameID =</span> <span class="fu">paste</span>(<span class="st">&quot;urn:lsid:marinespecies.org:taxname:&quot;</span>, scientificNameID, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scientificNameID =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(scientificNameID), <span class="fu">paste</span>(<span class="st">&quot;urn:lsid:marinespecies.org:taxname:&quot;</span>, scientificNameID, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="cn">NA</span>))</span></code></pre></div>
 </div>
 <div id="occurrenceid" class="section level3">
 <h3>occurrenceID</h3>
@@ -1918,8 +1919,9 @@ name.</p>
 </div>
 <div id="eventdate" class="section level3">
 <h3>eventDate</h3>
-<p>This is when the original resource was published</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="st">&quot;2018-12&quot;</span></span>
+<p>This is NULL since this is technically a checklist and we do not know
+the collection date.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(eventDate)</span></code></pre></div>
 </div>
 <div id="decimallongitudedecimallatitude" class="section level3">
@@ -2015,7 +2017,20 @@ missing.</p>
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.</code></pre>
-<pre><code>## # A tibble: 0 × 0</code></pre>
+<pre><code>## # A tibble: 32 × 4
+##    level field       row message                                 
+##    &lt;chr&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                                   
+##  1 error eventDate     1 Empty value for required field eventDate
+##  2 error eventDate     2 Empty value for required field eventDate
+##  3 error eventDate     3 Empty value for required field eventDate
+##  4 error eventDate     4 Empty value for required field eventDate
+##  5 error eventDate     5 Empty value for required field eventDate
+##  6 error eventDate     6 Empty value for required field eventDate
+##  7 error eventDate     7 Empty value for required field eventDate
+##  8 error eventDate     8 Empty value for required field eventDate
+##  9 error eventDate     9 Empty value for required field eventDate
+## 10 error eventDate    10 Empty value for required field eventDate
+## # ℹ 22 more rows</code></pre>
 </div>
 <div id="create-the-eml-file" class="section level2">
 <h2>Create the EML file</h2>
@@ -2076,11 +2091,11 @@ is the person who mobilized the data from the original resource.</p>
 <span id="cb28-33"><a href="#cb28-33" tabindex="-1"></a></span>
 <span id="cb28-34"><a href="#cb28-34" tabindex="-1"></a>contact <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">creator</span>(</span>
 <span id="cb28-35"><a href="#cb28-35" tabindex="-1"></a>  <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-36"><a href="#cb28-36" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;Pieter&quot;</span>, </span>
-<span id="cb28-37"><a href="#cb28-37" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Provost&quot;</span>),</span>
-<span id="cb28-38"><a href="#cb28-38" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;p.provoost@unesco.org&quot;</span>,</span>
-<span id="cb28-39"><a href="#cb28-39" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;UNESCO&quot;</span>,</span>
-<span id="cb28-40"><a href="#cb28-40" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;OBIS Data Manager&quot;</span></span>
+<span id="cb28-36"><a href="#cb28-36" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;OBIS&quot;</span>, </span>
+<span id="cb28-37"><a href="#cb28-37" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Secretariat&quot;</span>),</span>
+<span id="cb28-38"><a href="#cb28-38" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;helpdesk@obis.org&quot;</span>,</span>
+<span id="cb28-39"><a href="#cb28-39" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;OBIS&quot;</span>,</span>
+<span id="cb28-40"><a href="#cb28-40" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;Secretariat&quot;</span></span>
 <span id="cb28-41"><a href="#cb28-41" tabindex="-1"></a>)</span>
 <span id="cb28-42"><a href="#cb28-42" tabindex="-1"></a></span>
 <span id="cb28-43"><a href="#cb28-43" tabindex="-1"></a>metadataProvider <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">metadataProvider</span>(</span>
@@ -2115,7 +2130,7 @@ timestamp of the EML.</p>
 <span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>    <span class="at">gbif =</span> <span class="fu">list</span>(</span>
 <span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>      <span class="at">dateStamp =</span> <span class="fu">paste0</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%Y-%m-%dT%H:%M:%OS3&quot;</span>), <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">1</span>, <span class="dv">3</span>), <span class="st">&quot;:&quot;</span>, <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">4</span>, <span class="dv">5</span>)))),</span>
 <span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>      <span class="at">hierarchyLevel =</span> <span class="st">&quot;dataset&quot;</span>,</span>
-<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;Earl C, Provost P (2023) Évaluation du Service de Nerserie du Parc National du Banc d’arguin, Mauritania: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI&quot;</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;Earl C., OBIS Secretariat. (2023) Évaluation du Service de Nerserie du Parc National du Banc d’arguin, Mauritania: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI&quot;</span>,</span>
 <span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>      <span class="at">bibliography =</span> <span class="fu">list</span>(</span>
 <span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>        <span class="at">citation =</span> <span class="st">&quot;Trégarot E., Catry T., Pottier A., Cornet C., Maréchal J.-P., Fayad V., Sidi Cheick M.A., David G., Dia A.D., Fall A.D., Sarr O., El Valy Y., Wagne O.H., Meisse B., Kane E.A., Ball A.C., Haidallah M.S., Braham C.B., Dia M., Abdel Hamid M.L., Rey-Valette H., Salles J.-M., Ly D., Cissé C.B. et Failler P. (2018). Évaluation des services écosystémiques du Banc d’Arguin, Mauritanie. Rapport final pour le Parc National du Banc d’Arguin, XX p.&quot;</span>)</span>
 <span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>    )</span>
