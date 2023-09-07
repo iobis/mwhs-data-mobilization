@@ -247,7 +247,7 @@ Create a dataframe with unique taxa only (though this should already be unique).
 ```{r}
 #rename and restructure WoRMSIDs to OBIS requirements
 occurrence <- combined_dataframe %>%
-  distinct(CanonicalFull, WormsIDs) %>%
+  distinct(CanonicalFull, identificationQualifier, WormsIDs) %>%
   rename(scientificName = CanonicalFull) %>%
   rename(scientificNameID = WormsIDs) %>%
   mutate(scientificNameID = ifelse(!is.na(scientificNameID), paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""), NA))
@@ -360,7 +360,7 @@ Use the check_fields command from obistools to check if all OBIS required fields
 
 ```{r check}
 #Reorganize columns
-occurrence = occurrence %>% select(occurrenceID, scientificName, scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, footprintWKT, geodeticDatum, occurrenceStatus, basisOfRecord)
+occurrence = occurrence %>% select(occurrenceID, scientificName, identificationQualifier,scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, footprintWKT, geodeticDatum, occurrenceStatus, basisOfRecord)
 
 #Check fields
 check_fields(occurrence)

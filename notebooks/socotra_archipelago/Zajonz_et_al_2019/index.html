@@ -1715,7 +1715,7 @@ and parse out the table to a CSV.</p>
 <span id="cb3-69"><a href="#cb3-69" tabindex="-1"></a><span class="fu">system</span>(command, <span class="at">intern=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                                                                                                                                                                                    
 ##  [2] &quot;Script Execution Summary&quot;                                                                                                                                                            
-##  [3] &quot;Date and Time: 2023-09-06 12:18:12&quot;                                                                                                                                                  
+##  [3] &quot;Date and Time: 2023-09-06 15:38:16&quot;                                                                                                                                                  
 ##  [4] &quot;------------------------------&quot;                                                                                                                                                      
 ##  [5] &quot;&quot;                                                                                                                                                                                    
 ##  [6] &quot;PDF input: ../../../datasets/socotra_archipelago/Zajonz_et_al_2019/raw/Zajonz_et_al._2019-58-108_rotated.pdf&quot;                                                                        
@@ -2008,7 +2008,7 @@ decimalLatitude, occurrenceStatus, basisOfRecord.</p>
 be unique). This will be our primary DarwinCore data frame.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#rename and restructure WoRMSIDs to OBIS requirements</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>occurrence <span class="ot">&lt;-</span> combined_dataframe <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, WormsIDs) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, identificationQualifier, WormsIDs) <span class="sc">%&gt;%</span></span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificName =</span> CanonicalFull) <span class="sc">%&gt;%</span></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificNameID =</span> WormsIDs) <span class="sc">%&gt;%</span></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scientificNameID =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(scientificNameID), <span class="fu">paste</span>(<span class="st">&quot;urn:lsid:marinespecies.org:taxname:&quot;</span>, scientificNameID, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="cn">NA</span>))</span></code></pre></div>
@@ -2114,7 +2114,7 @@ from <a href="https://github.com/iobis/mwhs-shapes" class="uri">https://github.c
 required fields are present in an occurrence table and if any values are
 missing.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co">#Reorganize columns</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>occurrence <span class="ot">=</span> occurrence <span class="sc">%&gt;%</span> <span class="fu">select</span>(occurrenceID, scientificName, scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, footprintWKT, geodeticDatum, occurrenceStatus, basisOfRecord)</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>occurrence <span class="ot">=</span> occurrence <span class="sc">%&gt;%</span> <span class="fu">select</span>(occurrenceID, scientificName, identificationQualifier,scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, footprintWKT, geodeticDatum, occurrenceStatus, basisOfRecord)</span>
 <span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co">#Check fields</span></span>
 <span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="fu">check_fields</span>(occurrence)</span></code></pre></div>
@@ -2125,7 +2125,7 @@ missing.</p>
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.</code></pre>
-<pre><code>## # A tibble: 589 × 4
+<pre><code>## # A tibble: 590 × 4
 ##    level field       row message                                 
 ##    &lt;chr&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                                   
 ##  1 error eventDate     1 Empty value for required field eventDate
@@ -2138,7 +2138,7 @@ missing.</p>
 ##  8 error eventDate     8 Empty value for required field eventDate
 ##  9 error eventDate     9 Empty value for required field eventDate
 ## 10 error eventDate    10 Empty value for required field eventDate
-## # ℹ 579 more rows</code></pre>
+## # ℹ 580 more rows</code></pre>
 </div>
 <div id="create-the-eml-file" class="section level2">
 <h2>Create the EML file</h2>
