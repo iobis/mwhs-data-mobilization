@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-09-06 16:38:46
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/the_wadden_sea/Jagar_et_al_2009/raw/QSR2009_Fish.pdf -s -c -a 227.321,36.833,629.132,122.404 -p 39 -a 227.321,67.341,627.644,153.656 -p 40 -a 168.538,36.089,558.443,113.474 -p 41 -a 170.026,61.388,560.676,138.774 -p 42 -o ../../../datasets/the_wadden_sea/Jagar_et_al_2009/processed
+
+Script Arguments:
+pdf: ../../../datasets/the_wadden_sea/Jagar_et_al_2009/raw/QSR2009_Fish.pdf
+output: ../../../datasets/the_wadden_sea/Jagar_et_al_2009/processed
+area: [[227.321, 36.833, 629.132, 122.404], [227.321, 67.341, 627.644, 153.656], [168.538, 36.089, 558.443, 113.474], [170.026, 61.388, 560.676, 138.774]]
+pages: ['39', '40', '41', '42']
+concatenate: True
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/the_wadden_sea/Jagar_et_al_2009/processed/QSR2009_Fish_tables_parsed_concatenated.csv
+../../../datasets/the_wadden_sea/Jagar_et_al_2009/processed/QSR2009_Fish_parameters.txt
