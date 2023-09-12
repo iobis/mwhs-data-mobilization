@@ -642,6 +642,13 @@ for (field in fields) {
   }
 }
 
+#Add identificationQualifier
+new_field <- xml_add_sibling(fields[[3]], "field")
+xml_set_attr(new_field, "index", "3")
+xml_set_attr(new_field, "term", "http://rs.tdwg.org/dwc/terms/identificationQualifier")
+
+fields <- append(fields, list(new_field))
+
 ```
 
 ## Save outputs

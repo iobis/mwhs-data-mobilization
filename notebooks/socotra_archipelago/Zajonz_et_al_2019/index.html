@@ -7,7 +7,7 @@
 
         <meta name="author" content="Chandra Earl" />
     
-        <meta name="date" content="2023-09-06" />
+        <meta name="date" content="2023-09-09" />
     
     <title>Bundling Zajonz et al. 2019 to a DwC Archive</title>
 
@@ -1582,7 +1582,7 @@ Archive</li>
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Chandra
 Earl</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-06</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-09</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -1715,7 +1715,7 @@ and parse out the table to a CSV.</p>
 <span id="cb3-69"><a href="#cb3-69" tabindex="-1"></a><span class="fu">system</span>(command, <span class="at">intern=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                                                                                                                                                                                    
 ##  [2] &quot;Script Execution Summary&quot;                                                                                                                                                            
-##  [3] &quot;Date and Time: 2023-09-06 15:38:16&quot;                                                                                                                                                  
+##  [3] &quot;Date and Time: 2023-09-09 14:03:42&quot;                                                                                                                                                  
 ##  [4] &quot;------------------------------&quot;                                                                                                                                                      
 ##  [5] &quot;&quot;                                                                                                                                                                                    
 ##  [6] &quot;PDF input: ../../../datasets/socotra_archipelago/Zajonz_et_al_2019/raw/Zajonz_et_al._2019-58-108_rotated.pdf&quot;                                                                        
@@ -1945,32 +1945,32 @@ the WoRMS database.</p>
 <tr class="odd">
 <td align="left">Rhincodon typus Smith, 1828</td>
 <td align="left">Rhincodon typus</td>
-<td align="left">105847</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Chiloscyllium arabicum Gubanov, 1980</td>
 <td align="left">Chiloscyllium arabicum</td>
-<td align="left">277827</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Stegostoma fasciatum (Hermann, 1783)</td>
 <td align="left">Stegostoma fasciatum</td>
-<td align="left">220032</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Nebrius ferrugineus (Lesson, 1831)</td>
 <td align="left">Nebrius ferrugineus</td>
-<td align="left">220030</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Isurus oxyrinchus Rafinesque, 1810</td>
 <td align="left">Isurus oxyrinchus</td>
-<td align="left">105839</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Mustelus mosis Hemprich &amp; Ehrenberg, 1899</td>
 <td align="left">Mustelus mosis</td>
-<td align="left">214558</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table>
@@ -2125,7 +2125,7 @@ missing.</p>
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.</code></pre>
-<pre><code>## # A tibble: 590 × 4
+<pre><code>## # A tibble: 1,172 × 4
 ##    level field       row message                                 
 ##    &lt;chr&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                                   
 ##  1 error eventDate     1 Empty value for required field eventDate
@@ -2138,7 +2138,7 @@ missing.</p>
 ##  8 error eventDate     8 Empty value for required field eventDate
 ##  9 error eventDate     9 Empty value for required field eventDate
 ## 10 error eventDate    10 Empty value for required field eventDate
-## # ℹ 580 more rows</code></pre>
+## # ℹ 1,162 more rows</code></pre>
 </div>
 <div id="create-the-eml-file" class="section level2">
 <h2>Create the EML file</h2>
@@ -2396,7 +2396,14 @@ file “meta_occurrence_checklist_template.xml”</p>
 <span id="cb34-26"><a href="#cb34-26" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/basisOfRecord&quot;</span>) {</span>
 <span id="cb34-27"><a href="#cb34-27" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, basisOfRecord)</span>
 <span id="cb34-28"><a href="#cb34-28" tabindex="-1"></a>  }</span>
-<span id="cb34-29"><a href="#cb34-29" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb34-29"><a href="#cb34-29" tabindex="-1"></a>}</span>
+<span id="cb34-30"><a href="#cb34-30" tabindex="-1"></a></span>
+<span id="cb34-31"><a href="#cb34-31" tabindex="-1"></a><span class="co">#Add identificationQualifier</span></span>
+<span id="cb34-32"><a href="#cb34-32" tabindex="-1"></a>new_field <span class="ot">&lt;-</span> <span class="fu">xml_add_sibling</span>(fields[[<span class="dv">3</span>]], <span class="st">&quot;field&quot;</span>)</span>
+<span id="cb34-33"><a href="#cb34-33" tabindex="-1"></a><span class="fu">xml_set_attr</span>(new_field, <span class="st">&quot;index&quot;</span>, <span class="st">&quot;3&quot;</span>)</span>
+<span id="cb34-34"><a href="#cb34-34" tabindex="-1"></a><span class="fu">xml_set_attr</span>(new_field, <span class="st">&quot;term&quot;</span>, <span class="st">&quot;http://rs.tdwg.org/dwc/terms/identificationQualifier&quot;</span>)</span>
+<span id="cb34-35"><a href="#cb34-35" tabindex="-1"></a></span>
+<span id="cb34-36"><a href="#cb34-36" tabindex="-1"></a>fields <span class="ot">&lt;-</span> <span class="fu">append</span>(fields, <span class="fu">list</span>(new_field))</span></code></pre></div>
 </div>
 <div id="save-outputs" class="section level2">
 <h2>Save outputs</h2>

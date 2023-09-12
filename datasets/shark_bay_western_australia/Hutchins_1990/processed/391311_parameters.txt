@@ -1,0 +1,23 @@
+Script Execution Summary
+Date and Time: 2023-09-09 13:53:15
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/shark_bay_western_australia/Hutchins_1990/raw/391311.pdf -s -c -f -nh -ocr -# 8 -a 552.977,67.201,587.331,229.93 -p 5 -a 102.617,38.063,582.509,276.791 -p 6 -a 97.904,59.581,580.537,297.903 -p 7 -a 104.794,36.754,584.111,264.566 -p 8 -a 101.1,62.1,584.1,320.1 -p 9 -a 104.649,38.138,587.318,267.573 -p 10 -a 101.482,47.318,587.165,275.28 -p 11 -a 106.244,59.162,590.693,310.06 -p 12 -a 103.862,41.962,585.379,290.16 -p 13 -a 103.226,49.634,285.317,315.158 -p 14 -o ../../../datasets/shark_bay_western_australia/Hutchins_1990/processed
+
+Script Arguments:
+pdf: ../../../datasets/shark_bay_western_australia/Hutchins_1990/raw/391311.pdf
+output: ../../../datasets/shark_bay_western_australia/Hutchins_1990/processed
+area: [[552.977, 67.201, 587.331, 229.93], [102.617, 38.063, 582.509, 276.791], [97.904, 59.581, 580.537, 297.903], [104.794, 36.754, 584.111, 264.566], [101.1, 62.1, 584.1, 320.1], [104.649, 38.138, 587.318, 267.573], [101.482, 47.318, 587.165, 275.28], [106.244, 59.162, 590.693, 310.06], [103.862, 41.962, 585.379, 290.16], [103.226, 49.634, 285.317, 315.158]]
+pages: ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14']
+concatenate: True
+noheaders: True
+OCR: True
+cores: 8
+forceocr: True
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/shark_bay_western_australia/Hutchins_1990/processed/391311_ocr.pdf
+../../../datasets/shark_bay_western_australia/Hutchins_1990/processed/391311_tables_parsed_concatenated.csv
+../../../datasets/shark_bay_western_australia/Hutchins_1990/processed/391311_parameters.txt
