@@ -1,5 +1,5 @@
 Script Execution Summary
-Date and Time: 2023-09-11 20:29:46
+Date and Time: 2023-09-12 00:02:36
 ------------------------------
 Command Entered:
 ../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/banc_darguin_national_park/Gushin_and_Fall_2012/raw/S0032945212010055-4-6_rotated.pdf -s -c -a 71.775,113.355,540.045,243.045 -p 1 -a 71.775,113.355,540.045,243.045 -p 2 -a 63.855,113.355,490.545,243.045 -p 3 -o ../../../datasets/banc_darguin_national_park/Gushin_and_Fall_2012/processed

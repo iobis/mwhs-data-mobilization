@@ -7,7 +7,7 @@
 
         <meta name="author" content="Chandra Earl" />
     
-        <meta name="date" content="2023-09-09" />
+        <meta name="date" content="2023-09-12" />
     
     <title>Bundling Zajonz et al. 2019 to a DwC Archive</title>
 
@@ -1582,7 +1582,7 @@ Archive</li>
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Chandra
 Earl</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-09</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-12</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -1637,7 +1637,8 @@ messages.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>path_to_project_root <span class="ot">&lt;-</span> <span class="st">&quot;../../..&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>site_dir_name <span class="ot">&lt;-</span> <span class="st">&quot;socotra_archipelago&quot;</span></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>dataset_dir_name <span class="ot">&lt;-</span> <span class="st">&quot;Zajonz_et_al_2019&quot;</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>original_pdf <span class="ot">&lt;-</span> <span class="st">&quot;Zajonz_et_al._2019-58-108_rotated.pdf&quot;</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>original_pdf <span class="ot">&lt;-</span> <span class="st">&quot;Zajonz_et_al._2019-58-108_rotated.pdf&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>short_name <span class="ot">&lt;-</span> <span class="st">&quot;socotra-zajonz-2019&quot;</span></span></code></pre></div>
 </div>
 <div id="parsing-pdf-table-to-csv" class="section level1">
 <h1>Parsing PDF table to CSV</h1>
@@ -1715,7 +1716,7 @@ and parse out the table to a CSV.</p>
 <span id="cb3-69"><a href="#cb3-69" tabindex="-1"></a><span class="fu">system</span>(command, <span class="at">intern=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                                                                                                                                                                                    
 ##  [2] &quot;Script Execution Summary&quot;                                                                                                                                                            
-##  [3] &quot;Date and Time: 2023-09-09 14:03:42&quot;                                                                                                                                                  
+##  [3] &quot;Date and Time: 2023-09-12 10:11:10&quot;                                                                                                                                                  
 ##  [4] &quot;------------------------------&quot;                                                                                                                                                      
 ##  [5] &quot;&quot;                                                                                                                                                                                    
 ##  [6] &quot;PDF input: ../../../datasets/socotra_archipelago/Zajonz_et_al_2019/raw/Zajonz_et_al._2019-58-108_rotated.pdf&quot;                                                                        
@@ -1841,22 +1842,19 @@ common and only take the list of species, since this is a checklist.</p>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="fu">clean_names</span>()                             <span class="co"># Have sensible (lowercase) column names</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># Remove lines with colons, periods, lines with only one word and lines that start with &quot;(&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># Remove lines with colons, lines with only one word and lines that start with &quot;(&quot;</span></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> input_data <span class="sc">%&gt;%</span></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(x0, <span class="st">&quot;:&quot;</span>),</span>
 <span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>         <span class="fu">str_count</span>(x0, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">S+&quot;</span>) <span class="sc">&gt;</span> <span class="dv">1</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">str_detect</span>(x0, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>),</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">str_starts</span>(x0, <span class="st">&quot;^</span><span class="sc">\\</span><span class="st">(&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>  <span class="fu">remove_empty</span>(<span class="fu">c</span>(<span class="st">&quot;rows&quot;</span>, <span class="st">&quot;cols&quot;</span>))</span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> cleaned_data[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">288</span>, <span class="dv">301</span>, <span class="dv">586</span>),]</span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#to preview pretty table</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(cleaned_data))</span></code></pre></div>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">str_starts</span>(x0, <span class="st">&quot;^</span><span class="sc">\\</span><span class="st">(&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>  <span class="fu">remove_empty</span>(<span class="fu">c</span>(<span class="st">&quot;rows&quot;</span>, <span class="st">&quot;cols&quot;</span>))</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#to preview pretty table</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(cleaned_data))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th align="left">x</th>
+<th align="left">x0</th>
 </tr>
 </thead>
 <tbody>
@@ -1890,7 +1888,7 @@ common and only take the list of species, since this is a checklist.</p>
 species names using gnparser and then using the taxise library to call
 the WoRMS database.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#Parse author names out</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>parsed_names <span class="ot">&lt;-</span> rgnparser<span class="sc">::</span><span class="fu">gn_parse</span>(cleaned_data)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>parsed_names <span class="ot">&lt;-</span> rgnparser<span class="sc">::</span><span class="fu">gn_parse</span>(cleaned_data[,])</span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#Function to get WoRMS IDs. Search for accepted names first and if not found, search for unaccepted. If still not found, use the worrms package to search.</span></span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>get_worms_id_from_element <span class="ot">&lt;-</span> <span class="cf">function</span>(element) {</span>
@@ -1911,23 +1909,314 @@ the WoRMS database.</p>
 <span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
 <span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">NA</span>)</span>
 <span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>  }</span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>})</span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#combine original names, parsed data and WoRMS ID into one data frame</span></span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>combined_dataframe <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
-<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cleaned_data)) {</span>
-<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>  cleaned_value <span class="ot">&lt;-</span> cleaned_data[i]</span>
-<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>  canonical_value <span class="ot">&lt;-</span> parsed_names[[i]]<span class="sc">$</span>canonical<span class="sc">$</span>full</span>
-<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>  worms_id_value <span class="ot">&lt;-</span> worms_ids[[i]][<span class="dv">1</span>]</span>
-<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(canonical_value)){</span>
-<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>    canonical_value <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>  }</span>
-<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>  temp_row <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">CleanedData =</span> cleaned_value, <span class="at">CanonicalFull =</span> canonical_value, <span class="at">WormsIDs =</span> worms_id_value)</span>
-<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a>  combined_dataframe <span class="ot">&lt;-</span> <span class="fu">rbind</span>(combined_dataframe, temp_row)</span>
-<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a>}</span>
-<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a></span>
-<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(combined_dataframe))</span></code></pre></div>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>})</span></code></pre></div>
+<pre><code>## </code></pre>
+<pre><code>##         id                      target                      authority   status
+## 1   439446                   Randallia                 Stimpson, 1857 accepted
+## 5   441327         Randallia bulligera                  Rathbun, 1898 accepted
+## 7   441328      Randallia curacaoensis                  Rathbun, 1922 accepted
+## 14 1663147          Randallia jingomao                 Hu &amp; Tao, 2004 accepted
+## 15  441331            Randallia laevis             (Borradaile, 1916) accepted
+## 18  441332            Randallia minuta                  Rathbun, 1935 accepted
+## 21  441333            Randallia ornata                (Randall, 1840) accepted
+## 23 1660821     Randallia pleistocenica                  Rathbun, 1926 accepted
+## 24 1675261         Randallia prolanata                 Hu &amp; Tao, 1996 accepted
+## 28 1635436        Randallia saitoensis                 Karasawa, 1993 accepted
+## 36  270695              Randallichthys Anderson, Kami &amp; Johnson, 1977 accepted
+## 37  282547 Randallichthys filamentosus             (Fourmanoir, 1970) accepted</code></pre>
+<pre><code>## 
+## More than one WORMS ID found for taxon &#39;Randall&#39;!
+## 
+##                   Enter rownumber of taxon (other inputs will return &#39;NA&#39;):</code></pre>
+<pre><code>##         id                      target
+## 1   439446                   Randallia
+## 2   441325         Randallia agaricias
+## 3   441326         Randallia americana
+## 4  1380547          Randallia angelica
+## 5   441327         Randallia bulligera
+## 6   455328          Randallia coronata
+## 7   441328      Randallia curacaoensis
+## 8   455329         Randallia distincta
+## 9   455330           Randallia eburnea
+## 10  441329          Randallia gilberti
+## 11  441330         Randallia granulata
+## 12  455333       Randallia granuloides
+## 13  455334          Randallia japonica
+## 14 1663147          Randallia jingomao
+## 15  441331            Randallia laevis
+## 16  455335    Randallia lamellidentata
+## 17  455337        Randallia mesjatzevi
+## 18  441332            Randallia minuta
+## 19  455338         Randallia mirabilis
+## 20  455339              Randallia nana
+## 21  441333            Randallia ornata
+## 22  455340              Randallia pila
+## 23 1660821     Randallia pleistocenica
+## 24 1675261         Randallia prolanata
+## 25  455341     Randallia pustulilabris
+## 26  455342       Randallia pustuloides
+## 27  455343         Randallia pustulosa
+## 28 1635436        Randallia saitoensis
+## 29  455344           Randallia serenei
+## 30  455345          Randallia speciosa
+## 31 1646091         Randallia strouhali
+## 32 1675259      Randallia trinucloidea
+## 33  455346    Randallia trituberculata
+## 34  455347           Randallia villosa
+## 35  455348           Randallia vitjazi
+## 36  270695              Randallichthys
+## 37  282547 Randallichthys filamentosus
+##                                            authority                    status
+## 1                                     Stimpson, 1857                  accepted
+## 2                                      Rathbun, 1898    superseded combination
+## 3                                    (Rathbun, 1894)    superseded combination
+## 4                                        Garth, 1940 junior subjective synonym
+## 5                                      Rathbun, 1898                  accepted
+## 6                            Alcock &amp; Anderson, 1894    superseded combination
+## 7                                      Rathbun, 1922                  accepted
+## 8                                      Rathbun, 1894    superseded combination
+## 9                                       Alcock, 1896    superseded combination
+## 10                                     Rathbun, 1906                unaccepted
+## 11 Miers in Tizard, Moseley, Buchanan &amp; Murray, 1885    superseded combination
+## 12                                       Sakai, 1961    superseded combination
+## 13                                      Yokoya, 1933 junior subjective synonym
+## 14                                    Hu &amp; Tao, 2004                  accepted
+## 15                                (Borradaile, 1916)                  accepted
+## 16                                  Wood-Mason, 1892    superseded combination
+## 17                                    Zarenkov, 1990    superseded combination
+## 18                                     Rathbun, 1935                  accepted
+## 19                                    Zarenkov, 1969    superseded combination
+## 20                                    Zarenkov, 1990    superseded combination
+## 21                                   (Randall, 1840)                  accepted
+## 22                                         Tan, 1996    superseded combination
+## 23                                     Rathbun, 1926                  accepted
+## 24                                    Hu &amp; Tao, 1996                  accepted
+## 25                                      Alcock, 1896 junior subjective synonym
+## 26                                       Sakai, 1961    superseded combination
+## 27           Wood-Mason in Wood-Mason &amp; Alcock, 1891    superseded combination
+## 28                                    Karasawa, 1993                  accepted
+## 29                            Richer de Forges, 1983    superseded combination
+## 30                                        Chen, 1989    superseded combination
+## 31                                   Bachmayer, 1953    superseded combination
+## 32                                    Hu &amp; Tao, 1996    superseded combination
+## 33                                       Sakai, 1961    superseded combination
+## 34                                        Chen, 1989    superseded combination
+## 35                                    Zarenkov, 1994 junior subjective synonym
+## 36                    Anderson, Kami &amp; Johnson, 1977                  accepted
+## 37                                (Fourmanoir, 1970)                  accepted</code></pre>
+<pre><code>## 
+## More than one WORMS ID found for taxon &#39;Randall&#39;!
+## 
+##                   Enter rownumber of taxon (other inputs will return &#39;NA&#39;):</code></pre>
+<pre><code>##         id                      target                      authority   status
+## 1   439446                   Randallia                 Stimpson, 1857 accepted
+## 5   441327         Randallia bulligera                  Rathbun, 1898 accepted
+## 7   441328      Randallia curacaoensis                  Rathbun, 1922 accepted
+## 14 1663147          Randallia jingomao                 Hu &amp; Tao, 2004 accepted
+## 15  441331            Randallia laevis             (Borradaile, 1916) accepted
+## 18  441332            Randallia minuta                  Rathbun, 1935 accepted
+## 21  441333            Randallia ornata                (Randall, 1840) accepted
+## 23 1660821     Randallia pleistocenica                  Rathbun, 1926 accepted
+## 24 1675261         Randallia prolanata                 Hu &amp; Tao, 1996 accepted
+## 28 1635436        Randallia saitoensis                 Karasawa, 1993 accepted
+## 36  270695              Randallichthys Anderson, Kami &amp; Johnson, 1977 accepted
+## 37  282547 Randallichthys filamentosus             (Fourmanoir, 1970) accepted</code></pre>
+<pre><code>## 
+## More than one WORMS ID found for taxon &#39;Randall&#39;!
+## 
+##                   Enter rownumber of taxon (other inputs will return &#39;NA&#39;):</code></pre>
+<pre><code>##         id                      target
+## 1   439446                   Randallia
+## 2   441325         Randallia agaricias
+## 3   441326         Randallia americana
+## 4  1380547          Randallia angelica
+## 5   441327         Randallia bulligera
+## 6   455328          Randallia coronata
+## 7   441328      Randallia curacaoensis
+## 8   455329         Randallia distincta
+## 9   455330           Randallia eburnea
+## 10  441329          Randallia gilberti
+## 11  441330         Randallia granulata
+## 12  455333       Randallia granuloides
+## 13  455334          Randallia japonica
+## 14 1663147          Randallia jingomao
+## 15  441331            Randallia laevis
+## 16  455335    Randallia lamellidentata
+## 17  455337        Randallia mesjatzevi
+## 18  441332            Randallia minuta
+## 19  455338         Randallia mirabilis
+## 20  455339              Randallia nana
+## 21  441333            Randallia ornata
+## 22  455340              Randallia pila
+## 23 1660821     Randallia pleistocenica
+## 24 1675261         Randallia prolanata
+## 25  455341     Randallia pustulilabris
+## 26  455342       Randallia pustuloides
+## 27  455343         Randallia pustulosa
+## 28 1635436        Randallia saitoensis
+## 29  455344           Randallia serenei
+## 30  455345          Randallia speciosa
+## 31 1646091         Randallia strouhali
+## 32 1675259      Randallia trinucloidea
+## 33  455346    Randallia trituberculata
+## 34  455347           Randallia villosa
+## 35  455348           Randallia vitjazi
+## 36  270695              Randallichthys
+## 37  282547 Randallichthys filamentosus
+##                                            authority                    status
+## 1                                     Stimpson, 1857                  accepted
+## 2                                      Rathbun, 1898    superseded combination
+## 3                                    (Rathbun, 1894)    superseded combination
+## 4                                        Garth, 1940 junior subjective synonym
+## 5                                      Rathbun, 1898                  accepted
+## 6                            Alcock &amp; Anderson, 1894    superseded combination
+## 7                                      Rathbun, 1922                  accepted
+## 8                                      Rathbun, 1894    superseded combination
+## 9                                       Alcock, 1896    superseded combination
+## 10                                     Rathbun, 1906                unaccepted
+## 11 Miers in Tizard, Moseley, Buchanan &amp; Murray, 1885    superseded combination
+## 12                                       Sakai, 1961    superseded combination
+## 13                                      Yokoya, 1933 junior subjective synonym
+## 14                                    Hu &amp; Tao, 2004                  accepted
+## 15                                (Borradaile, 1916)                  accepted
+## 16                                  Wood-Mason, 1892    superseded combination
+## 17                                    Zarenkov, 1990    superseded combination
+## 18                                     Rathbun, 1935                  accepted
+## 19                                    Zarenkov, 1969    superseded combination
+## 20                                    Zarenkov, 1990    superseded combination
+## 21                                   (Randall, 1840)                  accepted
+## 22                                         Tan, 1996    superseded combination
+## 23                                     Rathbun, 1926                  accepted
+## 24                                    Hu &amp; Tao, 1996                  accepted
+## 25                                      Alcock, 1896 junior subjective synonym
+## 26                                       Sakai, 1961    superseded combination
+## 27           Wood-Mason in Wood-Mason &amp; Alcock, 1891    superseded combination
+## 28                                    Karasawa, 1993                  accepted
+## 29                            Richer de Forges, 1983    superseded combination
+## 30                                        Chen, 1989    superseded combination
+## 31                                   Bachmayer, 1953    superseded combination
+## 32                                    Hu &amp; Tao, 1996    superseded combination
+## 33                                       Sakai, 1961    superseded combination
+## 34                                        Chen, 1989    superseded combination
+## 35                                    Zarenkov, 1994 junior subjective synonym
+## 36                    Anderson, Kami &amp; Johnson, 1977                  accepted
+## 37                                (Fourmanoir, 1970)                  accepted</code></pre>
+<pre><code>## 
+## More than one WORMS ID found for taxon &#39;Randall&#39;!
+## 
+##                   Enter rownumber of taxon (other inputs will return &#39;NA&#39;):</code></pre>
+<pre><code>##         id                      target                      authority   status
+## 1   439446                   Randallia                 Stimpson, 1857 accepted
+## 5   441327         Randallia bulligera                  Rathbun, 1898 accepted
+## 7   441328      Randallia curacaoensis                  Rathbun, 1922 accepted
+## 14 1663147          Randallia jingomao                 Hu &amp; Tao, 2004 accepted
+## 15  441331            Randallia laevis             (Borradaile, 1916) accepted
+## 18  441332            Randallia minuta                  Rathbun, 1935 accepted
+## 21  441333            Randallia ornata                (Randall, 1840) accepted
+## 23 1660821     Randallia pleistocenica                  Rathbun, 1926 accepted
+## 24 1675261         Randallia prolanata                 Hu &amp; Tao, 1996 accepted
+## 28 1635436        Randallia saitoensis                 Karasawa, 1993 accepted
+## 36  270695              Randallichthys Anderson, Kami &amp; Johnson, 1977 accepted
+## 37  282547 Randallichthys filamentosus             (Fourmanoir, 1970) accepted</code></pre>
+<pre><code>## 
+## More than one WORMS ID found for taxon &#39;Randall&#39;!
+## 
+##                   Enter rownumber of taxon (other inputs will return &#39;NA&#39;):</code></pre>
+<pre><code>##         id                      target
+## 1   439446                   Randallia
+## 2   441325         Randallia agaricias
+## 3   441326         Randallia americana
+## 4  1380547          Randallia angelica
+## 5   441327         Randallia bulligera
+## 6   455328          Randallia coronata
+## 7   441328      Randallia curacaoensis
+## 8   455329         Randallia distincta
+## 9   455330           Randallia eburnea
+## 10  441329          Randallia gilberti
+## 11  441330         Randallia granulata
+## 12  455333       Randallia granuloides
+## 13  455334          Randallia japonica
+## 14 1663147          Randallia jingomao
+## 15  441331            Randallia laevis
+## 16  455335    Randallia lamellidentata
+## 17  455337        Randallia mesjatzevi
+## 18  441332            Randallia minuta
+## 19  455338         Randallia mirabilis
+## 20  455339              Randallia nana
+## 21  441333            Randallia ornata
+## 22  455340              Randallia pila
+## 23 1660821     Randallia pleistocenica
+## 24 1675261         Randallia prolanata
+## 25  455341     Randallia pustulilabris
+## 26  455342       Randallia pustuloides
+## 27  455343         Randallia pustulosa
+## 28 1635436        Randallia saitoensis
+## 29  455344           Randallia serenei
+## 30  455345          Randallia speciosa
+## 31 1646091         Randallia strouhali
+## 32 1675259      Randallia trinucloidea
+## 33  455346    Randallia trituberculata
+## 34  455347           Randallia villosa
+## 35  455348           Randallia vitjazi
+## 36  270695              Randallichthys
+## 37  282547 Randallichthys filamentosus
+##                                            authority                    status
+## 1                                     Stimpson, 1857                  accepted
+## 2                                      Rathbun, 1898    superseded combination
+## 3                                    (Rathbun, 1894)    superseded combination
+## 4                                        Garth, 1940 junior subjective synonym
+## 5                                      Rathbun, 1898                  accepted
+## 6                            Alcock &amp; Anderson, 1894    superseded combination
+## 7                                      Rathbun, 1922                  accepted
+## 8                                      Rathbun, 1894    superseded combination
+## 9                                       Alcock, 1896    superseded combination
+## 10                                     Rathbun, 1906                unaccepted
+## 11 Miers in Tizard, Moseley, Buchanan &amp; Murray, 1885    superseded combination
+## 12                                       Sakai, 1961    superseded combination
+## 13                                      Yokoya, 1933 junior subjective synonym
+## 14                                    Hu &amp; Tao, 2004                  accepted
+## 15                                (Borradaile, 1916)                  accepted
+## 16                                  Wood-Mason, 1892    superseded combination
+## 17                                    Zarenkov, 1990    superseded combination
+## 18                                     Rathbun, 1935                  accepted
+## 19                                    Zarenkov, 1969    superseded combination
+## 20                                    Zarenkov, 1990    superseded combination
+## 21                                   (Randall, 1840)                  accepted
+## 22                                         Tan, 1996    superseded combination
+## 23                                     Rathbun, 1926                  accepted
+## 24                                    Hu &amp; Tao, 1996                  accepted
+## 25                                      Alcock, 1896 junior subjective synonym
+## 26                                       Sakai, 1961    superseded combination
+## 27           Wood-Mason in Wood-Mason &amp; Alcock, 1891    superseded combination
+## 28                                    Karasawa, 1993                  accepted
+## 29                            Richer de Forges, 1983    superseded combination
+## 30                                        Chen, 1989    superseded combination
+## 31                                   Bachmayer, 1953    superseded combination
+## 32                                    Hu &amp; Tao, 1996    superseded combination
+## 33                                       Sakai, 1961    superseded combination
+## 34                                        Chen, 1989    superseded combination
+## 35                                    Zarenkov, 1994 junior subjective synonym
+## 36                    Anderson, Kami &amp; Johnson, 1977                  accepted
+## 37                                (Fourmanoir, 1970)                  accepted</code></pre>
+<pre><code>## 
+## More than one WORMS ID found for taxon &#39;Randall&#39;!
+## 
+##                   Enter rownumber of taxon (other inputs will return &#39;NA&#39;):</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co">#combine original names, parsed data and WoRMS ID into one data frame</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>combined_dataframe <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(cleaned_data)) {</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>  cleaned_value <span class="ot">&lt;-</span> cleaned_data[i,]</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>  canonical_value <span class="ot">&lt;-</span> parsed_names[[i]]<span class="sc">$</span>canonical<span class="sc">$</span>full</span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>  worms_id_value <span class="ot">&lt;-</span> worms_ids[[i]][<span class="dv">1</span>]</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(canonical_value)){</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>    canonical_value <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>  }</span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>  temp_row <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">CleanedData =</span> cleaned_value, <span class="at">CanonicalFull =</span> canonical_value, <span class="at">WormsIDs =</span> worms_id_value)</span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>  combined_dataframe <span class="ot">&lt;-</span> <span class="fu">rbind</span>(combined_dataframe, temp_row)</span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a>}</span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(combined_dataframe))</span></code></pre></div>
 <table style="width:100%;">
 <colgroup>
 <col width="56%" />
@@ -1945,32 +2234,32 @@ the WoRMS database.</p>
 <tr class="odd">
 <td align="left">Rhincodon typus Smith, 1828</td>
 <td align="left">Rhincodon typus</td>
-<td align="left">NA</td>
+<td align="left">105847</td>
 </tr>
 <tr class="even">
 <td align="left">Chiloscyllium arabicum Gubanov, 1980</td>
 <td align="left">Chiloscyllium arabicum</td>
-<td align="left">NA</td>
+<td align="left">277827</td>
 </tr>
 <tr class="odd">
 <td align="left">Stegostoma fasciatum (Hermann, 1783)</td>
 <td align="left">Stegostoma fasciatum</td>
-<td align="left">NA</td>
+<td align="left">220032</td>
 </tr>
 <tr class="even">
 <td align="left">Nebrius ferrugineus (Lesson, 1831)</td>
 <td align="left">Nebrius ferrugineus</td>
-<td align="left">NA</td>
+<td align="left">220030</td>
 </tr>
 <tr class="odd">
 <td align="left">Isurus oxyrinchus Rafinesque, 1810</td>
 <td align="left">Isurus oxyrinchus</td>
-<td align="left">NA</td>
+<td align="left">105839</td>
 </tr>
 <tr class="even">
 <td align="left">Mustelus mosis Hemprich &amp; Ehrenberg, 1899</td>
 <td align="left">Mustelus mosis</td>
-<td align="left">NA</td>
+<td align="left">214558</td>
 </tr>
 </tbody>
 </table>
@@ -1982,17 +2271,93 @@ OCR that can be searched for and fixed by hand. To do this, view the
 combined dataframe, search for unmatched species in WoRMS and add the
 ID, and remove rows that were not autoremoved in the earlier cleaning
 steps</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>combined_dataframe[<span class="dv">170</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Apogonichthyoides pseudotaeniatus&quot;</span>, <span class="dv">475091</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>combined_dataframe[<span class="dv">177</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Jaydia queketti&quot;</span>, <span class="dv">209280</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>combined_dataframe[<span class="dv">328</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Chaetodon&quot;</span>, <span class="st">&quot;Chaetodon collare × Chaetodon lunula&quot;</span>, <span class="dv">125954</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>combined_dataframe[<span class="dv">342</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pomacanthus&quot;</span>, <span class="st">&quot;Pomacanthus asfur × Pomacanthus maculosus&quot;</span>, <span class="dv">159286</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>combined_dataframe[<span class="dv">343</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pomacanthus&quot;</span>, <span class="st">&quot;Pomacanthus semicirculatus × Pomacanthus maculosus&quot;</span>, <span class="dv">159286</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>combined_dataframe[<span class="dv">357</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Dascyllus&quot;</span>, <span class="st">&quot;Dascyllus carneus × Dascyllus marginatus&quot;</span>, <span class="dv">205736</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#combination not in WoRMs</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>combined_dataframe[<span class="dv">375</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Plectroglyphidodon leucozonus cingulum&quot;</span>, <span class="cn">NA</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>combined_dataframe <span class="ot">&lt;-</span> combined_dataframe[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">237</span>),]</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>combined_dataframe[<span class="dv">30</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Gymnura&quot;</span>, <span class="st">&quot;cf. poecilura&quot;</span>, <span class="dv">105754</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>combined_dataframe[<span class="dv">31</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Gymnura&quot;</span>, <span class="st">&quot;aff. tentaculata&quot;</span>, <span class="dv">105754</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>combined_dataframe[<span class="dv">47</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Gymnothorax&quot;</span>, <span class="st">&quot;cf. chilospilus&quot;</span>, <span class="dv">125636</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>combined_dataframe[<span class="dv">57</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Gymnothorax&quot;</span>, <span class="st">&quot;cf. pseudothyrsoideus&quot;</span>, <span class="dv">125636</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>combined_dataframe[<span class="dv">65</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Anodontostoma&quot;</span>, <span class="st">&quot;cf. chacunda&quot;</span>, <span class="dv">268322</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>combined_dataframe[<span class="dv">83</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Crenimugil&quot;</span>, <span class="st">&quot;cf. buchanani&quot;</span>, <span class="dv">151497</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>combined_dataframe[<span class="dv">87</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Osteomugil&quot;</span>, <span class="st">&quot;cf. cunnesius&quot;</span>, <span class="dv">1042878</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>combined_dataframe[<span class="dv">96</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Cheilopogon&quot;</span>, <span class="st">&quot;cf. spilopterus&quot;</span>, <span class="dv">125691</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>combined_dataframe[<span class="dv">120</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Scorpaenopsis&quot;</span>, <span class="st">&quot;cf. lactomaculata&quot;</span>, <span class="dv">204563</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>combined_dataframe[<span class="dv">146</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Epinephelus&quot;</span>, <span class="st">&quot;cf. chlorostigma&quot;</span>, <span class="dv">126068</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a>combined_dataframe[<span class="dv">147</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Epinephelus&quot;</span>, <span class="st">&quot;cf. coioides&quot;</span>, <span class="dv">126068</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>combined_dataframe[<span class="dv">154</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Epinephelus&quot;</span>, <span class="st">&quot;cf. indistinctus&quot;</span>, <span class="dv">126068</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a>combined_dataframe[<span class="dv">156</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Epinephelus&quot;</span>, <span class="st">&quot;cf. malabaricus&quot;</span>, <span class="dv">126068</span>)</span>
+<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a>combined_dataframe[<span class="dv">178</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pseudochromis&quot;</span>, <span class="st">&quot;cf. omanensis&quot;</span>, <span class="dv">205515</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a>combined_dataframe[<span class="dv">179</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pseudochromis&quot;</span>, <span class="st">&quot;cf. punctatus&quot;</span>, <span class="dv">205515</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a>combined_dataframe[<span class="dv">187</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Plesiops&quot;</span>, <span class="st">&quot;cf. mystaxus&quot;</span>, <span class="dv">203918</span>)</span>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>combined_dataframe[<span class="dv">194</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Priacanthus&quot;</span>, <span class="st">&quot;cf. tayenus&quot;</span>, <span class="dv">126049</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a>combined_dataframe[<span class="dv">197</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Apogonichthyoides pseudotaeniatus&quot;</span>, <span class="dv">475091</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a>combined_dataframe[<span class="dv">198</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Apogonichthyoides&quot;</span>, <span class="st">&quot;cf. taeniatus&quot;</span>, <span class="dv">204673</span>)</span>
+<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a>combined_dataframe[<span class="dv">199</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Apogonichthyoides&quot;</span>, <span class="st">&quot;cf. timorensis&quot;</span>, <span class="dv">204673</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a>combined_dataframe[<span class="dv">201</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Cheilodipterus&quot;</span>, <span class="st">&quot;cf. artus&quot;</span>, <span class="dv">206449</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" tabindex="-1"></a>combined_dataframe[<span class="dv">207</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Jaydia queketti&quot;</span>, <span class="dv">209280</span>)</span>
+<span id="cb22-23"><a href="#cb22-23" tabindex="-1"></a>combined_dataframe[<span class="dv">219</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sillago&quot;</span>, <span class="st">&quot;cf. sihama&quot;</span>, <span class="dv">126072</span>)</span>
+<span id="cb22-24"><a href="#cb22-24" tabindex="-1"></a>combined_dataframe[<span class="dv">252</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pristipomoides&quot;</span>, <span class="st">&quot;cf. filamentosus&quot;</span>, <span class="dv">159804</span>)</span>
+<span id="cb22-25"><a href="#cb22-25" tabindex="-1"></a>combined_dataframe[<span class="dv">260</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lutjanus&quot;</span>, <span class="st">&quot;cf. indicus&quot;</span>, <span class="dv">159791</span>)</span>
+<span id="cb22-26"><a href="#cb22-26" tabindex="-1"></a>combined_dataframe[<span class="dv">280</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Gerres&quot;</span>, <span class="st">&quot;cf. infasciatus&quot;</span>, <span class="dv">204064</span>)</span>
+<span id="cb22-27"><a href="#cb22-27" tabindex="-1"></a>combined_dataframe[<span class="dv">292</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Plectorhinchus&quot;</span>, <span class="st">&quot;cf. chubbi&quot;</span>, <span class="dv">126010</span>)</span>
+<span id="cb22-28"><a href="#cb22-28" tabindex="-1"></a>combined_dataframe[<span class="dv">304</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Argyrops&quot;</span>, <span class="st">&quot;cf. spinifer&quot;</span>, <span class="dv">206644</span>)</span>
+<span id="cb22-29"><a href="#cb22-29" tabindex="-1"></a>combined_dataframe[<span class="dv">306</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Diplodus&quot;</span>, <span class="st">&quot;cf. kotschyi&quot;</span>, <span class="dv">126076</span>)</span>
+<span id="cb22-30"><a href="#cb22-30" tabindex="-1"></a>combined_dataframe[<span class="dv">315</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lethrinus&quot;</span>, <span class="st">&quot;cf. olivaceus&quot;</span>, <span class="dv">206059</span>)</span>
+<span id="cb22-31"><a href="#cb22-31" tabindex="-1"></a>combined_dataframe[<span class="dv">326</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Mulloidichthys flavolineatus flavicaudus&quot;</span>, <span class="dv">881626</span>)</span>
+<span id="cb22-32"><a href="#cb22-32" tabindex="-1"></a>combined_dataframe[<span class="dv">363</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Chaetodon&quot;</span>, <span class="st">&quot;cf. mesoleucos&quot;</span>, <span class="dv">125954</span>)</span>
+<span id="cb22-33"><a href="#cb22-33" tabindex="-1"></a>combined_dataframe[<span class="dv">370</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Chaetodon&quot;</span>, <span class="st">&quot;Chaetodon collare × Chaetodon lunula&quot;</span>, <span class="dv">125954</span>)</span>
+<span id="cb22-34"><a href="#cb22-34" tabindex="-1"></a>combined_dataframe[<span class="dv">384</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pomacanthus&quot;</span>, <span class="st">&quot;Pomacanthus asfur × Pomacanthus maculosus&quot;</span>, <span class="dv">159286</span>)</span>
+<span id="cb22-35"><a href="#cb22-35" tabindex="-1"></a>combined_dataframe[<span class="dv">385</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pomacanthus&quot;</span>, <span class="st">&quot;Pomacanthus semicirculatus × Pomacanthus maculosus&quot;</span>, <span class="dv">159286</span>)</span>
+<span id="cb22-36"><a href="#cb22-36" tabindex="-1"></a>combined_dataframe[<span class="dv">388</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Amphiprion&quot;</span>, <span class="st">&quot;cf. chagosensis&quot;</span>, <span class="dv">205723</span>)</span>
+<span id="cb22-37"><a href="#cb22-37" tabindex="-1"></a>combined_dataframe[<span class="dv">390</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Chromis&quot;</span>, <span class="st">&quot;cf. acares&quot;</span>, <span class="dv">126045</span>)</span>
+<span id="cb22-38"><a href="#cb22-38" tabindex="-1"></a>combined_dataframe[<span class="dv">393</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Chromis&quot;</span>, <span class="st">&quot;cf. nigrura&quot;</span>, <span class="dv">126045</span>)</span>
+<span id="cb22-39"><a href="#cb22-39" tabindex="-1"></a>combined_dataframe[<span class="dv">402</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Dascyllus&quot;</span>, <span class="st">&quot;Dascyllus carneus × Dascyllus marginatus&quot;</span>, <span class="dv">205736</span>)</span>
+<span id="cb22-40"><a href="#cb22-40" tabindex="-1"></a></span>
+<span id="cb22-41"><a href="#cb22-41" tabindex="-1"></a><span class="co">#combination not in WoRMs</span></span>
+<span id="cb22-42"><a href="#cb22-42" tabindex="-1"></a>combined_dataframe[<span class="dv">420</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Plectroglyphidodon leucozonus cingulum&quot;</span>, <span class="cn">NA</span>)</span>
+<span id="cb22-43"><a href="#cb22-43" tabindex="-1"></a></span>
+<span id="cb22-44"><a href="#cb22-44" tabindex="-1"></a>combined_dataframe[<span class="dv">421</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pomacentrus&quot;</span>, <span class="st">&quot;cf. aquilus&quot;</span>, <span class="dv">204256</span>)</span>
+<span id="cb22-45"><a href="#cb22-45" tabindex="-1"></a>combined_dataframe[<span class="dv">424</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pomacentrus&quot;</span>, <span class="st">&quot;sp. 2 [aff. leptus]&quot;</span>, <span class="dv">204256</span>)</span>
+<span id="cb22-46"><a href="#cb22-46" tabindex="-1"></a>combined_dataframe[<span class="dv">425</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pomacentrus&quot;</span>, <span class="st">&quot;cf. sulfureus&quot;</span>, <span class="dv">204256</span>)</span>
+<span id="cb22-47"><a href="#cb22-47" tabindex="-1"></a>combined_dataframe[<span class="dv">432</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Cheilinus&quot;</span>, <span class="st">&quot;cf. fasciatus&quot;</span>, <span class="dv">204502</span>)</span>
+<span id="cb22-48"><a href="#cb22-48" tabindex="-1"></a>combined_dataframe[<span class="dv">437</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Cirrhilabrus&quot;</span>, <span class="st">&quot;cf. cyanopleura&quot;</span>, <span class="dv">204972</span>)</span>
+<span id="cb22-49"><a href="#cb22-49" tabindex="-1"></a>combined_dataframe[<span class="dv">443</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Oxycheilinus&quot;</span>, <span class="st">&quot;cf. mentalis&quot;</span>, <span class="dv">205227</span>)</span>
+<span id="cb22-50"><a href="#cb22-50" tabindex="-1"></a>combined_dataframe[<span class="dv">466</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Halichoeres&quot;</span>, <span class="st">&quot;cf. stigmaticus&quot;</span>, <span class="dv">158813</span>)</span>
+<span id="cb22-51"><a href="#cb22-51" tabindex="-1"></a>combined_dataframe[<span class="dv">467</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Halichoeres&quot;</span>, <span class="st">&quot;cf. zeylonicus&quot;</span>, <span class="dv">158813</span>)</span>
+<span id="cb22-52"><a href="#cb22-52" tabindex="-1"></a>combined_dataframe[<span class="dv">476</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Leptojulis&quot;</span>, <span class="st">&quot;cf. cyanopleura&quot;</span>, <span class="dv">269660</span>)</span>
+<span id="cb22-53"><a href="#cb22-53" tabindex="-1"></a>combined_dataframe[<span class="dv">480</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Stethojulis&quot;</span>, <span class="st">&quot;cf. strigiventer&quot;</span>, <span class="dv">204183</span>)</span>
+<span id="cb22-54"><a href="#cb22-54" tabindex="-1"></a>combined_dataframe[<span class="dv">483</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Thalassoma&quot;</span>, <span class="st">&quot;cf. hardwicke&quot;</span>, <span class="dv">126024</span>)</span>
+<span id="cb22-55"><a href="#cb22-55" tabindex="-1"></a>combined_dataframe[<span class="dv">489</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Thalassoma&quot;</span>, <span class="st">&quot;cf. rueppellii&quot;</span>, <span class="dv">126024</span>)</span>
+<span id="cb22-56"><a href="#cb22-56" tabindex="-1"></a>combined_dataframe[<span class="dv">492</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Chlorurus&quot;</span>, <span class="st">&quot;cf. gibbus&quot;</span>, <span class="dv">204543</span>)</span>
+<span id="cb22-57"><a href="#cb22-57" tabindex="-1"></a>combined_dataframe[<span class="dv">501</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Scarus&quot;</span>, <span class="st">&quot;cf. persicus&quot;</span>, <span class="dv">159299</span>)</span>
+<span id="cb22-58"><a href="#cb22-58" tabindex="-1"></a>combined_dataframe[<span class="dv">504</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Scarus&quot;</span>, <span class="st">&quot;cf. scaber&quot;</span>, <span class="dv">159299</span>)</span>
+<span id="cb22-59"><a href="#cb22-59" tabindex="-1"></a>combined_dataframe[<span class="dv">505</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Scarus&quot;</span>, <span class="st">&quot;cf. tricolor&quot;</span>, <span class="dv">159299</span>)</span>
+<span id="cb22-60"><a href="#cb22-60" tabindex="-1"></a>combined_dataframe[<span class="dv">513</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Helcogramma&quot;</span>, <span class="st">&quot;cf. obtusirostris&quot;</span>, <span class="dv">206858</span>)</span>
+<span id="cb22-61"><a href="#cb22-61" tabindex="-1"></a>combined_dataframe[<span class="dv">516</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ecsenius&quot;</span>, <span class="st">&quot;cf. bicolor&quot;</span>, <span class="dv">204781</span>)</span>
+<span id="cb22-62"><a href="#cb22-62" tabindex="-1"></a>combined_dataframe[<span class="dv">520</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ecsenius&quot;</span>, <span class="st">&quot;n. sp. [pulcher-complex]&quot;</span>, <span class="dv">204781</span>)</span>
+<span id="cb22-63"><a href="#cb22-63" tabindex="-1"></a>combined_dataframe[<span class="dv">524</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Scartella&quot;</span>, <span class="st">&quot;cf. emarginata&quot;</span>, <span class="dv">125923</span>)</span>
+<span id="cb22-64"><a href="#cb22-64" tabindex="-1"></a>combined_dataframe[<span class="dv">532</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Meiacanthus&quot;</span>, <span class="st">&quot;cf. mossambicus&quot;</span>, <span class="dv">206901</span>)</span>
+<span id="cb22-65"><a href="#cb22-65" tabindex="-1"></a>combined_dataframe[<span class="dv">537</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Alloblennius&quot;</span>, <span class="st">&quot;cf. parvus&quot;</span>, <span class="dv">205245</span>)</span>
+<span id="cb22-66"><a href="#cb22-66" tabindex="-1"></a>combined_dataframe[<span class="dv">547</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Gnatholepis&quot;</span>, <span class="st">&quot;cf. cauerensis&quot;</span>, <span class="dv">204522</span>)</span>
+<span id="cb22-67"><a href="#cb22-67" tabindex="-1"></a>combined_dataframe[<span class="dv">548</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Awaous&quot;</span>, <span class="st">&quot;cf. aeneofuscus&quot;</span>, <span class="dv">826711</span>)</span>
+<span id="cb22-68"><a href="#cb22-68" tabindex="-1"></a>combined_dataframe[<span class="dv">563</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Eviota&quot;</span>, <span class="st">&quot;cf. pardalota&quot;</span>, <span class="dv">205965</span>)</span>
+<span id="cb22-69"><a href="#cb22-69" tabindex="-1"></a>combined_dataframe[<span class="dv">564</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Eviota&quot;</span>, <span class="st">&quot;cf. prasina&quot;</span>, <span class="dv">205965</span>)</span>
+<span id="cb22-70"><a href="#cb22-70" tabindex="-1"></a>combined_dataframe[<span class="dv">566</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fusigobius&quot;</span>, <span class="st">&quot;cf. duospilus&quot;</span>, <span class="dv">206282</span>)</span>
+<span id="cb22-71"><a href="#cb22-71" tabindex="-1"></a>combined_dataframe[<span class="dv">569</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Glossogobius&quot;</span>, <span class="st">&quot;sp. 1 [aff. tenuiformis]&quot;</span>, <span class="dv">203910</span>)</span>
+<span id="cb22-72"><a href="#cb22-72" tabindex="-1"></a>combined_dataframe[<span class="dv">570</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Glossogobius&quot;</span>, <span class="st">&quot;sp. 2 [aff. tenuiformis]&quot;</span>, <span class="dv">203910</span>)</span>
+<span id="cb22-73"><a href="#cb22-73" tabindex="-1"></a>combined_dataframe[<span class="dv">572</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Gobiodon&quot;</span>, <span class="st">&quot;cf. reticulatus&quot;</span>, <span class="dv">204038</span>)</span>
+<span id="cb22-74"><a href="#cb22-74" tabindex="-1"></a>combined_dataframe[<span class="dv">583</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Trimma&quot;</span>, <span class="st">&quot;sp. 1&quot;</span>, <span class="dv">205799</span>)</span>
+<span id="cb22-75"><a href="#cb22-75" tabindex="-1"></a>combined_dataframe[<span class="dv">584</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Trimma&quot;</span>, <span class="st">&quot;sp. 2&quot;</span>, <span class="dv">205799</span>)</span>
+<span id="cb22-76"><a href="#cb22-76" tabindex="-1"></a>combined_dataframe[<span class="dv">585</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Trimma&quot;</span>, <span class="st">&quot;sp. 3&quot;</span>, <span class="dv">205799</span>)</span>
+<span id="cb22-77"><a href="#cb22-77" tabindex="-1"></a>combined_dataframe[<span class="dv">588</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Xenisthmus&quot;</span>, <span class="st">&quot;cf. balius&quot;</span>, <span class="dv">205125</span>)</span>
+<span id="cb22-78"><a href="#cb22-78" tabindex="-1"></a>combined_dataframe[<span class="dv">590</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Gunnellichthys&quot;</span>, <span class="st">&quot;cf. viridescens&quot;</span>, <span class="dv">205532</span>)</span>
+<span id="cb22-79"><a href="#cb22-79" tabindex="-1"></a>combined_dataframe[<span class="dv">591</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ptereleotris&quot;</span>, <span class="st">&quot;cf. arabica&quot;</span>, <span class="dv">204246</span>)</span>
+<span id="cb22-80"><a href="#cb22-80" tabindex="-1"></a>combined_dataframe[<span class="dv">598</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Siganus&quot;</span>, <span class="st">&quot;cf. luridus&quot;</span>, <span class="dv">126071</span>)</span>
+<span id="cb22-81"><a href="#cb22-81" tabindex="-1"></a>combined_dataframe[<span class="dv">607</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Acanthurus&quot;</span>, <span class="st">&quot;cf. nigricans&quot;</span>, <span class="dv">125908</span>)</span>
+<span id="cb22-82"><a href="#cb22-82" tabindex="-1"></a>combined_dataframe[<span class="dv">614</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ctenochaetus&quot;</span>, <span class="st">&quot;cf. binotatus&quot;</span>, <span class="dv">204635</span>)</span>
+<span id="cb22-83"><a href="#cb22-83" tabindex="-1"></a>combined_dataframe[<span class="dv">618</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Zebrasoma&quot;</span>, <span class="st">&quot;cf. scopas&quot;</span>, <span class="dv">204630</span>)</span>
+<span id="cb22-84"><a href="#cb22-84" tabindex="-1"></a>combined_dataframe[<span class="dv">627</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Naso&quot;</span>, <span class="st">&quot;cf. tuberosus&quot;</span>, <span class="dv">205230</span>)</span>
+<span id="cb22-85"><a href="#cb22-85" tabindex="-1"></a></span>
+<span id="cb22-86"><a href="#cb22-86" tabindex="-1"></a></span>
+<span id="cb22-87"><a href="#cb22-87" tabindex="-1"></a>combined_dataframe <span class="ot">&lt;-</span> combined_dataframe[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">27</span>, <span class="dv">270</span>, <span class="dv">327</span>, <span class="dv">340</span>, <span class="dv">679</span>),]</span></code></pre></div>
 </div>
 </div>
 <div id="darwin-core-mapping" class="section level1">
@@ -2006,12 +2371,12 @@ decimalLatitude, occurrenceStatus, basisOfRecord.</p>
 <h3>scientificName/scientificNameID</h3>
 <p>Create a dataframe with unique taxa only (though this should already
 be unique). This will be our primary DarwinCore data frame.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#rename and restructure WoRMSIDs to OBIS requirements</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>occurrence <span class="ot">&lt;-</span> combined_dataframe <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, identificationQualifier, WormsIDs) <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificName =</span> CanonicalFull) <span class="sc">%&gt;%</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificNameID =</span> WormsIDs) <span class="sc">%&gt;%</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scientificNameID =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(scientificNameID), <span class="fu">paste</span>(<span class="st">&quot;urn:lsid:marinespecies.org:taxname:&quot;</span>, scientificNameID, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="cn">NA</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co">#rename and restructure WoRMSIDs to OBIS requirements</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>occurrence <span class="ot">&lt;-</span> combined_dataframe <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, identificationQualifier, WormsIDs) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificName =</span> CanonicalFull) <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificNameID =</span> WormsIDs) <span class="sc">%&gt;%</span></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scientificNameID =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(scientificNameID), <span class="fu">paste</span>(<span class="st">&quot;urn:lsid:marinespecies.org:taxname:&quot;</span>, scientificNameID, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="cn">NA</span>))</span></code></pre></div>
 </div>
 <div id="occurrenceid" class="section level3">
 <h3>occurrenceID</h3>
@@ -2019,18 +2384,18 @@ be unique). This will be our primary DarwinCore data frame.</p>
 persistent and globally unique. It is a combination of
 dataset-shortname:occurrence: and a hash based on the scientific
 name.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Vectorize the digest function (The digest() function isn&#39;t vectorized. So if you pass in a vector, you get one value for the whole vector rather than a digest for each element of the vector):</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>vdigest <span class="ot">&lt;-</span> <span class="fu">Vectorize</span>(digest)</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># Generate taxonID:</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">occurrenceID =</span> <span class="fu">paste</span>(<span class="st">&quot;socotra-zajonz-2019&quot;</span>, <span class="st">&quot;occurrence&quot;</span>, <span class="fu">vdigest</span> (scientificName, <span class="at">algo=</span><span class="st">&quot;md5&quot;</span>), <span class="at">sep=</span><span class="st">&quot;:&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Vectorize the digest function (The digest() function isn&#39;t vectorized. So if you pass in a vector, you get one value for the whole vector rather than a digest for each element of the vector):</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>vdigest <span class="ot">&lt;-</span> <span class="fu">Vectorize</span>(digest)</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co"># Generate taxonID:</span></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">occurrenceID =</span> <span class="fu">paste</span>(short_name, <span class="st">&quot;occurrence&quot;</span>, <span class="fu">vdigest</span> (<span class="fu">paste</span>(scientificName, identificationQualifier), <span class="at">algo=</span><span class="st">&quot;md5&quot;</span>), <span class="at">sep=</span><span class="st">&quot;:&quot;</span>))</span></code></pre></div>
 </div>
 <div id="eventdate" class="section level3">
 <h3>eventDate</h3>
 <p>This is NULL since this is technically a checklist and we do not know
 the collection date.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(eventDate)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(eventDate)</span></code></pre></div>
 </div>
 <div id="decimallongitudedecimallatitude" class="section level3">
 <h3>decimalLongitude/decimalLatitude</h3>
@@ -2038,11 +2403,11 @@ the collection date.</p>
 for WKT strings. This is useful for populating decimalLongitude,
 decimalLatitude and coordinateUncertaintyInMeters. The WKT strings are
 from <a href="https://github.com/iobis/mwhs-shapes" class="uri">https://github.com/iobis/mwhs-shapes</a>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">paste</span>(path_to_project_root, <span class="st">&quot;scripts_data/marine_world_heritage.gpkg&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>))) {</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="fu">download.file</span>(<span class="st">&quot;https://github.com/iobis/mwhs-shapes/blob/master/output/marine_world_heritage.gpkg?raw=true&quot;</span>, <span class="fu">paste</span>(path_to_project_root, <span class="st">&quot;scripts_data/marine_world_heritage.gpkg&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>))</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>}</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>shapes <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste</span>(path_to_project_root, <span class="st">&quot;scripts_data/marine_world_heritage.gpkg&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">paste</span>(path_to_project_root, <span class="st">&quot;scripts_data/marine_world_heritage.gpkg&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>))) {</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>  <span class="fu">download.file</span>(<span class="st">&quot;https://github.com/iobis/mwhs-shapes/blob/master/output/marine_world_heritage.gpkg?raw=true&quot;</span>, <span class="fu">paste</span>(path_to_project_root, <span class="st">&quot;scripts_data/marine_world_heritage.gpkg&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>))</span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>}</span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>shapes <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste</span>(path_to_project_root, <span class="st">&quot;scripts_data/marine_world_heritage.gpkg&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>))</span></code></pre></div>
 <pre><code>## Reading layer `marine_world_heritage&#39; from data source 
 ##   `/mnt/c/Users/Chandra Earl/Desktop/Labs/UNESCO/mwhs-data-mobilization/scripts_data/marine_world_heritage.gpkg&#39; 
 ##   using driver `GPKG&#39;
@@ -2051,58 +2416,58 @@ from <a href="https://github.com/iobis/mwhs-shapes" class="uri">https://github.c
 ## Dimension:     XY
 ## Bounding box:  xmin: -180 ymin: -55.32282 xmax: 180 ymax: 71.81381
 ## Geodetic CRS:  4326</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co">#For some sites, the GeoPackage has core as well as buffer areas. Merge the geometries by site.</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>shapes_processed <span class="ot">&lt;-</span> shapes <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>  <span class="fu">summarize</span>()</span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#Socotra Archipelago</span></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>ind_shape <span class="ot">&lt;-</span> shapes_processed<span class="sc">$</span>geom[<span class="fu">which</span>(shapes_processed<span class="sc">$</span>name <span class="sc">==</span> <span class="st">&quot;Socotra Archipelago&quot;</span>)]</span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#convert shape to WKT</span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>wkt <span class="ot">&lt;-</span> <span class="fu">st_as_text</span>(ind_shape, <span class="at">digits =</span> <span class="dv">6</span>)</span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>localities <span class="ot">&lt;-</span> <span class="fu">calculate_centroid</span>(wkt)</span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">decimalLatitude =</span> localities<span class="sc">$</span>decimalLatitude)</span>
-<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">decimalLongitude =</span> localities<span class="sc">$</span>decimalLongitude)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co">#For some sites, the GeoPackage has core as well as buffer areas. Merge the geometries by site.</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>shapes_processed <span class="ot">&lt;-</span> shapes <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>  <span class="fu">summarize</span>()</span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a><span class="co">#Socotra Archipelago</span></span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a>ind_shape <span class="ot">&lt;-</span> shapes_processed<span class="sc">$</span>geom[<span class="fu">which</span>(shapes_processed<span class="sc">$</span>name <span class="sc">==</span> <span class="st">&quot;Socotra Archipelago&quot;</span>)]</span>
+<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a><span class="co">#convert shape to WKT</span></span>
+<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a>wkt <span class="ot">&lt;-</span> <span class="fu">st_as_text</span>(ind_shape, <span class="at">digits =</span> <span class="dv">6</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a>localities <span class="ot">&lt;-</span> <span class="fu">calculate_centroid</span>(wkt)</span>
+<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="#cb28-15" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">decimalLatitude =</span> localities<span class="sc">$</span>decimalLatitude)</span>
+<span id="cb28-16"><a href="#cb28-16" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">decimalLongitude =</span> localities<span class="sc">$</span>decimalLongitude)</span></code></pre></div>
 </div>
 <div id="occurrencestatus" class="section level3">
 <h3>occurrenceStatus</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>occurrenceStatus <span class="ot">&lt;-</span> <span class="st">&quot;present&quot;</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(occurrenceStatus)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>occurrenceStatus <span class="ot">&lt;-</span> <span class="st">&quot;present&quot;</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(occurrenceStatus)</span></code></pre></div>
 </div>
 <div id="basisofrecord" class="section level3">
 <h3>basisOfRecord</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>basisOfRecord <span class="ot">&lt;-</span> <span class="st">&quot;HumanObservation&quot;</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(basisOfRecord)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>basisOfRecord <span class="ot">&lt;-</span> <span class="st">&quot;HumanObservation&quot;</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(basisOfRecord)</span></code></pre></div>
 </div>
 </div>
 <div id="extra-terms" class="section level2">
 <h2>Extra Terms</h2>
 <div id="footprintwkt" class="section level3">
 <h3>footprintWKT</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">footprintWKT =</span> wkt)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">footprintWKT =</span> wkt)</span></code></pre></div>
 </div>
 <div id="coordinateuncertaintyinmeters" class="section level3">
 <h3>coordinateUncertaintyInMeters</h3>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">coordinateUncertaintyInMeters =</span> localities<span class="sc">$</span>coordinateUncertaintyInMeters)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">coordinateUncertaintyInMeters =</span> localities<span class="sc">$</span>coordinateUncertaintyInMeters)</span></code></pre></div>
 </div>
 <div id="geodeticdatum" class="section level3">
 <h3>geodeticDatum</h3>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>geodeticDatum <span class="ot">&lt;-</span> <span class="st">&quot;WGS84&quot;</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(geodeticDatum)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>geodeticDatum <span class="ot">&lt;-</span> <span class="st">&quot;WGS84&quot;</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(geodeticDatum)</span></code></pre></div>
 </div>
 <div id="country" class="section level3">
 <h3>country</h3>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>country <span class="ot">&lt;-</span> <span class="st">&quot;Yemen&quot;</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(country)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>country <span class="ot">&lt;-</span> <span class="st">&quot;Yemen&quot;</span></span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(country)</span></code></pre></div>
 </div>
 <div id="locality" class="section level3">
 <h3>locality</h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>locality <span class="ot">&lt;-</span> <span class="st">&quot;Socotra Archipelago&quot;</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(locality)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>locality <span class="ot">&lt;-</span> <span class="st">&quot;Socotra Archipelago&quot;</span></span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(locality)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -2113,11 +2478,11 @@ from <a href="https://github.com/iobis/mwhs-shapes" class="uri">https://github.c
 <p>Use the check_fields command from obistools to check if all OBIS
 required fields are present in an occurrence table and if any values are
 missing.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co">#Reorganize columns</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>occurrence <span class="ot">=</span> occurrence <span class="sc">%&gt;%</span> <span class="fu">select</span>(occurrenceID, scientificName, identificationQualifier,scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, footprintWKT, geodeticDatum, occurrenceStatus, basisOfRecord)</span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co">#Check fields</span></span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="fu">check_fields</span>(occurrence)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co">#Reorganize columns</span></span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a>occurrence <span class="ot">=</span> occurrence <span class="sc">%&gt;%</span> <span class="fu">select</span>(occurrenceID, scientificName, identificationQualifier,scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, footprintWKT, geodeticDatum, occurrenceStatus, basisOfRecord)</span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="co">#Check fields</span></span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="fu">check_fields</span>(occurrence)</span></code></pre></div>
 <pre><code>## Warning: `data_frame()` was deprecated in tibble 1.1.0.
 ## ℹ Please use `tibble()` instead.
 ## ℹ The deprecated feature was likely used in the obistools package.
@@ -2125,7 +2490,7 @@ missing.</p>
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.</code></pre>
-<pre><code>## # A tibble: 1,172 × 4
+<pre><code>## # A tibble: 683 × 4
 ##    level field       row message                                 
 ##    &lt;chr&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                                   
 ##  1 error eventDate     1 Empty value for required field eventDate
@@ -2138,21 +2503,24 @@ missing.</p>
 ##  8 error eventDate     8 Empty value for required field eventDate
 ##  9 error eventDate     9 Empty value for required field eventDate
 ## 10 error eventDate    10 Empty value for required field eventDate
-## # ℹ 1,162 more rows</code></pre>
+## # ℹ 673 more rows</code></pre>
 </div>
 <div id="create-the-eml-file" class="section level2">
 <h2>Create the EML file</h2>
 <p>This is a file which contains the dataset’s metadata and is required
 in a DarwinCore-Archive.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>emld<span class="sc">::</span><span class="fu">eml_version</span>(<span class="st">&quot;eml-2.1.1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>emld<span class="sc">::</span><span class="fu">eml_version</span>(<span class="st">&quot;eml-2.1.1&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;eml-2.1.1&quot;</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co">#Title</span></span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="st">&quot;Coastal fish diversity of the Socotra Archipelago, Yemen: Fishes Checklist&quot;</span></span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co">#Abstract</span></span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>abstract <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">abstract</span>(</span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;The Socotra Archipelago, located in the eastern Gulf of Aden, has a unique marine environment which combines tropical and ‘pseudo-temperate’ elements. Studies on the fish biogeography of the archipelago, partially framed in regional studies, have substantially outpaced critical elementary research on the archipelago’s fish diversity. The present study seeks to close this gap and identifies the Socotra Archipelago as a major hotspot of coastal fish diversity in the Indian Ocean. The archipelago supports unique coastal fish assemblages which are predominantly composed of coral-associated (“reef”) species, in spite of the limited biogenic reef frameworks. A Preliminary Checklist comprises 682 species with confirmed records and a “Working List” includes an additional 51 records, totalling 733 faunal records in 108 families.&quot;</span></span>
-<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="co">#Title</span></span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="st">&quot;Coastal fish diversity of the Socotra Archipelago, Yemen: Fishes Checklist&quot;</span></span>
+<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a><span class="co">#AlternateIdentifier</span></span>
+<span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a>alternateIdentifier <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;https://ipt.obis.org/secretariat/resource?r=&quot;</span>, short_name, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" tabindex="-1"></a><span class="co">#Abstract</span></span>
+<span id="cb41-8"><a href="#cb41-8" tabindex="-1"></a>abstract <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">abstract</span>(</span>
+<span id="cb41-9"><a href="#cb41-9" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;The Socotra Archipelago, located in the eastern Gulf of Aden, has a unique marine environment which combines tropical and ‘pseudo-temperate’ elements. Studies on the fish biogeography of the archipelago, partially framed in regional studies, have substantially outpaced critical elementary research on the archipelago’s fish diversity. The present study seeks to close this gap and identifies the Socotra Archipelago as a major hotspot of coastal fish diversity in the Indian Ocean. The archipelago supports unique coastal fish assemblages which are predominantly composed of coral-associated (“reef”) species, in spite of the limited biogenic reef frameworks. A Preliminary Checklist comprises 682 species with confirmed records and a “Working List” includes an additional 51 records, totalling 733 faunal records in 108 families.&quot;</span></span>
+<span id="cb41-10"><a href="#cb41-10" tabindex="-1"></a>)</span></code></pre></div>
 <div id="people" class="section level3">
 <h3>People</h3>
 <p>Here we add the people involved in the project:</p>
@@ -2164,71 +2532,71 @@ with questions about the use, interpretation of a data set.</p>
 providing the metadata documentation for the resource.</p>
 <p>The <strong>associatedParty</strong> (in this case the Data Curator)
 is the person who mobilized the data from the original resource.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>creator <span class="ot">&lt;-</span> <span class="fu">list</span>(eml<span class="sc">$</span><span class="fu">creator</span>(</span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Uwe&quot;</span>, </span>
-<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Zajonz&quot;</span>),</span>
-<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Senckenberg Research Institute and Museum of Nature&quot;</span>,</span>
-<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>    <span class="at">electronicMailAddress =</span> <span class="st">&quot;uzajonz@senckenberg.de&quot;</span></span>
-<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a>  ), eml<span class="sc">$</span><span class="fu">creator</span>(</span>
-<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Edouard&quot;</span>, </span>
-<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Lavergne&quot;</span>),</span>
-<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Kyoto University&quot;</span>,</span>
-<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a>    <span class="at">electronicMailAddress =</span> <span class="st">&quot;edouard.lavergne@gmail.com&quot;</span></span>
-<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a>  ), eml<span class="sc">$</span><span class="fu">creator</span>(</span>
-<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-15"><a href="#cb28-15" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Sergey Y.&quot;</span>, </span>
-<span id="cb28-16"><a href="#cb28-16" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Bogorodsky&quot;</span>),</span>
-<span id="cb28-17"><a href="#cb28-17" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Station of Naturalists&quot;</span>,</span>
-<span id="cb28-18"><a href="#cb28-18" tabindex="-1"></a>    <span class="at">electronicMailAddress =</span> <span class="st">&quot;ic187196@yandex.ru&quot;</span></span>
-<span id="cb28-19"><a href="#cb28-19" tabindex="-1"></a>  ), eml<span class="sc">$</span><span class="fu">creator</span>(</span>
-<span id="cb28-20"><a href="#cb28-20" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-21"><a href="#cb28-21" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Fouad Naseeb&quot;</span>, </span>
-<span id="cb28-22"><a href="#cb28-22" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Saeed&quot;</span>),</span>
-<span id="cb28-23"><a href="#cb28-23" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Environmental Protection Authority, Socotra Branch&quot;</span>,</span>
-<span id="cb28-24"><a href="#cb28-24" tabindex="-1"></a>    <span class="at">electronicMailAddress =</span> <span class="st">&quot;imhor.fouad@gmail.com&quot;</span></span>
-<span id="cb28-25"><a href="#cb28-25" tabindex="-1"></a>  ), eml<span class="sc">$</span><span class="fu">creator</span>(</span>
-<span id="cb28-26"><a href="#cb28-26" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-27"><a href="#cb28-27" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Moteah Sheikh&quot;</span>, </span>
-<span id="cb28-28"><a href="#cb28-28" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Aideed&quot;</span>),</span>
-<span id="cb28-29"><a href="#cb28-29" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Hadhramout University&quot;</span>,</span>
-<span id="cb28-30"><a href="#cb28-30" tabindex="-1"></a>    <span class="at">electronicMailAddress =</span> <span class="st">&quot;sh79mo@yahoo.com&quot;</span></span>
-<span id="cb28-31"><a href="#cb28-31" tabindex="-1"></a>  ), eml<span class="sc">$</span><span class="fu">creator</span>(</span>
-<span id="cb28-32"><a href="#cb28-32" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-33"><a href="#cb28-33" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Friedhelm&quot;</span>, </span>
-<span id="cb28-34"><a href="#cb28-34" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Krupp&quot;</span>),</span>
-<span id="cb28-35"><a href="#cb28-35" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Senckenberg Research Institute and Museum of Nature&quot;</span></span>
-<span id="cb28-36"><a href="#cb28-36" tabindex="-1"></a>  )</span>
-<span id="cb28-37"><a href="#cb28-37" tabindex="-1"></a>)</span>
-<span id="cb28-38"><a href="#cb28-38" tabindex="-1"></a></span>
-<span id="cb28-39"><a href="#cb28-39" tabindex="-1"></a>contact <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">creator</span>(</span>
-<span id="cb28-40"><a href="#cb28-40" tabindex="-1"></a>  <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-41"><a href="#cb28-41" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;OBIS&quot;</span>, </span>
-<span id="cb28-42"><a href="#cb28-42" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Secretariat&quot;</span>),</span>
-<span id="cb28-43"><a href="#cb28-43" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;helpdesk@obis.org&quot;</span>,</span>
-<span id="cb28-44"><a href="#cb28-44" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;OBIS&quot;</span>,</span>
-<span id="cb28-45"><a href="#cb28-45" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;Secretariat&quot;</span></span>
-<span id="cb28-46"><a href="#cb28-46" tabindex="-1"></a>)</span>
-<span id="cb28-47"><a href="#cb28-47" tabindex="-1"></a></span>
-<span id="cb28-48"><a href="#cb28-48" tabindex="-1"></a>metadataProvider <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">metadataProvider</span>(</span>
-<span id="cb28-49"><a href="#cb28-49" tabindex="-1"></a>  <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-50"><a href="#cb28-50" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;Chandra&quot;</span>, </span>
-<span id="cb28-51"><a href="#cb28-51" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Earl&quot;</span>),</span>
-<span id="cb28-52"><a href="#cb28-52" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;c.earl@unesco.org&quot;</span>,</span>
-<span id="cb28-53"><a href="#cb28-53" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;UNESCO&quot;</span>,</span>
-<span id="cb28-54"><a href="#cb28-54" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;eDNA Scientific Officer&quot;</span></span>
-<span id="cb28-55"><a href="#cb28-55" tabindex="-1"></a>)</span>
-<span id="cb28-56"><a href="#cb28-56" tabindex="-1"></a></span>
-<span id="cb28-57"><a href="#cb28-57" tabindex="-1"></a>associatedParty <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">associatedParty</span>(</span>
-<span id="cb28-58"><a href="#cb28-58" tabindex="-1"></a>  <span class="at">role =</span> <span class="st">&quot;Data Curator&quot;</span>,</span>
-<span id="cb28-59"><a href="#cb28-59" tabindex="-1"></a>  <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
-<span id="cb28-60"><a href="#cb28-60" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;Chandra&quot;</span>, </span>
-<span id="cb28-61"><a href="#cb28-61" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Earl&quot;</span>),</span>
-<span id="cb28-62"><a href="#cb28-62" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;c.earl@unesco.org&quot;</span>,</span>
-<span id="cb28-63"><a href="#cb28-63" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;UNESCO&quot;</span>,</span>
-<span id="cb28-64"><a href="#cb28-64" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;eDNA Scientific Officer&quot;</span></span>
-<span id="cb28-65"><a href="#cb28-65" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a>creator <span class="ot">&lt;-</span> <span class="fu">list</span>(eml<span class="sc">$</span><span class="fu">creator</span>(</span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
+<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Uwe&quot;</span>, </span>
+<span id="cb42-4"><a href="#cb42-4" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Zajonz&quot;</span>),</span>
+<span id="cb42-5"><a href="#cb42-5" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Senckenberg Research Institute and Museum of Nature&quot;</span>,</span>
+<span id="cb42-6"><a href="#cb42-6" tabindex="-1"></a>    <span class="at">electronicMailAddress =</span> <span class="st">&quot;uzajonz@senckenberg.de&quot;</span></span>
+<span id="cb42-7"><a href="#cb42-7" tabindex="-1"></a>  ), eml<span class="sc">$</span><span class="fu">creator</span>(</span>
+<span id="cb42-8"><a href="#cb42-8" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
+<span id="cb42-9"><a href="#cb42-9" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Edouard&quot;</span>, </span>
+<span id="cb42-10"><a href="#cb42-10" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Lavergne&quot;</span>),</span>
+<span id="cb42-11"><a href="#cb42-11" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Kyoto University&quot;</span>,</span>
+<span id="cb42-12"><a href="#cb42-12" tabindex="-1"></a>    <span class="at">electronicMailAddress =</span> <span class="st">&quot;edouard.lavergne@gmail.com&quot;</span></span>
+<span id="cb42-13"><a href="#cb42-13" tabindex="-1"></a>  ), eml<span class="sc">$</span><span class="fu">creator</span>(</span>
+<span id="cb42-14"><a href="#cb42-14" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
+<span id="cb42-15"><a href="#cb42-15" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Sergey Y.&quot;</span>, </span>
+<span id="cb42-16"><a href="#cb42-16" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Bogorodsky&quot;</span>),</span>
+<span id="cb42-17"><a href="#cb42-17" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Station of Naturalists&quot;</span>,</span>
+<span id="cb42-18"><a href="#cb42-18" tabindex="-1"></a>    <span class="at">electronicMailAddress =</span> <span class="st">&quot;ic187196@yandex.ru&quot;</span></span>
+<span id="cb42-19"><a href="#cb42-19" tabindex="-1"></a>  ), eml<span class="sc">$</span><span class="fu">creator</span>(</span>
+<span id="cb42-20"><a href="#cb42-20" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
+<span id="cb42-21"><a href="#cb42-21" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Fouad Naseeb&quot;</span>, </span>
+<span id="cb42-22"><a href="#cb42-22" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Saeed&quot;</span>),</span>
+<span id="cb42-23"><a href="#cb42-23" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Environmental Protection Authority, Socotra Branch&quot;</span>,</span>
+<span id="cb42-24"><a href="#cb42-24" tabindex="-1"></a>    <span class="at">electronicMailAddress =</span> <span class="st">&quot;imhor.fouad@gmail.com&quot;</span></span>
+<span id="cb42-25"><a href="#cb42-25" tabindex="-1"></a>  ), eml<span class="sc">$</span><span class="fu">creator</span>(</span>
+<span id="cb42-26"><a href="#cb42-26" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
+<span id="cb42-27"><a href="#cb42-27" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Moteah Sheikh&quot;</span>, </span>
+<span id="cb42-28"><a href="#cb42-28" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Aideed&quot;</span>),</span>
+<span id="cb42-29"><a href="#cb42-29" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Hadhramout University&quot;</span>,</span>
+<span id="cb42-30"><a href="#cb42-30" tabindex="-1"></a>    <span class="at">electronicMailAddress =</span> <span class="st">&quot;sh79mo@yahoo.com&quot;</span></span>
+<span id="cb42-31"><a href="#cb42-31" tabindex="-1"></a>  ), eml<span class="sc">$</span><span class="fu">creator</span>(</span>
+<span id="cb42-32"><a href="#cb42-32" tabindex="-1"></a>    <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
+<span id="cb42-33"><a href="#cb42-33" tabindex="-1"></a>      <span class="at">givenName =</span> <span class="st">&quot;Friedhelm&quot;</span>, </span>
+<span id="cb42-34"><a href="#cb42-34" tabindex="-1"></a>      <span class="at">surName =</span> <span class="st">&quot;Krupp&quot;</span>),</span>
+<span id="cb42-35"><a href="#cb42-35" tabindex="-1"></a>    <span class="at">organizationName =</span> <span class="st">&quot;Senckenberg Research Institute and Museum of Nature&quot;</span></span>
+<span id="cb42-36"><a href="#cb42-36" tabindex="-1"></a>  )</span>
+<span id="cb42-37"><a href="#cb42-37" tabindex="-1"></a>)</span>
+<span id="cb42-38"><a href="#cb42-38" tabindex="-1"></a></span>
+<span id="cb42-39"><a href="#cb42-39" tabindex="-1"></a>contact <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">creator</span>(</span>
+<span id="cb42-40"><a href="#cb42-40" tabindex="-1"></a>  <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
+<span id="cb42-41"><a href="#cb42-41" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;OBIS&quot;</span>, </span>
+<span id="cb42-42"><a href="#cb42-42" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Secretariat&quot;</span>),</span>
+<span id="cb42-43"><a href="#cb42-43" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;helpdesk@obis.org&quot;</span>,</span>
+<span id="cb42-44"><a href="#cb42-44" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;OBIS&quot;</span>,</span>
+<span id="cb42-45"><a href="#cb42-45" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;Secretariat&quot;</span></span>
+<span id="cb42-46"><a href="#cb42-46" tabindex="-1"></a>)</span>
+<span id="cb42-47"><a href="#cb42-47" tabindex="-1"></a></span>
+<span id="cb42-48"><a href="#cb42-48" tabindex="-1"></a>metadataProvider <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">metadataProvider</span>(</span>
+<span id="cb42-49"><a href="#cb42-49" tabindex="-1"></a>  <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
+<span id="cb42-50"><a href="#cb42-50" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;Chandra&quot;</span>, </span>
+<span id="cb42-51"><a href="#cb42-51" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Earl&quot;</span>),</span>
+<span id="cb42-52"><a href="#cb42-52" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;c.earl@unesco.org&quot;</span>,</span>
+<span id="cb42-53"><a href="#cb42-53" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;UNESCO&quot;</span>,</span>
+<span id="cb42-54"><a href="#cb42-54" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;eDNA Scientific Officer&quot;</span></span>
+<span id="cb42-55"><a href="#cb42-55" tabindex="-1"></a>)</span>
+<span id="cb42-56"><a href="#cb42-56" tabindex="-1"></a></span>
+<span id="cb42-57"><a href="#cb42-57" tabindex="-1"></a>associatedParty <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">associatedParty</span>(</span>
+<span id="cb42-58"><a href="#cb42-58" tabindex="-1"></a>  <span class="at">role =</span> <span class="st">&quot;processor&quot;</span>,</span>
+<span id="cb42-59"><a href="#cb42-59" tabindex="-1"></a>  <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
+<span id="cb42-60"><a href="#cb42-60" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;Chandra&quot;</span>, </span>
+<span id="cb42-61"><a href="#cb42-61" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Earl&quot;</span>),</span>
+<span id="cb42-62"><a href="#cb42-62" tabindex="-1"></a>  <span class="at">electronicMailAddress =</span> <span class="st">&quot;c.earl@unesco.org&quot;</span>,</span>
+<span id="cb42-63"><a href="#cb42-63" tabindex="-1"></a>  <span class="at">organizationName =</span> <span class="st">&quot;UNESCO&quot;</span>,</span>
+<span id="cb42-64"><a href="#cb42-64" tabindex="-1"></a>  <span class="at">positionName =</span> <span class="st">&quot;eDNA Scientific Officer&quot;</span></span>
+<span id="cb42-65"><a href="#cb42-65" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="additional-metadata" class="section level3">
 <h3>Additional Metadata</h3>
@@ -2236,128 +2604,134 @@ is the person who mobilized the data from the original resource.</p>
 GBIF-type EML file and contains information such as the citation of the
 dataset, the citation of the original resource and the creation
 timestamp of the EML.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co">#{dataset.authors} ({dataset.pubDate}) {dataset.title}. [Version {dataset.version}]. {organization.title}. {dataset.type} Dataset {dataset.doi}, {dataset.url}</span></span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>additionalMetadata <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">additionalMetadata</span>(</span>
-<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a>  <span class="at">metadata =</span> <span class="fu">list</span>(</span>
-<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>    <span class="at">gbif =</span> <span class="fu">list</span>(</span>
-<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>      <span class="at">dateStamp =</span> <span class="fu">paste0</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%Y-%m-%dT%H:%M:%OS3&quot;</span>), <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">1</span>, <span class="dv">3</span>), <span class="st">&quot;:&quot;</span>, <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">4</span>, <span class="dv">5</span>)))),</span>
-<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>      <span class="at">hierarchyLevel =</span> <span class="st">&quot;dataset&quot;</span>,</span>
-<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;Earl C., OBIS Secretariat. (2023) Coastal fish diversity of the Socotra Archipelago, Yemen: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI&quot;</span>,</span>
-<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>      <span class="at">bibliography =</span> <span class="fu">list</span>(</span>
-<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>        <span class="at">citation =</span> <span class="st">&quot;Zajonz U, Lavergne E, Bogorodsky S, Saeed F, Aideed M, Krupp F. (2019). Coastal fish diversity of the Socotra Archipelago, Yemen. Zootaxa. 4636. 001-108. 10.11646/zootaxa.4636.1.1. &quot;</span>)</span>
-<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>    )</span>
-<span id="cb29-12"><a href="#cb29-12" tabindex="-1"></a>  )</span>
-<span id="cb29-13"><a href="#cb29-13" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="co">#{dataset.authors} ({dataset.pubDate}) {dataset.title}. [Version {dataset.version}]. {organization.title}. {dataset.type} Dataset {dataset.doi}, {dataset.url}</span></span>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" tabindex="-1"></a>additionalMetadata <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">additionalMetadata</span>(</span>
+<span id="cb43-4"><a href="#cb43-4" tabindex="-1"></a>  <span class="at">metadata =</span> <span class="fu">list</span>(</span>
+<span id="cb43-5"><a href="#cb43-5" tabindex="-1"></a>    <span class="at">gbif =</span> <span class="fu">list</span>(</span>
+<span id="cb43-6"><a href="#cb43-6" tabindex="-1"></a>      <span class="at">dateStamp =</span> <span class="fu">paste0</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%Y-%m-%dT%H:%M:%OS3&quot;</span>), <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">1</span>, <span class="dv">3</span>), <span class="st">&quot;:&quot;</span>, <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">4</span>, <span class="dv">5</span>)))),</span>
+<span id="cb43-7"><a href="#cb43-7" tabindex="-1"></a>      <span class="at">hierarchyLevel =</span> <span class="st">&quot;dataset&quot;</span>,</span>
+<span id="cb43-8"><a href="#cb43-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;IPT will autogenerate this&quot;</span>,</span>
+<span id="cb43-9"><a href="#cb43-9" tabindex="-1"></a>      <span class="at">bibliography =</span> <span class="fu">list</span>(</span>
+<span id="cb43-10"><a href="#cb43-10" tabindex="-1"></a>        <span class="at">citation =</span> <span class="st">&quot;Zajonz U, Lavergne E, Bogorodsky S, Saeed F, Aideed M, Krupp F. (2019). Coastal fish diversity of the Socotra Archipelago, Yemen. Zootaxa. 4636. 001-108. &quot;</span>)</span>
+<span id="cb43-11"><a href="#cb43-11" tabindex="-1"></a>    )</span>
+<span id="cb43-12"><a href="#cb43-12" tabindex="-1"></a>  )</span>
+<span id="cb43-13"><a href="#cb43-13" tabindex="-1"></a>)</span>
+<span id="cb43-14"><a href="#cb43-14" tabindex="-1"></a></span>
+<span id="cb43-15"><a href="#cb43-15" tabindex="-1"></a>citationdoi <span class="ot">&lt;-</span> <span class="st">&quot;https://doi.org/10.11646/zootaxa.4636.1.1&quot;</span></span></code></pre></div>
 </div>
 <div id="coverage" class="section level3">
 <h3>Coverage</h3>
 <p>Here we describe the dataset’s geographic, taxonomic and temporal
 coverage.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co">#Coverage</span></span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>coverage <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">coverage</span>(</span>
-<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a>  <span class="at">geographicCoverage =</span> eml<span class="sc">$</span><span class="fu">geographicCoverage</span>(</span>
-<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a>    <span class="at">geographicDescription =</span> <span class="st">&quot;Socotra Archipelago&quot;</span>,</span>
-<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a>    <span class="at">boundingCoordinates =</span> eml<span class="sc">$</span><span class="fu">boundingCoordinates</span>(</span>
-<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>      <span class="at">westBoundingCoordinate =</span> <span class="fu">st_bbox</span>(ind_shape)<span class="sc">$</span>xmax,</span>
-<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a>      <span class="at">eastBoundingCoordinate =</span> <span class="fu">st_bbox</span>(ind_shape)<span class="sc">$</span>xmin,</span>
-<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a>      <span class="at">northBoundingCoordinate =</span> <span class="fu">st_bbox</span>(ind_shape)<span class="sc">$</span>ymax,</span>
-<span id="cb30-9"><a href="#cb30-9" tabindex="-1"></a>      <span class="at">southBoundingCoordinate =</span> <span class="fu">st_bbox</span>(ind_shape)<span class="sc">$</span>ymin)</span>
-<span id="cb30-10"><a href="#cb30-10" tabindex="-1"></a>    ),</span>
-<span id="cb30-11"><a href="#cb30-11" tabindex="-1"></a>  <span class="at">taxonomicCoverage =</span> eml<span class="sc">$</span><span class="fu">taxonomicCoverage</span>(</span>
-<span id="cb30-12"><a href="#cb30-12" tabindex="-1"></a>    <span class="at">generalTaxonomicCoverage =</span> <span class="st">&quot;Fishes&quot;</span>,</span>
-<span id="cb30-13"><a href="#cb30-13" tabindex="-1"></a>    <span class="at">taxonomicClassification =</span> <span class="fu">list</span>(</span>
-<span id="cb30-14"><a href="#cb30-14" tabindex="-1"></a>      eml<span class="sc">$</span><span class="fu">taxonomicClassification</span>(</span>
-<span id="cb30-15"><a href="#cb30-15" tabindex="-1"></a>        <span class="at">taxonRankName =</span> <span class="st">&quot;Superclass&quot;</span>,</span>
-<span id="cb30-16"><a href="#cb30-16" tabindex="-1"></a>        <span class="at">taxonRankValue =</span> <span class="st">&quot;Agnatha&quot;</span>),</span>
-<span id="cb30-17"><a href="#cb30-17" tabindex="-1"></a>      eml<span class="sc">$</span><span class="fu">taxonomicClassification</span>(</span>
-<span id="cb30-18"><a href="#cb30-18" tabindex="-1"></a>        <span class="at">taxonRankName =</span> <span class="st">&quot;Parvphylum&quot;</span>,</span>
-<span id="cb30-19"><a href="#cb30-19" tabindex="-1"></a>        <span class="at">taxonRankValue =</span> <span class="st">&quot;Chondrichthyes&quot;</span>),</span>
-<span id="cb30-20"><a href="#cb30-20" tabindex="-1"></a>      eml<span class="sc">$</span><span class="fu">taxonomicClassification</span>(</span>
-<span id="cb30-21"><a href="#cb30-21" tabindex="-1"></a>        <span class="at">taxonRankName =</span> <span class="st">&quot;Parvphylum&quot;</span>,</span>
-<span id="cb30-22"><a href="#cb30-22" tabindex="-1"></a>        <span class="at">taxonRankValue =</span> <span class="st">&quot;Osteichthyes&quot;</span>)</span>
-<span id="cb30-23"><a href="#cb30-23" tabindex="-1"></a>      )</span>
-<span id="cb30-24"><a href="#cb30-24" tabindex="-1"></a>    </span>
-<span id="cb30-25"><a href="#cb30-25" tabindex="-1"></a><span class="co">#  ),</span></span>
-<span id="cb30-26"><a href="#cb30-26" tabindex="-1"></a><span class="co">#  temporalCoverage = eml$temporalCoverage(</span></span>
-<span id="cb30-27"><a href="#cb30-27" tabindex="-1"></a><span class="co">#    rangeOfDates = eml$rangeOfDates(</span></span>
-<span id="cb30-28"><a href="#cb30-28" tabindex="-1"></a><span class="co">#      beginDate = eml$beginDate(</span></span>
-<span id="cb30-29"><a href="#cb30-29" tabindex="-1"></a><span class="co">#        calendarDate = &quot;2019-05-01&quot;</span></span>
-<span id="cb30-30"><a href="#cb30-30" tabindex="-1"></a><span class="co">#      ),</span></span>
-<span id="cb30-31"><a href="#cb30-31" tabindex="-1"></a><span class="co">#      endDate = eml$endDate(</span></span>
-<span id="cb30-32"><a href="#cb30-32" tabindex="-1"></a><span class="co">#        calendarDate = &quot;2016-05-06&quot;</span></span>
-<span id="cb30-33"><a href="#cb30-33" tabindex="-1"></a><span class="co">#      )</span></span>
-<span id="cb30-34"><a href="#cb30-34" tabindex="-1"></a><span class="co">#    )</span></span>
-<span id="cb30-35"><a href="#cb30-35" tabindex="-1"></a>   )</span>
-<span id="cb30-36"><a href="#cb30-36" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="co">#Coverage</span></span>
+<span id="cb44-2"><a href="#cb44-2" tabindex="-1"></a>coverage <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">coverage</span>(</span>
+<span id="cb44-3"><a href="#cb44-3" tabindex="-1"></a>  <span class="at">geographicCoverage =</span> eml<span class="sc">$</span><span class="fu">geographicCoverage</span>(</span>
+<span id="cb44-4"><a href="#cb44-4" tabindex="-1"></a>    <span class="at">geographicDescription =</span> <span class="st">&quot;Socotra Archipelago&quot;</span>,</span>
+<span id="cb44-5"><a href="#cb44-5" tabindex="-1"></a>    <span class="at">boundingCoordinates =</span> eml<span class="sc">$</span><span class="fu">boundingCoordinates</span>(</span>
+<span id="cb44-6"><a href="#cb44-6" tabindex="-1"></a>      <span class="at">westBoundingCoordinate =</span> <span class="fu">st_bbox</span>(ind_shape)<span class="sc">$</span>xmax,</span>
+<span id="cb44-7"><a href="#cb44-7" tabindex="-1"></a>      <span class="at">eastBoundingCoordinate =</span> <span class="fu">st_bbox</span>(ind_shape)<span class="sc">$</span>xmin,</span>
+<span id="cb44-8"><a href="#cb44-8" tabindex="-1"></a>      <span class="at">northBoundingCoordinate =</span> <span class="fu">st_bbox</span>(ind_shape)<span class="sc">$</span>ymax,</span>
+<span id="cb44-9"><a href="#cb44-9" tabindex="-1"></a>      <span class="at">southBoundingCoordinate =</span> <span class="fu">st_bbox</span>(ind_shape)<span class="sc">$</span>ymin)</span>
+<span id="cb44-10"><a href="#cb44-10" tabindex="-1"></a>    ),</span>
+<span id="cb44-11"><a href="#cb44-11" tabindex="-1"></a>  <span class="at">taxonomicCoverage =</span> eml<span class="sc">$</span><span class="fu">taxonomicCoverage</span>(</span>
+<span id="cb44-12"><a href="#cb44-12" tabindex="-1"></a>    <span class="at">generalTaxonomicCoverage =</span> <span class="st">&quot;Fishes&quot;</span>,</span>
+<span id="cb44-13"><a href="#cb44-13" tabindex="-1"></a>    <span class="at">taxonomicClassification =</span> <span class="fu">list</span>(</span>
+<span id="cb44-14"><a href="#cb44-14" tabindex="-1"></a>      eml<span class="sc">$</span><span class="fu">taxonomicClassification</span>(</span>
+<span id="cb44-15"><a href="#cb44-15" tabindex="-1"></a>        <span class="at">taxonRankName =</span> <span class="st">&quot;Superclass&quot;</span>,</span>
+<span id="cb44-16"><a href="#cb44-16" tabindex="-1"></a>        <span class="at">taxonRankValue =</span> <span class="st">&quot;Agnatha&quot;</span>),</span>
+<span id="cb44-17"><a href="#cb44-17" tabindex="-1"></a>      eml<span class="sc">$</span><span class="fu">taxonomicClassification</span>(</span>
+<span id="cb44-18"><a href="#cb44-18" tabindex="-1"></a>        <span class="at">taxonRankName =</span> <span class="st">&quot;unranked&quot;</span>,</span>
+<span id="cb44-19"><a href="#cb44-19" tabindex="-1"></a>        <span class="at">taxonRankValue =</span> <span class="st">&quot;Chondrichthyes&quot;</span>),</span>
+<span id="cb44-20"><a href="#cb44-20" tabindex="-1"></a>      eml<span class="sc">$</span><span class="fu">taxonomicClassification</span>(</span>
+<span id="cb44-21"><a href="#cb44-21" tabindex="-1"></a>        <span class="at">taxonRankName =</span> <span class="st">&quot;unranked&quot;</span>,</span>
+<span id="cb44-22"><a href="#cb44-22" tabindex="-1"></a>        <span class="at">taxonRankValue =</span> <span class="st">&quot;Osteichthyes&quot;</span>)</span>
+<span id="cb44-23"><a href="#cb44-23" tabindex="-1"></a>      )</span>
+<span id="cb44-24"><a href="#cb44-24" tabindex="-1"></a>    </span>
+<span id="cb44-25"><a href="#cb44-25" tabindex="-1"></a><span class="co">#  ),</span></span>
+<span id="cb44-26"><a href="#cb44-26" tabindex="-1"></a><span class="co">#  temporalCoverage = eml$temporalCoverage(</span></span>
+<span id="cb44-27"><a href="#cb44-27" tabindex="-1"></a><span class="co">#    rangeOfDates = eml$rangeOfDates(</span></span>
+<span id="cb44-28"><a href="#cb44-28" tabindex="-1"></a><span class="co">#      beginDate = eml$beginDate(</span></span>
+<span id="cb44-29"><a href="#cb44-29" tabindex="-1"></a><span class="co">#        calendarDate = &quot;2019-05-01&quot;</span></span>
+<span id="cb44-30"><a href="#cb44-30" tabindex="-1"></a><span class="co">#      ),</span></span>
+<span id="cb44-31"><a href="#cb44-31" tabindex="-1"></a><span class="co">#      endDate = eml$endDate(</span></span>
+<span id="cb44-32"><a href="#cb44-32" tabindex="-1"></a><span class="co">#        calendarDate = &quot;2016-05-06&quot;</span></span>
+<span id="cb44-33"><a href="#cb44-33" tabindex="-1"></a><span class="co">#      )</span></span>
+<span id="cb44-34"><a href="#cb44-34" tabindex="-1"></a><span class="co">#    )</span></span>
+<span id="cb44-35"><a href="#cb44-35" tabindex="-1"></a>   )</span>
+<span id="cb44-36"><a href="#cb44-36" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="extra-metadata" class="section level3">
 <h3>Extra MetaData</h3>
 <p>These fields are not required, though they make the metadata more
 complete.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>methods <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">methods</span>(</span>
-<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>  <span class="at">methodStep =</span> eml<span class="sc">$</span><span class="fu">methodStep</span>(</span>
-<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>    <span class="at">description =</span> <span class="st">&quot;See Github R Project and Notebook - https://github.com/iobis/mwhs-data-mobilization/tree/master/notebooks/socotra_archipelago/Zajonz_et_al_2019 - for dataset construction&quot;</span></span>
-<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a>  )</span>
-<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>)</span>
-<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a><span class="co">#Other Data</span></span>
-<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a>pubDate <span class="ot">&lt;-</span> <span class="st">&quot;2023-09-30&quot;</span></span>
-<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a><span class="co">#language of original document</span></span>
-<span id="cb31-11"><a href="#cb31-11" tabindex="-1"></a>language <span class="ot">&lt;-</span> <span class="st">&quot;eng&quot;</span></span>
-<span id="cb31-12"><a href="#cb31-12" tabindex="-1"></a></span>
-<span id="cb31-13"><a href="#cb31-13" tabindex="-1"></a>keywordSet <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">keywordSet</span>(</span>
-<span id="cb31-14"><a href="#cb31-14" tabindex="-1"></a>  <span class="at">keyword =</span> <span class="st">&quot;Occurrence&quot;</span>,</span>
-<span id="cb31-15"><a href="#cb31-15" tabindex="-1"></a>  <span class="at">keywordThesaurus =</span> <span class="st">&quot;GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml&quot;</span></span>
-<span id="cb31-16"><a href="#cb31-16" tabindex="-1"></a>)</span>
-<span id="cb31-17"><a href="#cb31-17" tabindex="-1"></a></span>
-<span id="cb31-18"><a href="#cb31-18" tabindex="-1"></a>maintenance <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">maintenance</span>(</span>
-<span id="cb31-19"><a href="#cb31-19" tabindex="-1"></a>  <span class="at">description =</span> eml<span class="sc">$</span><span class="fu">description</span>(</span>
-<span id="cb31-20"><a href="#cb31-20" tabindex="-1"></a>    <span class="at">para =</span> <span class="st">&quot;&quot;</span>),</span>
-<span id="cb31-21"><a href="#cb31-21" tabindex="-1"></a>  <span class="at">maintenanceUpdateFrequency =</span> <span class="st">&quot;notPlanned&quot;</span></span>
-<span id="cb31-22"><a href="#cb31-22" tabindex="-1"></a>)</span>
-<span id="cb31-23"><a href="#cb31-23" tabindex="-1"></a></span>
-<span id="cb31-24"><a href="#cb31-24" tabindex="-1"></a><span class="co">#Universal CC</span></span>
-<span id="cb31-25"><a href="#cb31-25" tabindex="-1"></a>intellectualRights <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">intellectualRights</span>(</span>
-<span id="cb31-26"><a href="#cb31-26" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;These data are released under &lt;ulink url=</span><span class="sc">\&quot;</span><span class="st">https://creativecommons.org/publicdomain/zero/1.0/</span><span class="sc">\&quot;</span><span class="st">&gt;&lt;citetitle&gt;Creative Commons Zero (CC-0)&lt;/citetitle&gt;&lt;/ulink&gt;. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.&quot;</span></span>
-<span id="cb31-27"><a href="#cb31-27" tabindex="-1"></a>)</span>
-<span id="cb31-28"><a href="#cb31-28" tabindex="-1"></a></span>
-<span id="cb31-29"><a href="#cb31-29" tabindex="-1"></a>purpose <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">purpose</span>(</span>
-<span id="cb31-30"><a href="#cb31-30" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;These data were made accessible through UNESCO&#39;s eDNA Expeditions project to mobilize available marine species and occurrence datasets from World Heritage Sites.&quot;</span></span>
-<span id="cb31-31"><a href="#cb31-31" tabindex="-1"></a>)</span>
-<span id="cb31-32"><a href="#cb31-32" tabindex="-1"></a></span>
-<span id="cb31-33"><a href="#cb31-33" tabindex="-1"></a>additionalInfo <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">additionalInfo</span>(</span>
-<span id="cb31-34"><a href="#cb31-34" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;marine, harvested by iOBIS&quot;</span></span>
-<span id="cb31-35"><a href="#cb31-35" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>methods <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">methods</span>(</span>
+<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a>  <span class="at">methodStep =</span> eml<span class="sc">$</span><span class="fu">methodStep</span>(</span>
+<span id="cb45-3"><a href="#cb45-3" tabindex="-1"></a>    <span class="at">description =</span> eml<span class="sc">$</span><span class="fu">description</span>(</span>
+<span id="cb45-4"><a href="#cb45-4" tabindex="-1"></a>      <span class="at">para =</span> <span class="fu">paste</span>(<span class="st">&quot;See Github &lt;a href=</span><span class="sc">\&quot;</span><span class="st">https://github.com/iobis/mwhs-data-mobilization</span><span class="sc">\&quot;</span><span class="st">&gt;Project&lt;/a&gt; and &lt;a href=</span><span class="sc">\&quot;</span><span class="st">https://iobis.github.io/mwhs-data-mobilization/notebooks/&quot;</span>, site_dir_name, <span class="st">&quot;/&quot;</span>, dataset_dir_name, <span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st">&gt; R Notebook&lt;/a&gt; for dataset construction methods&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb45-5"><a href="#cb45-5" tabindex="-1"></a>    )</span>
+<span id="cb45-6"><a href="#cb45-6" tabindex="-1"></a>  )</span>
+<span id="cb45-7"><a href="#cb45-7" tabindex="-1"></a>)</span>
+<span id="cb45-8"><a href="#cb45-8" tabindex="-1"></a></span>
+<span id="cb45-9"><a href="#cb45-9" tabindex="-1"></a><span class="co">#Other Data</span></span>
+<span id="cb45-10"><a href="#cb45-10" tabindex="-1"></a>pubDate <span class="ot">&lt;-</span> <span class="st">&quot;2023-10-15&quot;</span></span>
+<span id="cb45-11"><a href="#cb45-11" tabindex="-1"></a></span>
+<span id="cb45-12"><a href="#cb45-12" tabindex="-1"></a><span class="co">#language of original document</span></span>
+<span id="cb45-13"><a href="#cb45-13" tabindex="-1"></a>language <span class="ot">&lt;-</span> <span class="st">&quot;eng&quot;</span></span>
+<span id="cb45-14"><a href="#cb45-14" tabindex="-1"></a></span>
+<span id="cb45-15"><a href="#cb45-15" tabindex="-1"></a>keywordSet <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">keywordSet</span>(</span>
+<span id="cb45-16"><a href="#cb45-16" tabindex="-1"></a>  <span class="at">keyword =</span> <span class="st">&quot;Occurrence&quot;</span>,</span>
+<span id="cb45-17"><a href="#cb45-17" tabindex="-1"></a>  <span class="at">keywordThesaurus =</span> <span class="st">&quot;GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml&quot;</span></span>
+<span id="cb45-18"><a href="#cb45-18" tabindex="-1"></a>)</span>
+<span id="cb45-19"><a href="#cb45-19" tabindex="-1"></a></span>
+<span id="cb45-20"><a href="#cb45-20" tabindex="-1"></a>maintenance <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">maintenance</span>(</span>
+<span id="cb45-21"><a href="#cb45-21" tabindex="-1"></a>  <span class="at">description =</span> eml<span class="sc">$</span><span class="fu">description</span>(</span>
+<span id="cb45-22"><a href="#cb45-22" tabindex="-1"></a>    <span class="at">para =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb45-23"><a href="#cb45-23" tabindex="-1"></a>  <span class="at">maintenanceUpdateFrequency =</span> <span class="st">&quot;notPlanned&quot;</span></span>
+<span id="cb45-24"><a href="#cb45-24" tabindex="-1"></a>)</span>
+<span id="cb45-25"><a href="#cb45-25" tabindex="-1"></a></span>
+<span id="cb45-26"><a href="#cb45-26" tabindex="-1"></a><span class="co">#Universal CC</span></span>
+<span id="cb45-27"><a href="#cb45-27" tabindex="-1"></a>intellectualRights <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">intellectualRights</span>(</span>
+<span id="cb45-28"><a href="#cb45-28" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the &lt;ulink url=</span><span class="sc">\&quot;</span><span class="st">http://creativecommons.org/publicdomain/zero/1.0/legalcode</span><span class="sc">\&quot;</span><span class="st">&gt;&lt;citetitle&gt;Public Domain (CC0 1.0)&lt;/citetitle&gt;&lt;/ulink&gt;. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.&quot;</span></span>
+<span id="cb45-29"><a href="#cb45-29" tabindex="-1"></a>)</span>
+<span id="cb45-30"><a href="#cb45-30" tabindex="-1"></a></span>
+<span id="cb45-31"><a href="#cb45-31" tabindex="-1"></a></span>
+<span id="cb45-32"><a href="#cb45-32" tabindex="-1"></a>purpose <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">purpose</span>(</span>
+<span id="cb45-33"><a href="#cb45-33" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;These data were made accessible through UNESCO&#39;s eDNA Expeditions project to mobilize available marine species and occurrence datasets from World Heritage Sites.&quot;</span></span>
+<span id="cb45-34"><a href="#cb45-34" tabindex="-1"></a>)</span>
+<span id="cb45-35"><a href="#cb45-35" tabindex="-1"></a></span>
+<span id="cb45-36"><a href="#cb45-36" tabindex="-1"></a>additionalInfo <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">additionalInfo</span>(</span>
+<span id="cb45-37"><a href="#cb45-37" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;marine, harvested by iOBIS&quot;</span></span>
+<span id="cb45-38"><a href="#cb45-38" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="create-and-validate-eml" class="section level3">
 <h3>Create and Validate EML</h3>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co">#Put it all together</span></span>
-<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>my_eml <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">eml</span>(</span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>           <span class="at">packageId =</span> <span class="fu">paste</span>(uuid<span class="sc">::</span><span class="fu">UUIDgenerate</span>(), <span class="st">&quot;/eml-1.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>),  </span>
-<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a>           <span class="at">system =</span> <span class="st">&quot;http://gbif.org&quot;</span>,</span>
-<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a>           <span class="at">scope =</span> <span class="st">&quot;system&quot;</span>,</span>
-<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a>           <span class="at">dataset =</span> eml<span class="sc">$</span><span class="fu">dataset</span>(</span>
-<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a>               <span class="at">title =</span> title,</span>
-<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a>               <span class="at">creator =</span> creator,</span>
-<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a>               <span class="at">metadataProvider =</span> metadataProvider,</span>
-<span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a>               <span class="at">associatedParty =</span> associatedParty,</span>
-<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a>               <span class="at">pubDate =</span> pubDate,</span>
-<span id="cb32-12"><a href="#cb32-12" tabindex="-1"></a>               <span class="at">coverage =</span> coverage,</span>
-<span id="cb32-13"><a href="#cb32-13" tabindex="-1"></a>               <span class="at">language =</span> language,</span>
-<span id="cb32-14"><a href="#cb32-14" tabindex="-1"></a>               <span class="at">abstract =</span> abstract,</span>
-<span id="cb32-15"><a href="#cb32-15" tabindex="-1"></a>               <span class="at">keywordSet =</span> keywordSet,</span>
-<span id="cb32-16"><a href="#cb32-16" tabindex="-1"></a>               <span class="at">contact =</span> contact,</span>
-<span id="cb32-17"><a href="#cb32-17" tabindex="-1"></a>               <span class="at">methods =</span> methods,</span>
-<span id="cb32-18"><a href="#cb32-18" tabindex="-1"></a>               <span class="at">intellectualRights =</span> intellectualRights,</span>
-<span id="cb32-19"><a href="#cb32-19" tabindex="-1"></a>               <span class="at">purpose =</span> purpose,</span>
-<span id="cb32-20"><a href="#cb32-20" tabindex="-1"></a>               <span class="at">maintenance =</span> maintenance,</span>
-<span id="cb32-21"><a href="#cb32-21" tabindex="-1"></a>               <span class="at">additionalInfo =</span> additionalInfo),</span>
-<span id="cb32-22"><a href="#cb32-22" tabindex="-1"></a>           <span class="at">additionalMetadata =</span> additionalMetadata</span>
-<span id="cb32-23"><a href="#cb32-23" tabindex="-1"></a>)</span>
-<span id="cb32-24"><a href="#cb32-24" tabindex="-1"></a></span>
-<span id="cb32-25"><a href="#cb32-25" tabindex="-1"></a><span class="fu">eml_validate</span>(my_eml)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="co">#Put it all together</span></span>
+<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a>my_eml <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">eml</span>(</span>
+<span id="cb46-3"><a href="#cb46-3" tabindex="-1"></a>           <span class="at">packageId =</span> <span class="fu">paste</span>(<span class="st">&quot;https://ipt.obis.org/secretariat/resource?id=&quot;</span>, short_name, <span class="st">&quot;/v1.0&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>),  </span>
+<span id="cb46-4"><a href="#cb46-4" tabindex="-1"></a>           <span class="at">system =</span> <span class="st">&quot;http://gbif.org&quot;</span>,</span>
+<span id="cb46-5"><a href="#cb46-5" tabindex="-1"></a>           <span class="at">scope =</span> <span class="st">&quot;system&quot;</span>,</span>
+<span id="cb46-6"><a href="#cb46-6" tabindex="-1"></a>           <span class="at">dataset =</span> eml<span class="sc">$</span><span class="fu">dataset</span>(</span>
+<span id="cb46-7"><a href="#cb46-7" tabindex="-1"></a>               <span class="at">alternateIdentifier =</span> alternateIdentifier,</span>
+<span id="cb46-8"><a href="#cb46-8" tabindex="-1"></a>               <span class="at">title =</span> title,</span>
+<span id="cb46-9"><a href="#cb46-9" tabindex="-1"></a>               <span class="at">creator =</span> creator,</span>
+<span id="cb46-10"><a href="#cb46-10" tabindex="-1"></a>               <span class="at">metadataProvider =</span> metadataProvider,</span>
+<span id="cb46-11"><a href="#cb46-11" tabindex="-1"></a>               <span class="at">associatedParty =</span> associatedParty,</span>
+<span id="cb46-12"><a href="#cb46-12" tabindex="-1"></a>               <span class="at">pubDate =</span> pubDate,</span>
+<span id="cb46-13"><a href="#cb46-13" tabindex="-1"></a>               <span class="at">coverage =</span> coverage,</span>
+<span id="cb46-14"><a href="#cb46-14" tabindex="-1"></a>               <span class="at">language =</span> language,</span>
+<span id="cb46-15"><a href="#cb46-15" tabindex="-1"></a>               <span class="at">abstract =</span> abstract,</span>
+<span id="cb46-16"><a href="#cb46-16" tabindex="-1"></a>               <span class="at">keywordSet =</span> keywordSet,</span>
+<span id="cb46-17"><a href="#cb46-17" tabindex="-1"></a>               <span class="at">contact =</span> contact,</span>
+<span id="cb46-18"><a href="#cb46-18" tabindex="-1"></a>               <span class="at">methods =</span> methods,</span>
+<span id="cb46-19"><a href="#cb46-19" tabindex="-1"></a>               <span class="at">intellectualRights =</span> intellectualRights,</span>
+<span id="cb46-20"><a href="#cb46-20" tabindex="-1"></a>               <span class="at">purpose =</span> purpose,</span>
+<span id="cb46-21"><a href="#cb46-21" tabindex="-1"></a>               <span class="at">maintenance =</span> maintenance,</span>
+<span id="cb46-22"><a href="#cb46-22" tabindex="-1"></a>               <span class="at">additionalInfo =</span> additionalInfo),</span>
+<span id="cb46-23"><a href="#cb46-23" tabindex="-1"></a>           <span class="at">additionalMetadata =</span> additionalMetadata</span>
+<span id="cb46-24"><a href="#cb46-24" tabindex="-1"></a>)</span>
+<span id="cb46-25"><a href="#cb46-25" tabindex="-1"></a></span>
+<span id="cb46-26"><a href="#cb46-26" tabindex="-1"></a><span class="fu">eml_validate</span>(my_eml)</span></code></pre></div>
 <pre><code>## [1] TRUE
 ## attr(,&quot;errors&quot;)
 ## character(0)</code></pre>
@@ -2368,50 +2742,50 @@ complete.</p>
 <p>This is a file which describes the archive and data file structure
 and is required in a DarwinCore-Archive. It is based on the template
 file “meta_occurrence_checklist_template.xml”</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>meta_template <span class="ot">&lt;-</span> <span class="fu">paste</span>(path_to_project_root, <span class="st">&quot;scripts_data/meta_occurrence_checklist_template.xml&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
-<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">read_xml</span>(meta_template)</span>
-<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a>fields <span class="ot">&lt;-</span> <span class="fu">xml_find_all</span>(meta, <span class="st">&quot;//d1:field&quot;</span>)</span>
-<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a></span>
-<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a><span class="cf">for</span> (field <span class="cf">in</span> fields) {</span>
-<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a>  term <span class="ot">&lt;-</span> <span class="fu">xml_attr</span>(field, <span class="st">&quot;term&quot;</span>)</span>
-<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a>  <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/eventDate&quot;</span>) {</span>
-<span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, eventDate)</span>
-<span id="cb34-10"><a href="#cb34-10" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/country&quot;</span>) {</span>
-<span id="cb34-11"><a href="#cb34-11" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, country)</span>
-<span id="cb34-12"><a href="#cb34-12" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/locality&quot;</span>) {</span>
-<span id="cb34-13"><a href="#cb34-13" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, locality)</span>
-<span id="cb34-14"><a href="#cb34-14" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/decimalLatitude&quot;</span>) {</span>
-<span id="cb34-15"><a href="#cb34-15" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, localities<span class="sc">$</span>decimalLatitude)</span>
-<span id="cb34-16"><a href="#cb34-16" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/decimalLongitude&quot;</span>) {</span>
-<span id="cb34-17"><a href="#cb34-17" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, localities<span class="sc">$</span>decimalLongitude)</span>
-<span id="cb34-18"><a href="#cb34-18" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters&quot;</span>) {</span>
-<span id="cb34-19"><a href="#cb34-19" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, localities<span class="sc">$</span>coordinateUncertaintyInMeters)</span>
-<span id="cb34-20"><a href="#cb34-20" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/footprintWKT&quot;</span>) {</span>
-<span id="cb34-21"><a href="#cb34-21" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, wkt)</span>
-<span id="cb34-22"><a href="#cb34-22" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/geodeticDatum&quot;</span>) {</span>
-<span id="cb34-23"><a href="#cb34-23" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, geodeticDatum)</span>
-<span id="cb34-24"><a href="#cb34-24" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/occurrenceStatus&quot;</span>) {</span>
-<span id="cb34-25"><a href="#cb34-25" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, occurrenceStatus)</span>
-<span id="cb34-26"><a href="#cb34-26" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/basisOfRecord&quot;</span>) {</span>
-<span id="cb34-27"><a href="#cb34-27" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, basisOfRecord)</span>
-<span id="cb34-28"><a href="#cb34-28" tabindex="-1"></a>  }</span>
-<span id="cb34-29"><a href="#cb34-29" tabindex="-1"></a>}</span>
-<span id="cb34-30"><a href="#cb34-30" tabindex="-1"></a></span>
-<span id="cb34-31"><a href="#cb34-31" tabindex="-1"></a><span class="co">#Add identificationQualifier</span></span>
-<span id="cb34-32"><a href="#cb34-32" tabindex="-1"></a>new_field <span class="ot">&lt;-</span> <span class="fu">xml_add_sibling</span>(fields[[<span class="dv">3</span>]], <span class="st">&quot;field&quot;</span>)</span>
-<span id="cb34-33"><a href="#cb34-33" tabindex="-1"></a><span class="fu">xml_set_attr</span>(new_field, <span class="st">&quot;index&quot;</span>, <span class="st">&quot;3&quot;</span>)</span>
-<span id="cb34-34"><a href="#cb34-34" tabindex="-1"></a><span class="fu">xml_set_attr</span>(new_field, <span class="st">&quot;term&quot;</span>, <span class="st">&quot;http://rs.tdwg.org/dwc/terms/identificationQualifier&quot;</span>)</span>
-<span id="cb34-35"><a href="#cb34-35" tabindex="-1"></a></span>
-<span id="cb34-36"><a href="#cb34-36" tabindex="-1"></a>fields <span class="ot">&lt;-</span> <span class="fu">append</span>(fields, <span class="fu">list</span>(new_field))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a>meta_template <span class="ot">&lt;-</span> <span class="fu">paste</span>(path_to_project_root, <span class="st">&quot;scripts_data/meta_occurrence_checklist_template.xml&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">read_xml</span>(meta_template)</span>
+<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a>fields <span class="ot">&lt;-</span> <span class="fu">xml_find_all</span>(meta, <span class="st">&quot;//d1:field&quot;</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" tabindex="-1"></a><span class="cf">for</span> (field <span class="cf">in</span> fields) {</span>
+<span id="cb48-7"><a href="#cb48-7" tabindex="-1"></a>  term <span class="ot">&lt;-</span> <span class="fu">xml_attr</span>(field, <span class="st">&quot;term&quot;</span>)</span>
+<span id="cb48-8"><a href="#cb48-8" tabindex="-1"></a>  <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/eventDate&quot;</span>) {</span>
+<span id="cb48-9"><a href="#cb48-9" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, eventDate)</span>
+<span id="cb48-10"><a href="#cb48-10" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/country&quot;</span>) {</span>
+<span id="cb48-11"><a href="#cb48-11" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, country)</span>
+<span id="cb48-12"><a href="#cb48-12" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/locality&quot;</span>) {</span>
+<span id="cb48-13"><a href="#cb48-13" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, locality)</span>
+<span id="cb48-14"><a href="#cb48-14" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/decimalLatitude&quot;</span>) {</span>
+<span id="cb48-15"><a href="#cb48-15" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, localities<span class="sc">$</span>decimalLatitude)</span>
+<span id="cb48-16"><a href="#cb48-16" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/decimalLongitude&quot;</span>) {</span>
+<span id="cb48-17"><a href="#cb48-17" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, localities<span class="sc">$</span>decimalLongitude)</span>
+<span id="cb48-18"><a href="#cb48-18" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters&quot;</span>) {</span>
+<span id="cb48-19"><a href="#cb48-19" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, localities<span class="sc">$</span>coordinateUncertaintyInMeters)</span>
+<span id="cb48-20"><a href="#cb48-20" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/footprintWKT&quot;</span>) {</span>
+<span id="cb48-21"><a href="#cb48-21" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, wkt)</span>
+<span id="cb48-22"><a href="#cb48-22" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/geodeticDatum&quot;</span>) {</span>
+<span id="cb48-23"><a href="#cb48-23" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, geodeticDatum)</span>
+<span id="cb48-24"><a href="#cb48-24" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/occurrenceStatus&quot;</span>) {</span>
+<span id="cb48-25"><a href="#cb48-25" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, occurrenceStatus)</span>
+<span id="cb48-26"><a href="#cb48-26" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/basisOfRecord&quot;</span>) {</span>
+<span id="cb48-27"><a href="#cb48-27" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, basisOfRecord)</span>
+<span id="cb48-28"><a href="#cb48-28" tabindex="-1"></a>  }</span>
+<span id="cb48-29"><a href="#cb48-29" tabindex="-1"></a>}</span>
+<span id="cb48-30"><a href="#cb48-30" tabindex="-1"></a></span>
+<span id="cb48-31"><a href="#cb48-31" tabindex="-1"></a><span class="co">#Add identificationQualifier</span></span>
+<span id="cb48-32"><a href="#cb48-32" tabindex="-1"></a>new_field <span class="ot">&lt;-</span> <span class="fu">xml_add_sibling</span>(fields[[<span class="dv">3</span>]], <span class="st">&quot;field&quot;</span>)</span>
+<span id="cb48-33"><a href="#cb48-33" tabindex="-1"></a><span class="fu">xml_set_attr</span>(new_field, <span class="st">&quot;index&quot;</span>, <span class="st">&quot;3&quot;</span>)</span>
+<span id="cb48-34"><a href="#cb48-34" tabindex="-1"></a><span class="fu">xml_set_attr</span>(new_field, <span class="st">&quot;term&quot;</span>, <span class="st">&quot;http://rs.tdwg.org/dwc/terms/identificationQualifier&quot;</span>)</span>
+<span id="cb48-35"><a href="#cb48-35" tabindex="-1"></a></span>
+<span id="cb48-36"><a href="#cb48-36" tabindex="-1"></a>fields <span class="ot">&lt;-</span> <span class="fu">append</span>(fields, <span class="fu">list</span>(new_field))</span></code></pre></div>
 </div>
 <div id="save-outputs" class="section level2">
 <h2>Save outputs</h2>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>dwc_output_dir <span class="ot">&lt;-</span> <span class="fu">paste</span>(path_to_project_root, <span class="st">&quot;output&quot;</span>, site_dir_name, dataset_dir_name, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="fu">write.csv</span>(occurrence, <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/occurrence.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">na =</span> <span class="st">&quot;&quot;</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="fu">write_xml</span>(meta, <span class="at">file =</span> <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/meta.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
-<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a><span class="fu">write_eml</span>(my_eml, <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/eml.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a>dwc_output_dir <span class="ot">&lt;-</span> <span class="fu">paste</span>(path_to_project_root, <span class="st">&quot;output&quot;</span>, site_dir_name, dataset_dir_name, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a><span class="fu">write.csv</span>(occurrence, <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/occurrence.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">na =</span> <span class="st">&quot;&quot;</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb49-4"><a href="#cb49-4" tabindex="-1"></a><span class="fu">write_xml</span>(meta, <span class="at">file =</span> <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/meta.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
+<span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a><span class="fu">write_eml</span>(my_eml, <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/eml.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
 <div id="edit-eml" class="section level3">
 <h3>Edit EML</h3>
 <p>We have to further edit the eml file to conform to GBIF-specific
@@ -2419,40 +2793,47 @@ requirements that cannot be included in the original EML construction.
 This includes changing the schemaLocation and rearranging the GBIF
 element, since the construction automatically arranges the children
 nodes to alphabetical order.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co">#edit the schemaLocation and rearrange gbif node for gbif specific eml file</span></span>
-<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a>eml_content <span class="ot">&lt;-</span> <span class="fu">read_xml</span>(<span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/eml.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
-<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="co">#change schemaLocation attribute</span></span>
-<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a>root_node <span class="ot">&lt;-</span> <span class="fu">xml_root</span>(eml_content)</span>
-<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a><span class="fu">xml_set_attr</span>(root_node, <span class="st">&quot;xsi:schemaLocation&quot;</span>, <span class="st">&quot;https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd&quot;</span>)</span>
-<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a></span>
-<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a><span class="co">#rearrange children nodes under the GBIF element</span></span>
-<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a>hierarchyLevel <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//hierarchyLevel&quot;</span>)</span>
-<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a>dateStamp <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//dateStamp&quot;</span>)</span>
-<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a>citation <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;./additionalMetadata/metadata/gbif/citation&quot;</span>)</span>
-<span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//hierarchyLevel&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
-<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//dateStamp&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
-<span id="cb36-14"><a href="#cb36-14" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;./additionalMetadata/metadata/gbif/citation&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
-<span id="cb36-15"><a href="#cb36-15" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(citation, <span class="at">.where=</span><span class="dv">0</span>)</span>
-<span id="cb36-16"><a href="#cb36-16" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(hierarchyLevel, <span class="at">.where=</span><span class="dv">0</span>)</span>
-<span id="cb36-17"><a href="#cb36-17" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(dateStamp, <span class="at">.where=</span><span class="dv">0</span>)</span>
-<span id="cb36-18"><a href="#cb36-18" tabindex="-1"></a></span>
-<span id="cb36-19"><a href="#cb36-19" tabindex="-1"></a><span class="fu">write_xml</span>(eml_content, <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/eml.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="co">#edit the schemaLocation and rearrange gbif node for gbif specific eml file</span></span>
+<span id="cb50-2"><a href="#cb50-2" tabindex="-1"></a>eml_content <span class="ot">&lt;-</span> <span class="fu">read_xml</span>(<span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/eml.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
+<span id="cb50-3"><a href="#cb50-3" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" tabindex="-1"></a><span class="co">#change schemaLocation attributes for GBIF</span></span>
+<span id="cb50-5"><a href="#cb50-5" tabindex="-1"></a>root_node <span class="ot">&lt;-</span> <span class="fu">xml_root</span>(eml_content)</span>
+<span id="cb50-6"><a href="#cb50-6" tabindex="-1"></a><span class="fu">xml_set_attr</span>(root_node, <span class="st">&quot;xsi:schemaLocation&quot;</span>, <span class="st">&quot;https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd&quot;</span>)</span>
+<span id="cb50-7"><a href="#cb50-7" tabindex="-1"></a><span class="fu">xml_set_attr</span>(root_node, <span class="st">&quot;xmlns:dc&quot;</span>, <span class="st">&quot;http://purl.org/dc/terms/&quot;</span>)</span>
+<span id="cb50-8"><a href="#cb50-8" tabindex="-1"></a><span class="fu">xml_set_attr</span>(root_node, <span class="st">&quot;xmlns:stmml&quot;</span>, <span class="cn">NULL</span>)</span>
+<span id="cb50-9"><a href="#cb50-9" tabindex="-1"></a><span class="fu">xml_set_attr</span>(root_node, <span class="st">&quot;xml:lang&quot;</span>, <span class="st">&quot;eng&quot;</span>)</span>
+<span id="cb50-10"><a href="#cb50-10" tabindex="-1"></a></span>
+<span id="cb50-11"><a href="#cb50-11" tabindex="-1"></a></span>
+<span id="cb50-12"><a href="#cb50-12" tabindex="-1"></a><span class="co">#rearrange children nodes under the GBIF element</span></span>
+<span id="cb50-13"><a href="#cb50-13" tabindex="-1"></a>hierarchyLevel <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//hierarchyLevel&quot;</span>)</span>
+<span id="cb50-14"><a href="#cb50-14" tabindex="-1"></a>dateStamp <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//dateStamp&quot;</span>)</span>
+<span id="cb50-15"><a href="#cb50-15" tabindex="-1"></a>citation <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;./additionalMetadata/metadata/gbif/citation&quot;</span>)</span>
+<span id="cb50-16"><a href="#cb50-16" tabindex="-1"></a>bibcitation <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;./additionalMetadata/metadata/gbif/bibliography/citation&quot;</span>)</span>
+<span id="cb50-17"><a href="#cb50-17" tabindex="-1"></a><span class="fu">xml_set_attr</span>(bibcitation, <span class="st">&quot;identifier&quot;</span>, citationdoi)</span>
+<span id="cb50-18"><a href="#cb50-18" tabindex="-1"></a></span>
+<span id="cb50-19"><a href="#cb50-19" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//hierarchyLevel&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
+<span id="cb50-20"><a href="#cb50-20" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//dateStamp&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
+<span id="cb50-21"><a href="#cb50-21" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;./additionalMetadata/metadata/gbif/citation&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
+<span id="cb50-22"><a href="#cb50-22" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(citation, <span class="at">.where=</span><span class="dv">0</span>)</span>
+<span id="cb50-23"><a href="#cb50-23" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(hierarchyLevel, <span class="at">.where=</span><span class="dv">0</span>)</span>
+<span id="cb50-24"><a href="#cb50-24" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(dateStamp, <span class="at">.where=</span><span class="dv">0</span>)</span>
+<span id="cb50-25"><a href="#cb50-25" tabindex="-1"></a></span>
+<span id="cb50-26"><a href="#cb50-26" tabindex="-1"></a><span class="fu">write_xml</span>(eml_content, <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/eml.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
 </div>
 <div id="zip-files-to-dwc-a" class="section level3">
 <h3>Zip files to DwC-A</h3>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>output_zip <span class="ot">&lt;-</span> <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;DwC-A.zip&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
-<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(output_zip)) {</span>
-<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a>  <span class="fu">unlink</span>(output_zip)</span>
-<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a>}</span>
-<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a>file_paths <span class="ot">&lt;-</span> <span class="fu">list.files</span>(dwc_output_dir, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a><span class="fu">zip</span>(<span class="at">zipfile =</span> output_zip, <span class="at">files =</span> file_paths, <span class="at">mode =</span> <span class="st">&quot;cherry-pick&quot;</span>)</span>
-<span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a></span>
-<span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(output_zip)) {</span>
-<span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a>  <span class="fu">unlink</span>(file_paths)</span>
-<span id="cb37-12"><a href="#cb37-12" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a>output_zip <span class="ot">&lt;-</span> <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;DwC-A.zip&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(output_zip)) {</span>
+<span id="cb51-4"><a href="#cb51-4" tabindex="-1"></a>  <span class="fu">unlink</span>(output_zip)</span>
+<span id="cb51-5"><a href="#cb51-5" tabindex="-1"></a>}</span>
+<span id="cb51-6"><a href="#cb51-6" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="#cb51-7" tabindex="-1"></a>file_paths <span class="ot">&lt;-</span> <span class="fu">list.files</span>(dwc_output_dir, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb51-8"><a href="#cb51-8" tabindex="-1"></a><span class="fu">zip</span>(<span class="at">zipfile =</span> output_zip, <span class="at">files =</span> file_paths, <span class="at">mode =</span> <span class="st">&quot;cherry-pick&quot;</span>)</span>
+<span id="cb51-9"><a href="#cb51-9" tabindex="-1"></a></span>
+<span id="cb51-10"><a href="#cb51-10" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(output_zip)) {</span>
+<span id="cb51-11"><a href="#cb51-11" tabindex="-1"></a>  <span class="fu">unlink</span>(file_paths)</span>
+<span id="cb51-12"><a href="#cb51-12" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </div>
 </div>

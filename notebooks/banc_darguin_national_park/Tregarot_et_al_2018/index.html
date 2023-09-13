@@ -7,7 +7,7 @@
 
         <meta name="author" content="Chandra Earl" />
     
-        <meta name="date" content="2023-09-06" />
+        <meta name="date" content="2023-09-12" />
     
     <title>Bundling Tregarot et al 2018 to a DwC Archive</title>
 
@@ -1582,7 +1582,7 @@ Archive</li>
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Chandra
 Earl</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-06</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-12</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -1640,7 +1640,8 @@ messages.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>path_to_project_root <span class="ot">&lt;-</span> <span class="st">&quot;../../..&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>site_dir_name <span class="ot">&lt;-</span> <span class="st">&quot;banc_darguin_national_park&quot;</span></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>dataset_dir_name <span class="ot">&lt;-</span> <span class="st">&quot;Tregarot_et_al_2018&quot;</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>original_pdf <span class="ot">&lt;-</span> <span class="st">&quot;010075369-330.pdf&quot;</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>original_pdf <span class="ot">&lt;-</span> <span class="st">&quot;010075369-330.pdf&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>short_name <span class="ot">&lt;-</span> <span class="st">&quot;banc-darguin-tregarot-2018&quot;</span></span></code></pre></div>
 </div>
 <div id="parsing-pdf-table-to-csv" class="section level1">
 <h1>Parsing PDF table to CSV</h1>
@@ -1673,7 +1674,7 @@ and parse out the table to a CSV.</p>
 <span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="fu">system</span>(command, <span class="at">intern=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                                                                                                                    
 ##  [2] &quot;Script Execution Summary&quot;                                                                                            
-##  [3] &quot;Date and Time: 2023-09-06 11:46:30&quot;                                                                                  
+##  [3] &quot;Date and Time: 2023-09-12 04:28:26&quot;                                                                                  
 ##  [4] &quot;------------------------------&quot;                                                                                      
 ##  [5] &quot;&quot;                                                                                                                    
 ##  [6] &quot;PDF input: ../../../datasets/banc_darguin_national_park/Tregarot_et_al_2018/raw/010075369-330.pdf&quot;                   
@@ -1753,12 +1754,10 @@ common and only take the list of species, since this is a checklist.</p>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="fu">remove_empty</span>(<span class="fu">c</span>(<span class="st">&quot;rows&quot;</span>, <span class="st">&quot;cols&quot;</span>)) <span class="sc">%&gt;%</span>       <span class="co"># Remove empty rows and columns</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="fu">clean_names</span>()                             <span class="co"># Have sensible (lowercase) column names</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#Remove sp.</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> input_data <span class="sc">%&gt;%</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(especes, <span class="st">&quot;sp</span><span class="sc">\\</span><span class="st">.&quot;</span>))</span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#to preview pretty table</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(cleaned_data))</span></code></pre></div>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> input_data</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#to preview pretty table</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(cleaned_data))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1773,16 +1772,16 @@ common and only take the list of species, since this is a checklist.</p>
 <td align="left">Arius heudeloti</td>
 </tr>
 <tr class="odd">
+<td align="left">Atherina sp.</td>
+</tr>
+<tr class="even">
 <td align="left">Bathysolea polli</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Boops boops</td>
 </tr>
-<tr class="odd">
-<td align="left">Chaetodipterus goreensis</td>
-</tr>
 <tr class="even">
-<td align="left">Dactylopterus volitans</td>
+<td align="left">Chaetodipterus goreensis</td>
 </tr>
 </tbody>
 </table>
@@ -1854,24 +1853,24 @@ the WoRMS database.</p>
 <td align="left">400141</td>
 </tr>
 <tr class="odd">
+<td align="left">Atherina sp.</td>
+<td align="left">Atherina</td>
+<td align="left">125659</td>
+</tr>
+<tr class="even">
 <td align="left">Bathysolea polli</td>
 <td align="left">Bathysolea polli</td>
 <td align="left">274297</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Boops boops</td>
 <td align="left">Boops boops</td>
 <td align="left">127047</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Chaetodipterus goreensis</td>
 <td align="left">Chaetodipterus goreensis</td>
 <td align="left">309465</td>
-</tr>
-<tr class="even">
-<td align="left">Dactylopterus volitans</td>
-<td align="left">Dactylopterus volitans</td>
-<td align="left">127232</td>
 </tr>
 </tbody>
 </table>
@@ -1884,7 +1883,11 @@ combined dataframe, search for unmatched species in WoRMS and add the
 ID, and remove rows that were not autoremoved in the earlier cleaning
 steps</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>combined_dataframe[<span class="dv">1</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Arius latiscutatus&quot;</span>, <span class="dv">275576</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>combined_dataframe[<span class="dv">17</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Pegusa triophthalma&quot;</span>, <span class="dv">274308</span>)</span></code></pre></div>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>combined_dataframe[<span class="dv">20</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Pegusa triophthalma&quot;</span>, <span class="dv">274308</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>combined_dataframe[<span class="dv">7</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Cynoglossus&quot;</span>, <span class="st">&quot;senegalensis&quot;</span>, <span class="dv">126112</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>combined_dataframe[<span class="dv">14</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Epinephelus&quot;</span>, <span class="st">&quot;aeneus&quot;</span>, <span class="dv">126068</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>combined_dataframe[<span class="dv">34</span>, <span class="fu">c</span>(<span class="st">&quot;CanonicalFull&quot;</span>, <span class="st">&quot;identificationQualifier&quot;</span>, <span class="st">&quot;WormsIDs&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sparus&quot;</span>, <span class="st">&quot;qurata&quot;</span>, <span class="dv">126082</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="darwin-core-mapping" class="section level1">
@@ -1900,7 +1903,7 @@ decimalLatitude, occurrenceStatus, basisOfRecord.</p>
 be unique). This will be our primary DarwinCore data frame.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#rename and restructure WoRMSIDs to OBIS requirements</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>occurrence <span class="ot">&lt;-</span> combined_dataframe <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, WormsIDs) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">distinct</span>(CanonicalFull, identificationQualifier, WormsIDs) <span class="sc">%&gt;%</span></span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificName =</span> CanonicalFull) <span class="sc">%&gt;%</span></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">scientificNameID =</span> WormsIDs) <span class="sc">%&gt;%</span></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scientificNameID =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(scientificNameID), <span class="fu">paste</span>(<span class="st">&quot;urn:lsid:marinespecies.org:taxname:&quot;</span>, scientificNameID, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="cn">NA</span>))</span></code></pre></div>
@@ -1915,13 +1918,13 @@ name.</p>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>vdigest <span class="ot">&lt;-</span> <span class="fu">Vectorize</span>(digest)</span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># Generate taxonID:</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">occurrenceID =</span> <span class="fu">paste</span>(<span class="st">&quot;banc-darguin-tregarot-2018&quot;</span>, <span class="st">&quot;occurrence&quot;</span>, <span class="fu">vdigest</span> (scientificName, <span class="at">algo=</span><span class="st">&quot;md5&quot;</span>), <span class="at">sep=</span><span class="st">&quot;:&quot;</span>))</span></code></pre></div>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">occurrenceID =</span> <span class="fu">paste</span>(short_name, <span class="st">&quot;occurrence&quot;</span>, <span class="fu">vdigest</span> (scientificName, <span class="at">algo=</span><span class="st">&quot;md5&quot;</span>), <span class="at">sep=</span><span class="st">&quot;:&quot;</span>))</span></code></pre></div>
 </div>
 <div id="eventdate" class="section level3">
 <h3>eventDate</h3>
 <p>This is NULL since this is technically a checklist and we do not know
 the collection date.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(eventDate)</span></code></pre></div>
 </div>
 <div id="decimallongitudedecimallatitude" class="section level3">
@@ -2006,7 +2009,7 @@ from <a href="https://github.com/iobis/mwhs-shapes" class="uri">https://github.c
 required fields are present in an occurrence table and if any values are
 missing.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co">#Reorganize columns</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>occurrence <span class="ot">=</span> occurrence <span class="sc">%&gt;%</span> <span class="fu">select</span>(occurrenceID, scientificName, scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, footprintWKT, geodeticDatum, occurrenceStatus, basisOfRecord)</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>occurrence <span class="ot">=</span> occurrence <span class="sc">%&gt;%</span> <span class="fu">select</span>(occurrenceID, scientificName, identificationQualifier,scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, footprintWKT, geodeticDatum, occurrenceStatus, basisOfRecord)</span>
 <span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co">#Check fields</span></span>
 <span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="fu">check_fields</span>(occurrence)</span></code></pre></div>
@@ -2017,7 +2020,7 @@ missing.</p>
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.</code></pre>
-<pre><code>## # A tibble: 32 × 4
+<pre><code>## # A tibble: 38 × 4
 ##    level field       row message                                 
 ##    &lt;chr&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                                   
 ##  1 error eventDate     1 Empty value for required field eventDate
@@ -2030,7 +2033,7 @@ missing.</p>
 ##  8 error eventDate     8 Empty value for required field eventDate
 ##  9 error eventDate     9 Empty value for required field eventDate
 ## 10 error eventDate    10 Empty value for required field eventDate
-## # ℹ 22 more rows</code></pre>
+## # ℹ 28 more rows</code></pre>
 </div>
 <div id="create-the-eml-file" class="section level2">
 <h2>Create the EML file</h2>
@@ -2041,10 +2044,13 @@ in a DarwinCore-Archive.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co">#Title</span></span>
 <span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="st">&quot;Évaluation des services écosystémiques du Banc d’Arguin, Mauritanie: Fishes Checklist&quot;</span></span>
 <span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co">#Abstract</span></span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>abstract <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">abstract</span>(</span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;Jager (1993) et van Etten (2003) ont échantillonné, à l’aide d’un chalut de fond d’une largeur de 2 m, les juvéniles de poissons et quelques céphalopodes dans le PNBA. Jager (1993) a échantillonné 50 sites subtidaux sur l’ensemble du PNBA, tandis que van Etten (2003) a échantillonné 37 stations dans la baie d’Aouatif, sur deux vasières intertidales appelées Arie et Francesc. Les coordonnées géographiques de Jager (1993) ont été extraites en utilisant le logiciel WebPotDigitizer v4.1 (http://arohatgi.info/WebPlotDigitizer/). Dans le rapport de van Etten (2003), l’intégralité des données brutes est indiquée en annexe. Ces données ont permis d’analyser les abondances de chaque espèce par habitat : herbiers de cymodocée, herbiers de zostère, flaques intertidales et vasières.&quot;</span></span>
-<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co">#AlternateIdentifier</span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>alternateIdentifier <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;https://ipt.obis.org/secretariat/resource?r=&quot;</span>, short_name, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="co">#Abstract</span></span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a>abstract <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">abstract</span>(</span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;Jager (1993) et van Etten (2003) ont échantillonné, à l’aide d’un chalut de fond d’une largeur de 2 m, les juvéniles de poissons et quelques céphalopodes dans le PNBA. Jager (1993) a échantillonné 50 sites subtidaux sur l’ensemble du PNBA, tandis que van Etten (2003) a échantillonné 37 stations dans la baie d’Aouatif, sur deux vasières intertidales appelées Arie et Francesc. Les coordonnées géographiques de Jager (1993) ont été extraites en utilisant le logiciel WebPotDigitizer v4.1 (http://arohatgi.info/WebPlotDigitizer/). Dans le rapport de van Etten (2003), l’intégralité des données brutes est indiquée en annexe. Ces données ont permis d’analyser les abondances de chaque espèce par habitat : herbiers de cymodocée, herbiers de zostère, flaques intertidales et vasières.&quot;</span></span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a>)</span></code></pre></div>
 <div id="people" class="section level3">
 <h3>People</h3>
 <p>Here we add the people involved in the project:</p>
@@ -2108,7 +2114,7 @@ is the person who mobilized the data from the original resource.</p>
 <span id="cb28-50"><a href="#cb28-50" tabindex="-1"></a>)</span>
 <span id="cb28-51"><a href="#cb28-51" tabindex="-1"></a></span>
 <span id="cb28-52"><a href="#cb28-52" tabindex="-1"></a>associatedParty <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">associatedParty</span>(</span>
-<span id="cb28-53"><a href="#cb28-53" tabindex="-1"></a>  <span class="at">role =</span> <span class="st">&quot;Data Curator&quot;</span>,</span>
+<span id="cb28-53"><a href="#cb28-53" tabindex="-1"></a>  <span class="at">role =</span> <span class="st">&quot;processor&quot;</span>,</span>
 <span id="cb28-54"><a href="#cb28-54" tabindex="-1"></a>  <span class="at">individualName =</span> eml<span class="sc">$</span><span class="fu">individualName</span>(</span>
 <span id="cb28-55"><a href="#cb28-55" tabindex="-1"></a>    <span class="at">givenName =</span> <span class="st">&quot;Chandra&quot;</span>, </span>
 <span id="cb28-56"><a href="#cb28-56" tabindex="-1"></a>    <span class="at">surName =</span> <span class="st">&quot;Earl&quot;</span>),</span>
@@ -2130,12 +2136,14 @@ timestamp of the EML.</p>
 <span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>    <span class="at">gbif =</span> <span class="fu">list</span>(</span>
 <span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>      <span class="at">dateStamp =</span> <span class="fu">paste0</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%Y-%m-%dT%H:%M:%OS3&quot;</span>), <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">1</span>, <span class="dv">3</span>), <span class="st">&quot;:&quot;</span>, <span class="fu">paste0</span>(<span class="fu">substr</span>(<span class="fu">format</span>(<span class="fu">Sys.time</span>(), <span class="st">&quot;%z&quot;</span>), <span class="dv">4</span>, <span class="dv">5</span>)))),</span>
 <span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>      <span class="at">hierarchyLevel =</span> <span class="st">&quot;dataset&quot;</span>,</span>
-<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;Earl C., OBIS Secretariat. (2023) Évaluation du Service de Nerserie du Parc National du Banc d’arguin, Mauritania: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI&quot;</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>      <span class="at">citation =</span> <span class="st">&quot;IPT will autogenerate this&quot;</span>,</span>
 <span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>      <span class="at">bibliography =</span> <span class="fu">list</span>(</span>
 <span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>        <span class="at">citation =</span> <span class="st">&quot;Trégarot E., Catry T., Pottier A., Cornet C., Maréchal J.-P., Fayad V., Sidi Cheick M.A., David G., Dia A.D., Fall A.D., Sarr O., El Valy Y., Wagne O.H., Meisse B., Kane E.A., Ball A.C., Haidallah M.S., Braham C.B., Dia M., Abdel Hamid M.L., Rey-Valette H., Salles J.-M., Ly D., Cissé C.B. et Failler P. (2018). Évaluation des services écosystémiques du Banc d’Arguin, Mauritanie. Rapport final pour le Parc National du Banc d’Arguin, XX p.&quot;</span>)</span>
 <span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>    )</span>
 <span id="cb29-12"><a href="#cb29-12" tabindex="-1"></a>  )</span>
-<span id="cb29-13"><a href="#cb29-13" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb29-13"><a href="#cb29-13" tabindex="-1"></a>)</span>
+<span id="cb29-14"><a href="#cb29-14" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" tabindex="-1"></a>citationdoi <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span></code></pre></div>
 </div>
 <div id="coverage" class="section level3">
 <h3>Coverage</h3>
@@ -2158,10 +2166,10 @@ coverage.</p>
 <span id="cb30-15"><a href="#cb30-15" tabindex="-1"></a>        <span class="at">taxonRankName =</span> <span class="st">&quot;Superclass&quot;</span>,</span>
 <span id="cb30-16"><a href="#cb30-16" tabindex="-1"></a>        <span class="at">taxonRankValue =</span> <span class="st">&quot;Agnatha&quot;</span>),</span>
 <span id="cb30-17"><a href="#cb30-17" tabindex="-1"></a>      eml<span class="sc">$</span><span class="fu">taxonomicClassification</span>(</span>
-<span id="cb30-18"><a href="#cb30-18" tabindex="-1"></a>        <span class="at">taxonRankName =</span> <span class="st">&quot;Parvphylum&quot;</span>,</span>
+<span id="cb30-18"><a href="#cb30-18" tabindex="-1"></a>        <span class="at">taxonRankName =</span> <span class="st">&quot;unranked&quot;</span>,</span>
 <span id="cb30-19"><a href="#cb30-19" tabindex="-1"></a>        <span class="at">taxonRankValue =</span> <span class="st">&quot;Chondrichthyes&quot;</span>),</span>
 <span id="cb30-20"><a href="#cb30-20" tabindex="-1"></a>      eml<span class="sc">$</span><span class="fu">taxonomicClassification</span>(</span>
-<span id="cb30-21"><a href="#cb30-21" tabindex="-1"></a>        <span class="at">taxonRankName =</span> <span class="st">&quot;Parvphylum&quot;</span>,</span>
+<span id="cb30-21"><a href="#cb30-21" tabindex="-1"></a>        <span class="at">taxonRankName =</span> <span class="st">&quot;unranked&quot;</span>,</span>
 <span id="cb30-22"><a href="#cb30-22" tabindex="-1"></a>        <span class="at">taxonRankValue =</span> <span class="st">&quot;Osteichthyes&quot;</span>)</span>
 <span id="cb30-23"><a href="#cb30-23" tabindex="-1"></a>      )</span>
 <span id="cb30-24"><a href="#cb30-24" tabindex="-1"></a>    </span>
@@ -2184,67 +2192,70 @@ coverage.</p>
 complete.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>methods <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">methods</span>(</span>
 <span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>  <span class="at">methodStep =</span> eml<span class="sc">$</span><span class="fu">methodStep</span>(</span>
-<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>    <span class="at">description =</span> <span class="st">&quot;See Github R Project and Notebook - https://github.com/iobis/mwhs-data-mobilization/tree/master/notebooks/banc_darguin_national_park/Tregarot_et_al_2018 - for dataset construction&quot;</span></span>
-<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a>  )</span>
-<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>)</span>
-<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a><span class="co">#Other Data</span></span>
-<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a>pubDate <span class="ot">&lt;-</span> <span class="st">&quot;2023-09-30&quot;</span></span>
-<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a><span class="co">#language of original document</span></span>
-<span id="cb31-11"><a href="#cb31-11" tabindex="-1"></a>language <span class="ot">&lt;-</span> <span class="st">&quot;fra&quot;</span></span>
-<span id="cb31-12"><a href="#cb31-12" tabindex="-1"></a></span>
-<span id="cb31-13"><a href="#cb31-13" tabindex="-1"></a>keywordSet <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">keywordSet</span>(</span>
-<span id="cb31-14"><a href="#cb31-14" tabindex="-1"></a>  <span class="at">keyword =</span> <span class="st">&quot;Occurrence&quot;</span>,</span>
-<span id="cb31-15"><a href="#cb31-15" tabindex="-1"></a>  <span class="at">keywordThesaurus =</span> <span class="st">&quot;GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml&quot;</span></span>
-<span id="cb31-16"><a href="#cb31-16" tabindex="-1"></a>)</span>
-<span id="cb31-17"><a href="#cb31-17" tabindex="-1"></a></span>
-<span id="cb31-18"><a href="#cb31-18" tabindex="-1"></a>maintenance <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">maintenance</span>(</span>
-<span id="cb31-19"><a href="#cb31-19" tabindex="-1"></a>  <span class="at">description =</span> eml<span class="sc">$</span><span class="fu">description</span>(</span>
-<span id="cb31-20"><a href="#cb31-20" tabindex="-1"></a>    <span class="at">para =</span> <span class="st">&quot;&quot;</span>),</span>
-<span id="cb31-21"><a href="#cb31-21" tabindex="-1"></a>  <span class="at">maintenanceUpdateFrequency =</span> <span class="st">&quot;notPlanned&quot;</span></span>
-<span id="cb31-22"><a href="#cb31-22" tabindex="-1"></a>)</span>
-<span id="cb31-23"><a href="#cb31-23" tabindex="-1"></a></span>
-<span id="cb31-24"><a href="#cb31-24" tabindex="-1"></a><span class="co">#Universal CC</span></span>
-<span id="cb31-25"><a href="#cb31-25" tabindex="-1"></a>intellectualRights <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">intellectualRights</span>(</span>
-<span id="cb31-26"><a href="#cb31-26" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;These data are released under &lt;ulink url=</span><span class="sc">\&quot;</span><span class="st">https://creativecommons.org/publicdomain/zero/1.0/</span><span class="sc">\&quot;</span><span class="st">&gt;&lt;citetitle&gt;Creative Commons Zero (CC-0)&lt;/citetitle&gt;&lt;/ulink&gt;. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.&quot;</span></span>
-<span id="cb31-27"><a href="#cb31-27" tabindex="-1"></a>)</span>
-<span id="cb31-28"><a href="#cb31-28" tabindex="-1"></a></span>
-<span id="cb31-29"><a href="#cb31-29" tabindex="-1"></a>purpose <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">purpose</span>(</span>
-<span id="cb31-30"><a href="#cb31-30" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;These data were made accessible through UNESCO&#39;s eDNA Expeditions project to mobilize available marine species and occurrence datasets from World Heritage Sites.&quot;</span></span>
-<span id="cb31-31"><a href="#cb31-31" tabindex="-1"></a>)</span>
-<span id="cb31-32"><a href="#cb31-32" tabindex="-1"></a></span>
-<span id="cb31-33"><a href="#cb31-33" tabindex="-1"></a>additionalInfo <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">additionalInfo</span>(</span>
-<span id="cb31-34"><a href="#cb31-34" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;marine, harvested by iOBIS&quot;</span></span>
-<span id="cb31-35"><a href="#cb31-35" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>    <span class="at">description =</span> eml<span class="sc">$</span><span class="fu">description</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a>      <span class="at">para =</span> <span class="fu">paste</span>(<span class="st">&quot;See Github &lt;a href=</span><span class="sc">\&quot;</span><span class="st">https://github.com/iobis/mwhs-data-mobilization</span><span class="sc">\&quot;</span><span class="st">&gt;Project&lt;/a&gt; and &lt;a href=</span><span class="sc">\&quot;</span><span class="st">https://iobis.github.io/mwhs-data-mobilization/notebooks/&quot;</span>, site_dir_name, <span class="st">&quot;/&quot;</span>, dataset_dir_name, <span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st">&gt; R Notebook&lt;/a&gt; for dataset construction methods&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>    )</span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a>  )</span>
+<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a>)</span>
+<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a><span class="co">#Other Data</span></span>
+<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a>pubDate <span class="ot">&lt;-</span> <span class="st">&quot;2023-10-15&quot;</span></span>
+<span id="cb31-11"><a href="#cb31-11" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" tabindex="-1"></a><span class="co">#language of original document</span></span>
+<span id="cb31-13"><a href="#cb31-13" tabindex="-1"></a>language <span class="ot">&lt;-</span> <span class="st">&quot;fra&quot;</span></span>
+<span id="cb31-14"><a href="#cb31-14" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" tabindex="-1"></a>keywordSet <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">keywordSet</span>(</span>
+<span id="cb31-16"><a href="#cb31-16" tabindex="-1"></a>  <span class="at">keyword =</span> <span class="st">&quot;Occurrence&quot;</span>,</span>
+<span id="cb31-17"><a href="#cb31-17" tabindex="-1"></a>  <span class="at">keywordThesaurus =</span> <span class="st">&quot;GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml&quot;</span></span>
+<span id="cb31-18"><a href="#cb31-18" tabindex="-1"></a>)</span>
+<span id="cb31-19"><a href="#cb31-19" tabindex="-1"></a></span>
+<span id="cb31-20"><a href="#cb31-20" tabindex="-1"></a>maintenance <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">maintenance</span>(</span>
+<span id="cb31-21"><a href="#cb31-21" tabindex="-1"></a>  <span class="at">description =</span> eml<span class="sc">$</span><span class="fu">description</span>(</span>
+<span id="cb31-22"><a href="#cb31-22" tabindex="-1"></a>    <span class="at">para =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb31-23"><a href="#cb31-23" tabindex="-1"></a>  <span class="at">maintenanceUpdateFrequency =</span> <span class="st">&quot;notPlanned&quot;</span></span>
+<span id="cb31-24"><a href="#cb31-24" tabindex="-1"></a>)</span>
+<span id="cb31-25"><a href="#cb31-25" tabindex="-1"></a></span>
+<span id="cb31-26"><a href="#cb31-26" tabindex="-1"></a><span class="co">#Universal CC</span></span>
+<span id="cb31-27"><a href="#cb31-27" tabindex="-1"></a>intellectualRights <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">intellectualRights</span>(</span>
+<span id="cb31-28"><a href="#cb31-28" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the &lt;ulink url=</span><span class="sc">\&quot;</span><span class="st">http://creativecommons.org/publicdomain/zero/1.0/legalcode</span><span class="sc">\&quot;</span><span class="st">&gt;&lt;citetitle&gt;Public Domain (CC0 1.0)&lt;/citetitle&gt;&lt;/ulink&gt;. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.&quot;</span></span>
+<span id="cb31-29"><a href="#cb31-29" tabindex="-1"></a>)</span>
+<span id="cb31-30"><a href="#cb31-30" tabindex="-1"></a></span>
+<span id="cb31-31"><a href="#cb31-31" tabindex="-1"></a>purpose <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">purpose</span>(</span>
+<span id="cb31-32"><a href="#cb31-32" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;These data were made accessible through UNESCO&#39;s eDNA Expeditions project to mobilize available marine species and occurrence datasets from World Heritage Sites.&quot;</span></span>
+<span id="cb31-33"><a href="#cb31-33" tabindex="-1"></a>)</span>
+<span id="cb31-34"><a href="#cb31-34" tabindex="-1"></a></span>
+<span id="cb31-35"><a href="#cb31-35" tabindex="-1"></a>additionalInfo <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">additionalInfo</span>(</span>
+<span id="cb31-36"><a href="#cb31-36" tabindex="-1"></a>  <span class="at">para =</span> <span class="st">&quot;marine, harvested by iOBIS&quot;</span></span>
+<span id="cb31-37"><a href="#cb31-37" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="create-and-validate-eml" class="section level3">
 <h3>Create and Validate EML</h3>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co">#Put it all together</span></span>
 <span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>my_eml <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">eml</span>(</span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>           <span class="at">packageId =</span> <span class="fu">paste</span>(uuid<span class="sc">::</span><span class="fu">UUIDgenerate</span>(), <span class="st">&quot;/eml-1.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>),  </span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>           <span class="at">packageId =</span> <span class="fu">paste</span>(<span class="st">&quot;https://ipt.obis.org/secretariat/resource?id=&quot;</span>, short_name, <span class="st">&quot;/v1.0&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>),  </span>
 <span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a>           <span class="at">system =</span> <span class="st">&quot;http://gbif.org&quot;</span>,</span>
 <span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a>           <span class="at">scope =</span> <span class="st">&quot;system&quot;</span>,</span>
 <span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a>           <span class="at">dataset =</span> eml<span class="sc">$</span><span class="fu">dataset</span>(</span>
-<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a>               <span class="at">title =</span> title,</span>
-<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a>               <span class="at">creator =</span> creator,</span>
-<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a>               <span class="at">metadataProvider =</span> metadataProvider,</span>
-<span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a>               <span class="at">associatedParty =</span> associatedParty,</span>
-<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a>               <span class="at">pubDate =</span> pubDate,</span>
-<span id="cb32-12"><a href="#cb32-12" tabindex="-1"></a>               <span class="at">coverage =</span> coverage,</span>
-<span id="cb32-13"><a href="#cb32-13" tabindex="-1"></a>               <span class="at">language =</span> language,</span>
-<span id="cb32-14"><a href="#cb32-14" tabindex="-1"></a>               <span class="at">abstract =</span> abstract,</span>
-<span id="cb32-15"><a href="#cb32-15" tabindex="-1"></a>               <span class="at">keywordSet =</span> keywordSet,</span>
-<span id="cb32-16"><a href="#cb32-16" tabindex="-1"></a>               <span class="at">contact =</span> contact,</span>
-<span id="cb32-17"><a href="#cb32-17" tabindex="-1"></a>               <span class="at">methods =</span> methods,</span>
-<span id="cb32-18"><a href="#cb32-18" tabindex="-1"></a>               <span class="at">intellectualRights =</span> intellectualRights,</span>
-<span id="cb32-19"><a href="#cb32-19" tabindex="-1"></a>               <span class="at">purpose =</span> purpose,</span>
-<span id="cb32-20"><a href="#cb32-20" tabindex="-1"></a>               <span class="at">maintenance =</span> maintenance,</span>
-<span id="cb32-21"><a href="#cb32-21" tabindex="-1"></a>               <span class="at">additionalInfo =</span> additionalInfo),</span>
-<span id="cb32-22"><a href="#cb32-22" tabindex="-1"></a>           <span class="at">additionalMetadata =</span> additionalMetadata</span>
-<span id="cb32-23"><a href="#cb32-23" tabindex="-1"></a>)</span>
-<span id="cb32-24"><a href="#cb32-24" tabindex="-1"></a></span>
-<span id="cb32-25"><a href="#cb32-25" tabindex="-1"></a><span class="fu">eml_validate</span>(my_eml)</span></code></pre></div>
+<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a>               <span class="at">alternateIdentifier =</span> alternateIdentifier,</span>
+<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a>               <span class="at">title =</span> title,</span>
+<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a>               <span class="at">creator =</span> creator,</span>
+<span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a>               <span class="at">metadataProvider =</span> metadataProvider,</span>
+<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a>               <span class="at">associatedParty =</span> associatedParty,</span>
+<span id="cb32-12"><a href="#cb32-12" tabindex="-1"></a>               <span class="at">pubDate =</span> pubDate,</span>
+<span id="cb32-13"><a href="#cb32-13" tabindex="-1"></a>               <span class="at">coverage =</span> coverage,</span>
+<span id="cb32-14"><a href="#cb32-14" tabindex="-1"></a>               <span class="at">language =</span> language,</span>
+<span id="cb32-15"><a href="#cb32-15" tabindex="-1"></a>               <span class="at">abstract =</span> abstract,</span>
+<span id="cb32-16"><a href="#cb32-16" tabindex="-1"></a>               <span class="at">keywordSet =</span> keywordSet,</span>
+<span id="cb32-17"><a href="#cb32-17" tabindex="-1"></a>               <span class="at">contact =</span> contact,</span>
+<span id="cb32-18"><a href="#cb32-18" tabindex="-1"></a>               <span class="at">methods =</span> methods,</span>
+<span id="cb32-19"><a href="#cb32-19" tabindex="-1"></a>               <span class="at">intellectualRights =</span> intellectualRights,</span>
+<span id="cb32-20"><a href="#cb32-20" tabindex="-1"></a>               <span class="at">purpose =</span> purpose,</span>
+<span id="cb32-21"><a href="#cb32-21" tabindex="-1"></a>               <span class="at">maintenance =</span> maintenance,</span>
+<span id="cb32-22"><a href="#cb32-22" tabindex="-1"></a>               <span class="at">additionalInfo =</span> additionalInfo),</span>
+<span id="cb32-23"><a href="#cb32-23" tabindex="-1"></a>           <span class="at">additionalMetadata =</span> additionalMetadata</span>
+<span id="cb32-24"><a href="#cb32-24" tabindex="-1"></a>)</span>
+<span id="cb32-25"><a href="#cb32-25" tabindex="-1"></a></span>
+<span id="cb32-26"><a href="#cb32-26" tabindex="-1"></a><span class="fu">eml_validate</span>(my_eml)</span></code></pre></div>
 <pre><code>## [1] TRUE
 ## attr(,&quot;errors&quot;)
 ## character(0)</code></pre>
@@ -2283,7 +2294,14 @@ file “meta_occurrence_checklist_template.xml”</p>
 <span id="cb34-26"><a href="#cb34-26" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (term <span class="sc">==</span> <span class="st">&quot;http://rs.tdwg.org/dwc/terms/basisOfRecord&quot;</span>) {</span>
 <span id="cb34-27"><a href="#cb34-27" tabindex="-1"></a>    <span class="fu">xml_set_attr</span>(field, <span class="st">&quot;default&quot;</span>, basisOfRecord)</span>
 <span id="cb34-28"><a href="#cb34-28" tabindex="-1"></a>  }</span>
-<span id="cb34-29"><a href="#cb34-29" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb34-29"><a href="#cb34-29" tabindex="-1"></a>}</span>
+<span id="cb34-30"><a href="#cb34-30" tabindex="-1"></a></span>
+<span id="cb34-31"><a href="#cb34-31" tabindex="-1"></a><span class="co">#Add identificationQualifier</span></span>
+<span id="cb34-32"><a href="#cb34-32" tabindex="-1"></a>new_field <span class="ot">&lt;-</span> <span class="fu">xml_add_sibling</span>(fields[[<span class="dv">3</span>]], <span class="st">&quot;field&quot;</span>)</span>
+<span id="cb34-33"><a href="#cb34-33" tabindex="-1"></a><span class="fu">xml_set_attr</span>(new_field, <span class="st">&quot;index&quot;</span>, <span class="st">&quot;3&quot;</span>)</span>
+<span id="cb34-34"><a href="#cb34-34" tabindex="-1"></a><span class="fu">xml_set_attr</span>(new_field, <span class="st">&quot;term&quot;</span>, <span class="st">&quot;http://rs.tdwg.org/dwc/terms/identificationQualifier&quot;</span>)</span>
+<span id="cb34-35"><a href="#cb34-35" tabindex="-1"></a></span>
+<span id="cb34-36"><a href="#cb34-36" tabindex="-1"></a>fields <span class="ot">&lt;-</span> <span class="fu">append</span>(fields, <span class="fu">list</span>(new_field))</span></code></pre></div>
 </div>
 <div id="save-outputs" class="section level2">
 <h2>Save outputs</h2>
@@ -2302,22 +2320,29 @@ nodes to alphabetical order.</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co">#edit the schemaLocation and rearrange gbif node for gbif specific eml file</span></span>
 <span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a>eml_content <span class="ot">&lt;-</span> <span class="fu">read_xml</span>(<span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/eml.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
 <span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="co">#change schemaLocation attribute</span></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="co">#change schemaLocation attributes for GBIF</span></span>
 <span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a>root_node <span class="ot">&lt;-</span> <span class="fu">xml_root</span>(eml_content)</span>
-<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a><span class="fu">xml_set_attr</span>(root_node, <span class="st">&quot;xsi:schemaLocation&quot;</span>, <span class="st">&quot;https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd&quot;</span>)</span>
-<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a></span>
-<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a><span class="co">#rearrange children nodes under the GBIF element</span></span>
-<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a>hierarchyLevel <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//hierarchyLevel&quot;</span>)</span>
-<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a>dateStamp <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//dateStamp&quot;</span>)</span>
-<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a>citation <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;./additionalMetadata/metadata/gbif/citation&quot;</span>)</span>
-<span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//hierarchyLevel&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
-<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//dateStamp&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
-<span id="cb36-14"><a href="#cb36-14" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;./additionalMetadata/metadata/gbif/citation&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
-<span id="cb36-15"><a href="#cb36-15" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(citation, <span class="at">.where=</span><span class="dv">0</span>)</span>
-<span id="cb36-16"><a href="#cb36-16" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(hierarchyLevel, <span class="at">.where=</span><span class="dv">0</span>)</span>
-<span id="cb36-17"><a href="#cb36-17" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(dateStamp, <span class="at">.where=</span><span class="dv">0</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a><span class="fu">xml_set_attr</span>(root_node, <span class="st">&quot;xsi:schemaLocation&quot;</span>, <span class="st">&quot;https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd&quot;</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a><span class="fu">xml_set_attr</span>(root_node, <span class="st">&quot;xmlns:dc&quot;</span>, <span class="st">&quot;http://purl.org/dc/terms/&quot;</span>)</span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a><span class="fu">xml_set_attr</span>(root_node, <span class="st">&quot;xmlns:stmml&quot;</span>, <span class="cn">NULL</span>)</span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a><span class="fu">xml_set_attr</span>(root_node, <span class="st">&quot;xml:lang&quot;</span>, <span class="st">&quot;eng&quot;</span>)</span>
+<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a></span>
+<span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a><span class="co">#rearrange children nodes under the GBIF element</span></span>
+<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a>hierarchyLevel <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//hierarchyLevel&quot;</span>)</span>
+<span id="cb36-14"><a href="#cb36-14" tabindex="-1"></a>dateStamp <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//dateStamp&quot;</span>)</span>
+<span id="cb36-15"><a href="#cb36-15" tabindex="-1"></a>citation <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;./additionalMetadata/metadata/gbif/citation&quot;</span>)</span>
+<span id="cb36-16"><a href="#cb36-16" tabindex="-1"></a>bibcitation <span class="ot">&lt;-</span> eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;./additionalMetadata/metadata/gbif/bibliography/citation&quot;</span>)</span>
+<span id="cb36-17"><a href="#cb36-17" tabindex="-1"></a><span class="fu">xml_set_attr</span>(bibcitation, <span class="st">&quot;identifier&quot;</span>, citationdoi)</span>
 <span id="cb36-18"><a href="#cb36-18" tabindex="-1"></a></span>
-<span id="cb36-19"><a href="#cb36-19" tabindex="-1"></a><span class="fu">write_xml</span>(eml_content, <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/eml.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<span id="cb36-19"><a href="#cb36-19" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//hierarchyLevel&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
+<span id="cb36-20"><a href="#cb36-20" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//dateStamp&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
+<span id="cb36-21"><a href="#cb36-21" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;./additionalMetadata/metadata/gbif/citation&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_remove</span>()</span>
+<span id="cb36-22"><a href="#cb36-22" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(citation, <span class="at">.where=</span><span class="dv">0</span>)</span>
+<span id="cb36-23"><a href="#cb36-23" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(hierarchyLevel, <span class="at">.where=</span><span class="dv">0</span>)</span>
+<span id="cb36-24"><a href="#cb36-24" tabindex="-1"></a>eml_content <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">&quot;.//gbif&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_add_child</span>(dateStamp, <span class="at">.where=</span><span class="dv">0</span>)</span>
+<span id="cb36-25"><a href="#cb36-25" tabindex="-1"></a></span>
+<span id="cb36-26"><a href="#cb36-26" tabindex="-1"></a><span class="fu">write_xml</span>(eml_content, <span class="fu">paste</span>(dwc_output_dir, <span class="st">&quot;/eml.xml&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
 </div>
 <div id="zip-files-to-dwc-a" class="section level3">
 <h3>Zip files to DwC-A</h3>

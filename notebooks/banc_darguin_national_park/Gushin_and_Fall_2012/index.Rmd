@@ -107,9 +107,7 @@ input_data %<>%
   remove_empty(c("rows", "cols")) %>%       # Remove empty rows and columns
   clean_names()                             # Have sensible (lowercase) column names
 
-#Remove sp. and gen.
-cleaned_data <- input_data %>%
-  filter(!str_detect(species, "sp\\.|gen\\."))
+cleaned_data <- input_data
 
 #For elements with an abbreviated genus name, look at the precious element and grab the genus
 for (i in 2:nrow(cleaned_data)) {
@@ -179,14 +177,14 @@ Sometimes there are misspellings in the original text or incorrect OCR that can 
 
 ```{r Human Verification}
 
-combined_dataframe[17,2:3] = c("Citharichthys stampflii", 275695)
-combined_dataframe[67,2:3] = c("Smaris macrophthalmus", 321559)
-combined_dataframe[70,2:3] = c("Sparisoma rubripinne", 159301)
+combined_dataframe[18,2:3] = c("Citharichthys stampflii", 275695)
+combined_dataframe[69,2:3] = c("Smaris macrophthalmus", 321559)
+combined_dataframe[72,2:3] = c("Sparisoma rubripinne", 159301)
 
 #I think this species doesn't exist - typo
-combined_dataframe[75,2:3] = c("Spicara spicara", NA)
+combined_dataframe[77,2:3] = c("Spicara spicara", NA)
 
-combined_dataframe[81,2:3] = c("Tilapia guineensis", 367733)
+combined_dataframe[84,2:3] = c("Tilapia guineensis", 367733)
 
 ```
 
@@ -227,7 +225,7 @@ occurrence %<>% mutate(occurrenceID = paste(short_name, "occurrence", vdigest (s
 This is NULL since this is technically a checklist and we do not know the collection date.
 
 ```{r eventDate}
-eventDate <- NA
+eventDate <- ""
 occurrence %<>% mutate(eventDate)
 ```
 
@@ -478,7 +476,7 @@ These fields are not required, though they make the metadata more complete.
 methods <- eml$methods(
   methodStep = eml$methodStep(
     description = eml$description(
-      para = "See Github <a href=\"https://github.com/iobis/mwhs-data-mobilization\">Project</a> and <a href=\"https://github.com/iobis/mwhs-data-mobilization/tree/master/notebooks/banc_darguin_national_park/Gushin_and_Fall_2012\"> R Notebook</a> for dataset construction methods"
+      para = paste("See Github <a href=\"https://github.com/iobis/mwhs-data-mobilization\">Project</a> and <a href=\"https://iobis.github.io/mwhs-data-mobilization/notebooks/", site_dir_name, "/", dataset_dir_name, "\"> R Notebook</a> for dataset construction methods", sep="")
     )
   )
 )

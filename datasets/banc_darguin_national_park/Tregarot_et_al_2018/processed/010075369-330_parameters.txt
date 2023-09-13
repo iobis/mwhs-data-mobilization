@@ -1,5 +1,5 @@
 Script Execution Summary
-Date and Time: 2023-09-06 11:46:39
+Date and Time: 2023-09-12 04:28:35
 ------------------------------
 Command Entered:
 ../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/banc_darguin_national_park/Tregarot_et_al_2018/raw/010075369-330.pdf -s -f -ocr -# 8 -a 183.402,74.03,748.861,220.603 -p 1 -o ../../../datasets/banc_darguin_national_park/Tregarot_et_al_2018/processed

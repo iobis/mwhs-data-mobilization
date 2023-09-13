@@ -44,6 +44,7 @@ path_to_project_root <- "../../.."
 site_dir_name <- "socotra_archipelago"
 dataset_dir_name <- "Zajonz_et_al_2019"
 original_pdf <- "Zajonz_et_al._2019-58-108_rotated.pdf"
+short_name <- "socotra-zajonz-2019"
 
 ```
 
@@ -150,15 +151,12 @@ input_data %<>%
   clean_names()                             # Have sensible (lowercase) column names
 
 
-# Remove lines with colons, periods, lines with only one word and lines that start with "("
+# Remove lines with colons, lines with only one word and lines that start with "("
 cleaned_data <- input_data %>%
   filter(!str_detect(x0, ":"),
          str_count(x0, "\\S+") > 1,
-         !str_detect(x0, "\\."),
          !str_starts(x0, "^\\(")) %>%
   remove_empty(c("rows", "cols"))
-
-cleaned_data <- cleaned_data[-c(288, 301, 586),]
 
 #to preview pretty table
 knitr::kable(head(cleaned_data))
@@ -173,7 +171,7 @@ First we will try to do this automatically by first cleaning the species names u
 ```{r Link to WoRMs}
 
 #Parse author names out
-parsed_names <- rgnparser::gn_parse(cleaned_data)
+parsed_names <- rgnparser::gn_parse(cleaned_data[,])
 
 #Function to get WoRMS IDs. Search for accepted names first and if not found, search for unaccepted. If still not found, use the worrms package to search.
 get_worms_id_from_element <- function(element) {
@@ -199,8 +197,8 @@ worms_ids <- lapply(parsed_names, function(element) {
 #combine original names, parsed data and WoRMS ID into one data frame
 combined_dataframe <- data.frame()
 
-for (i in 1:length(cleaned_data)) {
-  cleaned_value <- cleaned_data[i]
+for (i in 1:nrow(cleaned_data)) {
+  cleaned_value <- cleaned_data[i,]
   canonical_value <- parsed_names[[i]]$canonical$full
   worms_id_value <- worms_ids[[i]][1]
   if (is.null(canonical_value)){
@@ -220,17 +218,93 @@ Sometimes there are misspellings in the original text or incorrect OCR that can 
 
 ```{r Human Verification}
 
-combined_dataframe[170,2:3] = c("Apogonichthyoides pseudotaeniatus", 475091)
-combined_dataframe[177,2:3] = c("Jaydia queketti", 209280)
-combined_dataframe[328, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Chaetodon", "Chaetodon collare × Chaetodon lunula", 125954)
-combined_dataframe[342, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pomacanthus", "Pomacanthus asfur × Pomacanthus maculosus", 159286)
-combined_dataframe[343, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pomacanthus", "Pomacanthus semicirculatus × Pomacanthus maculosus", 159286)
-combined_dataframe[357, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Dascyllus", "Dascyllus carneus × Dascyllus marginatus", 205736)
+combined_dataframe[30, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Gymnura", "cf. poecilura", 105754)
+combined_dataframe[31, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Gymnura", "aff. tentaculata", 105754)
+combined_dataframe[47, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Gymnothorax", "cf. chilospilus", 125636)
+combined_dataframe[57, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Gymnothorax", "cf. pseudothyrsoideus", 125636)
+combined_dataframe[65, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Anodontostoma", "cf. chacunda", 268322)
+combined_dataframe[83, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Crenimugil", "cf. buchanani", 151497)
+combined_dataframe[87, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Osteomugil", "cf. cunnesius", 1042878)
+combined_dataframe[96, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Cheilopogon", "cf. spilopterus", 125691)
+combined_dataframe[120, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Scorpaenopsis", "cf. lactomaculata", 204563)
+combined_dataframe[146, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Epinephelus", "cf. chlorostigma", 126068)
+combined_dataframe[147, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Epinephelus", "cf. coioides", 126068)
+combined_dataframe[154, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Epinephelus", "cf. indistinctus", 126068)
+combined_dataframe[156, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Epinephelus", "cf. malabaricus", 126068)
+combined_dataframe[178, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pseudochromis", "cf. omanensis", 205515)
+combined_dataframe[179, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pseudochromis", "cf. punctatus", 205515)
+combined_dataframe[187, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Plesiops", "cf. mystaxus", 203918)
+combined_dataframe[194, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Priacanthus", "cf. tayenus", 126049)
+combined_dataframe[197,2:3] = c("Apogonichthyoides pseudotaeniatus", 475091)
+combined_dataframe[198, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Apogonichthyoides", "cf. taeniatus", 204673)
+combined_dataframe[199, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Apogonichthyoides", "cf. timorensis", 204673)
+combined_dataframe[201, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Cheilodipterus", "cf. artus", 206449)
+combined_dataframe[207,2:3] = c("Jaydia queketti", 209280)
+combined_dataframe[219, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Sillago", "cf. sihama", 126072)
+combined_dataframe[252, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pristipomoides", "cf. filamentosus", 159804)
+combined_dataframe[260, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Lutjanus", "cf. indicus", 159791)
+combined_dataframe[280, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Gerres", "cf. infasciatus", 204064)
+combined_dataframe[292, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Plectorhinchus", "cf. chubbi", 126010)
+combined_dataframe[304, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Argyrops", "cf. spinifer", 206644)
+combined_dataframe[306, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Diplodus", "cf. kotschyi", 126076)
+combined_dataframe[315, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Lethrinus", "cf. olivaceus", 206059)
+combined_dataframe[326,2:3] = c("Mulloidichthys flavolineatus flavicaudus", 881626)
+combined_dataframe[363, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Chaetodon", "cf. mesoleucos", 125954)
+combined_dataframe[370, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Chaetodon", "Chaetodon collare × Chaetodon lunula", 125954)
+combined_dataframe[384, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pomacanthus", "Pomacanthus asfur × Pomacanthus maculosus", 159286)
+combined_dataframe[385, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pomacanthus", "Pomacanthus semicirculatus × Pomacanthus maculosus", 159286)
+combined_dataframe[388, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Amphiprion", "cf. chagosensis", 205723)
+combined_dataframe[390, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Chromis", "cf. acares", 126045)
+combined_dataframe[393, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Chromis", "cf. nigrura", 126045)
+combined_dataframe[402, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Dascyllus", "Dascyllus carneus × Dascyllus marginatus", 205736)
 
 #combination not in WoRMs
-combined_dataframe[375,2:3] = c("Plectroglyphidodon leucozonus cingulum", NA)
+combined_dataframe[420,2:3] = c("Plectroglyphidodon leucozonus cingulum", NA)
 
-combined_dataframe <- combined_dataframe[-c(26, 237),]
+combined_dataframe[421, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pomacentrus", "cf. aquilus", 204256)
+combined_dataframe[424, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pomacentrus", "sp. 2 [aff. leptus]", 204256)
+combined_dataframe[425, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Pomacentrus", "cf. sulfureus", 204256)
+combined_dataframe[432, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Cheilinus", "cf. fasciatus", 204502)
+combined_dataframe[437, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Cirrhilabrus", "cf. cyanopleura", 204972)
+combined_dataframe[443, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Oxycheilinus", "cf. mentalis", 205227)
+combined_dataframe[466, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Halichoeres", "cf. stigmaticus", 158813)
+combined_dataframe[467, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Halichoeres", "cf. zeylonicus", 158813)
+combined_dataframe[476, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Leptojulis", "cf. cyanopleura", 269660)
+combined_dataframe[480, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Stethojulis", "cf. strigiventer", 204183)
+combined_dataframe[483, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Thalassoma", "cf. hardwicke", 126024)
+combined_dataframe[489, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Thalassoma", "cf. rueppellii", 126024)
+combined_dataframe[492, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Chlorurus", "cf. gibbus", 204543)
+combined_dataframe[501, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Scarus", "cf. persicus", 159299)
+combined_dataframe[504, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Scarus", "cf. scaber", 159299)
+combined_dataframe[505, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Scarus", "cf. tricolor", 159299)
+combined_dataframe[513, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Helcogramma", "cf. obtusirostris", 206858)
+combined_dataframe[516, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Ecsenius", "cf. bicolor", 204781)
+combined_dataframe[520, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Ecsenius", "n. sp. [pulcher-complex]", 204781)
+combined_dataframe[524, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Scartella", "cf. emarginata", 125923)
+combined_dataframe[532, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Meiacanthus", "cf. mossambicus", 206901)
+combined_dataframe[537, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Alloblennius", "cf. parvus", 205245)
+combined_dataframe[547, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Gnatholepis", "cf. cauerensis", 204522)
+combined_dataframe[548, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Awaous", "cf. aeneofuscus", 826711)
+combined_dataframe[563, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Eviota", "cf. pardalota", 205965)
+combined_dataframe[564, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Eviota", "cf. prasina", 205965)
+combined_dataframe[566, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Fusigobius", "cf. duospilus", 206282)
+combined_dataframe[569, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Glossogobius", "sp. 1 [aff. tenuiformis]", 203910)
+combined_dataframe[570, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Glossogobius", "sp. 2 [aff. tenuiformis]", 203910)
+combined_dataframe[572, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Gobiodon", "cf. reticulatus", 204038)
+combined_dataframe[583, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Trimma", "sp. 1", 205799)
+combined_dataframe[584, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Trimma", "sp. 2", 205799)
+combined_dataframe[585, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Trimma", "sp. 3", 205799)
+combined_dataframe[588, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Xenisthmus", "cf. balius", 205125)
+combined_dataframe[590, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Gunnellichthys", "cf. viridescens", 205532)
+combined_dataframe[591, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Ptereleotris", "cf. arabica", 204246)
+combined_dataframe[598, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Siganus", "cf. luridus", 126071)
+combined_dataframe[607, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Acanthurus", "cf. nigricans", 125908)
+combined_dataframe[614, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Ctenochaetus", "cf. binotatus", 204635)
+combined_dataframe[618, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Zebrasoma", "cf. scopas", 204630)
+combined_dataframe[627, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Naso", "cf. tuberosus", 205230)
+
+
+combined_dataframe <- combined_dataframe[-c(27, 270, 327, 340, 679),]
 
 ```
 
@@ -263,7 +337,7 @@ OccurrenceID is an identifier for the occurrence record and should be persistent
 vdigest <- Vectorize(digest)
 
 # Generate taxonID:
-occurrence %<>% mutate(occurrenceID = paste("socotra-zajonz-2019", "occurrence", vdigest (scientificName, algo="md5"), sep=":"))
+occurrence %<>% mutate(occurrenceID = paste(short_name, "occurrence", vdigest (paste(scientificName, identificationQualifier), algo="md5"), sep=":"))
 ```
 
 ### eventDate
@@ -271,7 +345,7 @@ occurrence %<>% mutate(occurrenceID = paste("socotra-zajonz-2019", "occurrence",
 This is NULL since this is technically a checklist and we do not know the collection date.
 
 ```{r eventDate}
-eventDate <- NA
+eventDate <- ""
 occurrence %<>% mutate(eventDate)
 ```
 
@@ -376,6 +450,9 @@ emld::eml_version("eml-2.1.1")
 #Title
 title <- "Coastal fish diversity of the Socotra Archipelago, Yemen: Fishes Checklist"
 
+#AlternateIdentifier
+alternateIdentifier <- paste("https://ipt.obis.org/secretariat/resource?r=", short_name, sep="")
+
 #Abstract
 abstract <- eml$abstract(
   para = "The Socotra Archipelago, located in the eastern Gulf of Aden, has a unique marine environment which combines tropical and ‘pseudo-temperate’ elements. Studies on the fish biogeography of the archipelago, partially framed in regional studies, have substantially outpaced critical elementary research on the archipelago’s fish diversity. The present study seeks to close this gap and identifies the Socotra Archipelago as a major hotspot of coastal fish diversity in the Indian Ocean. The archipelago supports unique coastal fish assemblages which are predominantly composed of coral-associated (“reef”) species, in spite of the limited biogenic reef frameworks. A Preliminary Checklist comprises 682 species with confirmed records and a “Working List” includes an additional 51 records, totalling 733 faunal records in 108 families."
@@ -453,7 +530,7 @@ metadataProvider <- eml$metadataProvider(
 )
 
 associatedParty <- eml$associatedParty(
-  role = "Data Curator",
+  role = "processor",
   individualName = eml$individualName(
     givenName = "Chandra", 
     surName = "Earl"),
@@ -477,12 +554,15 @@ additionalMetadata <- eml$additionalMetadata(
     gbif = list(
       dateStamp = paste0(format(Sys.time(), "%Y-%m-%dT%H:%M:%OS3"), paste0(substr(format(Sys.time(), "%z"), 1, 3), ":", paste0(substr(format(Sys.time(), "%z"), 4, 5)))),
       hierarchyLevel = "dataset",
-      citation = "Earl C., OBIS Secretariat. (2023) Coastal fish diversity of the Socotra Archipelago, Yemen: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI",
+      citation = "IPT will autogenerate this",
       bibliography = list(
-        citation = "Zajonz U, Lavergne E, Bogorodsky S, Saeed F, Aideed M, Krupp F. (2019). Coastal fish diversity of the Socotra Archipelago, Yemen. Zootaxa. 4636. 001-108. 10.11646/zootaxa.4636.1.1. ")
+        citation = "Zajonz U, Lavergne E, Bogorodsky S, Saeed F, Aideed M, Krupp F. (2019). Coastal fish diversity of the Socotra Archipelago, Yemen. Zootaxa. 4636. 001-108. ")
     )
   )
 )
+
+citationdoi <- "https://doi.org/10.11646/zootaxa.4636.1.1"
+
 ```
 
 
@@ -509,10 +589,10 @@ coverage <- eml$coverage(
         taxonRankName = "Superclass",
         taxonRankValue = "Agnatha"),
       eml$taxonomicClassification(
-        taxonRankName = "Parvphylum",
+        taxonRankName = "unranked",
         taxonRankValue = "Chondrichthyes"),
       eml$taxonomicClassification(
-        taxonRankName = "Parvphylum",
+        taxonRankName = "unranked",
         taxonRankValue = "Osteichthyes")
       )
     
@@ -540,12 +620,14 @@ These fields are not required, though they make the metadata more complete.
 
 methods <- eml$methods(
   methodStep = eml$methodStep(
-    description = "See Github R Project and Notebook - https://github.com/iobis/mwhs-data-mobilization/tree/master/notebooks/socotra_archipelago/Zajonz_et_al_2019 - for dataset construction"
+    description = eml$description(
+      para = paste("See Github <a href=\"https://github.com/iobis/mwhs-data-mobilization\">Project</a> and <a href=\"https://iobis.github.io/mwhs-data-mobilization/notebooks/", site_dir_name, "/", dataset_dir_name, "\"> R Notebook</a> for dataset construction methods", sep="")
+    )
   )
 )
 
 #Other Data
-pubDate <- "2023-09-30"
+pubDate <- "2023-10-15"
 
 #language of original document
 language <- "eng"
@@ -563,8 +645,9 @@ maintenance <- eml$maintenance(
 
 #Universal CC
 intellectualRights <- eml$intellectualRights(
-  para = "These data are released under <ulink url=\"https://creativecommons.org/publicdomain/zero/1.0/\"><citetitle>Creative Commons Zero (CC-0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction."
+  para = "To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url=\"http://creativecommons.org/publicdomain/zero/1.0/legalcode\"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction."
 )
+
 
 purpose <- eml$purpose(
   para = "These data were made accessible through UNESCO's eDNA Expeditions project to mobilize available marine species and occurrence datasets from World Heritage Sites."
@@ -581,10 +664,11 @@ additionalInfo <- eml$additionalInfo(
 
 #Put it all together
 my_eml <- eml$eml(
-           packageId = paste(uuid::UUIDgenerate(), "/eml-1.xml", sep = ""),  
+           packageId = paste("https://ipt.obis.org/secretariat/resource?id=", short_name, "/v1.0", sep = ""),  
            system = "http://gbif.org",
            scope = "system",
            dataset = eml$dataset(
+               alternateIdentifier = alternateIdentifier,
                title = title,
                creator = creator,
                metadataProvider = metadataProvider,
@@ -672,14 +756,21 @@ We have to further edit the eml file to conform to GBIF-specific requirements th
 #edit the schemaLocation and rearrange gbif node for gbif specific eml file
 eml_content <- read_xml(paste(dwc_output_dir, "/eml.xml", sep = ""))
 
-#change schemaLocation attribute
+#change schemaLocation attributes for GBIF
 root_node <- xml_root(eml_content)
-xml_set_attr(root_node, "xsi:schemaLocation", "https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd")
+xml_set_attr(root_node, "xsi:schemaLocation", "https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd")
+xml_set_attr(root_node, "xmlns:dc", "http://purl.org/dc/terms/")
+xml_set_attr(root_node, "xmlns:stmml", NULL)
+xml_set_attr(root_node, "xml:lang", "eng")
+
 
 #rearrange children nodes under the GBIF element
 hierarchyLevel <- eml_content %>% xml_find_all(".//hierarchyLevel")
 dateStamp <- eml_content %>% xml_find_all(".//dateStamp")
 citation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation")
+bibcitation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/bibliography/citation")
+xml_set_attr(bibcitation, "identifier", citationdoi)
+
 eml_content %>% xml_find_all(".//hierarchyLevel") %>% xml_remove()
 eml_content %>% xml_find_all(".//dateStamp") %>% xml_remove()
 eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation") %>% xml_remove()
@@ -688,6 +779,7 @@ eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(hierarchyLevel, .where
 eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(dateStamp, .where=0)
 
 write_xml(eml_content, paste(dwc_output_dir, "/eml.xml", sep = ""))
+
 
 ```
 

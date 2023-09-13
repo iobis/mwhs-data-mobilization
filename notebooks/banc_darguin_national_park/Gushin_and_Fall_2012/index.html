@@ -7,7 +7,7 @@
 
         <meta name="author" content="Chandra Earl" />
     
-        <meta name="date" content="2023-09-11" />
+        <meta name="date" content="2023-09-12" />
     
     <title>Bundling Gushin and Fall 2012 to a DwC Archive</title>
 
@@ -1582,7 +1582,7 @@ Archive</li>
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Chandra
 Earl</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-11</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-12</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -1672,7 +1672,7 @@ out the table to a CSV.</p>
 <span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="fu">system</span>(command, <span class="at">intern=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                                                                                                                                                  
 ##  [2] &quot;Script Execution Summary&quot;                                                                                                                          
-##  [3] &quot;Date and Time: 2023-09-11 20:29:42&quot;                                                                                                                
+##  [3] &quot;Date and Time: 2023-09-12 00:02:30&quot;                                                                                                                
 ##  [4] &quot;------------------------------&quot;                                                                                                                    
 ##  [5] &quot;&quot;                                                                                                                                                  
 ##  [6] &quot;PDF input: ../../../datasets/banc_darguin_national_park/Gushin_and_Fall_2012/raw/S0032945212010055-4-6_rotated.pdf&quot;                                
@@ -1747,20 +1747,18 @@ common and only take the list of species, since this is a checklist.</p>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="fu">remove_empty</span>(<span class="fu">c</span>(<span class="st">&quot;rows&quot;</span>, <span class="st">&quot;cols&quot;</span>)) <span class="sc">%&gt;%</span>       <span class="co"># Remove empty rows and columns</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="fu">clean_names</span>()                             <span class="co"># Have sensible (lowercase) column names</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#Remove sp. and gen.</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> input_data <span class="sc">%&gt;%</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(species, <span class="st">&quot;sp</span><span class="sc">\\</span><span class="st">.|gen</span><span class="sc">\\</span><span class="st">.&quot;</span>))</span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#For elements with an abbreviated genus name, look at the precious element and grab the genus</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(cleaned_data)) {</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">grepl</span>(<span class="st">&quot;[A-Za-z][.,]&quot;</span>, cleaned_data<span class="sc">$</span>species[i])) {</span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>    previous_species <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(cleaned_data<span class="sc">$</span>species[i <span class="sc">-</span> <span class="dv">1</span>], <span class="st">&quot; &quot;</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>]</span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>    cleaned_data<span class="sc">$</span>species[i] <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;^[A-Za-z][.,]&quot;</span>, <span class="fu">paste0</span>(previous_species, <span class="st">&quot; &quot;</span>), cleaned_data<span class="sc">$</span>species[i])</span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>  }</span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>}</span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#to preview pretty table</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(cleaned_data))</span></code></pre></div>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> input_data</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#For elements with an abbreviated genus name, look at the precious element and grab the genus</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(cleaned_data)) {</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">grepl</span>(<span class="st">&quot;[A-Za-z][.,]&quot;</span>, cleaned_data<span class="sc">$</span>species[i])) {</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>    previous_species <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(cleaned_data<span class="sc">$</span>species[i <span class="sc">-</span> <span class="dv">1</span>], <span class="st">&quot; &quot;</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>]</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>    cleaned_data<span class="sc">$</span>species[i] <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;^[A-Za-z][.,]&quot;</span>, <span class="fu">paste0</span>(previous_species, <span class="st">&quot; &quot;</span>), cleaned_data<span class="sc">$</span>species[i])</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>  }</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>}</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#to preview pretty table</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(cleaned_data))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1892,14 +1890,14 @@ OCR that can be searched for and fixed by hand. To do this, view the
 combined dataframe, search for unmatched species in WoRMS and add the
 ID, and remove rows that were not autoremoved in the earlier cleaning
 steps</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>combined_dataframe[<span class="dv">17</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Citharichthys stampflii&quot;</span>, <span class="dv">275695</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>combined_dataframe[<span class="dv">67</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Smaris macrophthalmus&quot;</span>, <span class="dv">321559</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>combined_dataframe[<span class="dv">70</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Sparisoma rubripinne&quot;</span>, <span class="dv">159301</span>)</span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>combined_dataframe[<span class="dv">18</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Citharichthys stampflii&quot;</span>, <span class="dv">275695</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>combined_dataframe[<span class="dv">69</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Smaris macrophthalmus&quot;</span>, <span class="dv">321559</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>combined_dataframe[<span class="dv">72</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Sparisoma rubripinne&quot;</span>, <span class="dv">159301</span>)</span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#I think this species doesn&#39;t exist - typo</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>combined_dataframe[<span class="dv">75</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Spicara spicara&quot;</span>, <span class="cn">NA</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>combined_dataframe[<span class="dv">77</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Spicara spicara&quot;</span>, <span class="cn">NA</span>)</span>
 <span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>combined_dataframe[<span class="dv">81</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Tilapia guineensis&quot;</span>, <span class="dv">367733</span>)</span></code></pre></div>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>combined_dataframe[<span class="dv">84</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Tilapia guineensis&quot;</span>, <span class="dv">367733</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="darwin-core-mapping" class="section level1">
@@ -1936,7 +1934,7 @@ name.</p>
 <h3>eventDate</h3>
 <p>This is NULL since this is technically a checklist and we do not know
 the collection date.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(eventDate)</span></code></pre></div>
 </div>
 <div id="decimallongitudedecimallatitude" class="section level3">
@@ -2032,7 +2030,7 @@ missing.</p>
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.</code></pre>
-<pre><code>## # A tibble: 89 × 4
+<pre><code>## # A tibble: 92 × 4
 ##    level field       row message                                 
 ##    &lt;chr&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                                   
 ##  1 error eventDate     1 Empty value for required field eventDate
@@ -2045,7 +2043,7 @@ missing.</p>
 ##  8 error eventDate     8 Empty value for required field eventDate
 ##  9 error eventDate     9 Empty value for required field eventDate
 ## 10 error eventDate    10 Empty value for required field eventDate
-## # ℹ 79 more rows</code></pre>
+## # ℹ 82 more rows</code></pre>
 </div>
 <div id="create-the-eml-file" class="section level2">
 <h2>Create the EML file</h2>
@@ -2185,7 +2183,7 @@ complete.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>methods <span class="ot">&lt;-</span> eml<span class="sc">$</span><span class="fu">methods</span>(</span>
 <span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>  <span class="at">methodStep =</span> eml<span class="sc">$</span><span class="fu">methodStep</span>(</span>
 <span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>    <span class="at">description =</span> eml<span class="sc">$</span><span class="fu">description</span>(</span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a>      <span class="at">para =</span> <span class="st">&quot;See Github &lt;a href=</span><span class="sc">\&quot;</span><span class="st">https://github.com/iobis/mwhs-data-mobilization</span><span class="sc">\&quot;</span><span class="st">&gt;Project&lt;/a&gt; and &lt;a href=</span><span class="sc">\&quot;</span><span class="st">https://github.com/iobis/mwhs-data-mobilization/tree/master/notebooks/banc_darguin_national_park/Gushin_and_Fall_2012</span><span class="sc">\&quot;</span><span class="st">&gt; R Notebook&lt;/a&gt; for dataset construction methods&quot;</span></span>
+<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a>      <span class="at">para =</span> <span class="fu">paste</span>(<span class="st">&quot;See Github &lt;a href=</span><span class="sc">\&quot;</span><span class="st">https://github.com/iobis/mwhs-data-mobilization</span><span class="sc">\&quot;</span><span class="st">&gt;Project&lt;/a&gt; and &lt;a href=</span><span class="sc">\&quot;</span><span class="st">https://iobis.github.io/mwhs-data-mobilization/notebooks/&quot;</span>, site_dir_name, <span class="st">&quot;/&quot;</span>, dataset_dir_name, <span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st">&gt; R Notebook&lt;/a&gt; for dataset construction methods&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
 <span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a>    )</span>
 <span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a>  )</span>
 <span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a>)</span>

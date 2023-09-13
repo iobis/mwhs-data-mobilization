@@ -1,5 +1,5 @@
 Script Execution Summary
-Date and Time: 2023-09-06 12:35:16
+Date and Time: 2023-09-12 12:37:30
 ------------------------------
 Command Entered:
 ../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/the_sundarbans/Gupta_et_al_2016/raw/ojsadmin,+188826viii169144-9154.pdf -s -c -a 109.754,325.542,754.884,463.199 -p 7 -a 111.986,88.175,748.932,219.136 -p 7 -a 88.175,85.199,689.404,219.136 -p 8 -o ../../../datasets/the_sundarbans/Gupta_et_al_2016/processed

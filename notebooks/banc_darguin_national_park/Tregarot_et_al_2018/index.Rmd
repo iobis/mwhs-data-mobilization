@@ -44,6 +44,7 @@ path_to_project_root <- "../../.."
 site_dir_name <- "banc_darguin_national_park"
 dataset_dir_name <- "Tregarot_et_al_2018"
 original_pdf <- "010075369-330.pdf"
+short_name <- "banc-darguin-tregarot-2018"
 
 ```
 
@@ -104,9 +105,7 @@ input_data %<>%
   remove_empty(c("rows", "cols")) %>%       # Remove empty rows and columns
   clean_names()                             # Have sensible (lowercase) column names
 
-#Remove sp.
-cleaned_data <- input_data %>%
-  filter(!str_detect(especes, "sp\\."))
+cleaned_data <- input_data
 
 #to preview pretty table
 knitr::kable(head(cleaned_data))
@@ -169,7 +168,11 @@ Sometimes there are misspellings in the original text or incorrect OCR that can 
 ```{r Human Verification}
 
 combined_dataframe[1,2:3] = c("Arius latiscutatus", 275576)
-combined_dataframe[17,2:3] = c("Pegusa triophthalma", 274308)
+combined_dataframe[20,2:3] = c("Pegusa triophthalma", 274308)
+
+combined_dataframe[7, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Cynoglossus", "senegalensis", 126112)
+combined_dataframe[14, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Epinephelus", "aeneus", 126068)
+combined_dataframe[34, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Sparus", "qurata", 126082)
 
 ```
 
@@ -186,7 +189,7 @@ Create a dataframe with unique taxa only (though this should already be unique).
 ```{r}
 #rename and restructure WoRMSIDs to OBIS requirements
 occurrence <- combined_dataframe %>%
-  distinct(CanonicalFull, WormsIDs) %>%
+  distinct(CanonicalFull, identificationQualifier, WormsIDs) %>%
   rename(scientificName = CanonicalFull) %>%
   rename(scientificNameID = WormsIDs) %>%
   mutate(scientificNameID = ifelse(!is.na(scientificNameID), paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""), NA))
@@ -202,7 +205,7 @@ OccurrenceID is an identifier for the occurrence record and should be persistent
 vdigest <- Vectorize(digest)
 
 # Generate taxonID:
-occurrence %<>% mutate(occurrenceID = paste("banc-darguin-tregarot-2018", "occurrence", vdigest (scientificName, algo="md5"), sep=":"))
+occurrence %<>% mutate(occurrenceID = paste(short_name, "occurrence", vdigest (scientificName, algo="md5"), sep=":"))
 ```
 
 ### eventDate
@@ -210,7 +213,7 @@ occurrence %<>% mutate(occurrenceID = paste("banc-darguin-tregarot-2018", "occur
 This is NULL since this is technically a checklist and we do not know the collection date.
 
 ```{r eventDate}
-eventDate <- NA
+eventDate <- ""
 occurrence %<>% mutate(eventDate)
 ```
 
@@ -299,7 +302,7 @@ Use the check_fields command from obistools to check if all OBIS required fields
 
 ```{r check}
 #Reorganize columns
-occurrence = occurrence %>% select(occurrenceID, scientificName, scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, footprintWKT, geodeticDatum, occurrenceStatus, basisOfRecord)
+occurrence = occurrence %>% select(occurrenceID, scientificName, identificationQualifier,scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, footprintWKT, geodeticDatum, occurrenceStatus, basisOfRecord)
 
 #Check fields
 check_fields(occurrence)
@@ -314,6 +317,9 @@ emld::eml_version("eml-2.1.1")
 
 #Title
 title <- "Évaluation des services écosystémiques du Banc d’Arguin, Mauritanie: Fishes Checklist"
+
+#AlternateIdentifier
+alternateIdentifier <- paste("https://ipt.obis.org/secretariat/resource?r=", short_name, sep="")
 
 #Abstract
 abstract <- eml$abstract(
@@ -387,7 +393,7 @@ metadataProvider <- eml$metadataProvider(
 )
 
 associatedParty <- eml$associatedParty(
-  role = "Data Curator",
+  role = "processor",
   individualName = eml$individualName(
     givenName = "Chandra", 
     surName = "Earl"),
@@ -411,12 +417,15 @@ additionalMetadata <- eml$additionalMetadata(
     gbif = list(
       dateStamp = paste0(format(Sys.time(), "%Y-%m-%dT%H:%M:%OS3"), paste0(substr(format(Sys.time(), "%z"), 1, 3), ":", paste0(substr(format(Sys.time(), "%z"), 4, 5)))),
       hierarchyLevel = "dataset",
-      citation = "Earl C., OBIS Secretariat. (2023) Évaluation du Service de Nerserie du Parc National du Banc d’arguin, Mauritania: Fishes Checklist. [Version 1]. UNESCO. Occurrence Dataset DOI",
+      citation = "IPT will autogenerate this",
       bibliography = list(
         citation = "Trégarot E., Catry T., Pottier A., Cornet C., Maréchal J.-P., Fayad V., Sidi Cheick M.A., David G., Dia A.D., Fall A.D., Sarr O., El Valy Y., Wagne O.H., Meisse B., Kane E.A., Ball A.C., Haidallah M.S., Braham C.B., Dia M., Abdel Hamid M.L., Rey-Valette H., Salles J.-M., Ly D., Cissé C.B. et Failler P. (2018). Évaluation des services écosystémiques du Banc d’Arguin, Mauritanie. Rapport final pour le Parc National du Banc d’Arguin, XX p.")
     )
   )
 )
+
+citationdoi <- ""
+
 ```
 
 
@@ -443,10 +452,10 @@ coverage <- eml$coverage(
         taxonRankName = "Superclass",
         taxonRankValue = "Agnatha"),
       eml$taxonomicClassification(
-        taxonRankName = "Parvphylum",
+        taxonRankName = "unranked",
         taxonRankValue = "Chondrichthyes"),
       eml$taxonomicClassification(
-        taxonRankName = "Parvphylum",
+        taxonRankName = "unranked",
         taxonRankValue = "Osteichthyes")
       )
     
@@ -474,12 +483,14 @@ These fields are not required, though they make the metadata more complete.
 
 methods <- eml$methods(
   methodStep = eml$methodStep(
-    description = "See Github R Project and Notebook - https://github.com/iobis/mwhs-data-mobilization/tree/master/notebooks/banc_darguin_national_park/Tregarot_et_al_2018 - for dataset construction"
+    description = eml$description(
+      para = paste("See Github <a href=\"https://github.com/iobis/mwhs-data-mobilization\">Project</a> and <a href=\"https://iobis.github.io/mwhs-data-mobilization/notebooks/", site_dir_name, "/", dataset_dir_name, "\"> R Notebook</a> for dataset construction methods", sep="")
+    )
   )
 )
 
 #Other Data
-pubDate <- "2023-09-30"
+pubDate <- "2023-10-15"
 
 #language of original document
 language <- "fra"
@@ -497,7 +508,7 @@ maintenance <- eml$maintenance(
 
 #Universal CC
 intellectualRights <- eml$intellectualRights(
-  para = "These data are released under <ulink url=\"https://creativecommons.org/publicdomain/zero/1.0/\"><citetitle>Creative Commons Zero (CC-0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction."
+  para = "To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url=\"http://creativecommons.org/publicdomain/zero/1.0/legalcode\"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction."
 )
 
 purpose <- eml$purpose(
@@ -515,10 +526,11 @@ additionalInfo <- eml$additionalInfo(
 
 #Put it all together
 my_eml <- eml$eml(
-           packageId = paste(uuid::UUIDgenerate(), "/eml-1.xml", sep = ""),  
+           packageId = paste("https://ipt.obis.org/secretariat/resource?id=", short_name, "/v1.0", sep = ""),  
            system = "http://gbif.org",
            scope = "system",
            dataset = eml$dataset(
+               alternateIdentifier = alternateIdentifier,
                title = title,
                creator = creator,
                metadataProvider = metadataProvider,
@@ -576,6 +588,14 @@ for (field in fields) {
   }
 }
 
+#Add identificationQualifier
+new_field <- xml_add_sibling(fields[[3]], "field")
+xml_set_attr(new_field, "index", "3")
+xml_set_attr(new_field, "term", "http://rs.tdwg.org/dwc/terms/identificationQualifier")
+
+fields <- append(fields, list(new_field))
+
+
 ```
 
 ## Save outputs
@@ -599,14 +619,21 @@ We have to further edit the eml file to conform to GBIF-specific requirements th
 #edit the schemaLocation and rearrange gbif node for gbif specific eml file
 eml_content <- read_xml(paste(dwc_output_dir, "/eml.xml", sep = ""))
 
-#change schemaLocation attribute
+#change schemaLocation attributes for GBIF
 root_node <- xml_root(eml_content)
-xml_set_attr(root_node, "xsi:schemaLocation", "https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd")
+xml_set_attr(root_node, "xsi:schemaLocation", "https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd")
+xml_set_attr(root_node, "xmlns:dc", "http://purl.org/dc/terms/")
+xml_set_attr(root_node, "xmlns:stmml", NULL)
+xml_set_attr(root_node, "xml:lang", "eng")
+
 
 #rearrange children nodes under the GBIF element
 hierarchyLevel <- eml_content %>% xml_find_all(".//hierarchyLevel")
 dateStamp <- eml_content %>% xml_find_all(".//dateStamp")
 citation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation")
+bibcitation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/bibliography/citation")
+xml_set_attr(bibcitation, "identifier", citationdoi)
+
 eml_content %>% xml_find_all(".//hierarchyLevel") %>% xml_remove()
 eml_content %>% xml_find_all(".//dateStamp") %>% xml_remove()
 eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation") %>% xml_remove()
@@ -617,7 +644,6 @@ eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(dateStamp, .where=0)
 write_xml(eml_content, paste(dwc_output_dir, "/eml.xml", sep = ""))
 
 ```
-
 ### Zip files to DwC-A
 
 ```{r Zip Files}
