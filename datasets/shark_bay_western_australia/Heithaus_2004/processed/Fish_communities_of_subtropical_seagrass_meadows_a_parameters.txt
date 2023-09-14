@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-09-13 14:21:36
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/shark_bay_western_australia/Heithaus_2004/raw/Fish_communities_of_subtropical_seagrass_meadows_a.pdf -s -a 76.806,40.329,646.554,160.033 -p 7 -o ../../../datasets/shark_bay_western_australia/Heithaus_2004/processed
+
+Script Arguments:
+pdf: ../../../datasets/shark_bay_western_australia/Heithaus_2004/raw/Fish_communities_of_subtropical_seagrass_meadows_a.pdf
+output: ../../../datasets/shark_bay_western_australia/Heithaus_2004/processed
+area: [[76.806, 40.329, 646.554, 160.033]]
+pages: ['7']
+concatenate: False
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/shark_bay_western_australia/Heithaus_2004/processed/Fish_communities_of_subtropical_seagrass_meadows_a_tables_parsed_1.csv
+../../../datasets/shark_bay_western_australia/Heithaus_2004/processed/Fish_communities_of_subtropical_seagrass_meadows_a_parameters.txt

@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-09-13 13:36:22
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/tubbataha_reefs_natural_park/Murray_et_al_2019/raw/1-s2.0-S2287884X18301596-main.pdf -s -a 601.601,155.888,722.888,247.412 -p 4 -o ../../../datasets/tubbataha_reefs_natural_park/Murray_et_al_2019/processed
+
+Script Arguments:
+pdf: ../../../datasets/tubbataha_reefs_natural_park/Murray_et_al_2019/raw/1-s2.0-S2287884X18301596-main.pdf
+output: ../../../datasets/tubbataha_reefs_natural_park/Murray_et_al_2019/processed
+area: [[601.601, 155.888, 722.888, 247.412]]
+pages: ['4']
+concatenate: False
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/tubbataha_reefs_natural_park/Murray_et_al_2019/processed/1-s2.0-S2287884X18301596-main_tables_parsed_1.csv
+../../../datasets/tubbataha_reefs_natural_park/Murray_et_al_2019/processed/1-s2.0-S2287884X18301596-main_parameters.txt
