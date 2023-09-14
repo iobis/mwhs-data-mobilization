@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-09-13 17:03:07
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Sazima_et_al_2006/raw/b1fc35f8bed7ad2566b1765f94ba0a81239a.pdf -s -a 473.918,147.263,743.198,254.363 -p 2 -o ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Sazima_et_al_2006/processed
+
+Script Arguments:
+pdf: ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Sazima_et_al_2006/raw/b1fc35f8bed7ad2566b1765f94ba0a81239a.pdf
+output: ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Sazima_et_al_2006/processed
+area: [[473.918, 147.263, 743.198, 254.363]]
+pages: ['2']
+concatenate: False
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Sazima_et_al_2006/processed/b1fc35f8bed7ad2566b1765f94ba0a81239a_tables_parsed_1.csv
+../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Sazima_et_al_2006/processed/b1fc35f8bed7ad2566b1765f94ba0a81239a_parameters.txt

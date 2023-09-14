@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-09-13 16:40:05
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Schmid_et_al_2020/raw/1676-0611-bn-20-04-e20201014_published.pdf -s -c -a 213.053,50.108,740.138,275.018 -p 3 -a 83.003,40.928,721.778,277.313 -p 4 -a 86.828,49.343,357.638,246.713 -p 5 -o ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Schmid_et_al_2020/processed
+
+Script Arguments:
+pdf: ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Schmid_et_al_2020/raw/1676-0611-bn-20-04-e20201014_published.pdf
+output: ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Schmid_et_al_2020/processed
+area: [[213.053, 50.108, 740.138, 275.018], [83.003, 40.928, 721.778, 277.313], [86.828, 49.343, 357.638, 246.713]]
+pages: ['3', '4', '5']
+concatenate: True
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Schmid_et_al_2020/processed/1676-0611-bn-20-04-e20201014_published_tables_parsed_concatenated.csv
+../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Schmid_et_al_2020/processed/1676-0611-bn-20-04-e20201014_published_parameters.txt
