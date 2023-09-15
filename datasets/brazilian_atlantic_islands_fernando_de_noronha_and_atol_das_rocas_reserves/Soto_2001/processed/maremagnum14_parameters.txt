@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-09-14 08:49:15
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Soto_2001/raw/maremagnum14.pdf -s -c -nh -a 220.522,313.491,771.641,566.366 -p 3 -a 84.416,37.559,771.641,277.791 -p 4 -a 92.597,283.741,768.666,534.384 -p 4 -a 79.209,62.847,769.409,312.747 -p 5 -a 81.441,314.234,768.666,557.441 -p 5 -a 95.572,36.072,280.022,254.734 -p 6 -o ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Soto_2001/processed
+
+Script Arguments:
+pdf: ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Soto_2001/raw/maremagnum14.pdf
+output: ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Soto_2001/processed
+area: [[220.522, 313.491, 771.641, 566.366], [84.416, 37.559, 771.641, 277.791], [92.597, 283.741, 768.666, 534.384], [79.209, 62.847, 769.409, 312.747], [81.441, 314.234, 768.666, 557.441], [95.572, 36.072, 280.022, 254.734]]
+pages: ['3', '4', '4', '5', '5', '6']
+concatenate: True
+noheaders: True
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Soto_2001/processed/maremagnum14_tables_parsed_concatenated.csv
+../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Soto_2001/processed/maremagnum14_parameters.txt
