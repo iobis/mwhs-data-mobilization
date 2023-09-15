@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-09-15 06:54:40
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/everglades_national_park/Loftus_2000/raw/Loftus2000.pdf -s -c -nh -a 110.872,15.366,588.872,134.512 -p 7 -a 85.246,15.181,584.109,147.837 -p 8 -a 84.312,10.043,560.754,132.89 -p 9 -a 87.114,15.181,568.694,139.896 -p 10 -a 90.05,15.444,589.01,135.194 -p 11 -a 88.2,15.288,592.469,141.826 -p 12 -a 85.246,9.576,567.293,132.89 -p 13 -a 86.207,15.522,588.642,143.996 -p 14 -a 80.613,15.366,525.991,134.512 -p 15 -o ../../../datasets/everglades_national_park/Loftus_2000/processed
+
+Script Arguments:
+pdf: ../../../datasets/everglades_national_park/Loftus_2000/raw/Loftus2000.pdf
+output: ../../../datasets/everglades_national_park/Loftus_2000/processed
+area: [[110.872, 15.366, 588.872, 134.512], [85.246, 15.181, 584.109, 147.837], [84.312, 10.043, 560.754, 132.89], [87.114, 15.181, 568.694, 139.896], [90.05, 15.444, 589.01, 135.194], [88.2, 15.288, 592.469, 141.826], [85.246, 9.576, 567.293, 132.89], [86.207, 15.522, 588.642, 143.996], [80.613, 15.366, 525.991, 134.512]]
+pages: ['7', '8', '9', '10', '11', '12', '13', '14', '15']
+concatenate: True
+noheaders: True
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/everglades_national_park/Loftus_2000/processed/Loftus2000_tables_parsed_concatenated.csv
+../../../datasets/everglades_national_park/Loftus_2000/processed/Loftus2000_parameters.txt

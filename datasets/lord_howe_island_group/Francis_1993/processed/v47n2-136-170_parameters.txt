@@ -1,0 +1,33 @@
+Script Execution Summary
+Date and Time: 2023-09-15 03:36:45
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/lord_howe_island_group/Francis_1993/raw/v47n2-136-170.pdf -s -nh -a 185.463,24.165,618.111,305.999 -p 22 -a 140.621,45.911,630.341,330.619 -p 23 -a 140.043,27.077,627.428,311.239 -p 24 -a 141.199,44.179,617.059,323.689 -p 25 -a 141.492,23.437,618.92,306.422 -p 26 -a 144.572,47.8,630.781,326.387 -p 27 -a 143.838,16.112,630.135,305.547 -p 28 -a 145.604,57.359,630.952,336.802 -p 29 -a 146.317,19.567,625.863,302.856 -p 30 -a 145.745,52.492,640.165,334.598 -p 31 -a 150.617,23.285,649.924,309.193 -p 32 -a 148.863,51.199,621.199,329.984 -p 33 -o ../../../datasets/lord_howe_island_group/Francis_1993/processed
+
+Script Arguments:
+pdf: ../../../datasets/lord_howe_island_group/Francis_1993/raw/v47n2-136-170.pdf
+output: ../../../datasets/lord_howe_island_group/Francis_1993/processed
+area: [[185.463, 24.165, 618.111, 305.999], [140.621, 45.911, 630.341, 330.619], [140.043, 27.077, 627.428, 311.239], [141.199, 44.179, 617.059, 323.689], [141.492, 23.437, 618.92, 306.422], [144.572, 47.8, 630.781, 326.387], [143.838, 16.112, 630.135, 305.547], [145.604, 57.359, 630.952, 336.802], [146.317, 19.567, 625.863, 302.856], [145.745, 52.492, 640.165, 334.598], [150.617, 23.285, 649.924, 309.193], [148.863, 51.199, 621.199, 329.984]]
+pages: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33']
+concatenate: False
+noheaders: True
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_1.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_2.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_3.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_4.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_5.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_6.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_7.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_8.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_9.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_10.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_11.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_tables_parsed_12.csv
+../../../datasets/lord_howe_island_group/Francis_1993/processed/v47n2-136-170_parameters.txt
