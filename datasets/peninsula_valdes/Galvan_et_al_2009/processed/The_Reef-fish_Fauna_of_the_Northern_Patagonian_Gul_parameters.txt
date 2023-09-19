@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-09-19 07:47:53
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/peninsula_valdes/Galvan_et_al_2009/raw/The_Reef-fish_Fauna_of_the_Northern_Patagonian_Gul.pdf -s -c -a 115.898,149.558,559.598,349.223 -p 4 -o ../../../datasets/peninsula_valdes/Galvan_et_al_2009/processed
+
+Script Arguments:
+pdf: ../../../datasets/peninsula_valdes/Galvan_et_al_2009/raw/The_Reef-fish_Fauna_of_the_Northern_Patagonian_Gul.pdf
+output: ../../../datasets/peninsula_valdes/Galvan_et_al_2009/processed
+area: [[115.898, 149.558, 559.598, 349.223]]
+pages: ['4']
+concatenate: True
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/peninsula_valdes/Galvan_et_al_2009/processed/The_Reef-fish_Fauna_of_the_Northern_Patagonian_Gul_tables_parsed_concatenated.csv
+../../../datasets/peninsula_valdes/Galvan_et_al_2009/processed/The_Reef-fish_Fauna_of_the_Northern_Patagonian_Gul_parameters.txt

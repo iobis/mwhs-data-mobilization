@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-09-19 07:26:06
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/peninsula_valdes/Maestro_et_al_1998/raw/14-Anexos.pdf -s -c -nh -a 233.708,154.148,710.303,358.403 -p 25 -a 96.008,154.148,239.828,359.933 -p 26 -o ../../../datasets/peninsula_valdes/Maestro_et_al_1998/processed
+
+Script Arguments:
+pdf: ../../../datasets/peninsula_valdes/Maestro_et_al_1998/raw/14-Anexos.pdf
+output: ../../../datasets/peninsula_valdes/Maestro_et_al_1998/processed
+area: [[233.708, 154.148, 710.303, 358.403], [96.008, 154.148, 239.828, 359.933]]
+pages: ['25', '26']
+concatenate: True
+noheaders: True
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/peninsula_valdes/Maestro_et_al_1998/processed/14-Anexos_tables_parsed_concatenated.csv
+../../../datasets/peninsula_valdes/Maestro_et_al_1998/processed/14-Anexos_parameters.txt

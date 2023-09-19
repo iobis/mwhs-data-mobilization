@@ -1,5 +1,5 @@
 Script Execution Summary
-Date and Time: 2023-09-15 05:11:32
+Date and Time: 2023-09-18 17:57:23
 ------------------------------
 Command Entered:
 ../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/archipielago_de_revillagigedo/Del_Moral-Flores_et_al_2016/raw/document.pdf -s -c -nh -a 233.708,83.003,703.418,256.658 -p 10 -a 83.003,82.238,705.713,253.598 -p 11 -a 83.003,83.768,706.478,260.483 -p 12 -a 82.238,82.238,711.068,261.248 -p 13 -a 82.238,82.238,707.243,259.718 -p 14 -a 81.473,83.003,703.418,258.953 -p 15 -a 81.473,82.238,704.183,265.838 -p 16 -a 83.768,84.533,408.128,252.068 -p 17 -o ../../../datasets/archipielago_de_revillagigedo/Del_Moral-Flores_et_al_2016/processed

@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-09-19 06:53:18
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/belize_barrier_reef_reserve_system/Alicea_2010/raw/noaa_820_DS1.pdf -s -c -a 144.203,194.693,710.303,368.348 -p 241 -a 95.243,195.458,711.068,367.583 -p 242 -a 96.008,195.458,706.478,366.818 -p 243 -a 96.008,195.458,705.713,366.818 -p 244 -a 94.478,195.458,660.578,366.818 -p 245 -a 95.243,195.458,705.713,367.583 -p 246 -a 95.243,196.223,207.698,367.583 -p 247 -o ../../../datasets/belize_barrier_reef_reserve_system/Alicea_2010/processed
+
+Script Arguments:
+pdf: ../../../datasets/belize_barrier_reef_reserve_system/Alicea_2010/raw/noaa_820_DS1.pdf
+output: ../../../datasets/belize_barrier_reef_reserve_system/Alicea_2010/processed
+area: [[144.203, 194.693, 710.303, 368.348], [95.243, 195.458, 711.068, 367.583], [96.008, 195.458, 706.478, 366.818], [96.008, 195.458, 705.713, 366.818], [94.478, 195.458, 660.578, 366.818], [95.243, 195.458, 705.713, 367.583], [95.243, 196.223, 207.698, 367.583]]
+pages: ['241', '242', '243', '244', '245', '246', '247']
+concatenate: True
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/belize_barrier_reef_reserve_system/Alicea_2010/processed/noaa_820_DS1_tables_parsed_concatenated.csv
+../../../datasets/belize_barrier_reef_reserve_system/Alicea_2010/processed/noaa_820_DS1_parameters.txt

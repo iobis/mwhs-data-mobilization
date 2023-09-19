@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-09-18 19:00:47
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/aldabra_atoll/Friedlander_et_al_2015/raw/PristineSeasSeychellesScientificReport.pdf -s -c -a 226.058,256.658,708.008,382.118 -p 49 -a 116.663,265.838,715.658,394.358 -p 50 -a 117.428,256.658,692.708,382.118 -p 51 -a 119.723,266.603,705.713,395.888 -p 52 -a 118.958,256.658,694.238,382.118 -p 53 -a 118.958,266.603,692.708,395.123 -p 54 -a 118.193,256.658,693.473,382.118 -p 55 -a 119.723,268.133,690.413,395.123 -p 56 -a 118.958,256.658,492.278,382.118 -p 57 -o ../../../datasets/aldabra_atoll/Friedlander_et_al_2015/processed
+
+Script Arguments:
+pdf: ../../../datasets/aldabra_atoll/Friedlander_et_al_2015/raw/PristineSeasSeychellesScientificReport.pdf
+output: ../../../datasets/aldabra_atoll/Friedlander_et_al_2015/processed
+area: [[226.058, 256.658, 708.008, 382.118], [116.663, 265.838, 715.658, 394.358], [117.428, 256.658, 692.708, 382.118], [119.723, 266.603, 705.713, 395.888], [118.958, 256.658, 694.238, 382.118], [118.958, 266.603, 692.708, 395.123], [118.193, 256.658, 693.473, 382.118], [119.723, 268.133, 690.413, 395.123], [118.958, 256.658, 492.278, 382.118]]
+pages: ['49', '50', '51', '52', '53', '54', '55', '56', '57']
+concatenate: True
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/aldabra_atoll/Friedlander_et_al_2015/processed/PristineSeasSeychellesScientificReport_tables_parsed_concatenated.csv
+../../../datasets/aldabra_atoll/Friedlander_et_al_2015/processed/PristineSeasSeychellesScientificReport_parameters.txt

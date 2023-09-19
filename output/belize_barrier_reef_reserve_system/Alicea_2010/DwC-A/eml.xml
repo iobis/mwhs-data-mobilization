@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/terms/" packageId="https://ipt.obis.org/secretariat/resource?id=belize-barrier-reef-alicea-2010/v1.0" scope="system" system="http://gbif.org" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd" xml:lang="eng">
+  <dataset>
+    <alternateIdentifier>https://ipt.obis.org/secretariat/resource?r=belize-barrier-reef-alicea-2010</alternateIdentifier>
+    <title>Laughing Bird Caye National Park management plan 2011 - 2016: a component of Belize's world heritage site: Fishes Checklist</title>
+    <creator>
+      <individualName>
+        <givenName>Eileen</givenName>
+        <surName>Alicea</surName>
+      </individualName>
+      <organizationName>National Oceanic and Atmospheric Administration</organizationName>
+    </creator>
+    <metadataProvider>
+      <individualName>
+        <givenName>Chandra</givenName>
+        <surName>Earl</surName>
+      </individualName>
+      <organizationName>UNESCO</organizationName>
+      <positionName>eDNA Scientific Officer</positionName>
+      <electronicMailAddress>c.earl@unesco.org</electronicMailAddress>
+    </metadataProvider>
+    <associatedParty>
+      <individualName>
+        <givenName>Chandra</givenName>
+        <surName>Earl</surName>
+      </individualName>
+      <organizationName>UNESCO</organizationName>
+      <positionName>eDNA Scientific Officer</positionName>
+      <electronicMailAddress>c.earl@unesco.org</electronicMailAddress>
+      <role>processor</role>
+    </associatedParty>
+    <pubDate>2023-10-15</pubDate>
+    <language>eng</language>
+    <abstract>
+      <para>Of the over 230 species included in the current species list, three are considered to be Critically Endangered or Endangered at global scale, including the critically endangered goliath grouper (Epinephelus itajara), endangered Nassau grouper (Epinephelus striatus) and the scalloped hammerhead (Sphyrna lewini). All three of these species have been, and continue to be, impacted by commercial fisheries.</para>
+    </abstract>
+    <keywordSet>
+      <keyword>Occurrence</keyword>
+      <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+    </keywordSet>
+    <additionalInfo>
+      <para>marine, harvested by iOBIS</para>
+    </additionalInfo>
+    <intellectualRights>
+      <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+    </intellectualRights>
+    <coverage>
+      <geographicCoverage>
+        <geographicDescription>Belize Barrier Reef Reserve System</geographicDescription>
+        <boundingCoordinates>
+          <westBoundingCoordinate>-87.4889</westBoundingCoordinate>
+          <eastBoundingCoordinate>-88.355</eastBoundingCoordinate>
+          <northBoundingCoordinate>18.1987</northBoundingCoordinate>
+          <southBoundingCoordinate>16.074</southBoundingCoordinate>
+        </boundingCoordinates>
+      </geographicCoverage>
+      <taxonomicCoverage>
+        <generalTaxonomicCoverage>Fishes</generalTaxonomicCoverage>
+        <taxonomicClassification>
+          <taxonRankName>Superclass</taxonRankName>
+          <taxonRankValue>Agnatha</taxonRankValue>
+        </taxonomicClassification>
+        <taxonomicClassification>
+          <taxonRankName>unranked</taxonRankName>
+          <taxonRankValue>Chondrichthyes</taxonRankValue>
+        </taxonomicClassification>
+        <taxonomicClassification>
+          <taxonRankName>unranked</taxonRankName>
+          <taxonRankValue>Osteichthyes</taxonRankValue>
+        </taxonomicClassification>
+      </taxonomicCoverage>
+    </coverage>
+    <purpose>
+      <para>These data were made accessible through UNESCO's eDNA Expeditions project to mobilize available marine species and occurrence datasets from World Heritage Sites.</para>
+    </purpose>
+    <maintenance>
+      <description>
+        <para/>
+      </description>
+      <maintenanceUpdateFrequency>notPlanned</maintenanceUpdateFrequency>
+    </maintenance>
+    <contact>
+      <individualName>
+        <givenName>OBIS</givenName>
+        <surName>Secretariat</surName>
+      </individualName>
+      <organizationName>OBIS</organizationName>
+      <positionName>Secretariat</positionName>
+      <electronicMailAddress>helpdesk@obis.org</electronicMailAddress>
+    </contact>
+    <methods>
+      <methodStep>
+        <description>
+          <para>See Github &lt;a href="https://github.com/iobis/mwhs-data-mobilization"&gt;Project&lt;/a&gt; and &lt;a href="https://iobis.github.io/mwhs-data-mobilization/notebooks/belize_barrier_reef_reserve_system/Alicea_2010"&gt; R Notebook&lt;/a&gt; for dataset construction methods</para>
+        </description>
+      </methodStep>
+    </methods>
+  </dataset>
+  <additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2023-09-19T06:54:55.255-10:00</dateStamp>
+        <hierarchyLevel>dataset</hierarchyLevel>
+        <citation>IPT will autogenerate this</citation>
+        <bibliography>
+          <citation identifier="">Alicea, Eileen (2010). Laughing Bird Caye National Park management plan 2011 - 2016 : a component of Belize's world heritage site.</citation>
+        </bibliography>
+      </gbif>
+    </metadata>
+  </additionalMetadata>
+</eml:eml>
