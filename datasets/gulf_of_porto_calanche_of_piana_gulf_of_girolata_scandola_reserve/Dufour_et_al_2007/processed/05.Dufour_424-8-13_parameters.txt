@@ -1,0 +1,23 @@
+Script Execution Summary
+Date and Time: 2023-09-19 17:15:05
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Dufour_et_al_2007/raw/05.Dufour_424-8-13.pdf -s -c -nh -ocr -# 8 -a 137.966,109.703,709.166,281.509 -p 1 -a 93.341,111.934,709.166,277.047 -p 2 -a 90.366,113.422,709.166,271.097 -p 3 -a 91.853,110.447,710.653,259.941 -p 4 -a 90.366,108.216,709.166,268.866 -p 5 -a 92.597,108.216,163.997,239.859 -p 6 -o ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Dufour_et_al_2007/processed
+
+Script Arguments:
+pdf: ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Dufour_et_al_2007/raw/05.Dufour_424-8-13.pdf
+output: ../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Dufour_et_al_2007/processed
+area: [[137.966, 109.703, 709.166, 281.509], [93.341, 111.934, 709.166, 277.047], [90.366, 113.422, 709.166, 271.097], [91.853, 110.447, 710.653, 259.941], [90.366, 108.216, 709.166, 268.866], [92.597, 108.216, 163.997, 239.859]]
+pages: ['1', '2', '3', '4', '5', '6']
+concatenate: True
+noheaders: True
+OCR: True
+cores: 8
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Dufour_et_al_2007/processed/05.Dufour_424-8-13_ocr.pdf
+../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Dufour_et_al_2007/processed/05.Dufour_424-8-13_tables_parsed_concatenated.csv
+../../../datasets/gulf_of_porto_calanche_of_piana_gulf_of_girolata_scandola_reserve/Dufour_et_al_2007/processed/05.Dufour_424-8-13_parameters.txt
