@@ -1,0 +1,52 @@
+        <html>
+        <head></head>
+        <body><h2>Local Endemism</h2>
+<div>
+    Only Inside area A
+    <div class="alert alert-info">14 records found, 14 Confirmed</div><table id="report_species_list" cellpadding="3" border="1" bordercollapse="1" width="100%"><tr bgcolor="#f1f1f1">
+            <th width="50%">Probable</th><th>Confirmed</th></tr><tr>
+                <td>
+                     Carcharhinus melanopterus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Ogilbia cocoensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Peristedion nesium
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Halichoeres salmofasciatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Axoclinus cocoensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gillellus chathamensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Acanthemblemaria atrata
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gobiesox woodsi
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Tomicodon vermiculatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Chriolepis dialepta
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Chriolepis atrimelum
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lythrypnus cobalus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lythrypnus lavenbergi
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lythrypnus alphigena
+                </td><td align="center">*</td></tr></table></div>
+        </body>
+        </html>
+        

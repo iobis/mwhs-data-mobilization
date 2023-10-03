@@ -1,0 +1,970 @@
+        <html>
+        <head></head>
+        <body><h2>Taxonomic/Functional Group - All Species</h2>
+<div>
+    All Species Inside area A
+    <div class="alert alert-info">320 records found, 290 Confirmed</div><table id="report_species_list" cellpadding="3" border="1" bordercollapse="1" width="100%"><tr bgcolor="#f1f1f1">
+            <th width="50%">Probable</th><th>Confirmed</th></tr><tr>
+                <td>
+                     Rhincodon typus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Alopias pelagicus
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Alopias superciliosus
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Isurus oxyrinchus
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Galeorhinus galeus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Carcharhinus altimus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Carcharhinus falciformis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Carcharhinus leucas
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Carcharhinus longimanus
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Carcharhinus plumbeus
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Carcharhinus albimarginatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Carcharhinus brachyurus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Carcharhinus galapagensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Carcharhinus limbatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Carcharhinus obscurus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Galeocerdo cuvier
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Nasolamia velox
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Prionace glauca
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Rhizoprionodon longurio
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Triaenodon obesus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Sphyrna tiburo
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Sphyrna lewini
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Sphyrna zygaena
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Echinorhinus cookei
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Narcine entemedor
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Dasyatis dipterura
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Dasyatis longus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Pteroplatytrygon violacea
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Aetobatus narinari
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Manta birostris
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Mobula tarapacana
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Mobula japanica
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Anarchias galapagensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Echidna nocturna
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Echidna nebulosa
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Enchelycore octaviana
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gymnomuraena zebra
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gymnothorax castaneus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gymnothorax flavimarginatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gymnothorax undulatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gymnothorax pictus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gymnothorax dovii
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gymnothorax panamensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Muraena clepsydra
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Muraena argus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Muraena lentiginosa
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Scuticaria tigrina
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Uropterygius versutus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Uropterygius macrocephalus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Ichthyapus selachops
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Myrichthys pantostigmius
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Paraletharchus opercularis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Ariosoma gilberti
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Heteroconger digueti
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Paraconger californiensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Paraconger similis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cetengraulis mysticetus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Sardinops sagax
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Synodus lacertinus
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Bregmaceros bathymaster
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Merluccius productus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Brotula ordwayi
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Grammonus diagrammus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Antennarius commerson
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Antennarius sanguineus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Antennatus strigatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Chaenomugil proboscideus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Mugil curema
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Mugil setosus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Atherinella eriarcha
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Atherinops affinis
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Cheilopogon pinnatibarbatus californicus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cheilopogon papilio
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cheilopogon xenopterus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cheilopogon atrisignis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cheilopogon dorsomacula
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Cheilopogon spilonotopterus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cypselurus callopterus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cypselurus angusticeps
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Exocoetus monocirrhus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Exocoetus volitans
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Hirundichthys rondeletii
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Hirundichthys speculiger
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Hirundichthys marginatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Prognichthys tringa
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Euleptorhamphus viridis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Hemiramphus saltator
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Oxyporhamphus micropterus micropterus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Ablennes hians
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Platybelone argalus pterura
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Strongylura exilis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Tylosurus acus melanotus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Tylosurus crocodilus fodiator
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Tylosurus pacificus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Fundulus parvipinnis
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Myripristis clarionensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Myripristis berndti
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Myripristis leiognathus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Neoniphon suborbitalis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Plectrypops lima
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Bryx veleronis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Doryrhamphus excisus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Syngnathus auliscus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Aulostomus chinensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Fistularia corneta
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Fistularia commersonii
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Pontinus vaughani
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Scorpaena mystes
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Scorpaena histrio
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Scorpaenodes xyris
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Bellator loxias
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Prionotus albirostris
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Alphestes immaculatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cephalopholis panamensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cephalopholis colonus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Dermatolepis dermatolepis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Diplectrum euryplectrum
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Epinephelus cifuentesi
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Epinephelus labriformis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Epinephelus analogus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Epinephelus quinquefasciatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Epinephelus clippertonensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Mycteroperca jordani
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Pronotogrammus multifasciatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Pseudogramma thaumasia
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Rypticus nigripinnis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Rypticus courtenayi
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Serranus socorroensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Opistognathus punctatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Opistognathus rosenblatti
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Opistognathus rhomaleus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cookeolus japonicus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Heteropriacanthus cruentatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Priacanthus alalaua
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Pristigenys serrula
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Apogon dovii
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Apogon retrosella
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Apogon atricaudus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Apogon guadalupensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Caulolatilus princeps
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Caulolatilus affinis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Coryphaena hippurus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Coryphaena equiselis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Echeneis naucrates
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Phtheirichthys lineatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Remora osteochir
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Remora albescens
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Remora brachyptera
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Remora remora
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Remora australis
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Alectis ciliaris
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Carangoides orthogrammus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Carangoides otrynter
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Caranx caballus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Caranx lugubris
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Caranx sexfasciatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Caranx caninus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Caranx melampygus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Chloroscombrus orqueta
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Decapterus muroadsi
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Decapterus macarellus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Elagatis bipinnulata
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gnathanodon speciosus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Naucrates ductor
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Selar crumenophthalmus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Seriola lalandi
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Seriola rivoliana
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Trachinotus stilbe
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Uraspis helvola
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Hoplopagrus guentherii
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lutjanus argentiventris
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lutjanus viridis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lutjanus peru
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lobotes pacificus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Diapterus brevirostris
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Anisotremus taeniatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Anisotremus interruptus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Calamus brachysomus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Pareques species A
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Mulloidichthys dentatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Pseudupeneus grandisquamis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Girella nigricans
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Kyphosus sectatrix
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Kyphosus vaigiensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Kyphosus ocyurus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Kyphosus elegans
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Chaetodon humeralis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Chaetodon meyeri
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Forcipiger flavissimus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Johnrandallia nigrirostris
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Prognathodes falcifer
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Holacanthus passer
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Holacanthus clarionensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Pomacanthus zonipectus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Kuhlia mugil
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cirrhitichthys oxycephalus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cirrhitus rivulatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Oxycirrhites typus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Abudefduf declivifrons
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Abudefduf troschelii
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Azurina hirundo
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Chromis atrilobata
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Chromis alta
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Chromis limbaughi
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Hypsypops rubicundus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Microspathodon dorsalis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Microspathodon bairdii
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Stegastes redemptus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Stegastes flavilatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Stegastes rectifraenum
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Stegastes acapulcoensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Stegastes leucorus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Bodianus diplotaenia
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Halichoeres adustus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Halichoeres dispilus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Halichoeres melanotis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Halichoeres notospilus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Halichoeres chierchiae
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Halichoeres insularis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Halichoeres nicholsi
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Iniistius pavo
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Novaculichthys taeniourus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Stethojulis bandanensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Thalassoma grammaticum
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Thalassoma lucasanum
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Thalassoma virens
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Xyrichtys species B
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Calotomus carolinus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Nicholsina denticulata
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Scarus compressus
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Scarus rubroviolaceus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Scarus perrico
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Axoclinus multicinctus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Enneanectes exsul
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Dactyloscopus insulatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gillellus semicinctus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Myxodagnus opercularis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Entomacrodus chiostictus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Hypsoblennius proteus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Ophioblennius steindachneri
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Plagiotremus azaleus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Labrisomus xanti
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Labrisomus socorroensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Labrisomus multiporosus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Acanthemblemaria mangognatha
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gobiesox aethus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gobiesox adustus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gobiesox canidens
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Tomicodon absitus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Tomicodon zebra
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Bathygobius ramosus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Coryphopterus urospilus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lythrypnus insularis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lythrypnus zebra
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lythrypnus pulchellus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Schindleria "cf praematura"
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Chaetodipterus zonatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Luvarus imperialis
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Zanclus cornutus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Acanthurus triostegus triostegus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Acanthurus nigricans
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Acanthurus xanthopterus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Ctenochaetus marginatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Prionurus punctatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Prionurus laticlavius
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Sphyraena argentea
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Gempylus serpens
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lepidocybium flavobrunneum
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Acanthocybium solandri
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Auxis rochei eudorax
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Auxis thazard brachydorax
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Euthynnus affinis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Euthynnus lineatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Katsuwonus pelamis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Sarda orientalis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Sarda chiliensis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Scomber australasicus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Scomber japonicus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Thunnus albacares
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Thunnus alalunga
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Thunnus obesus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Xiphias gladius
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Istiompax indica
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Istiophorus platypterus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Kajikia audax
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Makaira nigricans
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Tetrapturus angustirostris
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Schedophilus haedrichi
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Cubiceps pauciradiatus
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Nomeus gronovii
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Psenes sio
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Citharichthys gilberti
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Syacium ovale
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Syacium latifrons
+                </td><td align="center">&nbsp;</td></tr><tr>
+                <td>
+                     Bothus leopardinus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Bothus mancus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Aseraggodes herrei
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Symphurus atramentatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Balistes polylepis
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Canthidermis maculata
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Melichthys vidua
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Melichthys niger
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Sufflamen verres
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Xanthichthys mento
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Aluterus monoceros
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Aluterus scriptus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Cantherhines dumerilii
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lactoria diaphana
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Ostracion meleagris meleagris
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Arothron hispidus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Arothron meleagris
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Canthigaster punctatissima
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Lagocephalus lagocephalus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Sphoeroides lobatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Chilomycterus reticulatus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Diodon eydouxii
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Diodon holocanthus
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Diodon hystrix
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Mola mola
+                </td><td align="center">*</td></tr><tr>
+                <td>
+                     Ranzania laevis
+                </td><td align="center">*</td></tr></table></div>
+        </body>
+        </html>
+        

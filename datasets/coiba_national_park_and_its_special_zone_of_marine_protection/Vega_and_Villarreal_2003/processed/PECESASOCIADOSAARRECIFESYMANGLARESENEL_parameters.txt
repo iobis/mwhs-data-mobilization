@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-10-02 19:00:59
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Vega_and_Villarreal_2003/raw/PECESASOCIADOSAARRECIFESYMANGLARESENEL.pdf -s -c -a 199.322,130.458,652.29,477.836 -p 10 -a 138.875,132.754,663.768,477.836 -p 11 -a 123.572,130.458,630.101,482.427 -p 12 -a 139.64,132.754,564.298,480.132 -p 13 -o ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Vega_and_Villarreal_2003/processed
+
+Script Arguments:
+pdf: ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Vega_and_Villarreal_2003/raw/PECESASOCIADOSAARRECIFESYMANGLARESENEL.pdf
+output: ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Vega_and_Villarreal_2003/processed
+area: [[199.322, 130.458, 652.29, 477.836], [138.875, 132.754, 663.768, 477.836], [123.572, 130.458, 630.101, 482.427], [139.64, 132.754, 564.298, 480.132]]
+pages: ['10', '11', '12', '13']
+concatenate: True
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Vega_and_Villarreal_2003/processed/PECESASOCIADOSAARRECIFESYMANGLARESENEL_tables_parsed_concatenated.csv
+../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Vega_and_Villarreal_2003/processed/PECESASOCIADOSAARRECIFESYMANGLARESENEL_parameters.txt
