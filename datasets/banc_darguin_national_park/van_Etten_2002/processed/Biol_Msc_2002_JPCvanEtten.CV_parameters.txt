@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-10-03 16:04:15
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/banc_darguin_national_park/van_Etten_2002/raw/Biol_Msc_2002_JPCvanEtten.CV.pdf -s -nh -a 464.354,96.626,720.199,386.897 -p 10 -o ../../../datasets/banc_darguin_national_park/van_Etten_2002/processed
+
+Script Arguments:
+pdf: ../../../datasets/banc_darguin_national_park/van_Etten_2002/raw/Biol_Msc_2002_JPCvanEtten.CV.pdf
+output: ../../../datasets/banc_darguin_national_park/van_Etten_2002/processed
+area: [[464.354, 96.626, 720.199, 386.897]]
+pages: ['10']
+concatenate: False
+noheaders: True
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/banc_darguin_national_park/van_Etten_2002/processed/Biol_Msc_2002_JPCvanEtten.CV_tables_parsed_1.csv
+../../../datasets/banc_darguin_national_park/van_Etten_2002/processed/Biol_Msc_2002_JPCvanEtten.CV_parameters.txt

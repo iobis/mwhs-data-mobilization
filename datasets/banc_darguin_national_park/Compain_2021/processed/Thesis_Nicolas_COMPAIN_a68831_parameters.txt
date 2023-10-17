@@ -1,0 +1,24 @@
+Script Execution Summary
+Date and Time: 2023-10-03 18:35:12
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/banc_darguin_national_park/Compain_2021/raw/Thesis_Nicolas_COMPAIN_a68831.pdf -s -a 64.713,15.258,520.338,726.579 -p 24 -a 65.766,12.101,526.651,841.274 -p 25 -a 52.086,16.31,509.815,580.316 -p 26 -o ../../../datasets/banc_darguin_national_park/Compain_2021/processed
+
+Script Arguments:
+pdf: ../../../datasets/banc_darguin_national_park/Compain_2021/raw/Thesis_Nicolas_COMPAIN_a68831.pdf
+output: ../../../datasets/banc_darguin_national_park/Compain_2021/processed
+area: [[64.713, 15.258, 520.338, 726.579], [65.766, 12.101, 526.651, 841.274], [52.086, 16.31, 509.815, 580.316]]
+pages: ['24', '25', '26']
+concatenate: False
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/banc_darguin_national_park/Compain_2021/processed/Thesis_Nicolas_COMPAIN_a68831_tables_parsed_1.csv
+../../../datasets/banc_darguin_national_park/Compain_2021/processed/Thesis_Nicolas_COMPAIN_a68831_tables_parsed_2.csv
+../../../datasets/banc_darguin_national_park/Compain_2021/processed/Thesis_Nicolas_COMPAIN_a68831_tables_parsed_3.csv
+../../../datasets/banc_darguin_national_park/Compain_2021/processed/Thesis_Nicolas_COMPAIN_a68831_parameters.txt

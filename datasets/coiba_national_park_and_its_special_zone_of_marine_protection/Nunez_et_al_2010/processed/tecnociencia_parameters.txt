@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-10-03 14:24:26
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Nunez_et_al_2010/raw/tecnociencia.pdf -l -c -nh -a 154.913,325.508,659.048,476.213 -p 7 -a 114.368,330.098,258.953,478.508 -p 8 -o ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Nunez_et_al_2010/processed
+
+Script Arguments:
+pdf: ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Nunez_et_al_2010/raw/tecnociencia.pdf
+output: ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Nunez_et_al_2010/processed
+area: [[154.913, 325.508, 659.048, 476.213], [114.368, 330.098, 258.953, 478.508]]
+pages: ['7', '8']
+concatenate: True
+noheaders: True
+OCR: False
+cores: 4
+forceocr: False
+stream: False
+lattice: True
+
+Outputs:
+../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Nunez_et_al_2010/processed/tecnociencia_tables_parsed_concatenated.csv
+../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Nunez_et_al_2010/processed/tecnociencia_parameters.txt

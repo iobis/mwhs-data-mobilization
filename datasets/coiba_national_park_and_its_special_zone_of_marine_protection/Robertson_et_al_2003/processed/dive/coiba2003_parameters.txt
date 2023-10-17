@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-10-03 04:38:21
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Robertson_et_al_2003/raw/coiba2003.pdf -l -c -a 111.623,17.528,1965.848,1432.643 -p 5 -a 96.863,15.683,1379.138,1430.798 -p 6 -o ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Robertson_et_al_2003/processed/dive
+
+Script Arguments:
+pdf: ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Robertson_et_al_2003/raw/coiba2003.pdf
+output: ../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Robertson_et_al_2003/processed/dive
+area: [[111.623, 17.528, 1965.848, 1432.643], [96.863, 15.683, 1379.138, 1430.798]]
+pages: ['5', '6']
+concatenate: True
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: False
+lattice: True
+
+Outputs:
+../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Robertson_et_al_2003/processed/dive/coiba2003_tables_parsed_concatenated.csv
+../../../datasets/coiba_national_park_and_its_special_zone_of_marine_protection/Robertson_et_al_2003/processed/dive/coiba2003_parameters.txt
