@@ -1,5 +1,5 @@
 Script Execution Summary
-Date and Time: 2023-09-13 14:21:36
+Date and Time: 2023-10-16 21:45:27
 ------------------------------
 Command Entered:
 ../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/shark_bay_western_australia/Heithaus_2004/raw/Fish_communities_of_subtropical_seagrass_meadows_a.pdf -s -a 76.806,40.329,646.554,160.033 -p 7 -o ../../../datasets/shark_bay_western_australia/Heithaus_2004/processed

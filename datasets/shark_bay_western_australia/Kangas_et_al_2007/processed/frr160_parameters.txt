@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-10-17 15:55:22
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/shark_bay_western_australia/Kangas_et_al_2007/raw/frr160.pdf -l -c -a 213.927,172.258,771.999,273.455 -p 99 -a 64.364,173.746,764.558,274.199 -p 100 -a 62.876,173.746,763.069,274.199 -p 101 -a 62.876,173.746,758.605,274.199 -p 102 -a 64.364,173.746,775.719,273.455 -p 103 -a 60.644,174.49,764.558,273.455 -p 104 -a 61.388,174.49,505.613,271.967 -p 105 -o ../../../datasets/shark_bay_western_australia/Kangas_et_al_2007/processed
+
+Script Arguments:
+pdf: ../../../datasets/shark_bay_western_australia/Kangas_et_al_2007/raw/frr160.pdf
+output: ../../../datasets/shark_bay_western_australia/Kangas_et_al_2007/processed
+area: [[213.927, 172.258, 771.999, 273.455], [64.364, 173.746, 764.558, 274.199], [62.876, 173.746, 763.069, 274.199], [62.876, 173.746, 758.605, 274.199], [64.364, 173.746, 775.719, 273.455], [60.644, 174.49, 764.558, 273.455], [61.388, 174.49, 505.613, 271.967]]
+pages: ['99', '100', '101', '102', '103', '104', '105']
+concatenate: True
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: False
+lattice: True
+
+Outputs:
+../../../datasets/shark_bay_western_australia/Kangas_et_al_2007/processed/frr160_tables_parsed_concatenated.csv
+../../../datasets/shark_bay_western_australia/Kangas_et_al_2007/processed/frr160_parameters.txt

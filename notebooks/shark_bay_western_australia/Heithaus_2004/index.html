@@ -7,7 +7,7 @@
 
         <meta name="author" content="Chandra Earl" />
     
-        <meta name="date" content="2023-09-13" />
+        <meta name="date" content="2023-10-16" />
     
     <title>Bundling Heithaus 2004 to a DwC Archive</title>
 
@@ -1581,7 +1581,7 @@ margin-left: 0 !important;
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Chandra
 Earl</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-09-13</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2023-10-16</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -1626,7 +1626,8 @@ messages.</p>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(sf))           <span class="co"># To generate wkt polygon</span></span>
 <span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(EML))          <span class="co"># To create eml.xml file</span></span>
 <span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="fu">library</span>(xml2)                           <span class="co"># To create the meta.xml file</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(zip))          <span class="co"># To zip DwC file</span></span></code></pre></div>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(zip))          <span class="co"># To zip DwC file</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="fu">library</span>(rmapshaper)                     <span class="co"># To simplify shapefiles</span></span></code></pre></div>
 </div>
 <div id="input-parameters-and-paths" class="section level1">
 <h1>Input Parameters and Paths</h1>
@@ -1667,7 +1668,7 @@ and parse out the table to a CSV.</p>
 <span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="fu">system</span>(command, <span class="at">intern=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                                                                                                                                                    
 ##  [2] &quot;Script Execution Summary&quot;                                                                                                                            
-##  [3] &quot;Date and Time: 2023-09-13 14:21:35&quot;                                                                                                                  
+##  [3] &quot;Date and Time: 2023-10-16 21:44:25&quot;                                                                                                                  
 ##  [4] &quot;------------------------------&quot;                                                                                                                      
 ##  [5] &quot;&quot;                                                                                                                                                    
 ##  [6] &quot;PDF input: ../../../datasets/shark_bay_western_australia/Heithaus_2004/raw/Fish_communities_of_subtropical_seagrass_meadows_a.pdf&quot;                   
@@ -1942,14 +1943,16 @@ from <a href="https://github.com/iobis/mwhs-shapes" class="uri">https://github.c
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#Shark Bay, Western Australia</span></span>
 <span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>ind_shape <span class="ot">&lt;-</span> shapes_processed<span class="sc">$</span>geom[<span class="fu">which</span>(shapes_processed<span class="sc">$</span>name <span class="sc">==</span> <span class="st">&quot;Shark Bay, Western Australia&quot;</span>)]</span>
 <span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#convert shape to WKT</span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>wkt <span class="ot">&lt;-</span> <span class="fu">st_as_text</span>(ind_shape, <span class="at">digits =</span> <span class="dv">6</span>)</span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>localities <span class="ot">&lt;-</span> <span class="fu">calculate_centroid</span>(wkt)</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#Simplify shape because the WKT length is too long</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>smoothed_shape <span class="ot">&lt;-</span> <span class="fu">ms_simplify</span>(ind_shape)</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co">#convert shape to WKT</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>wkt <span class="ot">&lt;-</span> <span class="fu">st_as_text</span>(smoothed_shape, <span class="at">digits =</span> <span class="dv">6</span>)</span>
 <span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">decimalLatitude =</span> localities<span class="sc">$</span>decimalLatitude)</span>
-<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">decimalLongitude =</span> localities<span class="sc">$</span>decimalLongitude)</span></code></pre></div>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>localities <span class="ot">&lt;-</span> <span class="fu">calculate_centroid</span>(wkt)</span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">decimalLatitude =</span> localities<span class="sc">$</span>decimalLatitude)</span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>occurrence <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">decimalLongitude =</span> localities<span class="sc">$</span>decimalLongitude)</span></code></pre></div>
 </div>
 <div id="occurrencestatus" class="section level3">
 <h3>occurrenceStatus</h3>
