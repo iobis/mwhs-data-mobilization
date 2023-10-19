@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-10-18 13:42:12
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Batista_et_al_2012/raw/CheckList_article_18453_en_1.pdf -s -a 510.077,53.203,665.593,440.132 -p 4 -o ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Batista_et_al_2012/processed
+
+Script Arguments:
+pdf: ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Batista_et_al_2012/raw/CheckList_article_18453_en_1.pdf
+output: ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Batista_et_al_2012/processed
+area: [[510.077, 53.203, 665.593, 440.132]]
+pages: ['4']
+concatenate: False
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Batista_et_al_2012/processed/CheckList_article_18453_en_1_tables_parsed_1.csv
+../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Batista_et_al_2012/processed/CheckList_article_18453_en_1_parameters.txt

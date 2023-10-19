@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-10-18 15:56:28
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Eduardo_et_al_2022/raw/fmars-09-937154.pdf -s -c -a 133.59,54.701,729.724,466.264 -p 5 -a 102.332,55.446,729.724,467.008 -p 6 -a 103.821,53.213,726.002,467.008 -p 7 -a 103.821,53.213,730.468,464.031 -p 8 -a 103.821,53.213,727.491,464.776 -p 9 -a 102.332,51.724,679.116,464.031 -p 10 -o ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Eduardo_et_al_2022/processed
+
+Script Arguments:
+pdf: ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Eduardo_et_al_2022/raw/fmars-09-937154.pdf
+output: ../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Eduardo_et_al_2022/processed
+area: [[133.59, 54.701, 729.724, 466.264], [102.332, 55.446, 729.724, 467.008], [103.821, 53.213, 726.002, 467.008], [103.821, 53.213, 730.468, 464.031], [103.821, 53.213, 727.491, 464.776], [102.332, 51.724, 679.116, 464.031]]
+pages: ['5', '6', '7', '8', '9', '10']
+concatenate: True
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Eduardo_et_al_2022/processed/fmars-09-937154_tables_parsed_concatenated.csv
+../../../datasets/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/Eduardo_et_al_2022/processed/fmars-09-937154_parameters.txt
