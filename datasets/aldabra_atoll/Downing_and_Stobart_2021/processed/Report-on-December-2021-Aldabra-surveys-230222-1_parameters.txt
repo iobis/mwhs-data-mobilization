@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-10-20 00:47:44
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/aldabra_atoll/Downing_and_Stobart_2021/raw/Report-on-December-2021-Aldabra-surveys-230222-1.pdf -s -c -nh -a 230.314,75.531,774.288,484.814 -p 13 -a 194.595,72.555,766.102,487.046 -p 14 -a 193.107,75.531,765.358,484.07 -p 15 -a 193.851,74.787,766.102,487.79 -p 16 -a 193.107,75.531,765.358,484.814 -p 17 -a 193.107,74.787,405.934,489.279 -p 18 -o ../../../datasets/aldabra_atoll/Downing_and_Stobart_2021/processed
+
+Script Arguments:
+pdf: ../../../datasets/aldabra_atoll/Downing_and_Stobart_2021/raw/Report-on-December-2021-Aldabra-surveys-230222-1.pdf
+output: ../../../datasets/aldabra_atoll/Downing_and_Stobart_2021/processed
+area: [[230.314, 75.531, 774.288, 484.814], [194.595, 72.555, 766.102, 487.046], [193.107, 75.531, 765.358, 484.07], [193.851, 74.787, 766.102, 487.79], [193.107, 75.531, 765.358, 484.814], [193.107, 74.787, 405.934, 489.279]]
+pages: ['13', '14', '15', '16', '17', '18']
+concatenate: True
+noheaders: True
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/aldabra_atoll/Downing_and_Stobart_2021/processed/Report-on-December-2021-Aldabra-surveys-230222-1_tables_parsed_concatenated.csv
+../../../datasets/aldabra_atoll/Downing_and_Stobart_2021/processed/Report-on-December-2021-Aldabra-surveys-230222-1_parameters.txt

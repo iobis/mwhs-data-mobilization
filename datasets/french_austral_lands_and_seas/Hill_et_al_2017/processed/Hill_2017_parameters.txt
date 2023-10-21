@@ -1,0 +1,22 @@
+Script Execution Summary
+Date and Time: 2023-10-19 15:15:35
+------------------------------
+Command Entered:
+../../../scripts_data/pdf_to_tables/pdf_to_table.py -i ../../../datasets/french_austral_lands_and_seas/Hill_et_al_2017/raw/Hill_2017.pdf -s -a 58.411,215.416,373.908,352.329 -p 10 -o ../../../datasets/french_austral_lands_and_seas/Hill_et_al_2017/processed
+
+Script Arguments:
+pdf: ../../../datasets/french_austral_lands_and_seas/Hill_et_al_2017/raw/Hill_2017.pdf
+output: ../../../datasets/french_austral_lands_and_seas/Hill_et_al_2017/processed
+area: [[58.411, 215.416, 373.908, 352.329]]
+pages: ['10']
+concatenate: False
+noheaders: False
+OCR: False
+cores: 4
+forceocr: False
+stream: True
+lattice: False
+
+Outputs:
+../../../datasets/french_austral_lands_and_seas/Hill_et_al_2017/processed/Hill_2017_tables_parsed_1.csv
+../../../datasets/french_austral_lands_and_seas/Hill_et_al_2017/processed/Hill_2017_parameters.txt

@@ -1,0 +1,858 @@
+Location,Video_code,Video_name,Observer,Group,Code,Species
+LaPaz,CEC_10Oct18_1de7,CEC_GPR_10Oct18_1de7,Manuel,Fish,None,#N/A
+LaPaz,CEC_10Oct18_2de7,CEC_GPR_10Oct18_2de7,Alexia,Fish,mar,Muraena argus
+LaPaz,CEC_10Oct18_4de7,CEC_GPR_10Oct18_4de7,Alexia,Fish,sgu,Scorpaena guttata
+LaPaz,CEC_10Oct18_4de7,CEC_GPR_10Oct18_4de7,Alexia,Fish,lfa,Liopropoma fasciatum
+LaPaz,CEC_10Oct18_4de7,CEC_GPR_10Oct18_4de7,Hollarsmith,Fish,ljo,Lutjanus jordani
+LaPaz,CEC_10Oct18_4de7,CEC_GPR_10Oct18_4de7,Hollarsmith,Fish,pse,Pristigenys serrula
+LaPaz,CEC_10Oct18_4de7,CEC_GPR_10Oct18_4de7,Hollarsmith,Fish,hal,Halichoeres sp.
+LaPaz,CEC_10Oct18_4de7,CEC_GPR_10Oct18_4de7,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+LaPaz,CEC_10Oct18_5de7,CEC_GPR_10Oct18_5de7,Hollarsmith,Invert,Urt,Urotrygon sp.
+LaPaz,CEC_10Oct18_5de7,CEC_GPR_10Oct18_5de7,Hollarsmith,Fish,ljo,Lutjanus jordani
+LaPaz,CEC_10Oct18_5de7,CEC_GPR_10Oct18_5de7,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+LaPaz,CEC_10Oct18_5de7,CEC_GPR_10Oct18_5de7,Hollarsmith,Fish,pse,Pristigenys serrula
+LaPaz,CEC_10Oct18_5de7,CEC_GPR_10Oct18_5de7,Hollarsmith,Fish,lfa,Liopropoma fasciatum
+LaPaz,CEC_10Oct18_5de7,CEC_GPR_10Oct18_5de7,Hollarsmith,Fish,Ste,Stegastes sp.
+LaPaz,CEC_10Oct18_5de7,CEC_GPR_10Oct18_5de7,Hollarsmith,Fish,Slac,Synodus lacertinus
+LaPaz,CEC_10Oct18_6de7,CEC_GPR_10Oct18_6de7,Alexia,Fish,pfa,Prognathodes falcifer 
+LaPaz,CEC_10Oct18_6de7,CEC_GPR_10Oct18_6de7,Hollarsmith,Fish,lfa,Liopropoma fasciatum
+LaPaz,CEC_10Oct18_6de7,CEC_GPR_10Oct18_6de7,Hollarsmith,Fish,pse,Pristigenys serrula
+LaPaz,CEC_10Oct18_6de7,CEC_GPR_10Oct18_6de7,Hollarsmith,Fish,ljo,Lutjanus jordani
+LaPaz,CEC_10Oct18_7de7,CEC_GPR_10Oct18_7de7,Manuel,Fish,Pfa,Prognathodes falcifer 
+LaPaz,CEC_10Oct18_7de7,CEC_GPR_10Oct18_7de7,Manuel,Fish,Pse,Pristigenys serrula
+LaPaz,CEC_10Oct18_7de7,CEC_GPR_10Oct18_7de7,Manuel,Fish,Ljo,Lutjanus jordani
+LaPaz,CEC_10Oct18_1de7,CEC_ROV_10Oct18_1de7,Manuel,Fish,None,#N/A
+LaPaz,CEC_10Oct18_2de7,CEC_ROV_10Oct18_2de7,Manuel,Fish,mar,Muraena argus
+LaPaz,CEC_10Oct18_3de7,CEC_ROV_10Oct18_3de7,Manuel,Fish,Sri,Seriola rivoliana
+LaPaz,CEC_10Oct18_4de7,CEC_ROV_10Oct18_4de7,Hollarsmith,Fish,ljo,Lutjanus jordani
+LaPaz,CEC_10Oct18_4de7,CEC_ROV_10Oct18_4de7,Hollarsmith,Fish,sgu,Scorpaena guttata
+LaPaz,CEC_10Oct18_4de7,CEC_ROV_10Oct18_4de7,Hollarsmith,Fish,pse,Pristigenys serrula
+LaPaz,CEC_10Oct18_5de7,CEC_ROV_10Oct18_5de7,Hollarsmith,Invert,urt,Urotrygon sp.
+LaPaz,CEC_10Oct18_5de7,CEC_ROV_10Oct18_5de7,Hollarsmith,Fish,ljo,Lutjanus jordani
+LaPaz,CEC_10Oct18_5de7,CEC_ROV_10Oct18_5de7,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+LaPaz,CEC_10Oct18_5de7,CEC_ROV_10Oct18_5de7,Hollarsmith,Fish,pse,Pristigenys serrula
+LaPaz,CEC_10Oct18_5de7,CEC_ROV_10Oct18_5de7,Hollarsmith,Fish,ste,Stegastes sp.
+LaPaz,CEC_10Oct18_6de7,CEC_ROV_10Oct18_6de7,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+LaPaz,CEC_10Oct18_6de7,CEC_ROV_10Oct18_6de7,Hollarsmith,Fish,Pse,Pristigenys serrula
+LaPaz,CEC_10Oct18_6de7,CEC_ROV_10Oct18_6de7,Hollarsmith,Fish,lfa,Liopropoma fasciatum
+LaPaz,CEC_10Oct18_6de7,CEC_ROV_10Oct18_6de7,Hollarsmith,Fish,ljo,Lutjanus jordani
+LaPaz,CEC_10Oct18_7de7,CEC_ROV_10Oct18_7de7,Manuel,Fish,Pse,Pristigenys serrula
+LaPaz,CEC_10Oct18_7de7,CEC_ROV_10Oct18_7de7,Manuel,Fish,Ljo,Lutjanus jordani
+LaPaz,EBE_11Oct18_1de4,EBE_GPR_11Oct18_1de4,Manuel,Fish,Lar,Lutjanus argentiventris
+LaPaz,EBE_11Oct18_2de4,EBE_GPR_11Oct18_2de4,Benjamin,Fish,hpa,Holacanthus passer
+LaPaz,EBE_11Oct18_2de4,EBE_GPR_11Oct18_2de4,Benjamin,Fish,pco,Paranthias colonus
+LaPaz,EBE_11Oct18_3de4,EBE_GPR_11Oct18_3de4,Hollarsmith,Fish,pco,Paranthias colonus
+LaPaz,EBE_11Oct18_3de4,EBE_GPR_11Oct18_3de4,Hollarsmith,Fish,Clim,Chromis limbaughi
+LaPaz,EBE_11Oct18_3de4,EBE_GPR_11Oct18_3de4,Hollarsmith,Fish,sve,Sufflamen verres
+LaPaz,EBE_11Oct18_3de4,EBE_GPR_11Oct18_3de4,Hollarsmith,Fish,hpa,Holacanthus passer
+LaPaz,EBE_11Oct18_4de4,EBE_GPR_11Oct18_4de4,Hollarsmith,Fish,pco,Paranthias colonus
+LaPaz,EBE_11Oct18_4de4,EBE_GPR_11Oct18_4de4,Hollarsmith,Fish,mar,Muraena argus
+LaPaz,EBE_11Oct18_4de4,EBE_GPR_11Oct18_4de4,Hollarsmith,Fish,lfa,Liopropoma fasciatum
+LaPaz,EBE_11Oct18_1de4,EBE_ROV_11Oct18_1de4,Manuel,Fish,calt,Chromis alta
+LaPaz,EBE_11Oct18_1de4,EBE_ROV_11Oct18_1de4,Manuel,Fish,Lar,Lutjanus argentiventris
+LaPaz,EBE_11Oct18_1de4,EBE_ROV_11Oct18_1de4,Manuel,Fish,Lar,Lutjanus argentiventris
+LaPaz,EBE_11Oct18_2de4,EBE_ROV_11Oct18_2de4,Benjamin,Fish,sve,Sufflamen verres
+LaPaz,EBE_11Oct18_2de4,EBE_ROV_11Oct18_2de4,Benjamin,Fish,jni,Johnrandallia nigrirostris
+LaPaz,EBE_11Oct18_2de4,EBE_ROV_11Oct18_2de4,Benjamin,Fish,pco,Paranthias colonus
+LaPaz,EBE_11Oct18_2de4,EBE_ROV_11Oct18_2de4,Manuel,Fish,Hpa,Holacanthus passer
+LaPaz,EBE_11Oct18_3de4,EBE_ROV_11Oct18_3de4,Manuel,Fish,Pco,Paranthias colonus
+LaPaz,EBE_11Oct18_3de4,EBE_ROV_11Oct18_3de4,Manuel,Fish,Hpa,Holacanthus passer
+LaPaz,EBE_11Oct18_3de4,EBE_ROV_11Oct18_3de4,Manuel,Fish,Sve,Sufflamen verres
+LaPaz,EBE_11Oct18_3de4,EBE_ROV_11Oct18_3de4,Manuel,Fish,Mro,Mycteroperca rosacea
+LaPaz,EBE_11Oct18_4de4,EBE_ROV_11Oct18_4de4,Hollarsmith,Fish,mar,Muraena argus
+LaPaz,EBE_11Oct18_4de4,EBE_ROV_11Oct18_4de4,Hollarsmith,Fish,pco,Paranthias colonus
+LaPaz,EBE_11Oct18_4de4,EBE_ROV_11Oct18_4de4,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+LaPaz,EBE_11Oct18_4de4,EBE_ROV_11Oct18_4de4,Hollarsmith,Fish,lfa,Liopropoma fasciatum
+LaPaz,EMB_15Oct18_1de8,EMB_GPR_15Oct18_1de8,Hollarsmith,Fish,Ela,Epinephelus labriformis
+LaPaz,EMB_15Oct18_1de8,EMB_GPR_15Oct18_1de8,Hollarsmith,Fish,pco,Paranthias colonus
+LaPaz,EMB_15Oct18_1de8,EMB_GPR_15Oct18_1de8,Manuel,Fish,Lfa,Liopropoma fasciatum
+LaPaz,EMB_15Oct18_1de8,EMB_GPR_15Oct18_1de8,Manuel,Fish,Hpa,Holacanthus passer
+LaPaz,EMB_15Oct18_1de8,EMB_GPR_15Oct18_1de8,Manuel,Fish,Clim,Chromis limbaughi
+LaPaz,EMB_15Oct18_1de8,EMB_GPR_15Oct18_1de8,Manuel,Fish,Pfa,Prognathodes falcifer 
+LaPaz,EMB_15Oct18_1de8,EMB_GPR_15Oct18_1de8,Manuel,Fish,Sps,Serranus psittacinus
+LaPaz,EMB_15Oct18_2de8,EMB_GPR_15Oct18_2de8,Manuel,Fish,lgu,Lutjanus guttatus
+LaPaz,EMB_15Oct18_2de8,EMB_GPR_15Oct18_2de8,Benjamin,Fish,bdi,Bodianus diplotaenia
+LaPaz,EMB_15Oct18_2de8,EMB_GPR_15Oct18_2de8,Benjamin,Fish,bpo,Balistes polylepis
+LaPaz,EMB_15Oct18_2de8,EMB_GPR_15Oct18_2de8,Benjamin,Fish,mro,Mycteroperca rosacea
+LaPaz,EMB_15Oct18_2de8,EMB_GPR_15Oct18_2de8,Benjamin,Fish,jni,Johnrandallia nigrirostris
+LaPaz,EMB_15Oct18_2de8,EMB_GPR_15Oct18_2de8,Benjamin,Fish,ljo,Lutjanus jordani
+LaPaz,EMB_15Oct18_3de8,EMB_GPR_15Oct18_3de8,Hollarsmith,Fish,sri,Seriola rivoliana
+LaPaz,EMB_15Oct18_3de8,EMB_GPR_15Oct18_3de8,Hollarsmith,Fish,ljo,Lutjanus jordani
+LaPaz,EMB_15Oct18_3de8,EMB_GPR_15Oct18_3de8,Hollarsmith,Fish,lgu,Lutjanus guttatus
+LaPaz,EMB_15Oct18_3de8,EMB_GPR_15Oct18_3de8,Hollarsmith,Fish,hse,Haemulon sexfasciatum
+LaPaz,EMB_15Oct18_4de8,EMB_GPR_15Oct18_4de8,Alexia,Fish,hpa,Holacanthus passer
+LaPaz,EMB_15Oct18_4de8,EMB_GPR_15Oct18_4de8,Alexia,Fish,clim,Chromis limbaughi
+LaPaz,EMB_15Oct18_4de8,EMB_GPR_15Oct18_4de8,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+LaPaz,EMB_15Oct18_4de8,EMB_GPR_15Oct18_4de8,Hollarsmith,Fish,ljo,Lutjanus jordani
+LaPaz,EMB_15Oct18_4de8,EMB_GPR_15Oct18_4de8,Hollarsmith,Fish,lfa,Liopropoma fasciatum
+LaPaz,EMB_15Oct18_5de8,EMB_GPR_15Oct18_5de8,Hollarsmith,Fish,Slac,Synodus lacertinus
+LaPaz,EMB_15Oct18_6de8,EMB_GPR_15Oct18_6de8,Hollarsmith,Fish,Slac,Synodus lacertinus
+LaPaz,EMB_15Oct18_7de8,EMB_GPR_15Oct18_7de8,Hollarsmith,Fish,lfa,Liopropoma fasciatum
+LaPaz,EMB_15Oct18_8de8,EMB_GPR_15Oct18_8de8,Manuel,Fish,Slac,Synodus lacertinus
+LaPaz,EMB_15Oct18_1de8,EMB_ROV_15Oct18_1de8,Hollarsmith,Fish,ela,Epinephelus labriformis
+LaPaz,EMB_15Oct18_1de8,EMB_ROV_15Oct18_1de8,Hollarsmith,Fish,Lfa,Liopropoma fasciatum
+LaPaz,EMB_15Oct18_1de8,EMB_ROV_15Oct18_1de8,Manuel,Fish,Hpa,Holacanthus passer
+LaPaz,EMB_15Oct18_1de8,EMB_ROV_15Oct18_1de8,Manuel,Fish,Clim,Chromis limbaughi
+LaPaz,EMB_15Oct18_2de8,EMB_ROV_15Oct18_2de8,Benjamin,Fish,bpo,Balistes polylepis
+LaPaz,EMB_15Oct18_2de8,EMB_ROV_15Oct18_2de8,Benjamin,Fish,bdi,Bodianus diplotaenia
+LaPaz,EMB_15Oct18_2de8,EMB_ROV_15Oct18_2de8,Benjamin,Fish,ljo,Lutjanus jordani
+LaPaz,EMB_15Oct18_2de8,EMB_ROV_15Oct18_2de8,Manuel,Fish,lgu,Lutjanus guttatus
+LaPaz,EMB_15Oct18_3de8,EMB_ROV_15Oct18_3de8,Manuel,Fish,Sri,Seriola rivoliana
+LaPaz,EMB_15Oct18_3de8,EMB_ROV_15Oct18_3de8,Manuel,Fish,Lno,Lutjanus novemfasciatus
+LaPaz,EMB_15Oct18_3de8,EMB_ROV_15Oct18_3de8,Manuel,Fish,Lgu,Lutjanus guttatus
+LaPaz,EMB_15Oct18_4de8,EMB_ROV_15Oct18_4de8,Alexia,Fish,hpa,Holacanthus passer
+LaPaz,EMB_15Oct18_4de8,EMB_ROV_15Oct18_4de8,Alexia,Fish,clim,Chromis limbaughi
+LaPaz,EMB_15Oct18_4de8,EMB_ROV_15Oct18_4de8,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+LaPaz,EMB_15Oct18_4de8,EMB_ROV_15Oct18_4de8,Hollarsmith,Fish,lfa,Liopropoma fasciatum
+LaPaz,EMB_15Oct18_6de8,EMB_ROV_15Oct18_6de8,Hollarsmith,Fish,Slac,Synodus lacertinus
+LaPaz,EMB_15Oct18_7de8,EMB_ROV_15Oct18_7de8,Manuel,Fish,Slac,Synodus lacertinus
+LaPaz,EMB_15Oct18_7de8,EMB_ROV_15Oct18_7de8,Manuel,Fish,Bpo,Balistes polylepis
+LaPaz,EMB_15Oct18_8de8,EMB_ROV_15Oct18_8de8,Manuel,Fish,Bpo,Balistes polylepis
+LaPaz,EMB_15Oct18_8de8,EMB_ROV_15Oct18_8de8,Manuel,Fish,Hal,Halichoeres sp.
+LaPaz,EMB_15Oct18_8de8,EMB_ROV_15Oct18_8de8,Manuel,Fish,Sps,Serranus psittacinus
+LaPaz,EMB_15Oct18_8de8,EMB_ROV_15Oct18_8de8,Manuel,Fish,Slac,Synodus lacertinus
+Revillagigedo,IC1_17Dec18_1de1,IC1_GPR_17Dec18_1de1,PAUL PRECIADO,Algae,green,Halimeda sp. 
+Revillagigedo,IC1_17Dec18_1de1,IC1_GPR_17Dec18_1de1,PAUL PRECIADO,Fish,dho,Diodon holocanthus
+Revillagigedo,IC1_17Dec18_1de1,IC1_GPR_17Dec18_1de1,PAUL PRECIADO,Algae,green,Codium sp. 
+Revillagigedo,IC1_17Dec18_1de1,IC1_GPR_17Dec18_1de1,PAUL PRECIADO,Invert,tro,Toxopneustes roseus 
+Revillagigedo,IC1_17Dec18_1de1,IC1_ROV_17Dec18_1de1,PAUL PRECIADO,Algae,green,Halimeda sp. 
+Revillagigedo,IC1_17Dec18_1de1,IC1_ROV_17Dec18_1de1,PAUL PRECIADO,Fish,dho,Diodon holocanthus
+Revillagigedo,IC2_17Dec18_1de1,IC2_GPR_17Dec18_1de1,Hollarsmith,Invert,tro,Toxopneustes roseus 
+Revillagigedo,IC2_17Dec18_1de1,IC2_GPR_17Dec18_1de1,Hollarsmith,Invert,pcu,Pentaceraster cummingii
+Revillagigedo,IC2_17Dec18_1de1,IC2_GPR_17Dec18_1de1,Hollarsmith,Algae,green,Halimeda sp.
+Revillagigedo,IC2_17Dec18_1de1,IC2_GPR_17Dec18_1de1,Hollarsmith,Algae,brown,Padina sp.
+Revillagigedo,IC2_17Dec18_1de1,IC2_GPR_17Dec18_1de1,Hollarsmith,Algae,brown,Dictyota sp.
+Revillagigedo,IC2_17Dec18_1de1,IC2_GPR_17Dec18_1de1,Hollarsmith,Algae,brown,Spatoglossum sp.
+Revillagigedo,IC2_17Dec18_1de1,IC2_GPR_17Dec18_1de1,Hollarsmith,Algae,green,Codium sp.
+Revillagigedo,IC2_17Dec18_1de1,IC2_GPR_17Dec18_1de1,Hollarsmith,Fish,qev,Quassiremus evionthas
+Revillagigedo,IC2_17Dec18_1de1,IC2_ROV_17Dec18_1de1,PAUL PRECIADO,Algae,green,Halimeda sp. 
+Revillagigedo,IC2_17Dec18_1de1,IC2_ROV_17Dec18_1de1,PAUL PRECIADO,Fish,fco,Fistularia commersonii
+Revillagigedo,IC2_17Dec18_1de1,IC2_ROV_17Dec18_1de1,PAUL PRECIADO,Fish,ach,Aulostomus chinensis
+Revillagigedo,IC2_17Dec18_1de1,IC2_ROV_17Dec18_1de1,PAUL PRECIADO,Invert,pcu,Pentaceraster cummingii
+Revillagigedo,IC3_17Dec18_1de6,IC3_GPR_17Dec18_1de6,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,IC3_17Dec18_2de6,IC3_GPR_17Dec18_2de6,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,IC3_17Dec18_2de6,IC3_GPR_17Dec18_2de6,Hollarsmith,Fish,Scor,Scorpaena sp.
+Revillagigedo,IC3_17Dec18_2de6,IC3_GPR_17Dec18_2de6,Hollarsmith, Fish,eci,Epinephelus cifuentesi
+Revillagigedo,IC3_17Dec18_2de6,IC3_GPR_17Dec18_2de6,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,IC3_17Dec18_2de6,IC3_GPR_17Dec18_2de6,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,IC3_17Dec18_2de6,IC3_GPR_17Dec18_2de6,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,IC3_17Dec18_2de6,IC3_GPR_17Dec18_2de6,PAUL PRECIADO,Fish,bpo,Balistes polylepis
+Revillagigedo,IC3_17Dec18_2de6,IC3_GPR_17Dec18_2de6,PAUL PRECIADO,Fish,hcr,Heteropriacanthus cruentatus
+Revillagigedo,IC3_17Dec18_2de6,IC3_GPR_17Dec18_2de6,PAUL PRECIADO,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC3_17Dec18_2de6,IC3_GPR_17Dec18_2de6,PAUL PRECIADO,Fish,ach,Aulostomus chinensis
+Revillagigedo,IC3_17Dec18_2de6,IC3_GPR_17Dec18_2de6,PAUL PRECIADO,Fish,ela,Epinephelus labriformis
+Revillagigedo,IC3_17Dec18_3de6,IC3_GPR_17Dec18_3de6,Hollarsmith,Fish,eci,Epinephelus cifuentesi
+Revillagigedo,IC3_17Dec18_3de6,IC3_GPR_17Dec18_3de6,Hollarsmith,Fish,hcr,Heteropriacanthus cruentatus
+Revillagigedo,IC3_17Dec18_3de6,IC3_GPR_17Dec18_3de6,Hollarsmith,Trash,bottle,#N/A
+Revillagigedo,IC3_17Dec18_3de6,IC3_GPR_17Dec18_3de6,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,IC3_17Dec18_3de6,IC3_GPR_17Dec18_3de6,PAUL PRECIADO,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC3_17Dec18_3de6,IC3_GPR_17Dec18_3de6,PAUL PRECIADO,Fish,ela,Epinephelus labriformis
+Revillagigedo,IC3_17Dec18_3de6,IC3_GPR_17Dec18_3de6,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,IC3_17Dec18_3de6,IC3_GPR_17Dec18_3de6,PAUL PRECIADO,Fish,sri,Seriola rivoliana
+Revillagigedo,IC3_17Dec18_3de6,IC3_GPR_17Dec18_3de6,PAUL PRECIADO,Invert,oct,Octopus sp
+Revillagigedo,IC3_17Dec18_4de6,IC3_GPR_17Dec18_4de6,Hollarsmith,Fish,eci,Epinephelus cifuentesi
+Revillagigedo,IC3_17Dec18_4de6,IC3_GPR_17Dec18_4de6,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,IC3_17Dec18_4de6,IC3_GPR_17Dec18_4de6,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,IC3_17Dec18_4de6,IC3_GPR_17Dec18_4de6,Hollarsmith,Fish,hal,Halichoeres sp.
+Revillagigedo,IC3_17Dec18_4de6,IC3_GPR_17Dec18_4de6,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,IC3_17Dec18_4de6,IC3_GPR_17Dec18_4de6,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,IC3_17Dec18_4de6,IC3_GPR_17Dec18_4de6,PAUL PRECIADO,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC3_17Dec18_4de6,IC3_GPR_17Dec18_4de6,PAUL PRECIADO,Fish,hcr,Heteropriacanthus cruentatus
+Revillagigedo,IC3_17Dec18_4de6,IC3_GPR_17Dec18_4de6,PAUL PRECIADO,Fish,ela,Epinephelus labriformis
+Revillagigedo,IC3_17Dec18_4de6,IC3_GPR_17Dec18_4de6,PAUL PRECIADO,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC3_17Dec18_4de6,IC3_GPR_17Dec18_4de6,PAUL PRECIADO,Invert,hol,Holothuria sp
+Revillagigedo,IC3_17Dec18_5de6,IC3_GPR_17Dec18_5de6,Hollarsmith,Invert,ains,Amphiaster insignis
+Revillagigedo,IC3_17Dec18_5de6,IC3_GPR_17Dec18_5de6,Hollarsmith,Invert,oct,Octopus sp
+Revillagigedo,IC3_17Dec18_5de6,IC3_GPR_17Dec18_5de6,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,IC3_17Dec18_5de6,IC3_GPR_17Dec18_5de6,Hollarsmith,Trash,fishing line,#N/A
+Revillagigedo,IC3_17Dec18_5de6,IC3_GPR_17Dec18_5de6,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,IC3_17Dec18_5de6,IC3_GPR_17Dec18_5de6,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,IC3_17Dec18_5de6,IC3_GPR_17Dec18_5de6,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC3_17Dec18_5de6,IC3_GPR_17Dec18_5de6,PAUL PRECIADO,Fish,hcr,Heteropriacanthus cruentatus
+Revillagigedo,IC3_17Dec18_5de6,IC3_GPR_17Dec18_5de6,PAUL PRECIADO,Invert,hol,Holothuria sp
+Revillagigedo,IC3_17Dec18_6de6,IC3_GPR_17Dec18_6de6,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,IC3_17Dec18_6de6,IC3_GPR_17Dec18_6de6,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,IC3_17Dec18_6de6,IC3_GPR_17Dec18_6de6,PAUL PRECIADO,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,IC3_17Dec18_6de6,IC3_GPR_17Dec18_6de6,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,IC3_17Dec18_6de6,IC3_GPR_17Dec18_6de6,PAUL PRECIADO,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC3_17Dec18_6de6,IC3_GPR_17Dec18_6de6,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,IC3_17Dec18_6de6,IC3_GPR_17Dec18_6de6,PAUL PRECIADO,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,IC3_17Dec18_1de6,IC3_ROV_17Dec18_1de6,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,IC3_17Dec18_1de6,IC3_ROV_17Dec18_1de6,PAUL PRECIADO,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,IC3_17Dec18_1de6,IC3_ROV_17Dec18_1de6,PAUL PRECIADO,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,IC3_17Dec18_2de6,IC3_ROV_17Dec18_2de6,Hollarsmith,Fish,eci,Epinephelus cifuentesi
+Revillagigedo,IC3_17Dec18_2de6,IC3_ROV_17Dec18_2de6,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,IC3_17Dec18_2de6,IC3_ROV_17Dec18_2de6,PAUL PRECIADO,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,IC3_17Dec18_2de6,IC3_ROV_17Dec18_2de6,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,IC3_17Dec18_2de6,IC3_ROV_17Dec18_2de6,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,IC3_17Dec18_2de6,IC3_ROV_17Dec18_2de6,PAUL PRECIADO,Fish,bpo,Balistes polylepis
+Revillagigedo,IC3_17Dec18_2de6,IC3_ROV_17Dec18_2de6,PAUL PRECIADO,Fish,hcr,Heteropriacanthus cruentatus
+Revillagigedo,IC3_17Dec18_2de6,IC3_ROV_17Dec18_2de6,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,IC3_17Dec18_2de6,IC3_ROV_17Dec18_2de6,PAUL PRECIADO,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,IC3_17Dec18_2de6,IC3_ROV_17Dec18_2de6,PAUL PRECIADO,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC3_17Dec18_2de6,IC3_ROV_17Dec18_2de6,PAUL PRECIADO,Fish,ach,Aulostomus chinensis
+Revillagigedo,IC3_17Dec18_3de6,IC3_ROV_17Dec18_3de6,Hollarsmith,Invert,oct,Octopus sp
+Revillagigedo,IC3_17Dec18_3de6,IC3_ROV_17Dec18_3de6,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,IC3_17Dec18_3de6,IC3_ROV_17Dec18_3de6,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,IC3_17Dec18_3de6,IC3_ROV_17Dec18_3de6,PAUL PRECIADO,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC3_17Dec18_3de6,IC3_ROV_17Dec18_3de6,PAUL PRECIADO,Fish,ela,Epinephelus labriformis
+Revillagigedo,IC3_17Dec18_3de6,IC3_ROV_17Dec18_3de6,PAUL PRECIADO,Fish,hcr,Heteropriacanthus cruentatus
+Revillagigedo,IC3_17Dec18_4de6,IC3_ROV_17Dec18_4de6,Hollarsmith,Fish,eci,Epinephelus cifuentesi
+Revillagigedo,IC3_17Dec18_4de6,IC3_ROV_17Dec18_4de6,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,IC3_17Dec18_4de6,IC3_ROV_17Dec18_4de6,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,IC3_17Dec18_4de6,IC3_ROV_17Dec18_4de6,PAUL PRECIADO,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC3_17Dec18_4de6,IC3_ROV_17Dec18_4de6,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,IC3_17Dec18_4de6,IC3_ROV_17Dec18_4de6,PAUL PRECIADO,Fish,hcr,Heteropriacanthus cruentatus
+Revillagigedo,IC3_17Dec18_4de6,IC3_ROV_17Dec18_4de6,PAUL PRECIADO,Fish,sri,Seriola rivoliana
+Revillagigedo,IC3_17Dec18_5de6,IC3_ROV_17Dec18_5de6,Hollarsmith,Invert,,Holothurian sp.
+Revillagigedo,IC3_17Dec18_5de6,IC3_ROV_17Dec18_5de6,Hollarsmith,Fish,eci,Epinephelus cifuentesi
+Revillagigedo,IC3_17Dec18_5de6,IC3_ROV_17Dec18_5de6,Twinquist,Fish,Sri,Seriola rivoliana
+Revillagigedo,IC3_17Dec18_5de6,IC3_ROV_17Dec18_5de6,Twinquist,Fish,Pco,Paranthias colonus
+Revillagigedo,IC3_17Dec18_5de6,IC3_ROV_17Dec18_5de6,Twinquist,Fish,Clu,Caranx lugubris
+Revillagigedo,IC3_17Dec18_5de6,IC3_ROV_17Dec18_5de6,Twinquist,Fish,Hcr,Heteropriacanthus cruentatus
+Revillagigedo,IC3_17Dec18_5de6,IC3_ROV_17Dec18_5de6,Twinquist,Fish,Pfa,Prognathodes falcifer 
+Revillagigedo,IC3_17Dec18_5de6,IC3_ROV_17Dec18_5de6,Twinquist,Fish,Cal,Carcharhinus albimarginatus
+Revillagigedo,IC3_17Dec18_5de6,IC3_ROV_17Dec18_5de6,Twinquist,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,IC3_17Dec18_5de6,IC3_ROV_17Dec18_5de6,Twinquist,Fish,Xme,Xanthichthys mento
+Revillagigedo,IC3_17Dec18_6de6,IC3_ROV_17Dec18_6de6,Hollarsmith,Fish,pse,Pristigenys serrula
+Revillagigedo,IC3_17Dec18_6de6,IC3_ROV_17Dec18_6de6,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,IC3_17Dec18_6de6,IC3_ROV_17Dec18_6de6,Twinquist,Fish,Pfa,Prognathodes falcifer 
+Revillagigedo,IC3_17Dec18_6de6,IC3_ROV_17Dec18_6de6,Twinquist,Fish,Pco,Paranthias colonus
+Revillagigedo,IC3_17Dec18_6de6,IC3_ROV_17Dec18_6de6,Twinquist,Fish,Hcl,Holacanthus clarionensis
+Revillagigedo,IC3_17Dec18_6de6,IC3_ROV_17Dec18_6de6,Twinquist,Fish,Xme,Xanthichthys mento
+Revillagigedo,IC3_17Dec18_6de6,IC3_ROV_17Dec18_6de6,Twinquist,Fish,Clu,Caranx lugubris
+Revillagigedo,IC3_17Dec18_6de6,IC3_ROV_17Dec18_6de6,Twinquist,Fish,Cfa,Carcharhinus falciformis
+Revillagigedo,IC4_17Dec18_1de3,IC4_GPR_17Dec18_1de3,Hollarsmith,Invert,ains,Amphiaster insignis
+Revillagigedo,IC4_17Dec18_1de3,IC4_GPR_17Dec18_1de3,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,IC4_17Dec18_1de3,IC4_GPR_17Dec18_1de3,Hollarsmith,Fish,car,Caranx sp.
+Revillagigedo,IC4_17Dec18_2de3,IC4_GPR_17Dec18_2de3,Hollarsmith,Invert,ains,Amphiaster insignis
+Revillagigedo,IC4_17Dec18_2de3,IC4_GPR_17Dec18_2de3,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,IC4_17Dec18_3de3,IC4_GPR_17Dec18_3de3,Hollarsmith,Invert,ains,Amphiaster insignis
+Revillagigedo,IC4_17Dec18_3de3,IC4_GPR_17Dec18_3de3,Hollarsmith,Fish,qev,Quassiremus evionthas
+Revillagigedo,IC4_17Dec18_3de3,IC4_GPR_17Dec18_3de3,Hollarsmith,Fish,sri,Seriola rivoliana
+Revillagigedo,IC4_17Dec18_1de3,IC4_ROV_17Dec18_1de3,Hollarsmith,Fish,cme,Caranx melampygus
+Revillagigedo,IC4_17Dec18_1de3,IC4_ROV_17Dec18_1de3,Hollarsmith,Fish,sri,Seriola rivoliana
+Revillagigedo,IC4_17Dec18_2de3,IC4_ROV_17Dec18_2de3,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,IC4_17Dec18_3de3,IC4_ROV_17Dec18_3de3,Hollarsmith,Fish,clu,Caranx lugubris
+Revillagigedo,IC4_17Dec18_3de3,IC4_ROV_17Dec18_3de3,Hollarsmith,Fish,cme,Caranx melampygus
+Revillagigedo,IC4_17Dec18_3de3,IC4_ROV_17Dec18_3de3,Hollarsmith,Fish,qev,Quassiremus evionthas
+Revillagigedo,IC5_17Dec18_1de3,IC5_GPR_17Dec18_1de3,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,IC5_17Dec18_1de3,IC5_GPR_17Dec18_1de3,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,IC5_17Dec18_1de3,IC5_GPR_17Dec18_1de3,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,IC5_17Dec18_1de3,IC5_GPR_17Dec18_1de3,Hollarsmith,Fish,ela,Epinephelus labriformis
+Revillagigedo,IC5_17Dec18_1de3,IC5_GPR_17Dec18_1de3,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,IC5_17Dec18_2de3,IC5_GPR_17Dec18_2de3,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,IC5_17Dec18_2de3,IC5_GPR_17Dec18_2de3,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,IC5_17Dec18_2de3,IC5_GPR_17Dec18_2de3,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,IC5_17Dec18_2de3,IC5_GPR_17Dec18_2de3,Hollarsmith,Fish,pse,Pristigenys serrula
+Revillagigedo,IC5_17Dec18_2de3,IC5_GPR_17Dec18_2de3,Hollarsmith,Fish,ela,Epinephelus labriformis
+Revillagigedo,IC5_17Dec18_2de3,IC5_GPR_17Dec18_2de3,Hollarsmith,Fish,eci,Epinephelus cifuentesi
+Revillagigedo,IC5_17Dec18_2de3,IC5_GPR_17Dec18_2de3,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,IC5_17Dec18_3de3,IC5_GPR_17Dec18_3de3,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,IC5_17Dec18_3de3,IC5_GPR_17Dec18_3de3,Hollarsmith,Fish,ela,Epinephelus labriformis
+Revillagigedo,IC5_17Dec18_3de3,IC5_GPR_17Dec18_3de3,Hollarsmith,Fish,pse,Pristigenys serrula
+Revillagigedo,IC5_17Dec18_3de3,IC5_GPR_17Dec18_3de3,Hollarsmith,Fish,sso,Serranus socorroensis
+Revillagigedo,IC5_17Dec18_3de3,IC5_GPR_17Dec18_3de3,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,IC5_17Dec18_3de3,IC5_GPR_17Dec18_3de3,Hollarsmith,Fish,ecl,Epinephelus clippertonensis
+Revillagigedo,IC5_17Dec18_3de3,IC5_GPR_17Dec18_3de3,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,IC5_17Dec18_3de3,IC5_GPR_17Dec18_3de3,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,IC5_17Dec18_1de3,IC5_ROV_17Dec18_1de3,Hollarsmith,Fish,bpo,Balistes polylepis
+Revillagigedo,IC5_17Dec18_1de3,IC5_ROV_17Dec18_1de3,Hollarsmith,Fish,bpo,Balistes polylepis
+Revillagigedo,IC5_17Dec18_1de3,IC5_ROV_17Dec18_1de3,Hollarsmith,Fish,Xme,Xanthichthys mento
+Revillagigedo,IC5_17Dec18_1de3,IC5_ROV_17Dec18_1de3,Hollarsmith,Fish,car,Caranx sp.
+Revillagigedo,IC5_17Dec18_1de3,IC5_ROV_17Dec18_1de3,Twinquist,Fish,Pco,Paranthias colonus
+Revillagigedo,IC5_17Dec18_1de3,IC5_ROV_17Dec18_1de3,Twinquist,Fish,Bdi,Bodianus diplotaenia
+Revillagigedo,IC5_17Dec18_1de3,IC5_ROV_17Dec18_1de3,Twinquist,Fish,Tob,Triaenodon obesus
+Revillagigedo,IC5_17Dec18_1de3,IC5_ROV_17Dec18_1de3,Twinquist,Fish,Hcl,Holacanthus clarionensis
+Revillagigedo,IC5_17Dec18_1de3,IC5_ROV_17Dec18_1de3,Twinquist,Fish,Cal,Carcharhinus albimarginatus
+Revillagigedo,IC5_17Dec18_2de3,IC5_ROV_17Dec18_2de3,Hollarsmith,Fish,sri,Seriola rivoliana
+Revillagigedo,IC5_17Dec18_2de3,IC5_ROV_17Dec18_2de3,Hollarsmith,Fish,ecl,Epinephelus clippertonensis
+Revillagigedo,IC5_17Dec18_2de3,IC5_ROV_17Dec18_2de3,Hollarsmith,Fish,ecl,Epinephelus clippertonensis
+Revillagigedo,IC5_17Dec18_2de3,IC5_ROV_17Dec18_2de3,Hollarsmith,Fish,ain,Anisotremus interruptus
+Revillagigedo,IC5_17Dec18_2de3,IC5_ROV_17Dec18_2de3,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,IC5_17Dec18_2de3,IC5_ROV_17Dec18_2de3,Twinquist,Fish,Pco,Paranthias colonus
+Revillagigedo,IC5_17Dec18_2de3,IC5_ROV_17Dec18_2de3,Twinquist,Fish,Xme,Xanthichthys mento
+Revillagigedo,IC5_17Dec18_3de3,IC5_ROV_17Dec18_3de3,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,IC5_17Dec18_3de3,IC5_ROV_17Dec18_3de3,Hollarsmith,Fish,pse,Pristigenys serrula
+Revillagigedo,IC5_17Dec18_3de3,IC5_ROV_17Dec18_3de3,Hollarsmith,Fish,ela,Epinephelus labriformis
+Revillagigedo,IC5_17Dec18_3de3,IC5_ROV_17Dec18_3de3,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,IC6_18Dec18_1de1,IC6_GPR_18Dec18_1de1,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,IC6_18Dec18_1de1,IC6_GPR_18Dec18_1de1,Hollarsmith,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,IC6_18Dec18_1de1,IC6_GPR_18Dec18_1de1,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,IC6_18Dec18_1de1,IC6_GPR_18Dec18_1de1,Hollarsmith,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,IC6_18Dec18_1de1,IC6_ROV_18Dec18_1de1,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,IC6_18Dec18_1de1,IC6_ROV_18Dec18_1de1,Hollarsmith,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,IC7_18Dec18_1de1,IC7_GPR_18Dec18_1de1,Hollarsmith,Invert,pcu,Pentaceraster cummingii
+Revillagigedo,IC7_18Dec18_1de1,IC7_GPR_18Dec18_1de1,Hollarsmith,Fish,fco,Fistularia commersonii
+Revillagigedo,IC7_18Dec18_1de1,IC7_ROV_18Dec18_1de1,Hollarsmith,Fish,fco,Fistularia commersonii
+Revillagigedo,IC7_18Dec18_1de1,IC7_ROV_18Dec18_1de1,Hollarsmith,Fish,fco,Fistularia commersonii
+Revillagigedo,IC9_18Dec18_1de9,IC9_GPR_18Dec18_1de9,KCN,Fish,CLU,Caranx lugubris
+Revillagigedo,IC9_18Dec18_1de9,IC9_GPR_18Dec18_1de9,KCN,Fish,CME,Caranx melampygus
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,hal,Halichoeres sp.
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Trash,rope,#N/A
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,clu,Caranx lugubris
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Trash,bottle,#N/A
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,ain,Anisotremus interruptus
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,dde,Dermatolepis dermatolepis
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,clu,Caranx lugubris
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,bpo,Balistes polylepis
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,ste,Stegastes sp.
+Revillagigedo,IC9_18Dec18_2de9,IC9_GPR_18Dec18_2de9,Hollarsmith,Fish,ach,Aulostomus chinensis
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,scor,Scorpaena sp.
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,ain,Anisotremus interruptus
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,clu,Caranx lugubris
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,hal,Halichoeres sp.
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,cre,Chilomycterus reticulatus
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,ach,Aulostomus chinensis
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC9_18Dec18_3de9,IC9_GPR_18Dec18_3de9,Hollarsmith,Fish,sso,Serranus socorroensis
+Revillagigedo,IC9_18dec18_4de9,IC9_GPR_18dec18_4de9,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,IC9_18dec18_4de9,IC9_GPR_18dec18_4de9,Hollarsmith,Fish,dde,Dermatolepis dermatolepis
+Revillagigedo,IC9_18dec18_4de9,IC9_GPR_18dec18_4de9,Hollarsmith,Trash,spoon,#N/A
+Revillagigedo,IC9_18dec18_4de9,IC9_GPR_18dec18_4de9,Hollarsmith,Fish,scor,Scorpaena sp.
+Revillagigedo,IC9_18dec18_4de9,IC9_GPR_18dec18_4de9,Twinquist,Fish,pco,Paranthias colonus
+Revillagigedo,IC9_18Dec18_5de9,IC9_GPR_18Dec18_5de9,Hollarsmith,Invert,pcu,Pentaceraster cummingii
+Revillagigedo,IC9_18Dec18_5de9,IC9_GPR_18Dec18_5de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,IC9_18Dec18_5de9,IC9_GPR_18Dec18_5de9,Hollarsmith,Fish,ach,Aulostomus chinensis
+Revillagigedo,IC9_18Dec18_5de9,IC9_GPR_18Dec18_5de9,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,IC9_18Dec18_5de9,IC9_GPR_18Dec18_5de9,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,IC9_18Dec18_6de9,IC9_GPR_18Dec18_6de9,Twinquist,Invert,pcu,Pentaceraster cummingii
+Revillagigedo,IC9_18Dec18_6de9,IC9_GPR_18Dec18_6de9,Twinquist,Invert,pcu,Pentaceraster cummingii
+Revillagigedo,IC9_18Dec18_7de9,IC9_GPR_18Dec18_7de9,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,IC9_18Dec18_9de9,IC9_GPR_18Dec18_9de9,Hollarsmith,Invert,pcu,Pentaceraster cummingii
+Revillagigedo,IC9_18Dec18_1de9,IC9_ROV_18Dec18_1de9,KCN,Fish,SRI,Seriola rivoliana
+Revillagigedo,IC9_18Dec18_1de9,IC9_ROV_18Dec18_1de9,KCN,Fish,CLU,Caranx lugubris
+Revillagigedo,IC9_18Dec18_1de9,IC9_ROV_18Dec18_1de9,KCN,Fish,CFA,Carcharhinus falciformis
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,Hollarsmith,Fish,ain,Anisotremus interruptus
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,XME,Xanthichthys mento
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,BDI,Bodianus diplotaenia
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,CLU,Caranx lugubris
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,DDE,Dermatolepis dermatolepis
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,BPO,Balistes polylepis
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,BDI,Bodianus diplotaenia
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,PCO,Paranthias colonus
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,ELA,Epinephelus labriformis
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,SVE,Sufflamen verres
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,calt,Chromis alta
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,SRI,Seriola rivoliana
+Revillagigedo,IC9_18Dec18_2de9,IC9_ROV_18Dec18_2de9,KCN,Fish,HCL,Holacanthus clarionensis
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Hollarsmith,Fish,ain,Anisotremus interruptus
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Hollarsmith,Fish,sri,Seriola rivoliana
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Hollarsmith,Fish,dde,Dermatolepis dermatolepis
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Hollarsmith,Fish,ela,Epinephelus labriformis
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Twinquist,Fish,pco,Paranthias colonus
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Twinquist,Fish,xme,Xanthichthys mento
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Twinquist,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Twinquist,Fish,clu,Caranx lugubris
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Twinquist,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Twinquist,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Twinquist,Fish,lno,Lutjanus novemfasciatus
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Twinquist,Fish,cre,Chilomycterus reticulatus
+Revillagigedo,IC9_18Dec18_3de9,IC9_ROV_18Dec18_3de9,Twinquist,Fish,ach,Aulostomus chinensis
+Revillagigedo,IC9_18Dec18_4de9,IC9_ROV_18Dec18_4de9,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,IC9_18Dec18_4de9,IC9_ROV_18Dec18_4de9,Twinquist,Fish,pco,Paranthias colonus
+Revillagigedo,IC9_18Dec18_4de9,IC9_ROV_18Dec18_4de9,Twinquist,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,IC9_18Dec18_4de9,IC9_ROV_18Dec18_4de9,Twinquist,Fish,dde,Dermatolepis dermatolepis
+Revillagigedo,IC9_18Dec18_4de9,IC9_ROV_18Dec18_4de9,Twinquist,Fish,sri,Seriola rivoliana
+Revillagigedo,IC9_18Dec18_4de9,IC9_ROV_18Dec18_4de9,Twinquist,Fish,clu,Caranx lugubris
+Revillagigedo,IC9_18Dec18_4de9,IC9_ROV_18Dec18_4de9,Twinquist,Fish,xme,Xanthichthys mento
+Revillagigedo,IC9_18Dec18_4de9,IC9_ROV_18Dec18_4de9,Twinquist,Fish,ain,Anisotremus interruptus
+Revillagigedo,IC9_18Dec18_5de9,IC9_ROV_18Dec18_5de9,Hollarsmith,Fish,eci,Epinephelus cifuentesi
+Revillagigedo,IC9_18Dec18_5de9,IC9_ROV_18Dec18_5de9,Hollarsmith,Fish,sri,Seriola rivoliana
+Revillagigedo,IC9_18Dec18_5de9,IC9_ROV_18Dec18_5de9,Twinquist,Fish,pco,Paranthias colonus
+Revillagigedo,IC9_18Dec18_5de9,IC9_ROV_18Dec18_5de9,Twinquist,Fish,ain,Anisotremus interruptus
+Revillagigedo,IC9_18Dec18_5de9,IC9_ROV_18Dec18_5de9,Twinquist,Fish,xme,Xanthichthys mento
+Revillagigedo,IC9_18Dec18_5de9,IC9_ROV_18Dec18_5de9,Twinquist,Fish,ach,Aulostomus chinensis
+Revillagigedo,IC9_18Dec18_5de9,IC9_ROV_18Dec18_5de9,Twinquist,Fish,clu,Caranx lugubris
+Revillagigedo,IC9_18Dec18_5de9,IC9_ROV_18Dec18_5de9,Twinquist,Invert,pcu,Pentaceraster cummingii
+Revillagigedo,IC9_18Dec18_6de9,IC9_ROV_18Dec18_6de9,Hollarsmith,Invert,pcu,Pentaceraster cummingii
+Revillagigedo,IC9_18Dec18_6de9,IC9_ROV_18Dec18_6de9,Hollarsmith,Fish,bpo,Balistes polylepis
+Revillagigedo,IC9_18Dec18_6de9,IC9_ROV_18Dec18_6de9,Twinquist,Fish,sri,Seriola rivoliana
+Revillagigedo,IC9_18Dec18_6de9,IC9_ROV_18Dec18_6de9,Twinquist,Fish,sri,Seriola rivoliana
+Revillagigedo,IC9_18Dec18_6de9,IC9_ROV_18Dec18_6de9,Twinquist,Fish,xme,Xanthichthys mento
+Revillagigedo,IC9_18Dec18_9de9,IC9_ROV_18Dec18_9de9,Hollarsmith,Invert,pcu,Pentaceraster cummingii
+Revillagigedo,IC9_18Dec18_9de9,IC9_ROV_18Dec18_9de9,Hollarsmith,Fish,sri,Seriola rivoliana
+LaPaz,IS1_15Oct18_1de2,IS1_GPR_15Oct18_1de2,Hollarsmith,Fish,slac,Synodus lacertinus
+LaPaz,IS1_15Oct18_1de2,IS1_GPR_15Oct18_1de2,Manuel,Fish,Sps,Serranus psittacinus
+LaPaz,IS1_15Oct18_1de2,IS1_GPR_15Oct18_1de2,Manuel,Fish,ste,Stegastes sp.
+LaPaz,IS1_15Oct18_1de2,IS1_GPR_15Oct18_1de2,Manuel,Fish,Lfa,Liopropoma fasciatum
+LaPaz,IS1_15Oct18_1de2,IS1_GPR_15Oct18_1de2,Manuel,Fish,Clim,Chromis limbaughi
+LaPaz,IS1_15Oct18_1de2,IS1_GPR_15Oct18_1de2,Manuel,Fish,Sgu,Scorpaena guttata
+LaPaz,IS1_15Oct18_1de2,IS1_GPR_15Oct18_1de2,Manuel,Fish,Hdi,Halichoeres dispilus
+LaPaz,IS1_15Oct18_1de2,IS1_GPR_15Oct18_1de2,Manuel,Fish,Chu,Chaetodon humeralis
+LaPaz,IS1_15Oct18_1de2,IS1_GPR_15Oct18_1de2,Manuel,Fish,Pfa,Prognathodes falcifer 
+LaPaz,IS1_15Oct18_2de2,IS1_GPR_15Oct18_2de2,Benjamin,Fish,chu,Chaetodon humeralis
+LaPaz,IS1_15Oct18_2de2,IS1_GPR_15Oct18_2de2,Benjamin,Fish,clim,Chromis limbaughi
+LaPaz,IS1_15Oct18_2de2,IS1_GPR_15Oct18_2de2,Benjamin,Fish,pco,Paranthias colonus
+LaPaz,IS1_15Oct18_2de2,IS1_GPR_15Oct18_2de2,Benjamin,Fish,sps,Serranus psittacinus
+LaPaz,IS1_15Oct18_2de2,IS1_GPR_15Oct18_2de2,Benjamin,Fish,lfa,Liopropoma fasciatum
+LaPaz,IS1_15Oct18_2de2,IS1_GPR_15Oct18_2de2,Benjamin,Fish,ste,Stegastes sp.
+LaPaz,IS1_15Oct18_1de2,IS1_ROV_15Oct18_1de2,Hollarsmith,Fish,sgu,Scorpaena guttata
+LaPaz,IS1_15Oct18_1de2,IS1_ROV_15Oct18_1de2,Manuel,Fish,Pco,Paranthias colonus
+LaPaz,IS1_15Oct18_1de2,IS1_ROV_15Oct18_1de2,Manuel,Fish,Clim,Chromis limbaughi
+LaPaz,IS1_15Oct18_1de2,IS1_ROV_15Oct18_1de2,Manuel,Fish,ste,Stegastes sp.
+LaPaz,IS1_15Oct18_1de2,IS1_ROV_15Oct18_1de2,Manuel,Fish,Hdi,Halichoeres dispilus
+LaPaz,IS1_15Oct18_1de2,IS1_ROV_15Oct18_1de2,Manuel,Fish,Lfa,Liopropoma fasciatum
+LaPaz,IS1_15Oct18_1de2,IS1_ROV_15Oct18_1de2,Manuel,Fish,Chu,Chaetodon humeralis
+LaPaz,IS1_15Oct18_1de2,IS1_ROV_15Oct18_1de2,Manuel,Fish,Hpa,Holacanthus passer
+LaPaz,IS1_15Oct18_1de2,IS1_ROV_15Oct18_1de2,Manuel,Fish,Pse,Pristigenys serrula
+LaPaz,IS1_15Oct18_1de2,IS1_ROV_15Oct18_1de2,Manuel,Fish,Uro,Urobatis sp.
+LaPaz,IS1_15Oct18_2de2,IS1_ROV_15Oct18_2de2,Benjamin,Fish,hpa,Holacanthus passer
+LaPaz,IS1_15Oct18_2de2,IS1_ROV_15Oct18_2de2,Benjamin,Fish,pco,Paranthias colonus
+LaPaz,IS1_15Oct18_2de2,IS1_ROV_15Oct18_2de2,Benjamin,Fish,clim,Chromis limbaughi
+LaPaz,IS2_15Oct18_1de3,IS2_GPR_15Oct18_1de3,Manuel,Fish,Pco,Paranthias colonus
+LaPaz,IS2_15Oct18_1de3,IS2_GPR_15Oct18_1de3,Manuel,Fish,Clim,Chromis limbaughi
+LaPaz,IS2_15Oct18_1de3,IS2_GPR_15Oct18_1de3,Manuel,Fish,Lfa,Liopropoma fasciatum
+LaPaz,IS2_15Oct18_1de3,IS2_GPR_15Oct18_1de3,Manuel,Fish,ste,Stegastes sp.
+LaPaz,IS2_15Oct18_2de3,IS2_GPR_15Oct18_2de3,Benjamin,Fish,hal,Halichoeres sp.
+LaPaz,IS2_15Oct18_2de3,IS2_GPR_15Oct18_2de3,Benjamin,Fish,pse,Pristigenys serrula
+LaPaz,IS2_15Oct18_2de3,IS2_GPR_15Oct18_2de3,Benjamin,Fish,calt,Chromis alta
+LaPaz,IS2_15Oct18_2de3,IS2_GPR_15Oct18_2de3,Hollarsmith,Fish,lfa,Liopropoma fasciatum
+LaPaz,IS2_15Oct18_2de3,IS2_GPR_15Oct18_2de3,Manuel,Fish,clim,Chromis limbaughi
+LaPaz,IS2_15Oct18_2de3,IS2_GPR_15Oct18_2de3,Manuel,Fish,ste,Stegastes sp.
+LaPaz,IS2_15Oct18_3de3,IS2_GPR_15Oct18_3de3,Hollarsmith,Fish,pco,Paranthias colonus
+LaPaz,IS2_15Oct18_3de3,IS2_GPR_15Oct18_3de3,Hollarsmith,Fish,hme,Halichoeres melanotis
+LaPaz,IS2_15Oct18_1de3,IS2_ROV_15Oct18_1de3,Manuel,Fish,Pco,Paranthias colonus
+LaPaz,IS2_15Oct18_1de3,IS2_ROV_15Oct18_1de3,Manuel,Fish,Clim,Chromis limbaughi
+LaPaz,IS2_15Oct18_1de3,IS2_ROV_15Oct18_1de3,Manuel,Fish,ste,Stegastes sp.
+LaPaz,IS2_15Oct18_2de3,IS2_ROV_15Oct18_2de3,Manuel,Fish,ste,Stegastes sp.
+LaPaz,IS2_15Oct18_2de3,IS2_ROV_15Oct18_2de3,Benjamin,Fish,clim,Chromis limbaughi
+LaPaz,IS2_15Oct18_2de3,IS2_ROV_15Oct18_2de3,Benjamin,Fish,hgu,Hoplopagrus guentherii
+LaPaz,IS2_15Oct18_2de3,IS2_ROV_15OCT18_2de3,Manuel,Fish,spu,Semicossyphus pulcher
+LaPaz,IS2_15Oct18_2de3,IS2_ROV_15OCT18_2de3,Manuel,Fish,Hal,Halichoeres sp.
+LaPaz,IS2_15Oct18_2de3,IS2_ROV_15OCT18_2de3,Manuel,Fish,Pse,Pristigenys serrula
+LaPaz,IS2_15Oct18_3de3,IS2_ROV_15Oct18_3de3,Manuel,Fish,Sri,Seriola rivoliana
+LaPaz,IS2_15Oct18_3de3,IS2_ROV_15Oct18_3de3,Manuel,Fish,Bpo,Balistes polylepis
+LaPaz,IS2_15Oct18_3de3,IS2_ROV_15Oct18_3de3,Manuel,Fish,Pco,Paranthias colonus
+LaPaz,IS2_15Oct18_3de3,IS2_ROV_15Oct18_3de3,Manuel,Fish,Dho,Diodon holocanthus
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Hollarsmith,Fish,mde,Mulloidichthys dentatus
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Manuel,Fish,Mro,Mycteroperca rosacea
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Manuel,Fish,Pco,Paranthias colonus
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Manuel,Fish,Lar,Lutjanus argentiventris
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Manuel,Fish,Dho,Diodon holocanthus
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Manuel,Fish,Het,Heteroconger sp.
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Manuel,Fish,Sps,Serranus psittacinus
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Manuel,Fish,hal,Halichoeres sp.
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Manuel,Fish,Hpa,Holacanthus passer
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Manuel,Fish,Dhy,Diodon hystrix
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Manuel,Fish,Ain,Anisotremus interruptus
+LaPaz,LRE_10Oct18_1de2,LRE_GPR_10Oct18_1de2,Manuel,Fish,Hse,Haemulon sexfasciatum
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10Oct18_2de2,Benjamin,Fish,hpa,Holacanthus passer
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10Oct18_2de2,Benjamin,Fish,hse,Haemulon sexfasciatum
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10Oct18_2de2,Benjamin,Fish,fco,Fistularia commersonii
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10Oct18_2de2,Manuel,Fish,sri,Seriola rivoliana
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10Oct18_2de2,Benjamin,Fish,lar,Lutjanus argentiventris
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10Oct18_2de2,Benjamin,Fish,ain,Anisotremus interruptus
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10Oct18_2de2,Benjamin,Fish,mde,Mulloidichthys dentatus
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10Oct18_2de2,Benjamin,Fish,ppu,Prionurus laticlavius
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10Oct18_2de2,Benjamin,Fish,cre,Chilomycterus reticulatus
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10OCT18_2de2,Manuel,Fish,Bdi,Bodianus diplotaenia
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10OCT18_2de2,Hollarsmith,Fish,mro,Mycteroperca rosacea
+LaPaz,LRE_10Oct18_2de2,LRE_GPR_10Oct18_2de2,Hollarsmith,Fish,Fco,Fistularia commersonii
+LaPaz,LRE_10Oct18_1de2,LRE_ROV_10Oct18_1de2,Manuel,Fish,Mro,Mycteroperca rosacea
+LaPaz,LRE_10Oct18_1de2,LRE_ROV_10Oct18_1de2,Manuel,Fish,Pco,Paranthias colonus
+LaPaz,LRE_10Oct18_1de2,LRE_ROV_10Oct18_1de2,Manuel,Fish,Lar,Lutjanus argentiventris
+LaPaz,LRE_10Oct18_1de2,LRE_ROV_10Oct18_1de2,Manuel,Fish,Hpa,Holacanthus passer
+LaPaz,LRE_10Oct18_1de2,LRE_ROV_10Oct18_1de2,Manuel,Fish,Pla,Prionurus laticlavius
+LaPaz,LRE_10Oct18_2de2,LRE_ROV_10Oct18_2de2,Benjamin,Fish,ain,Anisotremus interruptus
+LaPaz,LRE_10Oct18_2de2,LRE_ROV_10Oct18_2de2,Benjamin,Fish,lar,Lutjanus argentiventris
+LaPaz,LRE_10Oct18_2de2,LRE_ROV_10Oct18_2de2,Benjamin,Fish,fco,Fistularia commersonii
+LaPaz,LRE_10Oct18_2de2,LRE_ROV_10Oct18_2de2,Benjamin,Fish,hpa,Holacanthus passer
+LaPaz,LRE_10Oct18_2de2,LRE_ROV_10Oct18_2de2,Benjamin,Fish,cre,Chilomycterus reticulatus
+LaPaz,LRE_10Oct18_2de2,LRE_ROV_10Oct18_2de2,Benjamin,Fish,ppu,Prionurus laticlavius
+LaPaz,LRE_10Oct18_2de2,LRE_ROV_10Oct18_2de2,Benjamin,Fish,mde,Mulloidichthys dentatus
+LaPaz,LRE_10Oct18_2de2,LRE_ROV_10OCT18_2de2,Manuel,Fish,Ccab,Caranx caballus
+LaPaz,LRE_10Oct18_2de2,LRE_ROV_10OCT18_2de2,Manuel,Fish,Bdi,Bodianus diplotaenia
+LaPaz,LRE_10Oct18_2de2,LRE_ROV_10OCT18_2de2,Manuel,Fish,Hse,Haemulon sexfasciatum
+LaPaz,PLO_14Oct18_10de12,PLO_GPR_14Oct18_10de12,Hollarsmith,,,#N/A
+LaPaz,PLO_14Oct18_10de12,PLO_GPR_14Oct18_10de12,Hollarsmith,Fish,Clim,Chromis limbaughi
+LaPaz,PLO_14Oct18_10de12,PLO_GPR_14Oct18_10de12,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+LaPaz,PLO_14Oct18_10de12,PLO_GPR_14Oct18_10de12,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+LaPaz,PLO_14Oct18_10de12,PLO_GPR_14Oct18_10de12,Hollarsmith,Fish,pco,Paranthias colonus
+LaPaz,PLO_14Oct18_10de12,PLO_GPR_14Oct18_10de12,Hollarsmith,Fish,lfa,Liopropoma fasciatum
+LaPaz,PLO_14Oct18_10de12,PLO_GPR_14Oct18_10de12,Hollarsmith,Fish,ela,Epinephelus labriformis
+LaPaz,PLO_14Oct18_11de12,PLO_GPR_14Oct18_11de12,Hollarsmith,Fish,ela,Epinephelus labriformis
+LaPaz,PLO_14Oct18_12de12,PLO_GPR_14Oct18_12de12,Manuel,Fish,Hpa,Holacanthus passer
+LaPaz,PLO_14Oct18_12de12,PLO_GPR_14Oct18_12de12,Manuel,Fish,Sps,Serranus psittacinus
+LaPaz,PLO_14Oct18_1de12,PLO_GPR_14Oct18_1de12,Manuel,Fish,Het,Heteroconger sp.
+LaPaz,PLO_14Oct18_2de12,PLO_GPR_14Oct18_2de12,Hollarsmith,Invert,uma,Urobatis maculatus
+LaPaz,PLO_14Oct18_2de12,PLO_GPR_14Oct18_2de12,Hollarsmith,Invert,uco,Urobatis concentricus
+LaPaz,PLO_14Oct18_2de12,PLO_GPR_14Oct18_2de12,Hollarsmith,Fish,het,Heteroconger sp.
+LaPaz,PLO_14Oct18_2de12,PLO_GPR_14Oct18_2de12,Hollarsmith,Fish,mde,Mulloidichthys dentatus
+LaPaz,PLO_14Oct18_2de12,PLO_GPR_14Oct18_2de12,Hollarsmith,Fish,fco,Fistularia commersonii
+LaPaz,PLO_14Oct18_3de12,PLO_GPR_14Oct18_3de12,Manuel,Fish,Sgh,Scarus ghobban
+LaPaz,PLO_14Oct18_3de12,PLO_GPR_14Oct18_3de12,Manuel,Fish,Lar,Lutjanus argentiventris
+LaPaz,PLO_14Oct18_3de12,PLO_GPR_14Oct18_3de12,Manuel,Fish,Hpa,Holacanthus passer
+LaPaz,PLO_14Oct18_3de12,PLO_GPR_14Oct18_3de12,Manuel,Fish,Mro,Mycteroperca rosacea
+LaPaz,PLO_14Oct18_3de12,PLO_GPR_14Oct18_3de12,Manuel,Fish,Bdi,Bodianus diplotaenia
+LaPaz,PLO_14Oct18_3de12,PLO_GPR_14Oct18_3de12,Manuel,Fish,Clim,Chromis limbaughi
+LaPaz,PLO_14Oct18_3de12,PLO_GPR_14Oct18_3de12,Manuel,Fish,Ain,Anisotremus interruptus
+LaPaz,PLO_14Oct18_4de12,PLO_GPR_14Oct18_4de12,Alexia,Fish,ela,Epinephelus labriformis
+LaPaz,PLO_14Oct18_4de12,PLO_GPR_14Oct18_4de12,Alexia,Fish,hpa,Holacanthus passer
+LaPaz,PLO_14Oct18_4de12,PLO_GPR_14Oct18_4de12,Alexia,Fish,hse,Haemulon sexfasciatum
+LaPaz,PLO_14Oct18_4de12,PLO_GPR_14Oct18_4de12,Alexia,Fish,ppu,Prionurus laticlavius
+LaPaz,PLO_14Oct18_4de12,PLO_GPR_14Oct18_4de12,Alexia,Fish,jni,Johnrandallia nigrirostris
+LaPaz,PLO_14Oct18_4de12,PLO_GPR_14Oct18_4de12,Hollarsmith,Fish,cpa,Cephalopholis panamensis
+LaPaz,PLO_14Oct18_4de12,PLO_GPR_14Oct18_4de12,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+LaPaz,PLO_14Oct18_4de12,PLO_GPR_14Oct18_4de12,Hollarsmith,Fish,ain,Anisotremus interruptus
+LaPaz,PLO_14Oct18_4de12,PLO_GPR_14Oct18_4de12,Hollarsmith,Fish,dho,Diodon holocanthus
+LaPaz,PLO_14Oct18_4de12,PLO_GPR_14Oct18_4de12,Hollarsmith,Fish,axa,Acanthurus xanthopterus
+LaPaz,PLO_14Oct18_4de12,PLO_GPR_14Oct18_4de12,Hollarsmith,Fish,ome,Ostracion meleagris
+LaPaz,PLO_14Oct18_6de12,PLO_GPR_14Oct18_6de12,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+LaPaz,PLO_14Oct18_7de12,PLO_GPR_14Oct18_7de12,Hollarsmith,Fish,ste,Stegastes sp.
+LaPaz,PLO_14Oct18_7de12,PLO_GPR_14Oct18_7de12,Manuel,Fish,Pfa,Prognathodes falcifer 
+LaPaz,PLO_14Oct18_7de12,PLO_GPR_14Oct18_7de12,Manuel,Fish,Pco,Paranthias colonus
+LaPaz,PLO_14Oct18_7de12,PLO_GPR_14Oct18_7de12,Manuel,Fish,Clim,Chromis limbaughi
+LaPaz,PLO_14Oct18_8de12,PLO_GPR_14Oct18_8de12,Manuel,Fish,Clim,Chromis limbaughi
+LaPaz,PLO_14Oct18_8de12,PLO_GPR_14Oct18_8de12,Manuel,Fish,Pco,Paranthias colonus
+LaPaz,PLO_14Oct18_8de12,PLO_GPR_14Oct18_8de12,Manuel,Fish,Pfa,Prognathodes falcifer 
+LaPaz,PLO_14Oct18_8de12,PLO_GPR_14Oct18_8de12,Manuel,Fish,Lfa,Liopropoma fasciatum
+LaPaz,PLO_14Oct18_10de12,PLO_ROV_14Oct18_10de12,Hollarsmith,Fish,hpa,Holacanthus passer
+LaPaz,PLO_14Oct18_10de12,PLO_ROV_14Oct18_10de12,Hollarsmith,Fish,ljo,Lutjanus jordani
+LaPaz,PLO_14Oct18_11de12,PLO_ROV_14Oct18_11de12,Alexia,Fish,hpa,Holacanthus passer
+LaPaz,PLO_14Oct18_11de12,PLO_ROV_14Oct18_11de12,Alexia,Fish,ain,Anisotremus interruptus
+LaPaz,PLO_14Oct18_11de12,PLO_ROV_14Oct18_11de12,Alexia,Fish,hse,Haemulon sexfasciatum
+LaPaz,PLO_14Oct18_11de12,PLO_ROV_14Oct18_11de12,Alexia,Fish,dho,Diodon holocanthus
+LaPaz,PLO_14Oct18_11de12,PLO_ROV_14Oct18_11de12,Hollarsmith,Fish,lar,Lutjanus argentiventris
+LaPaz,PLO_14Oct18_12de12,PLO_ROV_14Oct18_12de12,Manuel,Fish,Lno,Lutjanus novemfasciatus
+LaPaz,PLO_14Oct18_12de12,PLO_ROV_14Oct18_12de12,Manuel,Fish,Hpa,Holacanthus passer
+LaPaz,PLO_14Oct18_12de12,PLO_ROV_14Oct18_12de12,Manuel,Fish,Lar,Lutjanus argentiventris
+LaPaz,PLO_14Oct18_12de12,PLO_ROV_14Oct18_12de12,Manuel,Fish,Ppu,Prionurus laticlavius
+LaPaz,PLO_14Oct18_1de12,PLO_ROV_14Oct18_1de12,Manuel,Fish,Het,Heteroconger sp.
+LaPaz,PLO_14Oct18_2de12,PLO_ROV_14Oct18_2de12,Manuel,Fish,Het,Heteroconger sp.
+LaPaz,PLO_14Oct18_2de12,PLO_ROV_14Oct18_2de12,Manuel,Fish,Ccab,Caranx caballus
+LaPaz,PLO_14Oct18_2de12,PLO_ROV_14Oct18_2de12,Manuel,Fish,Bpo,Balistes polylepis
+LaPaz,PLO_14Oct18_2de12,PLO_ROV_14Oct18_2de12,Manuel,Fish,Uco,Urobatis concentricus
+LaPaz,PLO_14Oct18_2de12,PLO_ROV_14Oct18_2de12,Manuel,Fish,Bpo,Balistes polylepis
+LaPaz,PLO_14Oct18_4de12,PLO_ROV_14Oct18_4de12,Alexia,Fish,ppu,Prionurus laticlavius
+LaPaz,PLO_14Oct18_4de12,PLO_ROV_14Oct18_4de12,Alexia,Fish,hse,Haemulon sexfasciatum
+LaPaz,PLO_14Oct18_4de12,PLO_ROV_14Oct18_4de12,Alexia,Fish,ain,Anisotremus interruptus
+LaPaz,PLO_14Oct18_4de12,PLO_ROV_14Oct18_4de12,Alexia,Fish,sgh,Scarus ghobban
+LaPaz,PLO_14Oct18_4de12,PLO_ROV_14Oct18_4de12,Alexia,Fish,pla,Prionurus laticlavius
+LaPaz,PLO_14Oct18_4de12,PLO_ROV_14Oct18_4de12,Hollarsmith,Fish,axa,Acanthurus xanthopterus
+LaPaz,PLO_14Oct18_4de12,PLO_ROV_14Oct18_4de12,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+LaPaz,PLO_14Oct18_4de12,PLO_ROV_14Oct18_4de12,Hollarsmith,Fish,zco,Zanclus cornutus
+LaPaz,PLO_14Oct18_4de12,PLO_ROV_14Oct18_4de12,Hollarsmith,Fish,lar,Lutjanus argentiventris
+LaPaz,PLO_14Oct18_6de12,PLO_ROV_14Oct18_6de12,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+LaPaz,PLO_14Oct18_7de12,PLO_ROV_14Oct18_7de12,Hollarsmith,Fish,ste,Stegastes sp.
+LaPaz,PLO_14Oct18_7de12,PLO_ROV_14Oct18_7de12,Manuel,Fish,Pco,Paranthias colonus
+LaPaz,PLO_14Oct18_7de12,PLO_ROV_14Oct18_7de12,Manuel,Fish,Pfa,Prognathodes falcifer 
+LaPaz,PLO_14Oct18_7de12,PLO_ROV_14Oct18_7de12,Manuel,Fish,Clim,Chromis limbaughi
+LaPaz,PLO_14Oct18_8de12,PLO_ROV_14Oct18_8de12,Hollarsmith,Fish,ste,Stegastes sp.
+LaPaz,PLO_14Oct18_8de12,PLO_ROV_14Oct18_8de12,Manuel,Fish,Pco,Paranthias colonus
+LaPaz,PLO_14Oct18_8de12,PLO_ROV_14Oct18_8de12,Manuel,Fish,Pfa,Prognathodes falcifer 
+LaPaz,PLO_14Oct18_8de12,PLO_ROV_14Oct18_8de12,Manuel,Fish,Lfa,Liopropoma fasciatum
+Revillagigedo,SBE_13Dec18_1de3,SBE_GPR_13Dec18_1de3,KCN,Fish,LVI,Lutjanus viridis
+Revillagigedo,SBE_13Dec18_1de3,SBE_GPR_13Dec18_1de3,KCN,Algae,gft,Green filamentous
+Revillagigedo,SBE_13Dec18_1de3,SBE_GPR_13Dec18_1de3,KCN,Invert,TDE,Tripneustes depressus
+Revillagigedo,SBE_13Dec18_1de3,SBE_GPR_13Dec18_1de3,KCN,Fish,BDI,Bodianus diplotaenia
+Revillagigedo,SBE_13Dec18_1de3,SBE_GPR_13Dec18_1de3,KCN,Fish,PCO,Paranthias colonus
+Revillagigedo,SBE_13Dec18_1de3,SBE_GPR_13Dec18_1de3,KCN,Fish,XME,Xanthichthys mento
+Revillagigedo,SBE_13Dec18_1de3,SBE_GPR_13Dec18_1de3,KCN,Fish,CME,Caranx melampygus
+Revillagigedo,SBE_13Dec18_1de3,SBE_GPR_13Dec18_1de3,KCN,Fish,TOB,Triaenodon obesus
+Revillagigedo,SBE_13Dec18_1de3,SBE_GPR_13Dec18_1de3,KCN,Fish,dho,Diodon holocanthus
+Revillagigedo,SBE_13Dec18_2de3,SBE_GPR_13Dec18_2de3,KCN,Algae,gft,Green filamentous
+Revillagigedo,SBE_13Dec18_2de3,SBE_GPR_13Dec18_2de3,KCN,Algae,neo,Neomeris sp.
+Revillagigedo,SBE_13Dec18_2de3,SBE_GPR_13Dec18_2de3,KCN,Fish,ACH,Aulostomus chinensis
+Revillagigedo,SBE_13Dec18_2de3,SBE_GPR_13Dec18_2de3,KCN,Fish,BDI,Bodianus diplotaenia
+Revillagigedo,SBE_13Dec18_2de3,SBE_GPR_13Dec18_2de3,KCN,Fish,XME,Xanthichthys mento
+Revillagigedo,SBE_13Dec18_2de3,SBE_GPR_13Dec18_2de3,KCN,Fish,HCL,Holacanthus clarionensis
+Revillagigedo,SBE_13Dec18_2de3,SBE_GPR_13Dec18_2de3,KCN,Fish,PCO,Paranthias colonus
+Revillagigedo,SBE_13Dec18_2de3,SBE_GPR_13Dec18_2de3,KCN,Fish,FFL,Forcipiger flavissimus
+Revillagigedo,SBE_13Dec18_2de3,SBE_GPR_13Dec18_2de3,KCN,Fish,CME,Caranx melampygus
+Revillagigedo,SBE_13Dec18_3de3,SBE_GPR_13Dec18_3ade3,KCN,Fish,XME,Xanthichthys mento
+Revillagigedo,SBE_13Dec18_3de3,SBE_GPR_13Dec18_3ade3,KCN,Fish,CME,Caranx melampygus
+Revillagigedo,SBE_13Dec18_3de3,SBE_GPR_13Dec18_3ade3,KCN,Invert,tde,Tripneustes depressus
+Revillagigedo,SBE_13Dec18_3de3,SBE_GPR_13Dec18_3ade3,KCN,Fish,PCO,Paranthias colonus
+Revillagigedo,SBE_13Dec18_3de3,SBE_GPR_13Dec18_3ade3,KCN,Fish,ANI,Acanthurus nigricans
+Revillagigedo,SBE_13Dec18_3de3,SBE_GPR_13Dec18_3ade3,KCN,Fish,prio,Prionurus sp.
+Revillagigedo,SBE_13Dec18_3de3,SBE_GPR_13Dec18_3ade3,KCN,Fish,TGR,Thalassoma grammaticum
+Revillagigedo,SBE_13Dec18_3de3,SBE_GPR_13Dec18_3bde3,KCN,Algae,neo,Neomeris sp.
+Revillagigedo,SBE_13Dec18_3de3,SBE_GPR_13Dec18_3bde3,KCN,Algae,gft,Green filamentous
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Fish,XME,Xanthichthys mento
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Invert,TDE,Tripneustes depressus
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Fish,PCO,Paranthias colonus
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Fish,AIN,Anisotremus interruptus
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Fish,SVE,Sufflamen verres
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Fish,ANI,Acanthurus nigricans
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Fish,CME,Caranx melampygus
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Fish,CAL,Carcharhinus albimarginatus
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Fish,PCO,Paranthias colonus
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Fish,LAR,Lutjanus argentiventris
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Fish,AIN,Anisotremus interruptus
+Revillagigedo,SBE_13Dec18_1de3,SBE_ROV_13Dec18_1de3,KCN,Fish,BDI,Bodianus diplotaenia
+Revillagigedo,SBE_13Dec18_2de3,SBE_ROV_13Dec18_2de3,KCN,Fish,XME,Xanthichthys mento
+Revillagigedo,SBE_13Dec18_2de3,SBE_ROV_13Dec18_2de3,KCN,Fish,ANI,Acanthurus nigricans
+Revillagigedo,SBE_13Dec18_2de3,SBE_ROV_13Dec18_2de3,KCN,Fish,PCO,Paranthias colonus
+Revillagigedo,SBE_13Dec18_2de3,SBE_ROV_13Dec18_2de3,KCN,Fish,HCL,Holacanthus clarionensis
+Revillagigedo,SBE_13Dec18_2de3,SBE_ROV_13Dec18_2de3,KCN,Fish,BDI,Bodianus diplotaenia
+Revillagigedo,SBE_13Dec18_2de3,SBE_ROV_13Dec18_2de3,KCN,Fish,ela,Epinephelus labriformis
+Revillagigedo,SBE_13Dec18_2de3,SBE_ROV_13Dec18_2de3,KCN,Fish,FFL,Forcipiger flavissimus
+Revillagigedo,SBE_13Dec18_2de3,SBE_ROV_13Dec18_2de3,KCN,Fish,FCO,Fistularia commersonii
+Revillagigedo,SBE_13Dec18_2de3,SBE_ROV_13Dec18_2de3,KCN,Fish,CME,Caranx melampygus
+Revillagigedo,SBE_13Dec18_2de3,SBE_ROV_13Dec18_2de3,KCN,Invert,TDE,Tripneustes depressus
+Revillagigedo,SBE_13Dec18_2de3,SBE_ROV_13Dec18_2de3,KCN,Fish,AME,Arothron meleagris
+Revillagigedo,SBE_13Dec18_3de3,SBE_ROV_13Dec18_3de3,KCN,Fish,XME,Xanthichthys mento
+Revillagigedo,SBE_13Dec18_3de3,SBE_ROV_13Dec18_3de3,KCN,Fish,PCO,Paranthias colonus
+Revillagigedo,SBE_13Dec18_3de3,SBE_ROV_13Dec18_3de3,KCN,Fish,AIN,Anisotremus interruptus
+Revillagigedo,SBE_13Dec18_3de3,SBE_ROV_13Dec18_3de3,KCN,Fish,ANI,Acanthurus nigricans
+Revillagigedo,SBE_13Dec18_3de3,SBE_ROV_13Dec18_3de3,KCN,Fish,CME,Caranx melampygus
+Revillagigedo,SBE_13Dec18_3de3,SBE_ROV_13Dec18_3de3,KCN,Invert,Pocillopora?,#N/A
+Revillagigedo,SBE_13Dec18_3de3,SBE_ROV_13Dec18_3de3,KCN,Algae,gft,Green filamentous
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Hollarsmith,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Hollarsmith,Fish,dde,Dermatolepis dermatolepis
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Algae,gft,Green filamentous
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,LVI,Lutjanus viridis
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,Hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,PCO,Paranthias colonus
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,Tob,Triaenodon obesus
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,Clu,Caranx lugubris
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,Cme,Caranx melampygus
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,Ffl,Forcipiger flavissimus
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,Sle,Stegastes leucorus
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,Ela,Epinephelus labriformis
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,Ecl,Epinephelus clippertonensis
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,Zco,Zanclus cornutus
+Revillagigedo,SBW_13Dec18_1de9,SBW_GPR_13Dec18_1de9,Twinquist,Fish,Xme,Xanthichthys mento
+Revillagigedo,SBW_13Dec18_2de9,SBW_GPR_13Dec18_2de9,Hollarsmith,Algae,gft,Green filamentous
+Revillagigedo,SBW_13Dec18_2de9,SBW_GPR_13Dec18_2de9,Hollarsmith,Fish,ste,Stegastes sp.
+Revillagigedo,SBW_13Dec18_2de9,SBW_GPR_13Dec18_2de9,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,SBW_13Dec18_2de9,SBW_GPR_13Dec18_2de9,Hollarsmith,Fish,zco,Zanclus cornutus
+Revillagigedo,SBW_13Dec18_2de9,SBW_GPR_13Dec18_2de9,Hollarsmith,Fish,cme,Caranx melampygus
+Revillagigedo,SBW_13Dec18_2de9,SBW_GPR_13Dec18_2de9,Twinquist,Fish,Ffl,Forcipiger flavissimus
+Revillagigedo,SBW_13Dec18_2de9,SBW_GPR_13Dec18_2de9,Twinquist,Fish,Pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_2de9,SBW_GPR_13Dec18_2de9,Twinquist,Fish,BDI,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_2de9,SBW_GPR_13Dec18_2de9,Twinquist,Fish,Xme,Xanthichthys mento
+Revillagigedo,SBW_13Dec18_2de9,SBW_GPR_13Dec18_2de9,Twinquist,Fish,Hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Hollarsmith,Algae,gft,Green filamentous
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Hollarsmith,Fish,ste,Stegastes sp.
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Hollarsmith,Fish,calt,Chromis alta
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Hollarsmith,Fish,ela,Epinephelus labriformis
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Twinquist,Fish,Dde,Dermatolepis dermatolepis
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Twinquist,Fish,Ain,Anisotremus interruptus
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Twinquist,Fish,Ffl,Forcipiger flavissimus
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Twinquist,Fish,PCO,Paranthias colonus
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Twinquist,Fish,Hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Twinquist,Fish,Cpa,Cephalopholis panamensis
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Twinquist,Fish,Pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Twinquist,Fish,Clu,Caranx lugubris
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Twinquist,Fish,Pfa,Prognathodes falcifer 
+Revillagigedo,SBW_13Dec18_3de9,SBW_GPR_13Dec18_3de9,Twinquist,Fish,Ecl,Epinephelus clippertonensis
+Revillagigedo,SBW_13Dec18_4de9,SBW_GPR_13Dec18_4de9,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_4de9,SBW_GPR_13Dec18_4de9,PAUL PRECIADO,Fish,ste,Stegastes sp.
+Revillagigedo,SBW_13Dec18_4de9,SBW_GPR_13Dec18_4de9,PAUL PRECIADO,Fish,ffl,Forcipiger flavissimus
+Revillagigedo,SBW_13Dec18_4de9,SBW_GPR_13Dec18_4de9,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_4de9,SBW_GPR_13Dec18_4de9,PAUL PRECIADO,Fish,dlo,Hypanus longus
+Revillagigedo,SBW_13Dec18_4de9,SBW_GPR_13Dec18_4de9,PAUL PRECIADO,Fish,ela,Epinephelus labriformis
+Revillagigedo,SBW_13Dec18_5de9,SBW_GPR_13Dec18_5de9,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_5de9,SBW_GPR_13Dec18_5de9,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_5de9,SBW_GPR_13Dec18_5de9,PAUL PRECIADO,Fish,ste,Stegastes sp.
+Revillagigedo,SBW_13Dec18_6de9,SBW_GPR_13Dec18_6de9,PAUL PRECIADO,Fish,ecl,Epinephelus clippertonensis
+Revillagigedo,SBW_13Dec18_7de9,SBW_GPR_13Dec18_7de9,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_7de9,SBW_GPR_13Dec18_7de9,PAUL PRECIADO,Fish,ste,Stegastes sp.
+Revillagigedo,SBW_13Dec18_7de9,SBW_GPR_13Dec18_7de9,PAUL PRECIADO,Fish,ffl,Forcipiger flavissimus
+Revillagigedo,SBW_13Dec18_7de9,SBW_GPR_13Dec18_7de9,PAUL PRECIADO,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_7de9,SBW_GPR_13Dec18_7de9,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_7de9,SBW_GPR_13Dec18_7de9,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_7de9,SBW_GPR_13Dec18_7de9,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_7de9,SBW_GPR_13Dec18_7de9,PAUL PRECIADO,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_7de9,SBW_GPR_13Dec18_7de9,PAUL PRECIADO,Fish,cga,Carcharhinus galapagensis
+Revillagigedo,SBW_13Dec18_7de9,SBW_GPR_13Dec18_7de9,PAUL PRECIADO,Fish,ain,Anisotremus interruptus
+Revillagigedo,SBW_13Dec18_7de9,SBW_GPR_13Dec18_7de9,PAUL PRECIADO,Fish,cme,Caranx melampygus
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Fish,cpa,Cephalopholis panamensis
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Fish,xme,Xanthichthys mento
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Fish,tlu,Thalassoma lucasanum
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Fish,sleu,Stegastes leucorus
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Fish,ame,Arothron meleagris
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Fish,hcr,Heteropriacanthus cruentatus
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Fish,ani,Acanthurus nigricans
+Revillagigedo,SBW_13Dec18_8de9,SBW_GPR_13Dec18_8de9,PAUL PRECIADO,Invert,hol,Holothuria sp
+Revillagigedo,SBW_13Dec18_9de9,SBW_GPR_13Dec18_9de9,PAUL PRECIADO,Fish,ani,Acanthurus nigricans
+Revillagigedo,SBW_13Dec18_9de9,SBW_GPR_13Dec18_9de9,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_9de9,SBW_GPR_13Dec18_9de9,PAUL PRECIADO,Fish,xme,Xanthichthys mento
+Revillagigedo,SBW_13Dec18_9de9,SBW_GPR_13Dec18_9de9,PAUL PRECIADO,Fish,ame,Arothron meleagris
+Revillagigedo,SBW_13Dec18_9de9,SBW_GPR_13Dec18_9de9,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_9de9,SBW_GPR_13Dec18_9de9,PAUL PRECIADO,Fish,lvi,Lutjanus viridis
+Revillagigedo,SBW_13Dec18_9de9,SBW_GPR_13Dec18_9de9,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,SBW_13Dec18_9de9,SBW_GPR_13Dec18_9de9,PAUL PRECIADO,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_9de9,SBW_GPR_13Dec18_9de9,PAUL PRECIADO,Fish,cme,Caranx melampygus
+Revillagigedo,SBW_13Dec18_9de9,SBW_GPR_13Dec18_9de9,PAUL PRECIADO,Fish,sleu,Stegastes leucorus
+Revillagigedo,SBW_13Dec18_9de9,SBW_GPR_13Dec18_9de9,PAUL PRECIADO,Invert,tde,Tripneustes depressus
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,cdu,Cantherhines dumerilii
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,clu,Caranx lugubris
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,cme,Caranx melampygus
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,lvi,Lutjanus viridis
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,dde,Dermatolepis dermatolepis
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,sleu,Stegastes leucorus
+Revillagigedo,SBW_13Dec18_1de9,SBW_ROV_13Dec18_1de9,Hollarsmith,Fish,ffl,Forcipiger flavissimus
+Revillagigedo,SBW_13Dec18_2de9,SBW_ROV_13Dec18_2de9,Hollarsmith,Fish,clu,Caranx lugubris
+Revillagigedo,SBW_13Dec18_2de9,SBW_ROV_13Dec18_2de9,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_2de9,SBW_ROV_13Dec18_2de9,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,SBW_13Dec18_2de9,SBW_ROV_13Dec18_2de9,Hollarsmith,Fish,tob,Triaenodon obesus
+Revillagigedo,SBW_13Dec18_2de9,SBW_ROV_13Dec18_2de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_2de9,SBW_ROV_13Dec18_2de9,Hollarsmith,Fish,dde,Dermatolepis dermatolepis
+Revillagigedo,SBW_13Dec18_2de9,SBW_ROV_13Dec18_2de9,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,SBW_13Dec18_2de9,SBW_ROV_13Dec18_2de9,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,ste,Stegastes sp.
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,hcr,Heteropriacanthus cruentatus
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,dde,Dermatolepis dermatolepis
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,ela,Epinephelus labriformis
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,clu,Caranx lugubris
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,eci,Epinephelus cifuentesi
+Revillagigedo,SBW_13Dec18_3de9,SBW_ROV_13Dec18_3de9,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Invert,ifu,Isostichopus fuscus
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Fish,ela,Epinephelus labriformis
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Fish,eci,Epinephelus cifuentesi
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Fish,ste,Stegastes sp.
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Fish,ecl,Epinephelus clippertonensis
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Fish,dlo,Hypanus longus
+Revillagigedo,SBW_13Dec18_4de9,SBW_ROV_13Dec18_4de9,Hollarsmith,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,SBW_13Dec18_5de9,SBW_ROV_13Dec18_5de9,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_5de9,SBW_ROV_13Dec18_5de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_5de9,SBW_ROV_13Dec18_5de9,Hollarsmith,Fish,clu,Caranx lugubris
+Revillagigedo,SBW_13Dec18_5de9,SBW_ROV_13Dec18_5de9,Hollarsmith,Fish,,Haemulon sp. 
+Revillagigedo,SBW_13Dec18_6de9,SBW_ROV_13Dec18_6de9,Hollarsmith,Invert,ains,Amphiaster insignis
+Revillagigedo,SBW_13Dec18_6de9,SBW_ROV_13Dec18_6de9,Hollarsmith,Invert,eth,Eucidaris thouarsi
+Revillagigedo,SBW_13Dec18_6de9,SBW_ROV_13Dec18_6de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_6de9,SBW_ROV_13Dec18_6de9,Hollarsmith,Trash,rope,#N/A
+Revillagigedo,SBW_13Dec18_6de9,SBW_ROV_13Dec18_6de9,Hollarsmith,Fish,ecl,Epinephelus clippertonensis
+Revillagigedo,SBW_13Dec18_6de9,SBW_ROV_13Dec18_6de9,Hollarsmith,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,SBW_13Dec18_6de9,SBW_ROV_13Dec18_6de9,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,SBW_13Dec18_6de9,SBW_ROV_13Dec18_6de9,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_7de9,SBW_ROV_13Dec18_7de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_7de9,SBW_ROV_13Dec18_7de9,Hollarsmith,Fish,ste,Stegastes sp.
+Revillagigedo,SBW_13Dec18_7de9,SBW_ROV_13Dec18_7de9,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_7de9,SBW_ROV_13Dec18_7de9,Hollarsmith,Fish,tob,Triaenodon obesus
+Revillagigedo,SBW_13Dec18_7de9,SBW_ROV_13Dec18_7de9,Hollarsmith,Fish,clu,Caranx lugubris
+Revillagigedo,SBW_13Dec18_7de9,SBW_ROV_13Dec18_7de9,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,SBW_13Dec18_7de9,SBW_ROV_13Dec18_7de9,Hollarsmith,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,SBW_13Dec18_7de9,SBW_ROV_13Dec18_7de9,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,SBW_13Dec18_7de9,SBW_ROV_13Dec18_7de9,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_7de9,SBW_ROV_13Dec18_7de9,Hollarsmith,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,SBW_13Dec18_7de9,SBW_ROV_13Dec18_7de9,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,SBW_13Dec18_8de9,SBW_ROV_13Dec18_8de9,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,SBW_13Dec18_8de9,SBW_ROV_13Dec18_8de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_8de9,SBW_ROV_13Dec18_8de9,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_8de9,SBW_ROV_13Dec18_8de9,Hollarsmith,Fish,ecl,Epinephelus clippertonensis
+Revillagigedo,SBW_13Dec18_8de9,SBW_ROV_13Dec18_8de9,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,SBW_13Dec18_8de9,SBW_ROV_13Dec18_8de9,Hollarsmith,Fish,cpa,Cephalopholis panamensis
+Revillagigedo,SBW_13Dec18_8de9,SBW_ROV_13Dec18_8de9,Hollarsmith,Fish,lvi,Lutjanus viridis
+Revillagigedo,SBW_13Dec18_8de9,SBW_ROV_13Dec18_8de9,Hollarsmith,Fish,sleu,Stegastes leucorus
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Invert,tde,Tripneustes depressus
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Fish,cre,Chilomycterus reticulatus
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Fish,pco,Paranthias colonus
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Fish,cfa,Carcharhinus falciformis
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Fish,sleu,Stegastes leucorus
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Fish,lvi,Lutjanus viridis
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Fish,cdu,Cantherhines dumerilii
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Fish,cme,Caranx melampygus
+Revillagigedo,SBW_13Dec18_9de9,SBW_ROV_13Dec18_9de9,Hollarsmith,Fish,ani,Acanthurus nigricans
+Revillagigedo,SNE_12Dec18_1de3,SNE_GPR_12Dec18_1de3,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,SNE_12Dec18_1de3,SNE_GPR_12Dec18_1de3,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,SNE_12Dec18_1de3,SNE_GPR_12Dec18_1de3,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,SNE_12Dec18_1de3,SNE_GPR_12Dec18_1de3,PAUL PRECIADO,Fish,sleu,Stegastes leucorus
+Revillagigedo,SNE_12Dec18_1de3,SNE_GPR_12Dec18_1de3,PAUL PRECIADO,Fish,ela,Epinephelus labriformis
+Revillagigedo,SNE_12Dec18_1de3,SNE_GPR_12Dec18_1de3,PAUL PRECIADO,Fish,pfa,Prognathodes falcifer 
+Revillagigedo,SNE_12Dec18_1de3,SNE_GPR_12Dec18_1de3,PAUL PRECIADO,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,SNE_12Dec18_1de3,SNE_GPR_12Dec18_1de3,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SNE_12Dec18_1de3,SNE_GPR_12Dec18_1de3,PAUL PRECIADO,Fish,cga,Carcharhinus galapagensis
+Revillagigedo,SNE_12Dec18_1de3,SNE_GPR_12Dec18_1de3,PAUL PRECIADO,Fish,tob,Triaenodon obesus
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,Hollarsmith,Fish,lvi,Lutjanus viridis
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,Hollarsmith,Fish,Scor,Scorpaena sp.
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,gca,Gymnothorax castaneus
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,tob,Triaenodon obesus
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,axa,Acanthurus xanthopterus
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,ffl,Forcipiger flavissimus
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,SNE_12Dec18_2de3,SNE_GPR_12Dec18_2de3,PAUL PRECIADO,Fish,sleu,Stegastes leucorus
+Revillagigedo,SNE_12Dec18_3de3,SNE_GPR_12Dec18_3de3,Hollarsmith,Fish,ffl,Forcipiger flavissimus
+Revillagigedo,SNE_12Dec18_3de3,SNE_GPR_12Dec18_3de3,PAUL PRECIADO,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SNE_12Dec18_3de3,SNE_GPR_12Dec18_3de3,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SNE_12Dec18_3de3,SNE_GPR_12Dec18_3de3,PAUL PRECIADO,Fish,zco,Zanclus cornutus
+Revillagigedo,SNE_12Dec18_3de3,SNE_GPR_12Dec18_3de3,PAUL PRECIADO,Fish,ain,Anisotremus interruptus
+Revillagigedo,SNE_12Dec18_3de3,SNE_GPR_12Dec18_3de3,PAUL PRECIADO,Fish,dho,Diodon holocanthus
+Revillagigedo,SNE_12Dec18_3de3,SNE_GPR_12Dec18_3de3,PAUL PRECIADO,Fish,cre,Chilomycterus reticulatus
+Revillagigedo,SNE_12Dec18_3de3,SNE_GPR_12Dec18_3de3,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,SNE_12Dec18_3de3,SNE_GPR_12Dec18_3de3,PAUL PRECIADO,Fish,fco,Fistularia commersonii
+Revillagigedo,SNE_12Dec18_3de3,SNE_GPR_12Dec18_3de3,PAUL PRECIADO,Fish,bpo,Balistes polylepis
+Revillagigedo,SNE_12Dec18_3de3,SNE_GPR_12Dec18_3de3,PAUL PRECIADO,Fish,cdu,Cantherhines dumerilii
+Revillagigedo,SNE_12Dec18_1de3,SNE_ROV_12Dec18_1de3,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,SNE_12Dec18_1de3,SNE_ROV_12Dec18_1de3,PAUL PRECIADO,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,SNE_12Dec18_1de3,SNE_ROV_12Dec18_1de3,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,SNE_12Dec18_1de3,SNE_ROV_12Dec18_1de3,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,SNE_12Dec18_1de3,SNE_ROV_12Dec18_1de3,PAUL PRECIADO,Fish,tob,Triaenodon obesus
+Revillagigedo,SNE_12Dec18_1de3,SNE_ROV_12Dec18_1de3,PAUL PRECIADO,Fish,cme,Caranx melampygus
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,tob,Triaenodon obesus
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,pco,Paranthias colonus
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,cdu,Cantherhines dumerilii
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,lvi,Lutjanus viridis
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,ffl,Forcipiger flavissimus
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,cme,Caranx melampygus
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,cga,Carcharhinus galapagensis
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,ebi,Elagatis bipinnulata
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,ain,Anisotremus interruptus
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,cal,Carcharhinus albimarginatus
+Revillagigedo,SNE_12Dec18_2de3,SNE_ROV_12Dec18_2de3,PAUL PRECIADO,Fish,dde,Dermatolepis dermatolepis
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,Hollarsmith,Fish,dho,Diodon holocanthus
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,Hollarsmith,Fish,xme,Xanthichthys mento
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,dde,Dermatolepis dermatolepis
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,ain,Anisotremus interruptus
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,hcl,Holacanthus clarionensis
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,cme,Caranx melampygus
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,bpo,Balistes polylepis
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,bdi,Bodianus diplotaenia
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,zco,Zanclus cornutus
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,fco,Fistularia commersonii
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,cga,Carcharhinus galapagensis
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,tob,Triaenodon obesus
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,clu,Caranx lugubris
+Revillagigedo,SNE_12Dec18_3de3,SNE_ROV_12Dec18_3de3,PAUL PRECIADO,Fish,sve,Sufflamen verres
