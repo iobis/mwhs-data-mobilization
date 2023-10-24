@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/terms/" packageId="https://ipt.obis.org/secretariat/resource?id=brazilian-atlantic-islands-ciufes-2023/v1.0" scope="system" system="http://gbif.org" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd" xml:lang="eng">
+  <dataset>
+    <alternateIdentifier>https://ipt.obis.org/secretariat/resource?r=brazilian-atlantic-islands-ciufes-2023</alternateIdentifier>
+    <title>CIUFES - Ichthyological Collection of the Federal University of Espírito Santo</title>
+    <creator>
+      <individualName>
+        <givenName>Luiz Fernando Loureiro</givenName>
+        <surName>Fernandes</surName>
+      </individualName>
+      <organizationName>Federal University of Espírito Santo</organizationName>
+      <electronicMailAddress>oureiro@npd.ufes.br</electronicMailAddress>
+    </creator>
+    <creator>
+      <individualName>
+        <givenName>Jean-Christophe</givenName>
+        <surName>Joyeux</surName>
+      </individualName>
+      <organizationName>Federal University of Espírito Santo</organizationName>
+      <electronicMailAddress>ciufes@gmail.com</electronicMailAddress>
+    </creator>
+    <creator>
+      <individualName>
+        <givenName>Kathiani Victor</givenName>
+        <surName>Bastos</surName>
+      </individualName>
+      <organizationName>Federal University of Espírito Santo</organizationName>
+      <electronicMailAddress>ciufes@gmail.com</electronicMailAddress>
+    </creator>
+    <metadataProvider>
+      <individualName>
+        <givenName>Chandra</givenName>
+        <surName>Earl</surName>
+      </individualName>
+      <organizationName>UNESCO</organizationName>
+      <positionName>eDNA Scientific Officer</positionName>
+      <electronicMailAddress>c.earl@unesco.org</electronicMailAddress>
+    </metadataProvider>
+    <associatedParty>
+      <individualName>
+        <givenName>Chandra</givenName>
+        <surName>Earl</surName>
+      </individualName>
+      <organizationName>UNESCO</organizationName>
+      <positionName>eDNA Scientific Officer</positionName>
+      <electronicMailAddress>c.earl@unesco.org</electronicMailAddress>
+      <role>processor</role>
+    </associatedParty>
+    <pubDate>2023-10-15</pubDate>
+    <language>por</language>
+    <abstract>
+      <para>Collection of fish captured in research projects carried out by the UFES Ichthyology and Ichthyoplankton Laboratory, together with the fish collection from the UFES Zoology Collection. It serves as a reference collection and is intended for consultation by general researchers to confirm species identification. The relevance of the collection lies in the fact that most of the material comes from places that have not yet been studied or have little information and research.</para>
+    </abstract>
+    <keywordSet>
+      <keyword>Occurrence</keyword>
+      <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+    </keywordSet>
+    <additionalInfo>
+      <para>marine, harvested by iOBIS</para>
+    </additionalInfo>
+    <intellectualRights>
+      <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+    </intellectualRights>
+    <coverage>
+      <geographicCoverage>
+        <geographicDescription>Brazilian Atlantic Ocean</geographicDescription>
+        <boundingCoordinates>
+          <westBoundingCoordinate>-40.106</westBoundingCoordinate>
+          <eastBoundingCoordinate>46.5</eastBoundingCoordinate>
+          <northBoundingCoordinate>68.195</northBoundingCoordinate>
+          <southBoundingCoordinate>-82.252</southBoundingCoordinate>
+        </boundingCoordinates>
+      </geographicCoverage>
+      <taxonomicCoverage>
+        <generalTaxonomicCoverage>Fishes</generalTaxonomicCoverage>
+        <taxonomicClassification>
+          <taxonRankName>Superclass</taxonRankName>
+          <taxonRankValue>Agnatha</taxonRankValue>
+        </taxonomicClassification>
+        <taxonomicClassification>
+          <taxonRankName>unranked</taxonRankName>
+          <taxonRankValue>Chondrichthyes</taxonRankValue>
+        </taxonomicClassification>
+        <taxonomicClassification>
+          <taxonRankName>unranked</taxonRankName>
+          <taxonRankValue>Osteichthyes</taxonRankValue>
+        </taxonomicClassification>
+      </taxonomicCoverage>
+    </coverage>
+    <purpose>
+      <para>These data were made accessible through UNESCO's eDNA Expeditions project to mobilize available marine species and occurrence datasets from World Heritage Sites.</para>
+    </purpose>
+    <maintenance>
+      <description>
+        <para/>
+      </description>
+      <maintenanceUpdateFrequency>notPlanned</maintenanceUpdateFrequency>
+    </maintenance>
+    <contact>
+      <individualName>
+        <givenName>OBIS</givenName>
+        <surName>Secretariat</surName>
+      </individualName>
+      <organizationName>OBIS</organizationName>
+      <positionName>Secretariat</positionName>
+      <electronicMailAddress>helpdesk@obis.org</electronicMailAddress>
+    </contact>
+    <methods>
+      <methodStep>
+        <description>
+          <para>See Github &lt;a href="https://github.com/iobis/mwhs-data-mobilization"&gt;Project&lt;/a&gt; and &lt;a href="https://iobis.github.io/mwhs-data-mobilization/notebooks/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/CIUFES_2023"&gt; R Notebook&lt;/a&gt; for dataset construction methods</para>
+        </description>
+      </methodStep>
+    </methods>
+  </dataset>
+  <additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2023-10-23T15:17:04.309-10:00</dateStamp>
+        <hierarchyLevel>dataset</hierarchyLevel>
+        <citation>IPT will autogenerate this</citation>
+        <bibliography>
+          <citation identifier="https://specieslink.net/col/CIUFES/">CIUFES - Ichthyological Collection of the Federal University of Espírito Santo. Data downloaded: 2023-10-23</citation>
+        </bibliography>
+      </gbif>
+    </metadata>
+  </additionalMetadata>
+</eml:eml>

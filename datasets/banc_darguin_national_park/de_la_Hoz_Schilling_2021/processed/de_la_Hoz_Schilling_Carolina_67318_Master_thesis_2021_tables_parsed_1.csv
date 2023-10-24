@@ -1,0 +1,16 @@
+Sample name,Replicates,Extraction blank,Sampling Date,Filtration Date,Site,In/outside PNBA,Habitat,Longitude,Latitude
+Ile des Pelicans,3,ExtB161220,14/02/2020,14/02/2020,Mid Banc d'Arguin,Inside PNBA,no information,20.58314,-16.64489
+Akadir,3,ExtB161220,15/02/2020,15/02/2020,Ile d'Arguin,Inside PNBA,no information,20.60795,-16.44831
+Selac_Puit 1,1,ExtB161221,01/11/2020,01/11/2020,Nouadhibou Processing Site,Outside PNBA,,21.071735,-16.993395
+Selac_Puit 2,1,ExtB161222,01/11/2020,01/11/2020,Nouadhibou Processing Site,Outside PNBA,,21.071735,-16.993395
+Iwik,3,ExtB161223,04/11/2020,04/11/2020,Iwik,Inside PNBA,,19.877914,-16.304943
+Mamghar,3,ExtB161224,07/11/2020,07/11/2020,Mamghar,Inside PNBA,,19.355537,-16.516715
+Idis,3,ExtB161225,07/11/2020,07/11/2020,Idis,Inside PNBA,no information,19.525811,-16.495327
+Baye St Jean,3,ExtB260121,12/12/2020,12/12/2020,Baye St Jean,Inside PNBA,Seagrass,19.37591,-16.46436
+L'oeil,3,ExtB260121,13/12/2020,13/12/2020,L'oeil,Inside PNBA,No vegetation,19.37359,-16.53738
+Belkeiznaya,2,ExtB260121,14/12/2020,14/12/2020,Belkeiznaya,Inside PNBA,Seagrass matte?,19.902757,-16.308
+West Tidra 1,3,ExtB030221,15/12/2020,16/12/2020,West off Tidra/Kiji,Inside PNBA,Seagrass,19.84629,-16.618
+West Tidra 2,3,ExtB030221,15/12/2020,16/12/2020,West off Tidra/Kiji,Inside PNBA,Seagrass,19.78945,-16.59858
+Kiji,2,ExtB260121,16/12/2020,16/12/2020,Kiji,Inside PNBA,no information,19.73805,-16.49369
+Mouzan,3,ExtBNair,31/3/2021,01/04/2021,Mouzan,Inside PNBA,Seagrass,19.893577,-16.518452
+Nair,2,ExtBNair,01/04/2021,03/04/2021,Nair,Inside PNBA,Sand,19.859644,-16.407293
