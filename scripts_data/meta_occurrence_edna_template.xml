@@ -15,7 +15,6 @@
         <field index="5" term="http://rs.tdwg.org/dwc/terms/locality" />
         <field index="7" term="http://rs.tdwg.org/dwc/terms/decimalLatitude" />
         <field index="8" term="http://rs.tdwg.org/dwc/terms/decimalLongitude" />
-        <field index="9" term="http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters" />
         <field term="http://rs.tdwg.org/dwc/terms/geodeticDatum" default="###"/>
         <field term="http://rs.tdwg.org/dwc/terms/occurrenceStatus" default="###"/>
         <field term="http://rs.tdwg.org/dwc/terms/basisOfRecord" default="###"/>
