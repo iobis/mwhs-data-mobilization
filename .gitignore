@@ -1,4 +1,6 @@
 .DS_Store
 .Rhistory
 __pycache__
-
+.Rproj.user
+scripts_data/marine_world_heritage.gpkg
+World_Heritage_Mobilization_Status.xlsx
