@@ -1,0 +1,818 @@
+---
+title: Bundling CIUFES 2023 to a DwC Archive
+date: "`r Sys.Date()`"
+author: Chandra Earl
+output: (function(...) {
+  rmdformats::robobook(toc_depth = 4, pandoc_args = c("+RTS", "-K2000m", "-RTS"), ...) })
+editor_options: 
+  chunk_output_type: console
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding, output_dir = ".") })  
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook for converting the **species checklist** found in the following reference to DarwinCore format for upload into [OBIS](https://obis.org/) as part of UNESCO's [eDNA Expeditions](https://www.unesco.org/en/edna-expeditions) project:
+
+[Ichthyological Collection of the Federal University of Espírito Santo, CIUFES](https://specieslink.net/col/CIUFES/)
+
+Data were downloaded on 2023-10-23. Permission given by Jean-Christophe Joyeux.
+
+# Setup
+
+Call the necessary libraries and variables. Suppresses loading messages.
+
+```{r Setup}
+library(magrittr)                       # To use %<>% pipes
+suppressMessages(library(janitor))      # To clean input data
+suppressMessages(library(dplyr))        # To clean input data
+library(stringr)                        # To clean input data
+suppressMessages(library(rgnparser))    # To clean species names
+suppressMessages(library(taxize))       # To get WoRMS IDs
+library(worrms)                         # To get WoRMS IDs
+library(digest)                         # To generate hashes
+suppressMessages(library(obistools))    # To generate centroid lat/long and uncertainty
+suppressMessages(library(sf))           # To generate wkt polygon
+suppressMessages(library(EML))          # To create eml.xml file
+library(xml2)                           # To create the meta.xml file
+suppressMessages(library(zip))          # To zip DwC file
+```
+
+# Input Parameters and Paths
+
+```{r}
+
+path_to_project_root <- "../../.."
+site_dir_name <- "brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves"
+dataset_dir_name <- "CIUFES_2023"
+original_pdf <- ""
+short_name <- "brazilian-atlantic-islands-ciufes-2023"
+
+```
+
+# Parsing PDF table to CSV
+
+We don't have to do this since the data is not in a PDF.
+
+```{r PDF Parse}
+```
+
+# Read source data
+
+Now we'll read in the csv table outputted from the previous step
+
+```{r Read Source Data}
+
+processed_csv <- "speciesLink-20231023164028-0004399.csv"
+
+input_data <- read.csv(paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "raw", processed_csv, sep="/"))
+
+#to preview pretty table
+knitr::kable(head(input_data))
+```
+
+# Preprocessing
+
+Here we tidy the data up, since OCR and table parsing errors are common and only take the list of species, since this is a checklist.
+
+## Tidy Data
+
+```{r Tidy Data}
+cleaned_data <- input_data
+
+#to preview pretty table
+knitr::kable(head(cleaned_data))
+```
+
+# Get WoRMS IDs
+
+## Auto matching
+
+First we will try to do this automatically by first cleaning the species names using gnparser and then using the taxise library to call the WoRMS database.
+
+```{r Link to WoRMs}
+
+#Parse author names out
+parsed_names <- rgnparser::gn_parse(cleaned_data[,"scientificname"])
+
+#Function to get WoRMS IDs. Search for accepted names first and if not found, search for unaccepted. If still not found, use the worrms package to search.
+get_worms_id_from_element <- function(element) {
+  worms_id <- get_wormsid(element$canonical$full, searchtype="scientific", fuzzy=TRUE, messages = FALSE, accepted = TRUE)
+  if (attr(worms_id, "match") == "not found") {
+    worms_id <- get_wormsid(element$canonical$full, searchtype="scientific", messages = FALSE, fuzzy=TRUE)
+    if (attr(worms_id, "match") == "not found") {
+      worms_id <- NA
+    }
+  }
+  return(worms_id)
+}
+
+#Call the function
+worms_ids <- lapply(parsed_names, function(element) {
+  if (element$parsed) {
+    return(get_worms_id_from_element(element))
+  } else {
+    return(NA)
+  }
+})
+
+#combine original names, parsed data and WoRMS ID into one data frame
+combined_dataframe <- data.frame()
+
+for (i in 1:nrow(cleaned_data)) {
+  cleaned_value <- cleaned_data[i,]
+  canonical_value <- parsed_names[[i]]$canonical$full
+  worms_id_value <- worms_ids[[i]][1]
+  if (is.null(canonical_value)){
+    canonical_value <- NA
+  }
+  temp_row <- data.frame(CleanedData = cleaned_value, CanonicalFull = canonical_value, WormsIDs = worms_id_value)
+  combined_dataframe <- rbind(combined_dataframe, temp_row)
+}
+
+knitr::kable(head(combined_dataframe))
+
+```
+
+## Human Verification
+
+Sometimes there are misspellings in the original text or incorrect OCR that can be searched for and fixed by hand. To do this, view the combined dataframe, search for unmatched species in WoRMS and add the ID, and remove rows that were not autoremoved in the earlier cleaning steps
+
+```{r Human Verification}
+
+combined_dataframe[1519,72:73] = c("Serranidae", 125561)
+combined_dataframe[334,72:73] = c("Serranidae", 125561)
+combined_dataframe[4423,72:73] = c("Serranidae", 125561)
+combined_dataframe[4551,72:73] = c("Serranidae", 125561)
+combined_dataframe[4534,72:73] = c("Serranidae", 125561)
+combined_dataframe[2482,72:73] = c("Serranidae", 125561)
+combined_dataframe[4264,72:73] = c("Serranidae", 125561)
+combined_dataframe[4,72:73] = c('Chordata', 1821)
+combined_dataframe[64,72:73] = c('Chordata', 1821)
+combined_dataframe[164,72:73] = c('Chordata', 1821)
+combined_dataframe[176,72:73] = c('Chordata', 1821)
+combined_dataframe[185,72:73] = c('Chordata', 1821)
+combined_dataframe[188,72:73] = c('Chordata', 1821)
+combined_dataframe[241,72:73] = c('Chordata', 1821)
+combined_dataframe[243,72:73] = c('Chordata', 1821)
+combined_dataframe[271,72:73] = c('Chordata', 1821)
+combined_dataframe[272,72:73] = c('Chordata', 1821)
+combined_dataframe[297,72:73] = c('Chordata', 1821)
+combined_dataframe[379,72:73] = c('Chordata', 1821)
+combined_dataframe[408,72:73] = c('Chordata', 1821)
+combined_dataframe[410,72:73] = c('Chordata', 1821)
+combined_dataframe[430,72:73] = c('Chordata', 1821)
+combined_dataframe[449,72:73] = c('Chordata', 1821)
+combined_dataframe[494,72:73] = c('Chordata', 1821)
+combined_dataframe[501,72:73] = c('Chordata', 1821)
+combined_dataframe[580,72:73] = c('Chordata', 1821)
+combined_dataframe[642,72:73] = c('Chordata', 1821)
+combined_dataframe[675,72:73] = c('Chordata', 1821)
+combined_dataframe[678,72:73] = c('Chordata', 1821)
+combined_dataframe[690,72:73] = c('Chordata', 1821)
+combined_dataframe[692,72:73] = c('Chordata', 1821)
+combined_dataframe[728,72:73] = c('Chordata', 1821)
+combined_dataframe[744,72:73] = c('Chordata', 1821)
+combined_dataframe[769,72:73] = c('Chordata', 1821)
+combined_dataframe[841,72:73] = c('Chordata', 1821)
+combined_dataframe[881,72:73] = c('Chordata', 1821)
+combined_dataframe[919,72:73] = c('Chordata', 1821)
+combined_dataframe[937,72:73] = c('Chordata', 1821)
+combined_dataframe[962,72:73] = c('Chordata', 1821)
+combined_dataframe[991,72:73] = c('Chordata', 1821)
+combined_dataframe[997,72:73] = c('Chordata', 1821)
+combined_dataframe[1029,72:73] = c('Chordata', 1821)
+combined_dataframe[1058,72:73] = c('Chordata', 1821)
+combined_dataframe[1085,72:73] = c('Chordata', 1821)
+combined_dataframe[1146,72:73] = c('Chordata', 1821)
+combined_dataframe[1183,72:73] = c('Chordata', 1821)
+combined_dataframe[1197,72:73] = c('Chordata', 1821)
+combined_dataframe[1264,72:73] = c('Chordata', 1821)
+combined_dataframe[1272,72:73] = c('Chordata', 1821)
+combined_dataframe[1347,72:73] = c('Chordata', 1821)
+combined_dataframe[1426,72:73] = c('Chordata', 1821)
+combined_dataframe[1442,72:73] = c('Chordata', 1821)
+combined_dataframe[1510,72:73] = c('Chordata', 1821)
+combined_dataframe[1512,72:73] = c('Chordata', 1821)
+combined_dataframe[1525,72:73] = c('Chordata', 1821)
+combined_dataframe[1602,72:73] = c('Chordata', 1821)
+combined_dataframe[1688,72:73] = c('Chordata', 1821)
+combined_dataframe[1740,72:73] = c('Chordata', 1821)
+combined_dataframe[1831,72:73] = c('Chordata', 1821)
+combined_dataframe[1836,72:73] = c('Chordata', 1821)
+combined_dataframe[1837,72:73] = c('Chordata', 1821)
+combined_dataframe[1947,72:73] = c('Chordata', 1821)
+combined_dataframe[1992,72:73] = c('Chordata', 1821)
+combined_dataframe[2153,72:73] = c('Chordata', 1821)
+combined_dataframe[2156,72:73] = c('Chordata', 1821)
+combined_dataframe[2178,72:73] = c('Chordata', 1821)
+combined_dataframe[2179,72:73] = c('Chordata', 1821)
+combined_dataframe[2253,72:73] = c('Chordata', 1821)
+combined_dataframe[2273,72:73] = c('Chordata', 1821)
+combined_dataframe[2277,72:73] = c('Chordata', 1821)
+combined_dataframe[2279,72:73] = c('Chordata', 1821)
+combined_dataframe[2284,72:73] = c('Chordata', 1821)
+combined_dataframe[2454,72:73] = c('Chordata', 1821)
+combined_dataframe[2599,72:73] = c('Chordata', 1821)
+combined_dataframe[2611,72:73] = c('Chordata', 1821)
+combined_dataframe[2661,72:73] = c('Chordata', 1821)
+combined_dataframe[2693,72:73] = c('Chordata', 1821)
+combined_dataframe[2697,72:73] = c('Chordata', 1821)
+combined_dataframe[2732,72:73] = c('Chordata', 1821)
+combined_dataframe[2739,72:73] = c('Chordata', 1821)
+combined_dataframe[2740,72:73] = c('Chordata', 1821)
+combined_dataframe[2791,72:73] = c('Chordata', 1821)
+combined_dataframe[2832,72:73] = c('Chordata', 1821)
+combined_dataframe[2911,72:73] = c('Chordata', 1821)
+combined_dataframe[2947,72:73] = c('Chordata', 1821)
+combined_dataframe[3007,72:73] = c('Chordata', 1821)
+combined_dataframe[3008,72:73] = c('Chordata', 1821)
+combined_dataframe[3046,72:73] = c('Chordata', 1821)
+combined_dataframe[3047,72:73] = c('Chordata', 1821)
+combined_dataframe[3050,72:73] = c('Chordata', 1821)
+combined_dataframe[3052,72:73] = c('Chordata', 1821)
+combined_dataframe[3059,72:73] = c('Chordata', 1821)
+combined_dataframe[3168,72:73] = c('Chordata', 1821)
+combined_dataframe[3218,72:73] = c('Chordata', 1821)
+combined_dataframe[3221,72:73] = c('Chordata', 1821)
+combined_dataframe[3294,72:73] = c('Chordata', 1821)
+combined_dataframe[3314,72:73] = c('Chordata', 1821)
+combined_dataframe[3410,72:73] = c('Chordata', 1821)
+combined_dataframe[3451,72:73] = c('Chordata', 1821)
+combined_dataframe[3640,72:73] = c('Chordata', 1821)
+combined_dataframe[3688,72:73] = c('Chordata', 1821)
+combined_dataframe[3744,72:73] = c('Chordata', 1821)
+combined_dataframe[3752,72:73] = c('Chordata', 1821)
+combined_dataframe[3755,72:73] = c('Chordata', 1821)
+combined_dataframe[3817,72:73] = c('Chordata', 1821)
+combined_dataframe[3837,72:73] = c('Chordata', 1821)
+combined_dataframe[4477,72:73] = c('Chordata', 1821)
+combined_dataframe[4682,72:73] = c('Chordata', 1821)
+combined_dataframe[4759,72:73] = c('Chordata', 1821)
+combined_dataframe[4772,72:73] = c('Chordata', 1821)
+combined_dataframe[4790,72:73] = c('Chordata', 1821)
+combined_dataframe[4812,72:73] = c('Chordata', 1821)
+combined_dataframe[4823,72:73] = c('Chordata', 1821)
+combined_dataframe[4891,72:73] = c('Chordata', 1821)
+combined_dataframe[4892,72:73] = c('Chordata', 1821)
+combined_dataframe[4924,72:73] = c('Chordata', 1821)
+combined_dataframe[4925,72:73] = c('Chordata', 1821)
+combined_dataframe[4940,72:73] = c('Chordata', 1821)
+combined_dataframe[4968,72:73] = c('Chordata', 1821)
+combined_dataframe[4991,72:73] = c('Chordata', 1821)
+combined_dataframe[5021,72:73] = c('Chordata', 1821)
+combined_dataframe[5080,72:73] = c('Chordata', 1821)
+combined_dataframe[5098,72:73] = c('Chordata', 1821)
+combined_dataframe[5122,72:73] = c('Chordata', 1821)
+combined_dataframe[5173,72:73] = c('Chordata', 1821)
+combined_dataframe[5189,72:73] = c('Chordata', 1821)
+combined_dataframe[5203,72:73] = c('Chordata', 1821)
+combined_dataframe[5255,72:73] = c('Chordata', 1821)
+combined_dataframe[5257,72:73] = c('Chordata', 1821)
+combined_dataframe[5275,72:73] = c('Chordata', 1821)
+combined_dataframe[5337,72:73] = c('Chordata', 1821)
+combined_dataframe[5527,72:73] = c('Chordata', 1821)
+combined_dataframe[5528,72:73] = c('Chordata', 1821)
+combined_dataframe[5541,72:73] = c('Chordata', 1821)
+combined_dataframe[4538,72:73] = c('Chlopsidae', 125426)
+combined_dataframe[364,72:73] = c('Synodontidae', 125449)
+combined_dataframe[1388,72:73] = c('Synodontidae', 125449)
+combined_dataframe[3102,72:73] = c('Belonidae', 125451)
+combined_dataframe[3611,72:73] = c('Holocentridae', 125458)
+combined_dataframe[225,72:73] = c('Clupeidae', 125464)
+combined_dataframe[1260,72:73] = c('Clupeidae', 125464)
+combined_dataframe[2172,72:73] = c('Clupeidae', 125464)
+combined_dataframe[878,72:73] = c('Engraulidae', 125465)
+combined_dataframe[1087,72:73] = c('Engraulidae', 125465)
+combined_dataframe[1312,72:73] = c('Engraulidae', 125465)
+combined_dataframe[2043,72:73] = c('Engraulidae', 125465)
+combined_dataframe[4846,72:73] = c('Engraulidae', 125465)
+combined_dataframe[4967,72:73] = c('Engraulidae', 125465)
+combined_dataframe[1083,72:73] = c('Antennariidae', 125484)
+combined_dataframe[1338,72:73] = c('Antennariidae', 125484)
+combined_dataframe[2793,72:73] = c('Antennariidae', 125484)
+combined_dataframe[77,72:73] = c('Ophidiidae', 125505)
+combined_dataframe[3722,72:73] = c('Ophidiidae', 125505)
+combined_dataframe[898,72:73] = c('Apogonidae', 125518)
+combined_dataframe[4625,72:73] = c('Blenniidae', 125519)
+combined_dataframe[934,72:73] = c('Carangidae', 125523)
+combined_dataframe[1320,72:73] = c('Carangidae', 125523)
+combined_dataframe[1716,72:73] = c('Carangidae', 125523)
+combined_dataframe[1912,72:73] = c('Carangidae', 125523)
+combined_dataframe[2650,72:73] = c('Carangidae', 125523)
+combined_dataframe[4826,72:73] = c('Carangidae', 125523)
+combined_dataframe[1524,72:73] = c('Gobiidae', 125537)
+combined_dataframe[1139,72:73] = c('Haemulidae', 125538)
+combined_dataframe[1145,72:73] = c('Haemulidae', 125538)
+combined_dataframe[1219,72:73] = c('Haemulidae', 125538)
+combined_dataframe[1262,72:73] = c('Haemulidae', 125538)
+combined_dataframe[2812,72:73] = c('Haemulidae', 125538)
+combined_dataframe[3784,72:73] = c('Labridae', 125541)
+combined_dataframe[5113,72:73] = c('Labridae', 125541)
+combined_dataframe[1088,72:73] = c('Mugilidae', 125546)
+combined_dataframe[1693,72:73] = c('Mugilidae', 125546)
+combined_dataframe[2373,72:73] = c('Mugilidae', 125546)
+combined_dataframe[2795,72:73] = c('Mugilidae', 125546)
+combined_dataframe[3844,72:73] = c('Mugilidae', 125546)
+combined_dataframe[4811,72:73] = c('Mugilidae', 125546)
+combined_dataframe[4906,72:73] = c('Mugilidae', 125546)
+combined_dataframe[5282,72:73] = c('Mugilidae', 125546)
+combined_dataframe[2770,72:73] = c('Mullidae', 125547)
+combined_dataframe[3387,72:73] = c('Mullidae', 125547)
+combined_dataframe[1143,72:73] = c('Pomacentridae', 125553)
+combined_dataframe[2756,72:73] = c('Pomacentridae', 125553)
+combined_dataframe[3847,72:73] = c('Pomacentridae', 125553)
+combined_dataframe[1805,72:73] = c('Scaridae', 125557)
+combined_dataframe[2143,72:73] = c('Scaridae', 125557)
+combined_dataframe[4881,72:73] = c('Scaridae', 125557)
+combined_dataframe[1104,72:73] = c('Sciaenidae', 125558)
+combined_dataframe[1293,72:73] = c('Sciaenidae', 125558)
+combined_dataframe[1430,72:73] = c('Sciaenidae', 125558)
+combined_dataframe[1491,72:73] = c('Sciaenidae', 125558)
+combined_dataframe[1860,72:73] = c('Sciaenidae', 125558)
+combined_dataframe[3178,72:73] = c('Sciaenidae', 125558)
+combined_dataframe[3251,72:73] = c('Sciaenidae', 125558)
+combined_dataframe[3332,72:73] = c('Sciaenidae', 125558)
+combined_dataframe[3446,72:73] = c('Sciaenidae', 125558)
+combined_dataframe[4862,72:73] = c('Sciaenidae', 125558)
+combined_dataframe[1721,72:73] = c('Scombridae', 125559)
+combined_dataframe[1827,72:73] = c('Serranidae', 125561)
+combined_dataframe[1963,72:73] = c('Serranidae', 125561)
+combined_dataframe[4112,72:73] = c('Tripterygiidae', 125572)
+combined_dataframe[2333,72:73] = c('Polymixiidae', 125582)
+combined_dataframe[3905,72:73] = c('Scorpaenidae', 125595)
+combined_dataframe[752,72:73] = c('Triglidae', 125598)
+combined_dataframe[1151,72:73] = c('Triglidae', 125598)
+combined_dataframe[1252,72:73] = c('Triglidae', 125598)
+combined_dataframe[3388,72:73] = c('Triglidae', 125598)
+combined_dataframe[4948,72:73] = c('Triglidae', 125598)
+combined_dataframe[1745,72:73] = c('Syngnathidae', 125606)
+combined_dataframe[3257,72:73] = c('Syngnathidae', 125606)
+combined_dataframe[5339,72:73] = c('Syngnathidae', 125606)
+combined_dataframe[5362,72:73] = c('Syngnathidae', 125606)
+combined_dataframe[466,72:73] = c('Monacanthidae', 125610)
+combined_dataframe[478,72:73] = c('Monacanthidae', 125610)
+combined_dataframe[1007,72:73] = c('Monacanthidae', 125610)
+combined_dataframe[1216,72:73] = c('Monacanthidae', 125610)
+combined_dataframe[1410,72:73] = c('Monacanthidae', 125610)
+combined_dataframe[1429,72:73] = c('Monacanthidae', 125610)
+combined_dataframe[1434,72:73] = c('Monacanthidae', 125610)
+combined_dataframe[3190,72:73] = c('Monacanthidae', 125610)
+combined_dataframe[5382,72:73] = c('Monacanthidae', 125610)
+combined_dataframe[5478,72:73] = c('Monacanthidae', 125610)
+combined_dataframe[2560,72:73] = c('Ostraciidae', 125611)
+combined_dataframe[3429,72:73] = c('Tetraodontidae', 125612)
+combined_dataframe[3580,72:73] = c('Percophidae', 151412)
+combined_dataframe[4089,72:73] = c('Chaenopsidae', 151415)
+combined_dataframe[4095,72:73] = c('Chaenopsidae', 151415)
+combined_dataframe[4110,72:73] = c('Chaenopsidae', 151415)
+combined_dataframe[4111,72:73] = c('Chaenopsidae', 151415)
+combined_dataframe[4113,72:73] = c('Dactyloscopidae', 151416)
+combined_dataframe[633,72:73] = c('Centropomidae', 151431)
+combined_dataframe[1898,72:73] = c('Centropomidae', 151431)
+combined_dataframe[2447,72:73] = c('Centropomidae', 151431)
+combined_dataframe[4798,72:73] = c('Centropomidae', 151431)
+combined_dataframe[715,72:73] = c('Lutjanidae', 151453)
+combined_dataframe[3197,72:73] = c('Lutjanidae', 151453)
+combined_dataframe[3657,72:73] = c('Lutjanidae', 151453)
+combined_dataframe[1234,72:73] = c('Gerreidae', 151456)
+combined_dataframe[5068,72:73] = c('Gerreidae', 151456)
+combined_dataframe[5352,72:73] = c('Gerreidae', 151456)
+combined_dataframe[2721,72:73] = c('Pempheridae', 151460)
+combined_dataframe[207,72:73] = c('Poeciliidae', 154389)
+combined_dataframe[1238,72:73] = c('Poeciliidae', 154389)
+combined_dataframe[1276,72:73] = c('Poeciliidae', 154389)
+combined_dataframe[2694,72:73] = c('Poeciliidae', 154389)
+combined_dataframe[2830,72:73] = c('Poeciliidae', 154389)
+combined_dataframe[4734,72:73] = c('Poeciliidae', 154389)
+combined_dataframe[5201,72:73] = c('Poeciliidae', 154389)
+combined_dataframe[5462,72:73] = c('Poeciliidae', 154389)
+combined_dataframe[3621,72:73] = c('Fistulariidae', 154577)
+combined_dataframe[987,72:73] = c('Loricariidae', 154623)
+combined_dataframe[3591,72:73] = c('Loricariidae', 154623)
+combined_dataframe[2794,72:73] = c('Ariidae', 154659)
+combined_dataframe[3661,72:73] = c('Ariidae', 154659)
+combined_dataframe[3055,72:73] = c('Atherinopsidae', 266995)
+combined_dataframe[354,72:73] = c('Crenicichla', 268872)
+combined_dataframe[3949,72:73] = c('Microlepidogaster', 269861)
+combined_dataframe[834,72:73] = c('Parexocoetus hillianus', 272173)
+combined_dataframe[4595,72:73] = c('Apogon americanus', 272972)
+combined_dataframe[4629,72:73] = c('Pempheris poeyi', 277066)
+combined_dataframe[4630,72:73] = c('Pempheris poeyi', 277066)
+combined_dataframe[4544,72:73] = c('Paradiplogrammus bairdi', 315166)
+combined_dataframe[2934,72:73] = c('Hoplias malabaricus', 874263)
+combined_dataframe[339,72:73] = c('Clarias gariepinus', 888192)
+combined_dataframe[729,72:73] = c('Clarias gariepinus', 888192)
+combined_dataframe[1117,72:73] = c('Clarias gariepinus', 888192)
+combined_dataframe[2139,72:73] = c('Clarias gariepinus', 888192)
+combined_dataframe[2185,72:73] = c('Microglanis pataxo', 1008906)
+combined_dataframe[5048,72:73] = c('Cichla kelberi', 1008929)
+combined_dataframe[1404,72:73] = c('Odontesthes mirinensis', 1010706)
+combined_dataframe[1637,72:73] = c('Odontesthes humensis', 1014093)
+combined_dataframe[1815,72:73] = c('Salminus brasiliensis', 1016624)
+combined_dataframe[2262,72:73] = c('Crenicichla lacustris', 1017287)
+combined_dataframe[3397,72:73] = c('Crenicichla lacustris', 1017287)
+combined_dataframe[2490,72:73] = c('Pygocentrus nattereri', 1018170)
+combined_dataframe[2720,72:73] = c('Pygocentrus nattereri', 1018170)
+combined_dataframe[3616,72:73] = c('Pygocentrus nattereri', 1018170)
+combined_dataframe[4969,72:73] = c('Pygocentrus nattereri', 1018170)
+combined_dataframe[4903,72:73] = c('Anchoviella vaillanti', 1018247)
+combined_dataframe[1180,72:73] = c('Pachyurus adspersus', 1020053)
+combined_dataframe[1447,72:73] = c('Pachyurus adspersus', 1020053)
+combined_dataframe[1657,72:73] = c('Pachyurus adspersus', 1020053)
+combined_dataframe[1676,72:73] = c('Pachyurus adspersus', 1020053)
+combined_dataframe[1754,72:73] = c('Pachyurus adspersus', 1020053)
+combined_dataframe[2443,72:73] = c('Pachyurus adspersus', 1020053)
+combined_dataframe[2607,72:73] = c('Pachyurus adspersus', 1020053)
+combined_dataframe[3423,72:73] = c('Pachyurus adspersus', 1020053)
+combined_dataframe[434,72:73] = c('Pseudauchenipterus affinis', 1020246)
+combined_dataframe[1271,72:73] = c('Pseudauchenipterus affinis', 1020246)
+combined_dataframe[1645,72:73] = c('Pseudauchenipterus affinis', 1020246)
+combined_dataframe[1972,72:73] = c('Pseudauchenipterus affinis', 1020246)
+combined_dataframe[3231,72:73] = c('Pseudauchenipterus affinis', 1020246)
+combined_dataframe[3379,72:73] = c('Pseudauchenipterus affinis', 1020246)
+combined_dataframe[850,72:73] = c('Prochilodus costatus', 1020354)
+combined_dataframe[2659,72:73] = c('Pimelodus maculatus', 1021320)
+combined_dataframe[3800,72:73] = c('Pimelodus maculatus', 1021320)
+combined_dataframe[5410,72:73] = c('Pimelodus maculatus', 1021320)
+combined_dataframe[324,72:73] = c('Cathorops arenatus', 1022317)
+combined_dataframe[1529,72:73] = c('Cathorops arenatus', 1022317)
+combined_dataframe[2133,72:73] = c('Cathorops arenatus', 1022317)
+combined_dataframe[2267,72:73] = c('Cathorops arenatus', 1022317)
+combined_dataframe[2764,72:73] = c('Cathorops arenatus', 1022317)
+combined_dataframe[3339,72:73] = c('Cathorops arenatus', 1022317)
+combined_dataframe[4852,72:73] = c('Cathorops arenatus', 1022317)
+combined_dataframe[2051,72:73] = c('Prochilodus argenteus', 1022670)
+combined_dataframe[397,72:73] = c('Astyanax bimaculatus', 1023047)
+combined_dataframe[557,72:73] = c('Astyanax bimaculatus', 1023047)
+combined_dataframe[815,72:73] = c('Astyanax bimaculatus', 1023047)
+combined_dataframe[3589,72:73] = c('Astyanax bimaculatus', 1023047)
+combined_dataframe[3862,72:73] = c('Astyanax bimaculatus', 1023047)
+combined_dataframe[2187,72:73] = c('Callichthys callichthys', 1023061)
+combined_dataframe[4740,72:73] = c('Cichlasoma dimerus', 1026270)
+combined_dataframe[81,72:73] = c('Jenynsia multidentata', 1026699)
+combined_dataframe[5475,72:73] = c('Hoplias intermedius', 1043443)
+combined_dataframe[2240,72:73] = c('Astyanax lacustris', 1259634)
+combined_dataframe[3576,72:73] = c('Megaleporinus conirostris', 1422088)
+combined_dataframe[4901,72:73] = c('Hypostomus scabriceps', 1467486)
+combined_dataframe[2232,72:73] = c('Knodus moenkhausii', 1470238)
+combined_dataframe[1459,72:73] = c('Deuterodon intermedius', 1526100)
+
+combined_dataframe[combined_dataframe == '#VALUE!' | combined_dataframe == '#Value! #value!'] <- NA
+
+
+```
+
+# Darwin Core mapping
+
+## Required Terms
+
+OBIS currently has eight required DwC terms: scientificName, scientificNameID, occurrenceID, eventDate, decimalLongitude, decimalLatitude, occurrenceStatus, basisOfRecord.
+
+### scientificName/scientificNameID
+
+Create a dataframe with unique taxa only (though this should already be unique). This will be our primary DarwinCore data frame.
+
+```{r}
+#rename and restructure WoRMSIDs to OBIS requirements
+occurrence <- combined_dataframe %>%
+  rename(scientificName = CleanedData.scientificname) %>%
+  rename(scientificNameID = WormsIDs) %>%
+  mutate(scientificNameID = ifelse(!is.na(scientificNameID), paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""), NA))
+
+occurrence <- subset(occurrence, select = -CanonicalFull)
+new_names <- sub("^CleanedData\\.", "", names(occurrence))
+names(occurrence) <- new_names
+
+```
+
+### occurrenceID
+
+OccurrenceID is an identifier for the occurrence record and should be persistent and globally unique. It is a combination of dataset-shortname:occurrence: and a hash based on the scientific name.
+
+```{r occurrenceID}
+# Vectorize the digest function (The digest() function isn't vectorized. So if you pass in a vector, you get one value for the whole vector rather than a digest for each element of the vector):
+vdigest <- Vectorize(digest)
+
+# Generate occurrenceID:
+occurrence %<>% mutate(occurrenceID = paste(short_name, "occurrence", vdigest (paste(catalognumber), algo="md5"), sep=":"))
+```
+
+# Post-processing
+
+## Check data
+
+Use the check_fields command from obistools to check if all OBIS required fields are present in an occurrence table and if any values are missing.
+
+```{r check}
+
+#Check fields
+check_fields(occurrence)
+```
+
+## Create the EML file
+
+This is a file which contains the dataset's metadata and is required in a DarwinCore-Archive.
+
+```{r eml}
+emld::eml_version("eml-2.1.1")
+
+#Title
+title <- "CIUFES - Ichthyological Collection of the Federal University of Espírito Santo"
+
+#AlternateIdentifier
+alternateIdentifier <- paste("https://ipt.obis.org/secretariat/resource?r=", short_name, sep="")
+
+#Abstract
+abstract <- eml$abstract(
+  para = "Collection of fish captured in research projects carried out by the UFES Ichthyology and Ichthyoplankton Laboratory, together with the fish collection from the UFES Zoology Collection. It serves as a reference collection and is intended for consultation by general researchers to confirm species identification. The relevance of the collection lies in the fact that most of the material comes from places that have not yet been studied or have little information and research."
+)
+```
+
+### People
+
+Here we add the people involved in the project:
+
+The **creator** is the person or organization responsible for creating the resource itself.
+
+The **contact** is the person or institution to contact with questions about the use, interpretation of a data set.
+
+The **metadataProvider** is the person responsible for providing the metadata documentation for the resource.
+
+The **associatedParty** (in this case the Data Curator) is the person who mobilized the data from the original resource.
+
+```{r eml-people}
+
+creator <- list(eml$creator(
+    individualName = eml$individualName(
+      givenName = "Luiz Fernando Loureiro", 
+      surName = "Fernandes"),
+    organizationName = "Federal University of Espírito Santo",
+    electronicMailAddress = "oureiro@npd.ufes.br"
+  ), eml$creator(
+    individualName = eml$individualName(
+      givenName = "Jean-Christophe", 
+      surName = "Joyeux"),
+    organizationName = "Federal University of Espírito Santo",
+    electronicMailAddress = "ciufes@gmail.com"
+  ), eml$creator(
+    individualName = eml$individualName(
+      givenName = "Kathiani Victor", 
+      surName = "Bastos"),
+    organizationName = "Federal University of Espírito Santo",
+    electronicMailAddress = "ciufes@gmail.com"
+  )
+)
+
+
+contact <- eml$creator(
+  individualName = eml$individualName(
+    givenName = "OBIS", 
+    surName = "Secretariat"),
+  electronicMailAddress = "helpdesk@obis.org",
+  organizationName = "OBIS",
+  positionName = "Secretariat"
+)
+
+metadataProvider <- eml$metadataProvider(
+  individualName = eml$individualName(
+    givenName = "Chandra", 
+    surName = "Earl"),
+  electronicMailAddress = "c.earl@unesco.org",
+  organizationName = "UNESCO",
+  positionName = "eDNA Scientific Officer"
+)
+
+associatedParty <- eml$associatedParty(
+  role = "processor",
+  individualName = eml$individualName(
+    givenName = "Chandra", 
+    surName = "Earl"),
+  electronicMailAddress = "c.earl@unesco.org",
+  organizationName = "UNESCO",
+  positionName = "eDNA Scientific Officer"
+)
+
+```
+
+
+### Additional Metadata
+
+Here we add the additionalMetadata element, which is required for a GBIF-type EML file and contains information such as the citation of the dataset, the citation of the original resource and the creation timestamp of the EML.
+
+```{r}
+#{dataset.authors} ({dataset.pubDate}) {dataset.title}. [Version {dataset.version}]. {organization.title}. {dataset.type} Dataset {dataset.doi}, {dataset.url}
+
+additionalMetadata <- eml$additionalMetadata(
+  metadata = list(
+    gbif = list(
+      dateStamp = paste0(format(Sys.time(), "%Y-%m-%dT%H:%M:%OS3"), paste0(substr(format(Sys.time(), "%z"), 1, 3), ":", paste0(substr(format(Sys.time(), "%z"), 4, 5)))),
+      hierarchyLevel = "dataset",
+      citation = "IPT will autogenerate this",
+      bibliography = list(
+        citation = "CIUFES - Ichthyological Collection of the Federal University of Espírito Santo. Data downloaded: 2023-10-23")
+    )
+  )
+)
+
+citationdoi <- "https://specieslink.net/col/CIUFES/"
+```
+
+
+### Coverage
+
+Here we describe the dataset's geographic, taxonomic and temporal coverage.
+
+```{r Coverage}
+
+#Coverage
+coverage <- eml$coverage(
+  geographicCoverage = eml$geographicCoverage(
+    geographicDescription = "Brazilian Atlantic Ocean",
+    boundingCoordinates = eml$boundingCoordinates(
+      westBoundingCoordinate = min(occurrence$latitude),
+      eastBoundingCoordinate = max(occurrence$latitude),
+      northBoundingCoordinate = max(occurrence$longitude),
+      southBoundingCoordinate = min(occurrence$longitude))
+    ),
+  taxonomicCoverage = eml$taxonomicCoverage(
+    generalTaxonomicCoverage = "Fishes",
+    taxonomicClassification = list(
+      eml$taxonomicClassification(
+        taxonRankName = "Superclass",
+        taxonRankValue = "Agnatha"),
+      eml$taxonomicClassification(
+        taxonRankName = "unranked",
+        taxonRankValue = "Chondrichthyes"),
+      eml$taxonomicClassification(
+        taxonRankName = "unranked",
+        taxonRankValue = "Osteichthyes")
+      )
+    
+#  ),
+#  temporalCoverage = eml$temporalCoverage(
+#    rangeOfDates = eml$rangeOfDates(
+#      beginDate = eml$beginDate(
+#        calendarDate = "2019-05-01"
+#      ),
+#      endDate = eml$endDate(
+#        calendarDate = "2016-05-06"
+#      )
+#    )
+   )
+)
+
+
+```
+
+
+### Extra MetaData
+
+These fields are not required, though they make the metadata more complete.
+
+```{r Other Data}
+
+methods <- eml$methods(
+  methodStep = eml$methodStep(
+    description = eml$description(
+      para = paste("See Github <a href=\"https://github.com/iobis/mwhs-data-mobilization\">Project</a> and <a href=\"https://iobis.github.io/mwhs-data-mobilization/notebooks/", site_dir_name, "/", dataset_dir_name, "\"> R Notebook</a> for dataset construction methods", sep="")
+    )
+  )
+)
+
+#Other Data
+pubDate <- "2023-10-15"
+
+#language of original document
+language <- "por"
+
+keywordSet <- eml$keywordSet(
+  keyword = "Occurrence",
+  keywordThesaurus = "GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml"
+)
+
+maintenance <- eml$maintenance(
+  description = eml$description(
+    para = ""),
+  maintenanceUpdateFrequency = "notPlanned"
+)
+
+#Universal CC
+intellectualRights <- eml$intellectualRights(
+  para = "To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url=\"http://creativecommons.org/publicdomain/zero/1.0/legalcode\"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction."
+)
+
+
+purpose <- eml$purpose(
+  para = "These data were made accessible through UNESCO's eDNA Expeditions project to mobilize available marine species and occurrence datasets from World Heritage Sites."
+)
+
+additionalInfo <- eml$additionalInfo(
+  para = "marine, harvested by iOBIS"
+)
+```
+
+### Create and Validate EML
+
+```{r Validate eml}
+
+#Put it all together
+my_eml <- eml$eml(
+           packageId = paste("https://ipt.obis.org/secretariat/resource?id=", short_name, "/v1.0", sep = ""),  
+           system = "http://gbif.org",
+           scope = "system",
+           dataset = eml$dataset(
+               alternateIdentifier = alternateIdentifier,
+               title = title,
+               creator = creator,
+               metadataProvider = metadataProvider,
+               associatedParty = associatedParty,
+               pubDate = pubDate,
+               coverage = coverage,
+               language = language,
+               abstract = abstract,
+               keywordSet = keywordSet,
+               contact = contact,
+               methods = methods,
+               intellectualRights = intellectualRights,
+               purpose = purpose,
+               maintenance = maintenance,
+               additionalInfo = additionalInfo),
+           additionalMetadata = additionalMetadata
+)
+
+eml_validate(my_eml)
+
+```
+
+## Create meta.xml file
+
+Since these data are very different from the usual (there are many more fields) we will use the IPT auto mapping tool to create the meta.xml file.
+
+```{r meta}
+
+
+```
+
+## Save outputs
+
+```{r Save}
+
+dwc_output_dir <- paste(path_to_project_root, "output", site_dir_name, dataset_dir_name, sep="/")
+
+write.csv(occurrence, paste(dwc_output_dir, "/occurrence.csv", sep = ""), na = "", row.names=FALSE)
+write_eml(my_eml, paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+```
+
+### Edit EML
+
+We have to further edit the eml file to conform to GBIF-specific requirements that cannot be included in the original EML construction. This includes changing the schemaLocation and rearranging the GBIF element, since the construction automatically arranges the children nodes to alphabetical order.
+
+```{r edit EML}
+
+#edit the schemaLocation and rearrange gbif node for gbif specific eml file
+eml_content <- read_xml(paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+#change schemaLocation attributes for GBIF
+root_node <- xml_root(eml_content)
+xml_set_attr(root_node, "xsi:schemaLocation", "https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd")
+xml_set_attr(root_node, "xmlns:dc", "http://purl.org/dc/terms/")
+xml_set_attr(root_node, "xmlns:stmml", NULL)
+xml_set_attr(root_node, "xml:lang", "eng")
+
+
+#rearrange children nodes under the GBIF element
+hierarchyLevel <- eml_content %>% xml_find_all(".//hierarchyLevel")
+dateStamp <- eml_content %>% xml_find_all(".//dateStamp")
+citation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation")
+bibcitation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/bibliography/citation")
+xml_set_attr(bibcitation, "identifier", citationdoi)
+
+eml_content %>% xml_find_all(".//hierarchyLevel") %>% xml_remove()
+eml_content %>% xml_find_all(".//dateStamp") %>% xml_remove()
+eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation") %>% xml_remove()
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(citation, .where=0)
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(hierarchyLevel, .where=0)
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(dateStamp, .where=0)
+
+write_xml(eml_content, paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+
+```
+
+### Zip files to DwC-A
+
+Only zip occurrence since we don't have a whole DwC archive.
+
+```{r Zip Files}
+output_zip <- paste(dwc_output_dir, "occurrence.zip", sep="/")
+
+if (file.exists(output_zip)) {
+  unlink(output_zip)
+}
+
+zip(zipfile = output_zip, files = "../../../output/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/CIUFES_2023/occurrence.csv", mode = "cherry-pick")
+
+if (file.exists(output_zip)) {
+  unlink("../../../output/brazilian_atlantic_islands_fernando_de_noronha_and_atol_das_rocas_reserves/CIUFES_2023/occurrence.csv")
+}
+```

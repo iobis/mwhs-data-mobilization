@@ -1,0 +1,622 @@
+---
+title: Bundling CCMAR - Centre of Marine Sciences 2023 to a DwC Archive
+date: "`r Sys.Date()`"
+author: Chandra Earl
+output: (function(...) {
+  rmdformats::robobook(toc_depth = 4, pandoc_args = c("+RTS", "-K2000m", "-RTS"), ...) })
+editor_options: 
+  chunk_output_type: console
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding, output_dir = ".") })  
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook for converting the **species checklist** found in the following reference to DarwinCore format for upload into [OBIS](https://obis.org/) as part of UNESCO's [eDNA Expeditions](https://www.unesco.org/en/edna-expeditions) project:
+
+[Project Marafrica: a network monitoring, integrating and assessing marine biodiversity data along the west africa to understand, predict and mitigate climatic / oceanographic changes.](https://www.marafrica.net/pnba/)
+
+Data were downloaded on 2023-10-17.
+
+# Setup
+
+Call the necessary libraries and variables. Suppresses loading messages.
+
+```{r Setup}
+library(magrittr)                       # To use %<>% pipes
+suppressMessages(library(janitor))      # To clean input data
+suppressMessages(library(dplyr))        # To clean input data
+library(stringr)                        # To clean input data
+suppressMessages(library(rgnparser))    # To clean species names
+suppressMessages(library(taxize))       # To get WoRMS IDs
+library(worrms)                         # To get WoRMS IDs
+library(digest)                         # To generate hashes
+suppressMessages(library(obistools))    # To generate centroid lat/long and uncertainty
+suppressMessages(library(sf))           # To generate wkt polygon
+suppressMessages(library(EML))          # To create eml.xml file
+library(xml2)                           # To create the meta.xml file
+suppressMessages(library(zip))          # To zip DwC file
+```
+
+# Input Parameters and Paths
+
+```{r}
+
+path_to_project_root <- "../../.."
+site_dir_name <- "banc_darguin_national_park"
+dataset_dir_name <- "CCMAR_2023"
+original_pdf <- ""
+short_name <- "banc-darguin-ccmar-2023"
+
+```
+
+# Parsing PDF table to CSV
+
+The data for this reference is formatted as an image-based table inside a PDF across multiple sheets. First, we use [pdf_to_table](https://github.com/sunray1/pdf_to_table) to OCR and parse out the table to a CSV. We don't have to do this since we have the CSV.
+
+```{r PDF Parse}
+
+```
+
+# Read source data
+
+Now we'll read in the csv table outputted from the previous step
+
+```{r Read Source Data}
+
+processed_csv <- "biodiversity-data.csv"
+
+input_data <- read.csv(paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "raw", processed_csv, sep="/"))
+
+#to preview pretty table
+knitr::kable(head(input_data))
+```
+
+# Preprocessing
+
+Here we tidy the data up, since OCR and table parsing errors are common and only take the list of species, since this is a checklist.
+
+## Tidy Data
+
+```{r Tidy Data}
+
+input_data %<>%
+  remove_empty(c("rows", "cols"))
+
+# Remove iNaturalist data since this will be duplicated
+cleaned_data <- subset(input_data, datasetName != "iNaturalist")
+
+#to preview pretty table
+knitr::kable(head(cleaned_data))
+```
+
+# Get WoRMS IDs
+
+## Auto matching
+
+First we will try to do this automatically by first cleaning the species names using gnparser and then using the taxise library to call the WoRMS database.
+
+```{r Link to WoRMs}
+
+#Parse author names out
+parsed_names <- rgnparser::gn_parse(cleaned_data[,1])
+
+#Function to get WoRMS IDs. Search for accepted names first and if not found, search for unaccepted. If still not found, use the worrms package to search.
+get_worms_id_from_element <- function(element) {
+  worms_id <- get_wormsid(element$canonical$full, searchtype="scientific", fuzzy=TRUE, messages = FALSE, accepted = TRUE)
+  if (attr(worms_id, "match") == "not found") {
+    worms_id <- get_wormsid(element$canonical$full, searchtype="scientific", messages = FALSE, fuzzy=TRUE)
+    if (attr(worms_id, "match") == "not found") {
+      worms_id <- NA
+    }
+  }
+  return(worms_id)
+}
+
+#Call the function
+worms_ids <- lapply(parsed_names, function(element) {
+  if (element$parsed) {
+    return(get_worms_id_from_element(element))
+  } else {
+    return(NA)
+  }
+})
+
+#combine original names, parsed data and WoRMS ID into one data frame
+combined_dataframe <- data.frame()
+
+for (i in 1:nrow(cleaned_data)) {
+  cleaned_value <- cleaned_data[i,]
+  canonical_value <- parsed_names[[i]]$canonical$full
+  worms_id_value <- worms_ids[[i]][1]
+  if (is.null(canonical_value)){
+    canonical_value <- NA
+  }
+  temp_row <- data.frame(CleanedData = cleaned_value, CanonicalFull = canonical_value, WormsIDs = worms_id_value)
+  combined_dataframe <- rbind(combined_dataframe, temp_row)
+}
+
+knitr::kable(head(combined_dataframe))
+
+```
+
+## Human Verification
+
+Sometimes there are misspellings in the original text or incorrect OCR that can be searched for and fixed by hand. To do this, view the combined dataframe, search for unmatched species in WoRMS and add the ID, and remove rows that were not autoremoved in the earlier cleaning steps. 
+
+```{r Human Verification}
+
+```
+
+# Darwin Core mapping
+
+## Required Terms
+
+OBIS currently has eight required DwC terms: scientificName, scientificNameID, occurrenceID, eventDate, decimalLongitude, decimalLatitude, occurrenceStatus, basisOfRecord.
+
+### scientificName/scientificNameID
+
+Create a dataframe with unique taxa only (though this should already be unique). This will be our primary DarwinCore data frame.
+
+```{r}
+#rename and restructure WoRMSIDs to OBIS requirements
+occurrence <- combined_dataframe %>%
+  distinct(CleanedData.decimalLongitude, CleanedData.decimalLatitude, CleanedData.year, CleanedData.month, CleanedData.day, CanonicalFull, WormsIDs) %>%
+  rename(scientificName = CanonicalFull) %>%
+  rename(scientificNameID = WormsIDs) %>%
+  rename(decimalLongitude = CleanedData.decimalLongitude) %>%
+  rename(decimalLatitude = CleanedData.decimalLatitude) %>%
+  rename(year = CleanedData.year) %>%
+  rename(month = CleanedData.month) %>%
+  rename(day = CleanedData.day) %>%
+  mutate(scientificNameID = ifelse(!is.na(scientificNameID), paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""), NA))
+
+```
+
+### occurrenceID
+
+OccurrenceID is an identifier for the occurrence record and should be persistent and globally unique. It is a combination of dataset-shortname:occurrence: and a hash based on the scientific name.
+
+```{r occurrenceID}
+# Vectorize the digest function (The digest() function isn't vectorized. So if you pass in a vector, you get one value for the whole vector rather than a digest for each element of the vector):
+vdigest <- Vectorize(digest)
+
+# Generate taxonID:
+occurrence %<>% mutate(occurrenceID = paste(short_name, "occurrence", vdigest (paste(scientificName, decimalLongitude, decimalLatitude, year, month, day), algo="md5"), sep=":"))
+```
+
+### eventDate
+
+This is NULL since we do not know the collection date.
+
+```{r eventDate}
+occurrence$eventDate <- ifelse(!is.na(occurrence$year), occurrence$year, NA)
+occurrence$eventDate <- ifelse(!is.na(occurrence$month), paste(occurrence$eventDate, sprintf("%02d", occurrence$month), sep="-"), occurrence$eventDate)
+occurrence$eventDate <- ifelse(!is.na(occurrence$day), paste(occurrence$eventDate, sprintf("%02d", occurrence$day), sep="-"), occurrence$eventDate)
+occurrence$eventDate[occurrence$eventDate == "NA-NA-NA"] <- NA
+```
+
+### decimalLongitude/decimalLatitude
+
+Use obistools::calculate_centroid to calculate a centroid and radius for WKT strings. This is useful for populating decimalLongitude, decimalLatitude and coordinateUncertaintyInMeters. The WKT strings are from <https://github.com/iobis/mwhs-shapes>.
+
+```{r decimalLongitude/decimalLatitude}
+if (!file.exists(paste(path_to_project_root, "scripts_data/marine_world_heritage.gpkg", sep="/"))) {
+  download.file("https://github.com/iobis/mwhs-shapes/blob/master/output/marine_world_heritage.gpkg?raw=true", paste(path_to_project_root, "scripts_data/marine_world_heritage.gpkg", sep="/"))
+}
+
+shapes <- st_read(paste(path_to_project_root, "scripts_data/marine_world_heritage.gpkg", sep="/"))
+#For some sites, the GeoPackage has core as well as buffer areas. Merge the geometries by site.
+shapes_processed <- shapes %>%
+  group_by(name) %>%
+  summarize()
+
+#Banc d'Arguin National Park
+ind_shape <- shapes_processed$geom[which(shapes_processed$name == "Banc d'Arguin National Park")]
+
+```
+
+### occurrenceStatus
+
+```{r occurrenceStatus}
+occurrenceStatus <- "present"
+occurrence %<>% mutate(occurrenceStatus)
+```
+
+### basisOfRecord
+
+```{r basisOfRecord}
+basisOfRecord <- "HumanObservation"
+occurrence %<>% mutate(basisOfRecord)
+```
+
+## Extra Terms
+
+### footprintWKT
+
+```{r footprintWKT}
+```
+
+### coordinateUncertaintyInMeters
+
+```{r coordinateUncertaintyInMeters}
+occurrence %<>% mutate(coordinateUncertaintyInMeters = NA)
+```
+
+### geodeticDatum
+
+```{r geodeticDatum}
+geodeticDatum <- "WGS84"
+occurrence %<>% mutate(geodeticDatum)
+```
+
+### country
+
+```{r country}
+country <- "Mauritania"
+occurrence %<>% mutate(country)
+```
+
+### locality
+
+```{r locality}
+locality <- "Banc d'Arguin National Park"
+occurrence %<>% mutate(locality)
+```
+
+# Post-processing
+
+## Check data
+
+Use the check_fields command from obistools to check if all OBIS required fields are present in an occurrence table and if any values are missing.
+
+```{r check}
+#Reorganize columns
+occurrence = occurrence %>% select(occurrenceID, scientificName, scientificNameID, eventDate, year, month, day, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, geodeticDatum, occurrenceStatus, basisOfRecord)
+
+#Check fields
+check_fields(occurrence)
+```
+
+## Create the EML file
+
+This is a file which contains the dataset's metadata and is required in a DarwinCore-Archive.
+
+```{r eml}
+emld::eml_version("eml-2.1.1")
+
+#Title
+title <- "Biodiversity data of the Banc D'Arguin National Park. Information for education, conservation and management."
+
+#AlternateIdentifier
+alternateIdentifier <- paste("https://ipt.obis.org/secretariat/resource?r=", short_name, sep="")
+
+#Abstract
+abstract <- eml$abstract(
+  para = "The Parc National du Banc d′Arguin (PNBA, comprising 12,000 km2 of which half are marine) is the largest marine protected area in western Africa, recognized for its unique universal value by the UNESCO’s Marine World Heritage Programme. It is a globally significant hotspot for blue carbon, as the third largest area of seagrass and the third largest carbon stock among these UNESCO sites. PNBA is also a Ramsar Wetland of international importance and a WWF “Gift to the Earth”, and is the most important habitat of the Western Atlantic for nesting birds and Palaearctic migratory waders. The PNBA’s extensive marine vegetation provides major shelter, feeding and/or breeding sites for a wide range of marine species, including seabirds, turtles, endangered elasmobranchs and many other species of conservation and/or commercial interest (adapted from https://doi.org/10.1016/j.gecco.2021.e01890)"
+)
+```
+
+### People
+
+Here we add the people involved in the project:
+
+The **creator** is the person or organization responsible for creating the resource itself.
+
+The **contact** is the person or institution to contact with questions about the use, interpretation of a data set.
+
+The **metadataProvider** is the person responsible for providing the metadata documentation for the resource.
+
+The **associatedParty** (in this case the Data Curator) is the person who mobilized the data from the original resource.
+
+```{r eml-people}
+
+creator <- list(eml$creator(
+    individualName = eml$individualName(
+      givenName = "Ester", 
+      surName = "Serrao"),
+    organizationName = "Universidade do Algarve"
+  )
+)
+
+contact <- eml$creator(
+  individualName = eml$individualName(
+    givenName = "OBIS", 
+    surName = "Secretariat"),
+  electronicMailAddress = "helpdesk@obis.org",
+  organizationName = "OBIS",
+  positionName = "Secretariat"
+)
+
+metadataProvider <- eml$metadataProvider(
+  individualName = eml$individualName(
+    givenName = "Chandra", 
+    surName = "Earl"),
+  electronicMailAddress = "c.earl@unesco.org",
+  organizationName = "UNESCO",
+  positionName = "eDNA Scientific Officer"
+)
+
+associatedParty <- eml$associatedParty(
+  role = "processor",
+  individualName = eml$individualName(
+    givenName = "Chandra", 
+    surName = "Earl"),
+  electronicMailAddress = "c.earl@unesco.org",
+  organizationName = "UNESCO",
+  positionName = "eDNA Scientific Officer"
+)
+
+```
+
+
+### Additional Metadata
+
+Here we add the additionalMetadata element, which is required for a GBIF-type EML file and contains information such as the citation of the dataset, the citation of the original resource and the creation timestamp of the EML.
+
+```{r}
+#{dataset.authors} ({dataset.pubDate}) {dataset.title}. [Version {dataset.version}]. {organization.title}. {dataset.type} Dataset {dataset.doi}, {dataset.url}
+
+additionalMetadata <- eml$additionalMetadata(
+  metadata = list(
+    gbif = list(
+      dateStamp = paste0(format(Sys.time(), "%Y-%m-%dT%H:%M:%OS3"), paste0(substr(format(Sys.time(), "%z"), 1, 3), ":", paste0(substr(format(Sys.time(), "%z"), 4, 5)))),
+      hierarchyLevel = "dataset",
+      citation = "IPT will autogenerate this",
+      bibliography = list(
+        citation = "Project Marafrica: a network monitoring, integrating and assessing marine biodiversity data along the west africa to understand, predict and mitigate climatic / oceanographic changes. Aga-Khan Foundation and FCT-Portugal and Project STM - Survi des Tortues Marines. MAVA Foundation and PRCM. 2023. Data Downloaded 2023-10-17. ")
+    )
+  )
+)
+
+citationdoi <- "https://www.marafrica.net/pnba/"
+```
+
+
+### Coverage
+
+Here we describe the dataset's geographic, taxonomic and temporal coverage.
+
+```{r Coverage}
+
+#Coverage
+coverage <- eml$coverage(
+  geographicCoverage = eml$geographicCoverage(
+    geographicDescription = "Banc d'Arguin National Park",
+    boundingCoordinates = eml$boundingCoordinates(
+      westBoundingCoordinate = st_bbox(ind_shape)$xmax,
+      eastBoundingCoordinate = st_bbox(ind_shape)$xmin,
+      northBoundingCoordinate = st_bbox(ind_shape)$ymax,
+      southBoundingCoordinate = st_bbox(ind_shape)$ymin)
+    ),
+  taxonomicCoverage = eml$taxonomicCoverage(
+    generalTaxonomicCoverage = "Fishes",
+    taxonomicClassification = list(
+      eml$taxonomicClassification(
+        taxonRankName = "Superclass",
+        taxonRankValue = "Agnatha"),
+      eml$taxonomicClassification(
+        taxonRankName = "unranked",
+        taxonRankValue = "Chondrichthyes"),
+      eml$taxonomicClassification(
+        taxonRankName = "unranked",
+        taxonRankValue = "Osteichthyes")
+      )
+    
+#  ),
+#  temporalCoverage = eml$temporalCoverage(
+#    rangeOfDates = eml$rangeOfDates(
+#      beginDate = eml$beginDate(
+#        calendarDate = "2019-05-01"
+#      ),
+#      endDate = eml$endDate(
+#        calendarDate = "2016-05-06"
+#      )
+#    )
+   )
+)
+
+```
+
+
+### Extra MetaData
+
+These fields are not required, though they make the metadata more complete.
+
+```{r Other Data}
+
+methods <- eml$methods(
+  methodStep = eml$methodStep(
+    description = eml$description(
+      para = paste("See Github <a href=\"https://github.com/iobis/mwhs-data-mobilization\">Project</a> and <a href=\"https://iobis.github.io/mwhs-data-mobilization/notebooks/", site_dir_name, "/", dataset_dir_name, "\"> R Notebook</a> for dataset construction methods", sep="")
+    )
+  )
+)
+
+#Other Data
+pubDate <- "2023-10-15"
+
+#language of original document
+language <- "eng"
+
+keywordSet <- eml$keywordSet(
+  keyword = "Occurrence",
+  keywordThesaurus = "GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml"
+)
+
+maintenance <- eml$maintenance(
+  description = eml$description(
+    para = ""),
+  maintenanceUpdateFrequency = "notPlanned"
+)
+
+#Universal CC
+intellectualRights <- eml$intellectualRights(
+  para = "To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url=\"http://creativecommons.org/publicdomain/zero/1.0/legalcode\"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction."
+)
+
+
+purpose <- eml$purpose(
+  para = "These data were made accessible through UNESCO's eDNA Expeditions project to mobilize available marine species and occurrence datasets from World Heritage Sites."
+)
+
+additionalInfo <- eml$additionalInfo(
+  para = "marine, harvested by iOBIS"
+)
+```
+
+### Create and Validate EML
+
+```{r Validate eml}
+
+#Put it all together
+my_eml <- eml$eml(
+           packageId = paste("https://ipt.obis.org/secretariat/resource?id=", short_name, "/v1.0", sep = ""),  
+           system = "http://gbif.org",
+           scope = "system",
+           dataset = eml$dataset(
+               alternateIdentifier = alternateIdentifier,
+               title = title,
+               creator = creator,
+               metadataProvider = metadataProvider,
+               associatedParty = associatedParty,
+               pubDate = pubDate,
+               coverage = coverage,
+               language = language,
+               abstract = abstract,
+               keywordSet = keywordSet,
+               contact = contact,
+               methods = methods,
+               intellectualRights = intellectualRights,
+               purpose = purpose,
+               maintenance = maintenance,
+               additionalInfo = additionalInfo),
+           additionalMetadata = additionalMetadata
+)
+
+eml_validate(my_eml)
+
+```
+
+## Create meta.xml file
+
+This is a file which describes the archive and data file structure and is required in a DarwinCore-Archive. It is based on the template file "meta_occurrence_checklist_template.xml"
+
+```{r meta}
+meta_template <- paste(path_to_project_root, "scripts_data/meta_occurrence_occurrence_template.xml", sep="/")
+meta <- read_xml(meta_template)
+
+fields <- xml_find_all(meta, "//d1:field")
+
+for (field in fields) {
+  term <- xml_attr(field, "term")
+  if (term == "http://rs.tdwg.org/dwc/terms/eventDate") {
+    xml_set_attr(field, "index", "3")
+    xml_set_attr(field, "default", NULL)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/country") {
+    xml_set_attr(field, "default", country)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/geodeticDatum") {
+    xml_set_attr(field, "default", geodeticDatum)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/occurrenceStatus") {
+    xml_set_attr(field, "default", occurrenceStatus)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/basisOfRecord") {
+    xml_set_attr(field, "default", basisOfRecord)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/locality") {
+    xml_set_attr(field, "default", locality)
+    xml_set_attr(field, "index", NULL)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/decimalLatitude") {
+    xml_set_attr(field, "index", "9")
+  } else if (term == "http://rs.tdwg.org/dwc/terms/decimalLongitude") {
+    xml_set_attr(field, "index", "10")
+  } else if (term == "http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters") {
+    xml_set_attr(field, "index", "11")
+  } else if (term == "http://rs.tdwg.org/dwc/terms/fieldNumber") {
+    xml_remove(field)
+  }
+}
+
+#Add year, month, day
+new_field <- xml_add_sibling(fields[[4]], "field")
+xml_set_attr(new_field, "index", "4")
+xml_set_attr(new_field, "term", "http://rs.tdwg.org/dwc/terms/year")
+
+fields <- append(fields, list(new_field))
+
+new_field <- xml_add_sibling(fields[[5]], "field")
+xml_set_attr(new_field, "index", "5")
+xml_set_attr(new_field, "term", "http://rs.tdwg.org/dwc/terms/month")
+
+fields <- append(fields, list(new_field))
+
+new_field <- xml_add_sibling(fields[[6]], "field")
+xml_set_attr(new_field, "index", "6")
+xml_set_attr(new_field, "term", "http://rs.tdwg.org/dwc/terms/day")
+
+fields <- append(fields, list(new_field))
+
+
+```
+
+## Save outputs
+
+```{r Save}
+
+dwc_output_dir <- paste(path_to_project_root, "output", site_dir_name, dataset_dir_name, sep="/")
+
+write.csv(occurrence, paste(dwc_output_dir, "/occurrence.csv", sep = ""), na = "", row.names=FALSE)
+write_xml(meta, file = paste(dwc_output_dir, "/meta.xml", sep = ""))
+write_eml(my_eml, paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+```
+
+### Edit EML
+
+We have to further edit the eml file to conform to GBIF-specific requirements that cannot be included in the original EML construction. This includes changing the schemaLocation and rearranging the GBIF element, since the construction automatically arranges the children nodes to alphabetical order.
+
+```{r edit EML}
+
+#edit the schemaLocation and rearrange gbif node for gbif specific eml file
+eml_content <- read_xml(paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+#change schemaLocation attributes for GBIF
+root_node <- xml_root(eml_content)
+xml_set_attr(root_node, "xsi:schemaLocation", "https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd")
+xml_set_attr(root_node, "xmlns:dc", "http://purl.org/dc/terms/")
+xml_set_attr(root_node, "xmlns:stmml", NULL)
+xml_set_attr(root_node, "xml:lang", "eng")
+
+
+#rearrange children nodes under the GBIF element
+hierarchyLevel <- eml_content %>% xml_find_all(".//hierarchyLevel")
+dateStamp <- eml_content %>% xml_find_all(".//dateStamp")
+citation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation")
+bibcitation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/bibliography/citation")
+xml_set_attr(bibcitation, "identifier", citationdoi)
+
+eml_content %>% xml_find_all(".//hierarchyLevel") %>% xml_remove()
+eml_content %>% xml_find_all(".//dateStamp") %>% xml_remove()
+eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation") %>% xml_remove()
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(citation, .where=0)
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(hierarchyLevel, .where=0)
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(dateStamp, .where=0)
+
+write_xml(eml_content, paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+
+```
+
+### Zip files to DwC-A
+
+```{r Zip Files}
+output_zip <- paste(dwc_output_dir, "DwC-A.zip", sep="/")
+
+if (file.exists(output_zip)) {
+  unlink(output_zip)
+}
+
+file_paths <- list.files(dwc_output_dir, full.names = TRUE)
+zip(zipfile = output_zip, files = file_paths, mode = "cherry-pick")
+
+if (file.exists(output_zip)) {
+  unlink(file_paths)
+}
+
+```

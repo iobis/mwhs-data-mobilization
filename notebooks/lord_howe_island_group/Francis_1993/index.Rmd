@@ -1,0 +1,801 @@
+---
+title: Bundling Francis 1993 to a DwC Archive
+date: "`r Sys.Date()`"
+author: Chandra Earl
+output: (function(...) {
+  rmdformats::robobook(toc_depth = 4, pandoc_args = c("+RTS", "-K2000m", "-RTS"), ...) })
+editor_options: 
+  chunk_output_type: console
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding, output_dir = ".") })  
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook for converting the **species checklist** found in the following reference to DarwinCore format for upload into [OBIS](https://obis.org/) as part of UNESCO's [eDNA Expeditions](https://www.unesco.org/en/edna-expeditions) project:
+
+[Francis, Malcolm. (1993). Checklist of the coastal fishes of Lord Howe, Norfolk and Kermadec Islands, southwest Pacific Ocean.](http://dx.doi.org/10.6084/m9.figshare.c.4428305)
+
+# Setup
+
+Call the necessary libraries and variables. Suppresses loading messages.
+
+```{r Setup}
+library(magrittr)                       # To use %<>% pipes
+suppressMessages(library(janitor))      # To clean input data
+suppressMessages(library(dplyr))        # To clean input data
+library(stringr)                        # To clean input data
+suppressMessages(library(rgnparser))    # To clean species names
+suppressMessages(library(taxize))       # To get WoRMS IDs
+library(worrms)                         # To get WoRMS IDs
+library(digest)                         # To generate hashes
+suppressMessages(library(obistools))    # To generate centroid lat/long and uncertainty
+suppressMessages(library(sf))           # To generate wkt polygon
+suppressMessages(library(EML))          # To create eml.xml file
+library(xml2)                           # To create the meta.xml file
+suppressMessages(library(zip))          # To zip DwC file
+```
+
+# Input Parameters and Paths
+
+```{r}
+
+path_to_project_root <- "../../.."
+site_dir_name <- "lord_howe_island_group"
+dataset_dir_name <- "Francis_1993"
+original_pdf <- "v47n2-136-170.pdf"
+short_name <- "lord-howe-francis-1993"
+
+```
+
+# Parsing PDF table to CSV
+
+The data for this reference is formatted as an image-based table inside a PDF across multiple sheets. First, we use [pdf_to_table](https://github.com/sunray1/pdf_to_table) to OCR and parse out the table to a CSV.
+
+```{r PDF Parse}
+#conda environment
+condaenv <- "mwhs-data-mobilization"
+
+# Path to the Python script
+script <- paste(path_to_project_root, "scripts_data/pdf_to_tables/pdf_to_table.py", sep="/")
+
+# Input PDF file path
+input_pdf <- paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "raw", original_pdf, sep="/")
+
+# Output directory for OCR/table files
+output_dir <- paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", sep="/")
+
+# Define page numbers and table areas (see documentation)
+page_args <- c(
+"-a 185.463,24.165,618.111,305.999 -p 22",
+"-a 140.621,45.911,630.341,330.619 -p 23",
+"-a 140.043,27.077,627.428,311.239 -p 24",
+"-a 141.199,44.179,617.059,323.689 -p 25",
+"-a 141.492,23.437,618.92,306.422 -p 26",
+"-a 144.572,47.8,630.781,326.387 -p 27",
+"-a 143.838,16.112,630.135,305.547 -p 28",
+"-a 145.604,57.359,630.952,336.802 -p 29",
+"-a 146.317,19.567,625.863,302.856 -p 30",
+"-a 145.745,52.492,640.165,334.598 -p 31",
+"-a 150.617,23.285,649.924,309.193 -p 32",
+"-a 148.863,51.199,621.199,329.984 -p 33"
+)
+
+# Define run parameters (see documentation)
+run_parameters <- "-s -nh"
+
+# Combine page arguments and execute
+page_args_combined <- paste(page_args, collapse = " ")
+command <- paste("conda run -n", condaenv, "python", script, "-i", input_pdf, run_parameters, page_args_combined, "-o", output_dir)
+system(command, intern=TRUE)
+```
+
+# Read source data
+
+Now we'll read in the csv table outputted from the previous step
+
+```{r Read Source Data}
+
+file_list <- list.files(pattern = "v47n2-136-170_tables_parsed_\\d+.csv", path = paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", sep = "/"), full.names = TRUE)
+df_list <- list()
+
+for (file in file_list) {
+  df <- read.csv(file, header = FALSE, stringsAsFactors = FALSE)
+  df[1, ] <- lapply(df[1, ], function(x) ifelse(grepl("^Unnamed", x), "", x))
+  first_col <- min(which(!is.na(df[1, ])))
+  last_col <- max(which(!is.na(df[1, ])))
+  df <- data.frame(
+    First_Column = df[ , first_col],
+    Last_Column = df[ , last_col],
+    stringsAsFactors = FALSE
+  )
+  df_list[[file]] <- df
+}
+
+input_data <- do.call(rbind, df_list)
+rownames(input_data) <- NULL
+colnames(input_data) <- c("taxa", "lord_howe_island")
+
+#to preview pretty table
+knitr::kable(head(input_data))
+```
+
+# Preprocessing
+
+Here we tidy the data up, since OCR and table parsing errors are common and only take the list of species, since this is a checklist.
+
+## Tidy Data
+
+```{r Tidy Data}
+
+input_data %<>%
+  remove_empty(c("rows", "cols")) %>%       # Remove empty rows and columns
+  clean_names()
+
+#Remove rows with nothing in the last column (ie those that are not in Lord Howe Island)
+input_data <- input_data[input_data$lord_howe_island != "", ]
+
+# Remove Classes, Families and Orders and take first column only
+cleaned_data <- input_data[,1]
+
+#to preview pretty table
+knitr::kable(head(cleaned_data))
+```
+
+# Get WoRMS IDs
+
+## Auto matching
+
+First we will try to do this automatically by first cleaning the species names using gnparser and then using the taxise library to call the WoRMS database.
+
+```{r Link to WoRMs}
+
+#Parse author names out
+parsed_names <- rgnparser::gn_parse(cleaned_data[])
+
+#Function to get WoRMS IDs. Search for accepted names first and if not found, search for unaccepted. If still not found, use the worrms package to search.
+get_worms_id_from_element <- function(element) {
+  worms_id <- get_wormsid(element$canonical$full, searchtype="scientific", fuzzy=TRUE, messages = FALSE, accepted = TRUE)
+  if (attr(worms_id, "match") == "not found") {
+    worms_id <- get_wormsid(element$canonical$full, searchtype="scientific", messages = FALSE, fuzzy=TRUE)
+    if (attr(worms_id, "match") == "not found") {
+      worms_id <- NA
+    }
+  }
+  return(worms_id)
+}
+
+#Call the function
+worms_ids <- lapply(parsed_names, function(element) {
+  if (element$parsed) {
+    return(get_worms_id_from_element(element))
+  } else {
+    return(NA)
+  }
+})
+
+#combine original names, parsed data and WoRMS ID into one data frame
+combined_dataframe <- data.frame()
+
+for (i in 1:length(cleaned_data)) {
+  cleaned_value <- cleaned_data[i]
+  canonical_value <- parsed_names[[i]]$canonical$full
+  worms_id_value <- worms_ids[[i]][1]
+  if (is.null(canonical_value)){
+    canonical_value <- NA
+  }
+  temp_row <- data.frame(CleanedData = cleaned_value, CanonicalFull = canonical_value, WormsIDs = worms_id_value)
+  combined_dataframe <- rbind(combined_dataframe, temp_row)
+}
+
+knitr::kable(head(combined_dataframe))
+
+```
+
+## Human Verification
+
+Sometimes there are misspellings in the original text or incorrect OCR that can be searched for and fixed by hand. To do this, view the combined dataframe, search for unmatched species in WoRMS and add the ID, and remove rows that were not autoremoved in the earlier cleaning steps
+
+```{r Human Verification}
+
+combined_dataframe[9,2:3] = c("Enchelycore ramosus", 399857)
+combined_dataframe[17, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Gymnothorax", "sp. A", 125636)
+combined_dataframe[18, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Gymnothorax", "sp. B", 125636)
+combined_dataframe[19, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Gymnothorax", "sp. C", 125636)
+combined_dataframe[27,2:3] = c("Scarus psittacus", 219125)
+combined_dataframe[29,2:3] = c("Scarus schlegeli", 276060)
+combined_dataframe[31,2:3] = c("Limnichthys fasciatus", 277886)
+combined_dataframe[33,2:3] = c("Parapercis cylindrica", 219155)
+combined_dataframe[34,2:3] = c("Parapercis hexophtalma", 219159)
+combined_dataframe[35,2:3] = c("Enneapterygius rufopileus", 277337)
+combined_dataframe[37,2:3] = c("Norfolkia squamiceps", 276728)
+combined_dataframe[38,2:3] = c("Cristiceps aurantiacus", 276603)
+combined_dataframe[39,2:3] = c("Heteroclinus roseus", 281066)
+combined_dataframe[40,2:3] = c("Cirripectes alboapicalis", 276716)
+combined_dataframe[41,2:3] = c("Cirripectes castaneus", 219266)
+combined_dataframe[42,2:3] = c("Cirripectes chelomatus", 276718)
+combined_dataframe[43,2:3] = c("Enchelyurus ater", 276882)
+combined_dataframe[48,2:3] = c("Plagiotremus rhinorhynchos", 219334)
+combined_dataframe[51,2:3] = c("Xiphasia matsubarai", 219344)
+combined_dataframe[53,2:3] = c("Ammodytoides vagus", 276860)
+combined_dataframe[54,2:3] = c("Callionymus calcaratus", 302219)
+combined_dataframe[55,2:3] = c("Amblygobius nocturnus", 219377)
+combined_dataframe[57,2:3] = c("Asterropteryx semipunctatus", 219382)
+combined_dataframe[60, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Callogobius", "sp. 3", 206441)
+combined_dataframe[61, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Callogobius", "sp. 6", 206441)
+combined_dataframe[75, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Priolepis", "sp. 3", 203905)
+combined_dataframe[76, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Priolepis", "sp. 4", 203905)
+combined_dataframe[93,2:3] = c("Zebrasoma scopas", 219679)
+combined_dataframe[100,2:3] = c("Bothus pantherinus", 219795)
+combined_dataframe[101,2:3] = c("Crossorhombus", 205615)
+combined_dataframe[102,2:3] = c("Paraplagusia unicolor", NA)
+combined_dataframe[103,2:3] = c("Aseraggodes bahamondei", 279708)
+combined_dataframe[104,2:3] = c("Aseraggodes macleayanus", 279729)
+combined_dataframe[105,2:3] = c("Aseraggodes ramsaii", 279738)
+combined_dataframe[106,2:3] = c("Balistoides conspicillum", 219876)
+combined_dataframe[107,2:3] = c("Rhinecanthus aculeatus", 219890)
+combined_dataframe[108,2:3] = c("Rhinecanthus rectangulus", 219886)
+combined_dataframe[109,2:3] = c("Sufflamen chrysopterus", 219895)
+combined_dataframe[110,2:3] = c("Sufflamen freanatus", 403408)
+combined_dataframe[111,2:3] = c("Aluterus monoceros", 127407)
+combined_dataframe[112,2:3] = c("Brachaluteres taylori", 279952)
+combined_dataframe[115,2:3] = c("Cantherhines pardalis", 220058)
+combined_dataframe[117,2:3] = c("Oxymonacanthus longirostris", 220063)
+combined_dataframe[119,2:3] = c("Thamnaconus analis", 277205)
+combined_dataframe[122,2:3] = c("Lactoria fornasini", 219902)
+combined_dataframe[164,2:3] = c("Antennarius nummifer", 126530)
+combined_dataframe[170,2:3] = c("Lepadichthys frenatus", 279218)
+combined_dataframe[171,2:3] = c("Gobiesocidae", 125477)
+combined_dataframe[191, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Hippocampus", "sp. A", 126224)
+combined_dataframe[192, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Hippocampus", "sp. B", 126224)
+combined_dataframe[223,2:3] = c("Pseudanthias pictilis", 277472)
+combined_dataframe[229,2:3] = c("Belonepterygion fasciolatum", 279890)
+combined_dataframe[231,2:3] = c("Terapon jarbua", 218350)
+combined_dataframe[234,2:3] = c("Priacanthus hamrur", 218360)
+combined_dataframe[239, c("CanonicalFull", "identificationQualifier", "WormsIDs")] <- c("Apogon", "sp. B", 125913)
+combined_dataframe[244,2:3] = c("Sillago ciliata", 273939)
+combined_dataframe[256,2:3] = c("Trachinotus baillonii", 218440)
+combined_dataframe[259,2:3] = c("Arripis trutta", 279693)
+combined_dataframe[273,2:3] = c("Lethrinus nebulosus", 212081)
+combined_dataframe[274,2:3] = c("Scolopsis bilineatus", 401948)
+combined_dataframe[275,2:3] = c("Mulloidichthys flavolineatus", 218647)
+combined_dataframe[276,2:3] = c("Mulloidichthys vanicolensis", 218648)
+combined_dataframe[280,2:3] = c("Parupeneus multifasciatus", 277820)
+combined_dataframe[281,2:3] = c("Parupeneus pleurostigma", 218656)
+combined_dataframe[282,2:3] = c("Parupeneus spilurus", 277825)
+combined_dataframe[285,2:3] = c("Pempheris oualensis", 218700)
+combined_dataframe[286,2:3] = c("Pempheris vanicolensis", 218701)
+combined_dataframe[287,2:3] = c("Girella cyanea", 280857)
+combined_dataframe[288,2:3] = c("Girella elevata", 280858)
+combined_dataframe[295,2:3] = c("Bathystethus cultratus", 279876)
+combined_dataframe[296,2:3] = c("Labracoglossa nitida", 281246)
+combined_dataframe[297,2:3] = c("Scorpis lineolatus", 315585)
+combined_dataframe[298,2:3] = c("Scorpis violaceus", 315588)
+combined_dataframe[302,2:3] = c("Chaetodon citrinellus", 218744)
+combined_dataframe[303,2:3] = c("Chaetodon flavirostris", 273337)
+combined_dataframe[305,2:3] = c("Chaetodon kleinii", 218738)
+combined_dataframe[306,2:3] = c("Chaetodon lineolatus", 218734)
+combined_dataframe[307,2:3] = c("Chaetodon lunula", 218733)
+combined_dataframe[312,2:3] = c("Chaetodon plebeius", 273354)
+combined_dataframe[313,2:3] = c("Chaetodon rainfordi", 273358)
+combined_dataframe[314,2:3] = c("Chaetodon speculum", 218740)
+combined_dataframe[315,2:3] = c("Chaetodon tricinctus", 273365)
+combined_dataframe[316,2:3] = c("Chaetodon trifascialis", 218719)
+combined_dataframe[317,2:3] = c("Chaetodon trifasciatus", 218741)
+combined_dataframe[319,2:3] = c("Chaetodon unimaculatus", 218753)
+combined_dataframe[320,2:3] = c("Chaetodon vagabundus", 218754)
+combined_dataframe[321,2:3] = c("Forcipiger flavissimus", 218760)
+combined_dataframe[322,2:3] = c("Heniochus acuminatus", 218765)
+combined_dataframe[323,2:3] = c("Centropyge bispinosus", 211779)
+combined_dataframe[324,2:3] = c("Centropyge tibicen", 278851)
+combined_dataframe[325,2:3] = c("Centropyge vrolikii", 278853)
+combined_dataframe[326,2:3] = c("Chaetodontoplus conspicillatus", 280116)
+combined_dataframe[327,2:3] = c("Chaetodontoplus meredithi", 280120)
+combined_dataframe[328,2:3] = c("Genicanthus semicinctus", 279095)
+combined_dataframe[329,2:3] = c("Pomacanthus imperator", 220001)
+combined_dataframe[330,2:3] = c("Pomacanthus semicirculatus", 220003)
+combined_dataframe[331,2:3] = c("Evistias acutirostris", 280765)
+combined_dataframe[332,2:3] = c("Abudefduf bengalensis", 212885)
+combined_dataframe[333,2:3] = c("Abudefduf sexfasciatus", 159289)
+combined_dataframe[334,2:3] = c("Abudefduf sordidus", 212888)
+combined_dataframe[335,2:3] = c("Abudefduf vaigiensis", 212879)
+combined_dataframe[336,2:3] = c("Abudefduf whitleyi", 273703)
+combined_dataframe[337,2:3] = c("Amphiprion latezonatus", 278395)
+combined_dataframe[338,2:3] = c("Amphiprion mccullochi", 278397)
+combined_dataframe[339,2:3] = c("Chromis atripectoralis", 212812)
+combined_dataframe[340,2:3] = c("Chromis flavomaculata", 273727)
+combined_dataframe[341,2:3] = c("Chromis hypsilepis", 273730)
+combined_dataframe[342,2:3] = c("Chromis margaritifer", 273739)
+combined_dataframe[343,2:3] = c("Chromis nitida", 273744)
+combined_dataframe[344,2:3] = c("Chromis vanderbilti", 273758)
+combined_dataframe[345,2:3] = c("Chrysiptera glauca", 218783)
+combined_dataframe[346,2:3] = c("Chrysiptera notialis", 276835)
+combined_dataframe[347,2:3] = c("Dascyllus aruanus", 212843)
+combined_dataframe[348,2:3] = c("Dascyllus reticulatus", 212844)
+combined_dataframe[349,2:3] = c("Dascyllus trimaculatus", 212846)
+combined_dataframe[350,2:3] = c("Neoglyphidodon polyacanthus", 278815)
+combined_dataframe[351,2:3] = c("Parma alboscapularis", 282152)
+combined_dataframe[352,2:3] = c("Parma polylepis", 282159)
+combined_dataframe[354,2:3] = c("Plectroglyphidodon johnstonianus", 212859)
+combined_dataframe[355,2:3] = c("Plectroglyphidodon lacrymatus", 212860)
+combined_dataframe[386,2:3] = c("Coris aygula", 218957)
+combined_dataframe[387,2:3] = c("Coris bulbifrons", 273551)
+combined_dataframe[388,2:3] = c("Coris gaimard", 218960)
+combined_dataframe[370,2:3] = c("Cheilodactylus vittatus", 311553)
+combined_dataframe[384,2:3] = c("Choerodon fasciatus", 277268)
+combined_dataframe[390,2:3] = c("Coris sandeyeri", 273563)
+combined_dataframe[391,2:3] = c("Cymolutes torquatus", 218966)
+combined_dataframe[392,2:3] = c("Gomphosus varius", 218975)
+combined_dataframe[393,2:3] = c("Halichoeres nebulosus", 218986)
+combined_dataframe[395,2:3] = c("Hemigymnus fasciatus", 218999)
+combined_dataframe[396,2:3] = c("Hemigymnus melapterus", 218998)
+combined_dataframe[399,2:3] = c("Labroides bicolor", 219015)
+combined_dataframe[404,2:3] = c("Notolabrus inscriptus", 281790)
+combined_dataframe[416,2:3] = c("Thalassoma jansenii", 273582)
+combined_dataframe[423,2:3] = c("Xyrichtys jacksonensis", 273599)
+
+
+combined_dataframe <- combined_dataframe[-c(65),]
+
+```
+
+# Darwin Core mapping
+
+## Required Terms
+
+OBIS currently has eight required DwC terms: scientificName, scientificNameID, occurrenceID, eventDate, decimalLongitude, decimalLatitude, occurrenceStatus, basisOfRecord.
+
+### scientificName/scientificNameID
+
+Create a dataframe with unique taxa only (though this should already be unique). This will be our primary DarwinCore data frame.
+
+```{r}
+#rename and restructure WoRMSIDs to OBIS requirements
+occurrence <- combined_dataframe %>%
+  distinct(CanonicalFull, identificationQualifier, WormsIDs) %>%
+  rename(scientificName = CanonicalFull) %>%
+  rename(scientificNameID = WormsIDs) %>%
+  mutate(scientificNameID = ifelse(!is.na(scientificNameID), paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""), NA))
+
+```
+
+### occurrenceID
+
+OccurrenceID is an identifier for the occurrence record and should be persistent and globally unique. It is a combination of dataset-shortname:occurrence: and a hash based on the scientific name.
+
+```{r occurrenceID}
+# Vectorize the digest function (The digest() function isn't vectorized. So if you pass in a vector, you get one value for the whole vector rather than a digest for each element of the vector):
+vdigest <- Vectorize(digest)
+
+# Generate taxonID:
+occurrence %<>% mutate(occurrenceID = paste(short_name, "occurrence", vdigest (paste(scientificName, identificationQualifier), algo="md5"), sep=":"))
+```
+
+### eventDate
+
+This is NULL since this is technically a checklist and we do not know the collection date.
+
+```{r eventDate}
+eventDate <- ""
+occurrence %<>% mutate(eventDate)
+```
+
+### decimalLongitude/decimalLatitude
+
+Use obistools::calculate_centroid to calculate a centroid and radius for WKT strings. This is useful for populating decimalLongitude, decimalLatitude and coordinateUncertaintyInMeters. The WKT strings are from <https://github.com/iobis/mwhs-shapes>.
+
+```{r decimalLongitude/decimalLatitude}
+if (!file.exists(paste(path_to_project_root, "scripts_data/marine_world_heritage.gpkg", sep="/"))) {
+  download.file("https://github.com/iobis/mwhs-shapes/blob/master/output/marine_world_heritage.gpkg?raw=true", paste(path_to_project_root, "scripts_data/marine_world_heritage.gpkg", sep="/"))
+}
+
+shapes <- st_read(paste(path_to_project_root, "scripts_data/marine_world_heritage.gpkg", sep="/"))
+#For some sites, the GeoPackage has core as well as buffer areas. Merge the geometries by site.
+shapes_processed <- shapes %>%
+  group_by(name) %>%
+  summarize()
+
+#Lord Howe Island Group
+ind_shape <- shapes_processed$geom[which(shapes_processed$name == "Lord Howe Island Group")]
+
+
+#convert shape to WKT
+wkt <- st_as_text(ind_shape, digits = 6)
+
+localities <- calculate_centroid(wkt)
+
+occurrence %<>% mutate(decimalLatitude = localities$decimalLatitude)
+occurrence %<>% mutate(decimalLongitude = localities$decimalLongitude)
+```
+
+### occurrenceStatus
+
+```{r occurrenceStatus}
+occurrenceStatus <- "present"
+occurrence %<>% mutate(occurrenceStatus)
+```
+
+### basisOfRecord
+
+```{r basisOfRecord}
+basisOfRecord <- "HumanObservation"
+occurrence %<>% mutate(basisOfRecord)
+```
+
+## Extra Terms
+
+### footprintWKT
+
+```{r footprintWKT}
+occurrence %<>% mutate(footprintWKT = wkt)
+```
+
+### coordinateUncertaintyInMeters
+
+```{r coordinateUncertaintyInMeters}
+occurrence %<>% mutate(coordinateUncertaintyInMeters = localities$coordinateUncertaintyInMeters)
+```
+
+### geodeticDatum
+
+```{r geodeticDatum}
+geodeticDatum <- "WGS84"
+occurrence %<>% mutate(geodeticDatum)
+```
+
+### country
+
+```{r country}
+country <- "Australia"
+occurrence %<>% mutate(country)
+```
+
+### locality
+
+```{r locality}
+locality <- "Lord Howe Island Group"
+occurrence %<>% mutate(locality)
+```
+
+# Post-processing
+
+## Check data
+
+Use the check_fields command from obistools to check if all OBIS required fields are present in an occurrence table and if any values are missing.
+
+```{r check}
+#Reorganize columns
+occurrence = occurrence %>% select(occurrenceID, scientificName, identificationQualifier,scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude, coordinateUncertaintyInMeters, footprintWKT, geodeticDatum, occurrenceStatus, basisOfRecord)
+
+#Check fields
+check_fields(occurrence)
+```
+
+## Create the EML file
+
+This is a file which contains the dataset's metadata and is required in a DarwinCore-Archive.
+
+```{r eml}
+emld::eml_version("eml-2.1.1")
+
+#Title
+title <- "Checklist of the coastal fishes of Lord Howe, Norfolk and Kermadec Islands, southwest Pacific Ocean: Fishes Checklist"
+
+#AlternateIdentifier
+alternateIdentifier <- paste("https://ipt.obis.org/secretariat/resource?r=", short_name, sep="")
+
+#Abstract
+abstract <- eml$abstract(
+  para = "A checklist ofcoastal fishes includes 433 species from Lord Howe Island, 254 from Norfolk Island, and 145 from the Kermadec Islands. Tropical and subtropical species dominate all three faunas, but the proportion of tropical species decreases, and the proportion of subtropical species increases, from west to east. Subtropical species are the most abundant individual fishes at all three islands. Only 4.6% of the combined fauna is endemic, with individual island endemism even lower (1.2-2.1 %). The fish faunas of the three islands appear to have originated mainly by larval dispersal from Australia and the Coral Sea. Evidence for present-day dispersal is discussed. Faunal relationships among the subtropical islands of the western, central, and eastern South Pacific are examined. In the South Pacific as a whole, there is a high positive correlation between coastal fish diversity and hermatypic coral diversity.."
+)
+```
+
+### People
+
+Here we add the people involved in the project:
+
+The **creator** is the person or organization responsible for creating the resource itself.
+
+The **contact** is the person or institution to contact with questions about the use, interpretation of a data set.
+
+The **metadataProvider** is the person responsible for providing the metadata documentation for the resource.
+
+The **associatedParty** (in this case the Data Curator) is the person who mobilized the data from the original resource.
+
+```{r eml-people}
+
+creator <- eml$creator(
+  individualName = eml$individualName(
+    givenName = "Malcolm P.", 
+    surName = "Francis"),
+  organizationName = "University of Auckland"
+)
+
+contact <- eml$creator(
+  individualName = eml$individualName(
+    givenName = "OBIS", 
+    surName = "Secretariat"),
+  electronicMailAddress = "helpdesk@obis.org",
+  organizationName = "OBIS",
+  positionName = "Secretariat"
+)
+
+metadataProvider <- eml$metadataProvider(
+  individualName = eml$individualName(
+    givenName = "Chandra", 
+    surName = "Earl"),
+  electronicMailAddress = "c.earl@unesco.org",
+  organizationName = "UNESCO",
+  positionName = "eDNA Scientific Officer"
+)
+
+associatedParty <- eml$associatedParty(
+  role = "processor",
+  individualName = eml$individualName(
+    givenName = "Chandra", 
+    surName = "Earl"),
+  electronicMailAddress = "c.earl@unesco.org",
+  organizationName = "UNESCO",
+  positionName = "eDNA Scientific Officer"
+)
+
+```
+
+
+### Additional Metadata
+
+Here we add the additionalMetadata element, which is required for a GBIF-type EML file and contains information such as the citation of the dataset, the citation of the original resource and the creation timestamp of the EML.
+
+```{r}
+#{dataset.authors} ({dataset.pubDate}) {dataset.title}. [Version {dataset.version}]. {organization.title}. {dataset.type} Dataset {dataset.doi}, {dataset.url}
+
+additionalMetadata <- eml$additionalMetadata(
+  metadata = list(
+    gbif = list(
+      dateStamp = paste0(format(Sys.time(), "%Y-%m-%dT%H:%M:%OS3"), paste0(substr(format(Sys.time(), "%z"), 1, 3), ":", paste0(substr(format(Sys.time(), "%z"), 4, 5)))),
+      hierarchyLevel = "dataset",
+      citation = "IPT will autogenerate this",
+      bibliography = list(
+        citation = "Francis, Malcolm. (1993). Checklist of the coastal fishes of Lord Howe, Norfolk and Kermadec Islands, southwest Pacific Ocean.")
+    )
+  )
+)
+
+citationdoi <- "http://dx.doi.org/10.6084/m9.figshare.c.4428305"
+```
+
+
+### Coverage
+
+Here we describe the dataset's geographic, taxonomic and temporal coverage.
+
+```{r Coverage}
+
+#Coverage
+coverage <- eml$coverage(
+  geographicCoverage = eml$geographicCoverage(
+    geographicDescription = "Lord Howe Island Group",
+    boundingCoordinates = eml$boundingCoordinates(
+      westBoundingCoordinate = st_bbox(ind_shape)$xmax,
+      eastBoundingCoordinate = st_bbox(ind_shape)$xmin,
+      northBoundingCoordinate = st_bbox(ind_shape)$ymax,
+      southBoundingCoordinate = st_bbox(ind_shape)$ymin)
+    ),
+  taxonomicCoverage = eml$taxonomicCoverage(
+    generalTaxonomicCoverage = "Fishes",
+    taxonomicClassification = list(
+      eml$taxonomicClassification(
+        taxonRankName = "Superclass",
+        taxonRankValue = "Agnatha"),
+      eml$taxonomicClassification(
+        taxonRankName = "unranked",
+        taxonRankValue = "Chondrichthyes"),
+      eml$taxonomicClassification(
+        taxonRankName = "unranked",
+        taxonRankValue = "Osteichthyes")
+      )
+    
+#  ),
+#  temporalCoverage = eml$temporalCoverage(
+#    rangeOfDates = eml$rangeOfDates(
+#      beginDate = eml$beginDate(
+#        calendarDate = "2019-05-01"
+#      ),
+#      endDate = eml$endDate(
+#        calendarDate = "2016-05-06"
+#      )
+#    )
+   )
+)
+
+```
+
+
+### Extra MetaData
+
+These fields are not required, though they make the metadata more complete.
+
+```{r Other Data}
+
+methods <- eml$methods(
+  methodStep = eml$methodStep(
+    description = eml$description(
+      para = paste("See Github <a href=\"https://github.com/iobis/mwhs-data-mobilization\">Project</a> and <a href=\"https://iobis.github.io/mwhs-data-mobilization/notebooks/", site_dir_name, "/", dataset_dir_name, "\"> R Notebook</a> for dataset construction methods", sep="")
+    )
+  )
+)
+
+#Other Data
+pubDate <- "2023-10-15"
+
+#language of original document
+language <- "eng"
+
+keywordSet <- eml$keywordSet(
+  keyword = "Occurrence",
+  keywordThesaurus = "GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml"
+)
+
+maintenance <- eml$maintenance(
+  description = eml$description(
+    para = ""),
+  maintenanceUpdateFrequency = "notPlanned"
+)
+
+#Universal CC
+intellectualRights <- eml$intellectualRights(
+  para = "To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url=\"http://creativecommons.org/publicdomain/zero/1.0/legalcode\"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction."
+)
+
+
+purpose <- eml$purpose(
+  para = "These data were made accessible through UNESCO's eDNA Expeditions project to mobilize available marine species and occurrence datasets from World Heritage Sites."
+)
+
+additionalInfo <- eml$additionalInfo(
+  para = "marine, harvested by iOBIS"
+)
+```
+
+### Create and Validate EML
+
+```{r Validate eml}
+
+#Put it all together
+my_eml <- eml$eml(
+           packageId = paste("https://ipt.obis.org/secretariat/resource?id=", short_name, "/v1.0", sep = ""),  
+           system = "http://gbif.org",
+           scope = "system",
+           dataset = eml$dataset(
+               alternateIdentifier = alternateIdentifier,
+               title = title,
+               creator = creator,
+               metadataProvider = metadataProvider,
+               associatedParty = associatedParty,
+               pubDate = pubDate,
+               coverage = coverage,
+               language = language,
+               abstract = abstract,
+               keywordSet = keywordSet,
+               contact = contact,
+               methods = methods,
+               intellectualRights = intellectualRights,
+               purpose = purpose,
+               maintenance = maintenance,
+               additionalInfo = additionalInfo),
+           additionalMetadata = additionalMetadata
+)
+
+eml_validate(my_eml)
+
+```
+
+## Create meta.xml file
+
+This is a file which describes the archive and data file structure and is required in a DarwinCore-Archive. It is based on the template file "meta_occurrence_checklist_template.xml"
+
+```{r meta}
+meta_template <- paste(path_to_project_root, "scripts_data/meta_occurrence_checklist_template.xml", sep="/")
+meta <- read_xml(meta_template)
+
+fields <- xml_find_all(meta, "//d1:field")
+
+for (field in fields) {
+  term <- xml_attr(field, "term")
+  if (term == "http://rs.tdwg.org/dwc/terms/eventDate") {
+    xml_set_attr(field, "default", eventDate)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/country") {
+    xml_set_attr(field, "default", country)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/locality") {
+    xml_set_attr(field, "default", locality)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/decimalLatitude") {
+    xml_set_attr(field, "default", localities$decimalLatitude)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/decimalLongitude") {
+    xml_set_attr(field, "default", localities$decimalLongitude)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters") {
+    xml_set_attr(field, "default", localities$coordinateUncertaintyInMeters)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/footprintWKT") {
+    xml_set_attr(field, "default", wkt)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/geodeticDatum") {
+    xml_set_attr(field, "default", geodeticDatum)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/occurrenceStatus") {
+    xml_set_attr(field, "default", occurrenceStatus)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/basisOfRecord") {
+    xml_set_attr(field, "default", basisOfRecord)
+  }
+}
+
+
+#Add identificationQualifier
+new_field <- xml_add_sibling(fields[[3]], "field")
+xml_set_attr(new_field, "index", "3")
+xml_set_attr(new_field, "term", "http://rs.tdwg.org/dwc/terms/identificationQualifier")
+
+fields <- append(fields, list(new_field))
+
+
+```
+
+## Save outputs
+
+```{r Save}
+
+dwc_output_dir <- paste(path_to_project_root, "output", site_dir_name, dataset_dir_name, sep="/")
+
+write.csv(occurrence, paste(dwc_output_dir, "/occurrence.csv", sep = ""), na = "", row.names=FALSE)
+write_xml(meta, file = paste(dwc_output_dir, "/meta.xml", sep = ""))
+write_eml(my_eml, paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+```
+
+### Edit EML
+
+We have to further edit the eml file to conform to GBIF-specific requirements that cannot be included in the original EML construction. This includes changing the schemaLocation and rearranging the GBIF element, since the construction automatically arranges the children nodes to alphabetical order.
+
+```{r edit EML}
+
+#edit the schemaLocation and rearrange gbif node for gbif specific eml file
+eml_content <- read_xml(paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+#change schemaLocation attributes for GBIF
+root_node <- xml_root(eml_content)
+xml_set_attr(root_node, "xsi:schemaLocation", "https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd")
+xml_set_attr(root_node, "xmlns:dc", "http://purl.org/dc/terms/")
+xml_set_attr(root_node, "xmlns:stmml", NULL)
+xml_set_attr(root_node, "xml:lang", "eng")
+
+
+#rearrange children nodes under the GBIF element
+hierarchyLevel <- eml_content %>% xml_find_all(".//hierarchyLevel")
+dateStamp <- eml_content %>% xml_find_all(".//dateStamp")
+citation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation")
+bibcitation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/bibliography/citation")
+xml_set_attr(bibcitation, "identifier", citationdoi)
+
+eml_content %>% xml_find_all(".//hierarchyLevel") %>% xml_remove()
+eml_content %>% xml_find_all(".//dateStamp") %>% xml_remove()
+eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation") %>% xml_remove()
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(citation, .where=0)
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(hierarchyLevel, .where=0)
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(dateStamp, .where=0)
+
+write_xml(eml_content, paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+
+```
+
+### Zip files to DwC-A
+
+```{r Zip Files}
+output_zip <- paste(dwc_output_dir, "DwC-A.zip", sep="/")
+
+if (file.exists(output_zip)) {
+  unlink(output_zip)
+}
+
+file_paths <- list.files(dwc_output_dir, full.names = TRUE)
+zip(zipfile = output_zip, files = file_paths, mode = "cherry-pick")
+
+if (file.exists(output_zip)) {
+  unlink(file_paths)
+}
+
+```

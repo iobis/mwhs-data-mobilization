@@ -1,0 +1,791 @@
+---
+title: Bundling de la Hoz Schilling 2021 to a DwC Archive
+date: "`r Sys.Date()`"
+author: Chandra Earl
+output: (function(...) {
+  rmdformats::robobook(toc_depth = 4, pandoc_args = c("+RTS", "-K2000m", "-RTS"), ...) })
+editor_options: 
+  chunk_output_type: console
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding, output_dir = ".") })  
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook for converting the **eDNA Data** found in the following reference to DarwinCore format for upload into [OBIS](https://obis.org/) as part of UNESCO's [eDNA Expeditions](https://www.unesco.org/en/edna-expeditions) project:
+
+[de la Hoz Schilling, C. (2021). DNA barcoding as a tool to explore elasmobranch diversity in environmental DNA off the Banc d’Arguin (Mauritania). MSc thesis. University of Algarve.](http://hdl.handle.net/10400.1/18173)
+
+# Setup
+
+Call the necessary libraries and variables. Suppresses loading messages.
+
+```{r Setup}
+library(magrittr)                       # To use %<>% pipes
+suppressMessages(library(janitor))      # To clean input data
+suppressMessages(library(dplyr))        # To clean input data
+library(stringr)                        # To clean input data
+suppressMessages(library(rgnparser))    # To clean species names
+suppressMessages(library(taxize))       # To get WoRMS IDs
+library(worrms)                         # To get WoRMS IDs
+library(digest)                         # To generate hashes
+suppressMessages(library(obistools))    # To generate centroid lat/long and uncertainty
+suppressMessages(library(sf))           # To generate wkt polygon
+suppressMessages(library(EML))          # To create eml.xml file
+library(xml2)                           # To create the meta.xml file
+suppressMessages(library(zip))          # To zip DwC file
+```
+
+# Input Parameters and Paths
+
+```{r}
+
+path_to_project_root <- "../../.."
+site_dir_name <- "banc_darguin_national_park"
+dataset_dir_name <- "de_la_Hoz_Schilling_2021"
+original_pdf <- "de_la_Hoz_Schilling_Carolina_67318_Master_thesis_2021.pdf"
+short_name <- "banc-darguin-de-la-hoz-schilling-2021"
+
+```
+
+# Parsing PDF table to CSV
+
+The data for this reference is formatted as an image-based table inside a PDF across multiple sheets. First, we use [pdf_to_table](https://github.com/sunray1/pdf_to_table) to OCR and parse out the table to a CSV.
+
+```{r PDF Parse}
+#conda environment
+condaenv <- "mwhs-data-mobilization"
+
+# Path to the Python script
+script <- paste(path_to_project_root, "scripts_data/pdf_to_tables/pdf_to_table.py", sep="/")
+
+# Input PDF file path
+input_pdf <- paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "raw", original_pdf, sep="/")
+
+# Output directory for OCR/table files
+output_dir <- paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", sep="/")
+
+# Define page numbers and table areas (see documentation)
+page_args <- c(
+"-a 118.958,70.763,266.603,565.718 -p 87",
+"-a 334.688,68.468,587.138,561.893 -p 87",
+"-a 613.913,69.233,737.078,584.078 -p 87",
+"-a 70.763,69.233,191.633,585.608 -p 88",
+"-a 218.408,70.763,458.618,570.308 -p 88",
+"-a 485.393,70.763,724.838,541.238 -p 88",
+"-a 125.843,69.233,438.728,350.753 -p 89",
+"-a 489.983,70.763,725.603,476.213 -p 89",
+"-a 70.763,70.763,364.523,476.213 -p 90"
+
+)
+
+# Define run parameters (see documentation)
+run_parameters <- "-l"
+
+# Combine page arguments and execute
+page_args_combined <- paste(page_args, collapse = " ")
+command <- paste("conda run -n", condaenv, "python", script, "-i", input_pdf, run_parameters, page_args_combined, "-o", output_dir)
+system(command, intern=TRUE)
+```
+
+# Read source data
+
+Now we'll read in the csv table outputted from the previous step. There are two datasets, the metadata and the number of reads for each species.
+
+```{r Read Source Data}
+
+metadata_csv <- "de_la_Hoz_Schilling_Carolina_67318_Master_thesis_2021_tables_parsed_1.csv"
+metadata_data <- read.csv(paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", metadata_csv, sep="/"))
+metadata_data[9, 1] <- "Loeil"
+#Latitude and Longitude values are incorrectly swapped in the paper
+# Assuming df is your DataFrame and you want to rename "old_name" to "new_name"
+metadata_data <- metadata_data %>% rename(Longitude = Latitude, Latitude = Longitude)
+
+
+reads_csv2 <- "de_la_Hoz_Schilling_Carolina_67318_Master_thesis_2021_tables_parsed_2.csv"
+reads_csv3 <- "de_la_Hoz_Schilling_Carolina_67318_Master_thesis_2021_tables_parsed_3.csv"
+reads_csv4 <- "de_la_Hoz_Schilling_Carolina_67318_Master_thesis_2021_tables_parsed_4.csv"
+reads_csv5 <- "de_la_Hoz_Schilling_Carolina_67318_Master_thesis_2021_tables_parsed_5.csv"
+reads_csv6 <- "de_la_Hoz_Schilling_Carolina_67318_Master_thesis_2021_tables_parsed_6.csv"
+reads_csv7 <- "de_la_Hoz_Schilling_Carolina_67318_Master_thesis_2021_tables_parsed_7.csv"
+reads_csv8 <- "de_la_Hoz_Schilling_Carolina_67318_Master_thesis_2021_tables_parsed_8.csv"
+reads_csv9 <- "de_la_Hoz_Schilling_Carolina_67318_Master_thesis_2021_tables_parsed_9.csv"
+
+reads_data2 <- read.csv(paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", reads_csv2, sep="/"))
+reads_data3 <- read.csv(paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", reads_csv3, sep="/"))
+reads_data4 <- read.csv(paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", reads_csv4, sep="/"), header = FALSE)
+names(reads_data4) <- names(reads_data3)
+reads_data5 <- read.csv(paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", reads_csv5, sep="/"))
+reads_data5[3:4,4:8] <- reads_data5[3:4,5:9]
+reads_data5$Unnamed..8 <- NULL
+reads_data6 <- read.csv(paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", reads_csv6, sep="/"))
+reads_data7 <- read.csv(paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", reads_csv7, sep="/"))
+reads_data8 <- read.csv(paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", reads_csv8, sep="/"))
+reads_data9 <- read.csv(paste(path_to_project_root, "datasets", site_dir_name, dataset_dir_name, "processed", reads_csv9, sep="/"))
+names(reads_data9) <- names(reads_data8)
+
+```
+
+# Preprocessing
+
+Here we tidy the data up and concatenate the read tables together into one.
+
+## Tidy Data
+
+```{r Tidy Data}
+#Put Tables S4 into one table
+reads_data3 <- rbind(reads_data3, reads_data4)
+input_data <- merge(reads_data2, reads_data3, by="Sample.location")
+input_data <- merge(input_data, reads_data5, by="Sample.location")
+input_data <- merge(input_data, reads_data6, by="Sample.location")
+names(input_data)[7] <- "Fontitrygon.margarita.margaritella"
+
+#Add Table S5 - there is no metadata for this
+#reads_data7 <- t(reads_data7)
+#colnames(reads_data7) <- gsub("\\s|\\/", ".", reads_data7[1,])
+#reads_data7 <- reads_data7[-1,]
+#reads_data7 <- as.data.frame(lapply(reads_data7, as.integer))
+#reads_data7$Sample.location <- "Cap Blanc"
+#reads_data7 <- as.data.frame(reads_data7)
+#input_data <- bind_rows(input_data, reads_data7)
+
+
+#Add Table S6
+reads_data8 <- rbind(reads_data8, reads_data9)
+reads_data8 <- t(reads_data8)
+colnames(reads_data8) <- gsub("\\s|\\/", ".", reads_data8[1,])
+reads_data8 <- reads_data8[-1,]
+reads_data8 <- reads_data8[-3,]
+reads_data8 <- as.data.frame(lapply(as.data.frame(reads_data8), as.integer))
+reads_data8$Sample.location <- c("Selac_Puit 1", "Selac_Puit 2")
+input_data <- bind_rows(input_data, reads_data8)
+
+input_data <- input_data[-12,]
+input_data[2, 1] <- "Baye St Jean"
+input_data[8, 1] <- "Loeil"
+
+all_data <- data.frame()
+
+for (i in 1:nrow(input_data)){
+  for (j in 2:ncol(input_data)){
+    if (is.na(input_data[i, j])==FALSE && input_data[i, j] != "0"){
+      temp_row <- data.frame(species = gsub("\\.", " ", colnames(input_data)[j]), organismQuantity = as.integer(input_data[i, j]), locality = input_data[i, 1])
+    all_data <- rbind(all_data, temp_row)
+    }
+  }
+}
+
+
+
+```
+
+# Get WoRMS IDs
+
+## Auto matching
+
+First we will try to do this automatically by first cleaning the species names using gnparser and then using the taxise library to call the WoRMS database.
+
+```{r Link to WoRMs}
+
+#Parse author names out
+parsed_names <- rgnparser::gn_parse(all_data[,1])
+
+#Function to get WoRMS IDs. Search for accepted names first and if not found, search for unaccepted. If still not found, use the worrms package to search.
+get_worms_id_from_element <- function(element) {
+  worms_id <- get_wormsid(element$canonical$full, searchtype="scientific", fuzzy=TRUE, messages = FALSE, accepted = TRUE)
+  if (attr(worms_id, "match") == "not found") {
+    worms_id <- get_wormsid(element$canonical$full, searchtype="scientific", messages = FALSE, fuzzy=TRUE)
+    if (attr(worms_id, "match") == "not found") {
+      worms_id <- NA
+    }
+  }
+  return(worms_id)
+}
+
+#Call the function
+worms_ids <- lapply(parsed_names, function(element) {
+  if (element$parsed) {
+    return(get_worms_id_from_element(element))
+  } else {
+    return(NA)
+  }
+})
+
+#combine original names, parsed data and WoRMS ID into one data frame
+combined_dataframe <- data.frame()
+
+for (i in 1:nrow(all_data)) {
+  cleaned_value <- all_data[i,]
+  canonical_value <- parsed_names[[i]]$canonical$full
+  worms_id_value <- worms_ids[[i]][1]
+  if (is.null(all_data)){
+    canonical_value <- NA
+  }
+  temp_row <- data.frame(CleanedData = cleaned_value, CanonicalFull = canonical_value, WormsIDs = worms_id_value)
+  combined_dataframe <- rbind(combined_dataframe, temp_row)
+}
+
+knitr::kable(head(combined_dataframe))
+
+```
+
+## Human Verification
+
+Sometimes there are misspellings in the original text or incorrect OCR that can be searched for and fixed by hand. To do this, view the combined dataframe, search for unmatched species in WoRMS and add the ID, and remove rows that were not autoremoved in the earlier cleaning steps
+
+```{r Human Verification}
+
+combined_dataframe[5,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[20,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[37,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[50,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[63,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[82,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[98,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[113,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[150,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[170,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[182,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[204,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[224,4:5] = c("Fontitrygon", 1042820)
+combined_dataframe[247,4:5] = c("Fontitrygon", 1042820)
+```
+
+# Occurrence Core mapping
+
+## Required Terms
+
+OBIS currently has eight required DwC terms: scientificName, scientificNameID, occurrenceID, eventDate, decimalLongitude, decimalLatitude, occurrenceStatus, basisOfRecord.
+
+### scientificName/scientificNameID
+
+Create a dataframe with unique taxa only (though this should already be unique). This will be our primary DarwinCore data frame.
+
+```{r}
+#rename and restructure WoRMSIDs to OBIS requirements
+occurrence <- combined_dataframe %>%
+  rename(scientificName = CanonicalFull) %>%
+  rename(scientificNameID = WormsIDs) %>%
+  mutate(scientificNameID = ifelse(!is.na(scientificNameID), paste("urn:lsid:marinespecies.org:taxname:", scientificNameID, sep = ""), NA))
+
+occurrence <- occurrence[,-1]
+occurrence <- merge(occurrence, metadata_data, by.x = "CleanedData.locality", by.y = "Sample.name", all.x=TRUE)
+occurrence <- occurrence[,-c(1, 5, 8, 10)]
+
+```
+
+### occurrenceID
+
+OccurrenceID is an identifier for the occurrence record and should be persistent and globally unique. It is a combination of dataset-shortname:occurrence: and a hash based on the scientific name.
+
+```{r occurrenceID}
+# Vectorize the digest function (The digest() function isn't vectorized. So if you pass in a vector, you get one value for the whole vector rather than a digest for each element of the vector):
+vdigest <- Vectorize(digest)
+
+# Generate taxonID:
+occurrence %<>% mutate(occurrenceID = paste(short_name, "occurrence", vdigest (paste(scientificName, Extraction.blank, Latitude, Site), algo="md5"), sep=":"))
+occurrence <- occurrence[,-c(4)]
+```
+
+### eventDate
+
+
+```{r eventDate}
+occurrence$Sampling.Date <- as.Date(occurrence$Sampling.Date, format = "%d/%m/%Y")
+occurrence$eventDate <- format(occurrence$Sampling.Date, "%Y-%m-%d")
+occurrence$Sampling.Date <- NULL
+```
+
+### decimalLongitude/decimalLatitude
+
+Use obistools::calculate_centroid to calculate a centroid and radius for WKT strings. This is useful for populating decimalLongitude, decimalLatitude and coordinateUncertaintyInMeters. The WKT strings are from <https://github.com/iobis/mwhs-shapes>.
+
+```{r decimalLongitude/decimalLatitude}
+if (!file.exists(paste(path_to_project_root, "scripts_data/marine_world_heritage.gpkg", sep="/"))) {
+  download.file("https://github.com/iobis/mwhs-shapes/blob/master/output/marine_world_heritage.gpkg?raw=true", paste(path_to_project_root, "scripts_data/marine_world_heritage.gpkg", sep="/"))
+}
+
+shapes <- st_read(paste(path_to_project_root, "scripts_data/marine_world_heritage.gpkg", sep="/"))
+#For some sites, the GeoPackage has core as well as buffer areas. Merge the geometries by site.
+shapes_processed <- shapes %>%
+  group_by(name) %>%
+  summarize()
+
+#Banc d'Arguin National Park
+ind_shape <- shapes_processed$geom[which(shapes_processed$name == "Banc d'Arguin National Park")]
+
+occurrence %<>%
+  rename(decimalLongitude = Longitude) %>%
+  rename(decimalLatitude = Latitude)
+
+```
+
+### occurrenceStatus
+
+```{r occurrenceStatus}
+occurrenceStatus <- "present"
+occurrence %<>% mutate(occurrenceStatus)
+```
+
+### basisOfRecord
+
+```{r basisOfRecord}
+basisOfRecord <- "MaterialSample"
+occurrence %<>% mutate(basisOfRecord)
+```
+
+## Extra Terms
+
+### geodeticDatum
+
+```{r geodeticDatum}
+geodeticDatum <- "WGS84"
+occurrence %<>% mutate(geodeticDatum)
+```
+
+### country
+
+```{r country}
+country <- "Mauritania"
+occurrence %<>% mutate(country)
+```
+
+### locality
+
+```{r locality}
+occurrence %<>%
+  rename(locality = Site)
+```
+
+### recordedBy
+
+```{r recordedBy}
+recordedBy <- "Carolina de la Hoz Schilling"
+occurrence %<>% mutate(recordedBy)
+```
+
+### organismQuantity
+
+```{r organismQuantity}
+occurrence %<>%
+  rename(organismQuantity = CleanedData.organismQuantity)
+```
+
+### organismQuantityType
+
+```{r organismQuantityType}
+organismQuantityType <- "DNA sequence reads"
+occurrence %<>% mutate(organismQuantityType)
+```
+
+### sampleSizeValue
+
+```{r sampleSizeValue}
+sampleSizeValue <- "2233019"
+occurrence %<>% mutate(sampleSizeValue)
+```
+
+### sampleSizeUnit
+
+```{r sampleSizeUnit}
+sampleSizeUnit <- "DNA sequence reads"
+occurrence %<>% mutate(sampleSizeUnit)
+```
+
+# DNA Derived Data Extension Mapping
+
+Here, we'll fill in the data for the DNA Derived Data Extension
+
+```{r dnaderivedextension}
+dnaderivedextension <- as.data.frame(occurrence$occurrenceID)
+names(dnaderivedextension) <- "occurrenceID"
+```
+
+### target_gene
+
+```{r target_gene}
+target_gene <- "12S rRNA"
+dnaderivedextension %<>% mutate(target_gene)
+```
+
+### pcr_primer_name_forward
+
+```{r pcr_primer_name_forward}
+pcr_primer_name_forward <- "MiFish-U-F"
+dnaderivedextension %<>% mutate(pcr_primer_name_forward)
+```
+
+### pcr_primer_name_reverse
+
+```{r pcr_primer_name_reverse}
+pcr_primer_name_reverse <- "MiFish-U-R"
+dnaderivedextension %<>% mutate(pcr_primer_name_reverse)
+```
+
+### pcr_primer_reference
+
+```{r pcr_primer_reference}
+pcr_primer_reference <- "https://doi.org/10.1098/rsos.150088"
+dnaderivedextension %<>% mutate(pcr_primer_reference)
+```
+
+### lib_layout
+
+```{r lib_layout}
+lib_layout <- "Paired"
+dnaderivedextension %<>% mutate(lib_layout)
+```
+
+### seq_meth
+
+```{r seq_meth}
+seq_meth <- "Illumina MiSeq"
+dnaderivedextension %<>% mutate(seq_meth)
+```
+
+### env_broad_scale
+
+```{r env_broad_scale}
+env_broad_scale <- "ocean biome [ENVO:01000048]"
+dnaderivedextension %<>% mutate(env_broad_scale)
+```
+
+### DNA_sequence
+
+```{r DNA_sequence}
+```
+
+### pcr_primer_forward
+
+```{r pcr_primer_forward}
+```
+
+### pcr_primer_reverse
+
+```{r pcr_primer_reverse}
+```
+
+
+# Post-processing
+
+## Check data
+
+Use the check_fields command from obistools to check if all OBIS required fields are present in an occurrence table and if any values are missing.
+
+```{r check}
+#Reorganize columns
+occurrence = occurrence %>% select(occurrenceID, scientificName, scientificNameID, eventDate, country, locality, decimalLatitude, decimalLongitude,  occurrenceStatus, basisOfRecord, organismQuantity, organismQuantityType, Habitat, recordedBy, sampleSizeValue, sampleSizeUnit)
+
+#Check fields
+check_fields(occurrence)
+```
+
+## Create the EML file
+
+This is a file which contains the dataset's metadata and is required in a DarwinCore-Archive.
+
+```{r eml}
+emld::eml_version("eml-2.1.1")
+
+#Title
+title <- "DNA barcoding as a tool to explore elasmobranch diversity in environmental DNA off the Banc d’Arguin (Mauritania)"
+
+#AlternateIdentifier
+alternateIdentifier <- paste("https://ipt.obis.org/secretariat/resource?r=", short_name, sep="")
+
+#Abstract
+abstract <- eml$abstract(
+  para = "Metabarcoding was used to explore species diversity in eDNA samples from the PNBA. Results confirmed the presence of 29 different species, 12 sharks and 17 rays of which 14 species had previously never been reported from the PNBA in the literature.")
+```
+
+### People
+
+Here we add the people involved in the project:
+
+The **creator** is the person or organization responsible for creating the resource itself.
+
+The **contact** is the person or institution to contact with questions about the use, interpretation of a data set.
+
+The **metadataProvider** is the person responsible for providing the metadata documentation for the resource.
+
+The **associatedParty** (in this case the Data Curator) is the person who mobilized the data from the original resource.
+
+```{r eml-people}
+
+creator <- eml$creator(
+  individualName = eml$individualName(
+    givenName = "Carolina", 
+    surName = "de la Hoz Schilling"),
+  organizationName = "Universidade do Algarve"
+)
+
+contact <- eml$creator(
+  individualName = eml$individualName(
+    givenName = "OBIS", 
+    surName = "Secretariat"),
+  electronicMailAddress = "helpdesk@obis.org",
+  organizationName = "OBIS",
+  positionName = "Secretariat"
+)
+
+metadataProvider <- eml$metadataProvider(
+  individualName = eml$individualName(
+    givenName = "Chandra", 
+    surName = "Earl"),
+  electronicMailAddress = "c.earl@unesco.org",
+  organizationName = "UNESCO",
+  positionName = "eDNA Scientific Officer"
+)
+
+associatedParty <- eml$associatedParty(
+  role = "processor",
+  individualName = eml$individualName(
+    givenName = "Chandra", 
+    surName = "Earl"),
+  electronicMailAddress = "c.earl@unesco.org",
+  organizationName = "UNESCO",
+  positionName = "eDNA Scientific Officer"
+)
+
+```
+
+
+### Additional Metadata
+
+Here we add the additionalMetadata element, which is required for a GBIF-type EML file and contains information such as the citation of the dataset, the citation of the original resource and the creation timestamp of the EML.
+
+```{r}
+#{dataset.authors} ({dataset.pubDate}) {dataset.title}. [Version {dataset.version}]. {organization.title}. {dataset.type} Dataset {dataset.doi}, {dataset.url}
+
+additionalMetadata <- eml$additionalMetadata(
+  metadata = list(
+    gbif = list(
+      dateStamp = paste0(format(Sys.time(), "%Y-%m-%dT%H:%M:%OS3"), paste0(substr(format(Sys.time(), "%z"), 1, 3), ":", paste0(substr(format(Sys.time(), "%z"), 4, 5)))),
+      hierarchyLevel = "dataset",
+      citation = "IPT will autogenerate this",
+      bibliography = list(
+        citation = "de la Hoz Schilling, C. (2021). DNA barcoding as a tool to explore elasmobranch diversity in environmental DNA off the Banc d’Arguin (Mauritania). MSc thesis. University of Algarve.")
+    )
+  )
+)
+
+citationdoi <- "http://hdl.handle.net/10400.1/18173"
+```
+
+
+### Coverage
+
+Here we describe the dataset's geographic, taxonomic and temporal coverage.
+
+```{r Coverage}
+
+#Coverage
+coverage <- eml$coverage(
+  geographicCoverage = eml$geographicCoverage(
+    geographicDescription = "Banc d'Arguin National Park",
+    boundingCoordinates = eml$boundingCoordinates(
+      westBoundingCoordinate = st_bbox(ind_shape)$xmax,
+      eastBoundingCoordinate = st_bbox(ind_shape)$xmin,
+      northBoundingCoordinate = st_bbox(ind_shape)$ymax,
+      southBoundingCoordinate = st_bbox(ind_shape)$ymin)
+    ),
+  taxonomicCoverage = eml$taxonomicCoverage(
+    generalTaxonomicCoverage = "Fishes",
+    taxonomicClassification = list(
+      eml$taxonomicClassification(
+        taxonRankName = "Superclass",
+        taxonRankValue = "Agnatha"),
+      eml$taxonomicClassification(
+        taxonRankName = "unranked",
+        taxonRankValue = "Chondrichthyes"),
+      eml$taxonomicClassification(
+        taxonRankName = "unranked",
+        taxonRankValue = "Osteichthyes")
+      )
+    
+#  ),
+#  temporalCoverage = eml$temporalCoverage(
+#    rangeOfDates = eml$rangeOfDates(
+#      beginDate = eml$beginDate(
+#        calendarDate = "2019-05-01"
+#      ),
+#      endDate = eml$endDate(
+#        calendarDate = "2016-05-06"
+#      )
+#    )
+   )
+)
+
+```
+
+
+### Extra MetaData
+
+These fields are not required, though they make the metadata more complete.
+
+```{r Other Data}
+
+methods <- eml$methods(
+  methodStep = eml$methodStep(
+    description = eml$description(
+      para = paste("See Github <a href=\"https://github.com/iobis/mwhs-data-mobilization\">Project</a> and <a href=\"https://iobis.github.io/mwhs-data-mobilization/notebooks/", site_dir_name, "/", dataset_dir_name, "\"> R Notebook</a> for dataset construction methods", sep="")
+    )
+  )
+)
+
+#Other Data
+pubDate <- "2023-10-15"
+
+#language of original document
+language <- "eng"
+
+keywordSet <- eml$keywordSet(
+  keyword = "Occurrence",
+  keywordThesaurus = "GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml"
+)
+
+maintenance <- eml$maintenance(
+  description = eml$description(
+    para = ""),
+  maintenanceUpdateFrequency = "notPlanned"
+)
+
+#Universal CC
+intellectualRights <- eml$intellectualRights(
+  para = "To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url=\"http://creativecommons.org/publicdomain/zero/1.0/legalcode\"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction."
+)
+
+
+purpose <- eml$purpose(
+  para = "These data were made accessible through UNESCO's eDNA Expeditions project to mobilize available marine species and occurrence datasets from World Heritage Sites."
+)
+
+additionalInfo <- eml$additionalInfo(
+  para = "marine, harvested by iOBIS"
+)
+```
+
+### Create and Validate EML
+
+```{r Validate eml}
+
+#Put it all together
+my_eml <- eml$eml(
+           packageId = paste("https://ipt.obis.org/secretariat/resource?id=", short_name, "/v1.0", sep = ""),  
+           system = "http://gbif.org",
+           scope = "system",
+           dataset = eml$dataset(
+               alternateIdentifier = alternateIdentifier,
+               title = title,
+               creator = creator,
+               metadataProvider = metadataProvider,
+               associatedParty = associatedParty,
+               pubDate = pubDate,
+               coverage = coverage,
+               language = language,
+               abstract = abstract,
+               keywordSet = keywordSet,
+               contact = contact,
+               methods = methods,
+               intellectualRights = intellectualRights,
+               purpose = purpose,
+               maintenance = maintenance,
+               additionalInfo = additionalInfo),
+           additionalMetadata = additionalMetadata
+)
+
+eml_validate(my_eml)
+
+```
+
+## Create meta.xml file
+
+This is a file which describes the archive and data file structure and is required in a DarwinCore-Archive. It is based on the template file "meta_occurrence_edna_template.xml"
+
+```{r meta}
+meta_template <- paste(path_to_project_root, "scripts_data/meta_occurrence_edna_template.xml", sep="/")
+meta <- read_xml(meta_template)
+
+fields <- xml_find_all(meta, "//d1:field")
+
+for (field in fields) {
+  term <- xml_attr(field, "term")
+  if (term == "http://rs.tdwg.org/dwc/terms/eventDate") {
+    xml_set_attr(field, "index", "3")
+  } else if (term == "http://rs.tdwg.org/dwc/terms/country") {
+    xml_set_attr(field, "default", country)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/geodeticDatum") {
+    xml_set_attr(field, "default", geodeticDatum)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/occurrenceStatus") {
+    xml_set_attr(field, "default", occurrenceStatus)
+  } else if (term == "http://rs.tdwg.org/dwc/terms/basisOfRecord") {
+    xml_set_attr(field, "default", basisOfRecord)
+  }
+}
+
+```
+
+## Save outputs
+
+```{r Save}
+
+dwc_output_dir <- paste(path_to_project_root, "output", site_dir_name, dataset_dir_name, sep="/")
+
+write.csv(occurrence, paste(dwc_output_dir, "/occurrence.csv", sep = ""), na = "", row.names=FALSE)
+write.csv(dnaderivedextension, paste(dwc_output_dir, "/dnaderiveddata.csv", sep = ""), na = "", row.names=FALSE)
+write_xml(meta, file = paste(dwc_output_dir, "/meta.xml", sep = ""))
+write_eml(my_eml, paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+```
+
+### Edit EML
+
+We have to further edit the eml file to conform to GBIF-specific requirements that cannot be included in the original EML construction. This includes changing the schemaLocation and rearranging the GBIF element, since the construction automatically arranges the children nodes to alphabetical order.
+
+```{r edit EML}
+
+#edit the schemaLocation and rearrange gbif node for gbif specific eml file
+eml_content <- read_xml(paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+#change schemaLocation attributes for GBIF
+root_node <- xml_root(eml_content)
+xml_set_attr(root_node, "xsi:schemaLocation", "https://eml.ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd")
+xml_set_attr(root_node, "xmlns:dc", "http://purl.org/dc/terms/")
+xml_set_attr(root_node, "xmlns:stmml", NULL)
+xml_set_attr(root_node, "xml:lang", "eng")
+
+
+#rearrange children nodes under the GBIF element
+hierarchyLevel <- eml_content %>% xml_find_all(".//hierarchyLevel")
+dateStamp <- eml_content %>% xml_find_all(".//dateStamp")
+citation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation")
+bibcitation <- eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/bibliography/citation")
+xml_set_attr(bibcitation, "identifier", citationdoi)
+
+eml_content %>% xml_find_all(".//hierarchyLevel") %>% xml_remove()
+eml_content %>% xml_find_all(".//dateStamp") %>% xml_remove()
+eml_content %>% xml_find_all("./additionalMetadata/metadata/gbif/citation") %>% xml_remove()
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(citation, .where=0)
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(hierarchyLevel, .where=0)
+eml_content %>% xml_find_all(".//gbif") %>% xml_add_child(dateStamp, .where=0)
+
+write_xml(eml_content, paste(dwc_output_dir, "/eml.xml", sep = ""))
+
+
+```
+
+### Zip files to DwC-A
+
+```{r Zip Files}
+output_zip <- paste(dwc_output_dir, "DwC-A.zip", sep="/")
+
+if (file.exists(output_zip)) {
+  unlink(output_zip)
+}
+
+file_paths <- list.files(dwc_output_dir, full.names = TRUE)
+zip(zipfile = output_zip, files = file_paths, mode = "cherry-pick")
+
+if (file.exists(output_zip)) {
+  unlink(file_paths)
+}
+
+```
